@@ -19,7 +19,7 @@ class User(Base):
     
     organization_id: Mapped[int]= mapped_column(ForeignKey("organizations.organization_id"),nullable=False) 
 
-    department_id:Mapped[int]=mapped_column(ForeignKey("departments.department_id"),nullable=False)
+    department_id:Mapped[int]=mapped_column(ForeignKey("departments.department_id"),nullable=True)
 
     team_id:Mapped[int]=mapped_column(ForeignKey("teams.team_id"),nullable=True)    
     

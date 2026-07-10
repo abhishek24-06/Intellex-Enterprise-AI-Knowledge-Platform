@@ -2,6 +2,7 @@ from sqlalchemy import Integer,String,DateTime,ForeignKey,Boolean
 from sqlalchemy.orm import Mapped,mapped_column,relationship
 from datetime import datetime,UTC
 from app.models.base import Base
+from sqlalchemy import UniqueConstraint
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -11,6 +12,14 @@ if TYPE_CHECKING:
 
 class Team(Base):
     __tablename__="teams"
+
+    __table_args__ = (
+    UniqueConstraint(
+        "department_id",
+        "name",
+        name="uq_team_department_name"
+    ),
+)
 
     team_id:Mapped[int]=mapped_column(primary_key=True,index=True)
 
