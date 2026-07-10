@@ -1,4 +1,5 @@
-from pydantic import BaseModel,EmailStr
+from pydantic import BaseModel,EmailStr,ConfigDict
+from app.enums.enums import UserRole
 
 class RegisterRequest(BaseModel):
     name:str
@@ -19,3 +20,14 @@ class UserResponse(BaseModel):
     user_id:int
     name:str
     email:EmailStr
+
+class CurrentUserResponse(BaseModel):
+    user_id: int
+    name: str
+    email: str
+    role: UserRole
+    organization_id: int
+    department_id: int | None
+    team_id: int | None
+
+    model_config=ConfigDict(from_attributes=True)

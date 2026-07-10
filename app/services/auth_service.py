@@ -6,7 +6,9 @@ from app.schemas.auth import LoginRequest,TokenResponse
 from app.core.security import verify_password,create_access_token
 
 def login_user(db:Session,login_data:LoginRequest):
-    user=(select(User).where(User.email == login_data.email))    
+    stmt=(select(User).where(User.email == login_data.email))    
+
+    user = db.execute(stmt).scalar_one_or_none()
 
     if not user:
         raise ValueError("Invalid email or password.")

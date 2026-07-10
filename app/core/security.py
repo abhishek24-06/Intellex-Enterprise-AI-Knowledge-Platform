@@ -33,13 +33,10 @@ def create_access_token(data:dict[str,Any])->str:
     return encoded_jwt
 
 def decode_access_token(token:str)->dict:
-    try:
-        payload=jwt.decode(
+    return jwt.decode(
             token,
-            settings.SECRET_KEY
-            ,
+            settings.SECRET_KEY,
             algorithms=[settings.ALGORITHM]
         )
-    except JWTError:
-        return{}
+
 

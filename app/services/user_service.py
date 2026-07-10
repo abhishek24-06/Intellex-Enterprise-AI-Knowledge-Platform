@@ -10,6 +10,11 @@ def get_user_by_email(db:Session,email:str)->User | None:
 
     return db.execute(stmt).scalar_one_or_none()
 
+def get_user_by_id(db:Session,id:int)->User | None:
+    stmt=(select(User).where(User.user_id==id))
+
+    return db.execute(stmt).scalar_one_or_none()
+
 def create_user(db:Session,
                 *,
                 name:str,
