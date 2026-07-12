@@ -17,11 +17,11 @@ class User(Base):
 
     user_id: Mapped[int]= mapped_column(Integer,primary_key=True,index=True)
     
-    organization_id: Mapped[int]= mapped_column(ForeignKey("organizations.organization_id"),nullable=False) 
+    organization_id: Mapped[int| None]= mapped_column(ForeignKey("organizations.organization_id"),nullable=True) 
 
-    department_id:Mapped[int]=mapped_column(ForeignKey("departments.department_id"),nullable=True)
+    department_id:Mapped[int | None]=mapped_column(ForeignKey("departments.department_id"),nullable=True)
 
-    team_id:Mapped[int]=mapped_column(ForeignKey("teams.team_id"),nullable=True)    
+    team_id:Mapped[int | None]=mapped_column(ForeignKey("teams.team_id"),nullable=True)    
     
     name: Mapped[str]= mapped_column(String(100),nullable=False)
     

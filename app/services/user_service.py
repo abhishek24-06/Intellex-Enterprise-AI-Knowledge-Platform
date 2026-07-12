@@ -28,6 +28,16 @@ def create_user(db:Session,
     if role==UserRole.EMPLOYEE:
         if department_id is None:
             raise ValueError("Employees must belong to a department.")
+        
+    elif role==UserRole.SUPER_ADMIN:
+        organization_id=None
+        department_id=None
+        team_id=None
+
+    elif role==UserRole.ORG_ADMIN:
+        if organization_id is None:
+            raise ValueError("Organization admin must belong to an organization.")
+
     
     existing_user=get_user_by_email(db=db,email=email)
 
@@ -47,7 +57,7 @@ def create_user(db:Session,
     )
 
     db.add(new_user)
-    db.commit()
+    db.flush()
     db.refresh(new_user)
 
     return new_user

@@ -1,4 +1,4 @@
-from sqlalchemy import Integer, String, DateTime
+from sqlalchemy import Integer, String, DateTime,Boolean
 from sqlalchemy.orm import Mapped,mapped_column,relationship
 from datetime import datetime,UTC
 from app.models.base import Base
@@ -20,6 +20,8 @@ class Organization(Base):
     industry: Mapped[str]=mapped_column(String(100),nullable=True)
     
     created_at: Mapped[datetime]= mapped_column(DateTime(timezone=True),default=lambda:datetime.now(UTC))##Lambda adds timestamps only when new row is added not when app starts
+
+    is_active: Mapped[bool]=mapped_column(Boolean,default=True)
 
     #RELATIONSHIPS
 

@@ -3,9 +3,10 @@ from sqlalchemy.orm import Session
 
 from app.database.database import get_db
 from app.schemas.auth import LoginRequest, TokenResponse
-from app.services.auth_service import login_user
 
+from app.services.auth_service import login_user
 from app.dependencies.auth import get_current_user
+from app.dependencies.roles import require_org_admin
 from app.models.users import User
 from app.schemas.auth import CurrentUserResponse
 
@@ -22,3 +23,4 @@ def login(login_data:LoginRequest,db:Session=Depends(get_db)):
 @router.get("/me",response_model=CurrentUserResponse)
 def get_me(current_user=Depends(get_current_user)):
     return current_user
+

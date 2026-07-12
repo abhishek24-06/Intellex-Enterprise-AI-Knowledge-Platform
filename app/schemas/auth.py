@@ -26,8 +26,9 @@ class CurrentUserResponse(BaseModel):
     name: str
     email: str
     role: UserRole
-    organization_id: int
+    organization_id: int | None
     department_id: int | None
     team_id: int | None
 
     model_config=ConfigDict(from_attributes=True)
+

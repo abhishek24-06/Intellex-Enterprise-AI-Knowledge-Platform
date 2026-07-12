@@ -1,8 +1,8 @@
-"""Initial tables
+"""Initial schema
 
-Revision ID: c59209c0fab6
+Revision ID: 9f3783d52536
 Revises: 
-Create Date: 2026-07-07 19:50:41.779779
+Create Date: 2026-07-13 00:57:20.148879
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'c59209c0fab6'
+revision: str = '9f3783d52536'
 down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -36,7 +36,8 @@ def upgrade() -> None:
     sa.Column('description', sa.String(length=255), nullable=False),
     sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
     sa.ForeignKeyConstraint(['organization_id'], ['organizations.organization_id'], ),
-    sa.PrimaryKeyConstraint('department_id')
+    sa.PrimaryKeyConstraint('department_id'),
+    sa.UniqueConstraint('organization_id', 'name', name='uq_department_org_name')
     )
     op.create_index(op.f('ix_departments_department_id'), 'departments', ['department_id'], unique=False)
     op.create_table('teams',
@@ -48,13 +49,14 @@ def upgrade() -> None:
     sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
     sa.ForeignKeyConstraint(['department_id'], ['departments.department_id'], ),
     sa.ForeignKeyConstraint(['organization_id'], ['organizations.organization_id'], ),
-    sa.PrimaryKeyConstraint('team_id')
+    sa.PrimaryKeyConstraint('team_id'),
+    sa.UniqueConstraint('department_id', 'name', name='uq_team_department_name')
     )
     op.create_index(op.f('ix_teams_team_id'), 'teams', ['team_id'], unique=False)
     op.create_table('users',
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('organization_id', sa.Integer(), nullable=False),
-    sa.Column('department_id', sa.Integer(), nullable=False),
+    sa.Column('organization_id', sa.Integer(), nullable=True),
+    sa.Column('department_id', sa.Integer(), nullable=True),
     sa.Column('team_id', sa.Integer(), nullable=True),
     sa.Column('name', sa.String(length=100), nullable=False),
     sa.Column('role', sa.Enum('SUPER_ADMIN', 'ORG_ADMIN', 'EMPLOYEE', name='userrole'), nullable=False),

@@ -27,7 +27,7 @@ def create_organization(db:Session,
 )
     
     db.add(organization)
-    db.commit()
+    db.flush()
     db.refresh(organization)
 
     return organization
