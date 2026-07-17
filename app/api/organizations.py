@@ -1,7 +1,6 @@
 from fastapi import APIRouter,Depends
 from sqlalchemy.orm import Session
 
-
 from app.database.database import get_db
 from app.schemas.organizations import OrganizationOnboardingResponse
 from app.services.onboarding_service import CreateOrganizationRequest,onboard_organization
@@ -15,7 +14,7 @@ router=APIRouter(
 )
 
 @router.post("",response_model=OrganizationOnboardingResponse)
-def create_organization(organization_data:CreateOrganizationRequest,
+def create_organization_api(organization_data:CreateOrganizationRequest,
                         db:Session=Depends(get_db),
                         current_user:User=Depends(require_super_admin)
                         ):
