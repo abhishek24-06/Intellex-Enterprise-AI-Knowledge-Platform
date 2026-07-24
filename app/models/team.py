@@ -33,6 +33,8 @@ class Team(Base):
 
     created_at:Mapped[datetime]=mapped_column(DateTime(timezone=True),default=lambda:datetime.now(UTC))
 
+    is_active:Mapped[bool]=mapped_column(Boolean,default=True,nullable=False)
+
     #RELATIONSHIPS
     department:Mapped["Department"]=relationship(back_populates="teams")
 

@@ -6,7 +6,13 @@ from app.schemas.departments import CreateDepartmentRequest
 
 def get_department_by_name(db:Session,organization_id:int,name:str)->Department|None:
 
-    stmt = (select(Department).where(Department.organization_id==organization_id,Department.name == name))
+    stmt = (select(Department).where(Department.department_id==organization_id,Department.name == name))
+
+    return db.execute(stmt).scalar_one_or_none()
+
+def get_department_by_id(db:Session,department_id:int)->Department |  None:
+    
+    stmt = (select(Department).where(Department.department_id==department_id))
 
     return db.execute(stmt).scalar_one_or_none()
 
