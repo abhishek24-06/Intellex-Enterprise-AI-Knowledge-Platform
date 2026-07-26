@@ -3,6 +3,7 @@ from fastapi import UploadFile
 from sqlalchemy import select
 from pathlib import Path
 import uuid,shutil
+import magic
 
 from app.models.document_acl import DocumentACL
 from app.models.documents import Document
@@ -12,6 +13,7 @@ from app.services.user_service import get_user_by_id
 from app.services.team_service import get_team_by_id
 from app.services.department_service import get_department_by_id
 
+MAX_FILE_SIZE=25*1024*1024
 ##ALLOWED FILE TYPES
 ALLOWED_MIME_TYPES = {
     "application/pdf",
@@ -19,6 +21,14 @@ ALLOWED_MIME_TYPES = {
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "application/msword",
     "text/markdown",
+}
+
+EXPECTED_MIME_TYPES = {
+    ".pdf": "application/pdf",
+    ".txt": "text/plain",
+    ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ".doc": "application/msword",
+    ".md": "text/plain",
 }
 
 def get_document_by_id(db:Session,document_id:int)->Document|None:
@@ -45,13 +55,39 @@ def get_documents_by_organization(db:Session,organization_id:int)->list[Document
 
     return db.execute(stmt).scalars().all()
 
-def validate_file(file:UploadFile)->None:
+def validate_file(file:UploadFile)->str:
 
     if not file.filename :
         raise ValueError("Invalid file")
+    
     if file.content_type not in ALLOWED_MIME_TYPES:
         raise ValueError(f"Unsupported file type: {file.content_type}")
-    
+
+    extension=Path(file.filename).suffix.lower()
+
+    if extension not in EXPECTED_MIME_TYPES:
+        raise ValueError(f"Unsupported file extension: {extension}")
+
+    file.file.seek(0) #Resets the file cursor to the absolute beginning (position 0) 
+
+    detected_mime=magic.from_buffer(file.file.read(4096),
+                               mime=True)
+
+    file.file.seek(0)
+
+    if detected_mime not in ALLOWED_MIME_TYPES :
+        raise ValueError(f"Invalid file content: {detected_mime}")
+
+    if detected_mime != file.content_type:
+        raise ValueError("Content-Type does not match actual file.")
+
+    expected_mime= EXPECTED_MIME_TYPES[extension]
+
+    if detected_mime != expected_mime:
+        raise ValueError("File extension does not match actual file content.")
+
+    return detected_mime
+
 def create_document(db:Session,
                     document_data:CreateDocumentRequest,
                     organization_id:int,
@@ -64,20 +100,19 @@ def create_document(db:Session,
     if document_data.visibility == DocumentVisibility.RESTRICTED and not document_data.permissions:
         raise ValueError("Restricted documents require at least one permission.")
 
-    validate_file(file)
+    verified_mime=validate_file(file)
     
     #Calculate file size 
     file.file.seek(0,2)
     file_size=file.file.tell()
     file.file.seek(0)
 
-    MAX_FILE_SIZE=25*1024*1024
 
     if file_size > MAX_FILE_SIZE:
         raise ValueError("File size exceeds 25 MB.")
 
     #Generate Storage Filename
-    extension=Path(file.filename).suffix
+    extension=Path(file.filename).suffix.lower()
 
     stored_filename=f"{uuid.uuid4()}{extension}"
 
@@ -106,7 +141,7 @@ def create_document(db:Session,
                           stored_filename=stored_filename,
                           file_path=str(file_path),
                           file_size=file_size,
-                          mime_type=file.content_type or "application/octet-stream",
+                          mime_type=verified_mime,
                           status=DocumentStatus.UPLOADING
         )
     
