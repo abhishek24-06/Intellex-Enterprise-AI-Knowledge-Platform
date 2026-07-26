@@ -2,7 +2,7 @@ from sqlalchemy import Integer,String,DateTime,ForeignKey,Boolean,Enum
 from sqlalchemy.orm import Mapped,mapped_column,relationship
 from datetime import datetime,UTC
 from app.models.base import Base
-from app.enums.enums import DocumentStatus,DocumentType
+from app.enums.enums import DocumentStatus,DocumentType,DocumentVisibility
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -22,9 +22,11 @@ class Document(Base):
 
     document_type:Mapped[DocumentType]=mapped_column(Enum(DocumentType),nullable=False)
 
+    visibility:Mapped[DocumentVisibility]=mapped_column(Enum(DocumentVisibility),nullable=False)
+
     title:Mapped[str]=mapped_column(String(255),nullable=False)
 
-    description:Mapped[str]=mapped_column(String(255),nullable=True)
+    description:Mapped[str]=mapped_column(String(1000),nullable=True)
 
     original_filename:Mapped[str]=mapped_column(String(255),nullable=False)
 
@@ -32,7 +34,7 @@ class Document(Base):
 
     status:Mapped[DocumentStatus]=mapped_column(Enum(DocumentStatus),nullable=False)
 
-    created_at:Mapped[datetime]=mapped_column(DateTime(timezone=True),default=lambda:datetime.now(UTC))
+    uploaded_at:Mapped[datetime]=mapped_column(DateTime(timezone=True),default=lambda:datetime.now(UTC))
 
     file_path: Mapped[str] = mapped_column(String(500),nullable=False)
 
@@ -43,6 +45,8 @@ class Document(Base):
     processing_error: Mapped[str | None]=mapped_column(String(500),nullable=True)
 
     is_deleted: Mapped[bool]=mapped_column(default=False)
+
+    version: Mapped[int] = mapped_column(default=1)
 
     #RELATIONSHIP
 

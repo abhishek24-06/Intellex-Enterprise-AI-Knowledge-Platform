@@ -28,7 +28,7 @@ class DocumentACL(Base):
 
     principal_type: Mapped[PrincipalType] = mapped_column(Enum(PrincipalType),nullable=False)
 
-    principal_id: Mapped[int] = mapped_column(nullable=False)
+    principal_id: Mapped[int|None] = mapped_column(nullable=True)
 
     permission: Mapped[PermissionType] = mapped_column(Enum(PermissionType),nullable=False,default=PermissionType.READ)
 

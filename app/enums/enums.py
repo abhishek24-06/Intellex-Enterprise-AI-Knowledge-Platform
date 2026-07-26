@@ -44,8 +44,12 @@ class PrincipalType(str, Enum):
     USER = "USER"
     TEAM = "TEAM"
     DEPARTMENT = "DEPARTMENT"
-    ROLE = "ROLE"
-
+    ORG_ADMIN = "ORG_ADMIN"
 
 class PermissionType(str, Enum):
     READ = "READ"
+
+class DocumentVisibility(str,Enum):
+    ORGANIZATION = "ORGANIZATION"
+    RESTRICTED = "RESTRICTED"
+ 

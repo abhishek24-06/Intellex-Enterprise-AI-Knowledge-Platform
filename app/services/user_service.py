@@ -40,7 +40,6 @@ def create_user(db:Session,
     elif role==UserRole.ORG_ADMIN:
         if organization_id is None:
             raise ValueError("Organization admin must belong to an organization.")
-
     
     existing_user=get_user_by_email(db=db,email=email)
 
