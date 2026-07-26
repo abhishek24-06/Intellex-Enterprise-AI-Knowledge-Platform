@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.api.auth import router as auth_router
-from app.api import departments, organizations, team, users
+from app.api import departments, organizations, team, users, documents
 from app.core.exceptions import value_error_handler
 
 app=FastAPI()
@@ -16,3 +16,5 @@ app.include_router(departments.router)
 app.include_router(team.router)
 
 app.include_router(users.router)
+
+app.include_router(documents.router)
