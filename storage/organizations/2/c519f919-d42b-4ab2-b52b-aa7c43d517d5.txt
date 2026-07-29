@@ -1,0 +1,21 @@
+# Finance Budget FY2027
+
+## Purpose
+This document outlines the projected budget allocation for FY2027.
+
+## Budget Allocation
+
+- Engineering: $12 Million
+- Marketing: $6 Million
+- Human Resources: $2 Million
+- Operations: $5 Million
+
+## Cost Reduction Targets
+
+- Reduce cloud infrastructure costs by 15%.
+- Reduce travel expenses by 20%.
+- Increase automation across financial workflows.
+
+## Approval
+
+Approved by the Finance Department on January 15, 2027.

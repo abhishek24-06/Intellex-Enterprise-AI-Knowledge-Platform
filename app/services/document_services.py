@@ -1,14 +1,17 @@
-from sqlalchemy.orm import Session
+from operator import or_
+
+from sqlalchemy.orm import Session, joinedload
 from fastapi import UploadFile
-from sqlalchemy import select
+from sqlalchemy import and_, select
 from pathlib import Path
 import uuid,shutil
 import magic
 
 from app.models.document_acl import DocumentACL
 from app.models.documents import Document
+from app.models.users import User
 from app.schemas.documents import CreateDocumentRequest,DocumentACLRequest
-from app.enums.enums import DocumentVisibility,DocumentStatus,PrincipalType
+from app.enums.enums import DocumentVisibility,DocumentStatus,PrincipalType, UserRole
 from app.services.user_service import get_user_by_id
 from app.services.team_service import get_team_by_id
 from app.services.department_service import get_department_by_id
@@ -77,9 +80,6 @@ def validate_file(file:UploadFile)->str:
 
     if detected_mime not in ALLOWED_MIME_TYPES :
         raise ValueError(f"Invalid file content: {detected_mime}")
-
-    if detected_mime != file.content_type:
-        raise ValueError("Content-Type does not match actual file.")
 
     expected_mime= EXPECTED_MIME_TYPES[extension]
 
@@ -236,4 +236,93 @@ def delete_document(db:Session,document_id:int,organization_id)->Document:
     db.refresh(document)
 
     return document 
+
+def has_document_access(document:Document,current_user:User)->bool :
+
+    if document.organization_id != current_user.organization_id:
+        return False
+
+    if document.visibility == DocumentVisibility.ORGANIZATION:
+        return True
+
+    for permission in document.acl_entries:
+
+        if(permission.principal_type == PrincipalType.USER and
+           permission.principal_id == current_user.user_id):  
+
+           return True
+
+        if(permission.principal_type == PrincipalType.TEAM and
+           permission.principal_id == current_user.team_id):
+
+            return True
+
+        if(permission.principal_type == PrincipalType.DEPARTMENT and
+           permission.principal_id == current_user.department_id):
+
+            return True
+
+        if(permission.principal_type == PrincipalType.ORG_ADMIN and
+           current_user.role == UserRole.ORG_ADMIN):
+
+            return True
+
+    return False        
+
+def get_accessible_document(db:Session,document_id:int,current_user:User):
+
+    stmt = select(Document).options(joinedload(Document.acl_entries)).where(
+        Document.document_id==document_id,
+        Document.is_deleted==False
+    )
+
+    document=db.execute(stmt).unique().scalar_one_or_none()
+
+    if document is None:
+        raise ValueError("Document not found")
+
+    if not has_document_access(document,current_user):
+        raise ValueError("Access denied")
+
+    return document
+    
+def get_all_accessible_documents(db:Session,current_user:User)->list[DocumentACL]:
+
+    acl_conditions=[
+        and_(
+            DocumentACL.principal_type==PrincipalType.USER,
+            DocumentACL.principal_id==current_user.user_id
+        ),
+        and_(
+            DocumentACL.principal_type == PrincipalType.TEAM,
+            DocumentACL.principal_id == current_user.team_id,
+        ),
+        and_(
+            DocumentACL.principal_type == PrincipalType.DEPARTMENT,
+            DocumentACL.principal_id == current_user.department_id,
+        ),
+    ]
+
+    if current_user.role == UserRole.ORG_ADMIN:
+        acl_conditions.append(
+            and_(
+                DocumentACL.principal_type == PrincipalType.ORG_ADMIN,
+            )
+        )
+
+    stmt = (
+        select(Document)
+        .outerjoin(DocumentACL)
+        .where(
+            Document.organization_id == current_user.organization_id,
+            Document.is_deleted == False,
+            or_(
+                Document.visibility == DocumentVisibility.ORGANIZATION,
+                *acl_conditions,
+            ),
+        )
+        .order_by(Document.uploaded_at.desc())
+    )
+
+    return db.execute(stmt).unique().scalars().all()
 
