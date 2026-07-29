@@ -1,8 +1,8 @@
-from operator import or_
+
 
 from sqlalchemy.orm import Session, joinedload
 from fastapi import UploadFile
-from sqlalchemy import and_, select
+from sqlalchemy import and_, or_, select
 from pathlib import Path
 import uuid,shutil
 import magic
