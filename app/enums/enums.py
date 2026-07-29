@@ -52,4 +52,8 @@ class PermissionType(str, Enum):
 class DocumentVisibility(str,Enum):
     ORGANIZATION = "ORGANIZATION"
     RESTRICTED = "RESTRICTED"
- 
+class EmbeddingStatus(str,Enum):
+    PENDING="PENDING"
+    PROCESSING="PROCESSING"
+    COMPLETED="COMPLETED"
+    FAILED="FAILED"

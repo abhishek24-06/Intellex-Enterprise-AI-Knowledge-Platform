@@ -1,5 +1,3 @@
-
-
 from sqlalchemy.orm import Session, joinedload
 from fastapi import UploadFile
 from sqlalchemy import and_, or_, select

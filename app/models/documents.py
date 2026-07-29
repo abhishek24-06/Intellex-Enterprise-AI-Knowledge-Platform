@@ -2,7 +2,7 @@ from sqlalchemy import Integer,String,DateTime,ForeignKey,Boolean,Enum
 from sqlalchemy.orm import Mapped,mapped_column,relationship
 from datetime import datetime,UTC
 from app.models.base import Base
-from app.enums.enums import DocumentStatus,DocumentType,DocumentVisibility
+from app.enums.enums import DocumentStatus,DocumentType,DocumentVisibility, EmbeddingStatus
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from app.models.chat_history import ChatHistory
     from app.models.users import User
     from app.models.document_acl import DocumentACL
+    from app.models.document_chunks import DocumentChunk
 
 class Document(Base):
     __tablename__="documents"
@@ -48,6 +49,10 @@ class Document(Base):
 
     version: Mapped[int] = mapped_column(default=1)
 
+    embedding_model:Mapped[str|None]=mapped_column(String(255),nullable=True)
+
+    embedding_status:Mapped[EmbeddingStatus]=mapped_column(Enum(EmbeddingStatus),default=EmbeddingStatus.PENDING,nullable=False)
+
     #RELATIONSHIP
 
     organization:Mapped["Organization"]=relationship(back_populates="documents")
@@ -58,6 +63,7 @@ class Document(Base):
 
     acl_entries: Mapped[list["DocumentACL"]]=relationship(back_populates="document",cascade="all,delete-orphan")
 
+    chunks:Mapped[list["DocumentChunk"]]=relationship(back_populates="document",cascade="all,delete-orphan")
 
 
 
