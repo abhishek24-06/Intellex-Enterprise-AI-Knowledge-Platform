@@ -28,7 +28,7 @@ def _remove_trailing_whitespace(text:str)->str:
 def _collapse_multiple_spaces(text:str)->str:
     #Multiple spaces to a single spaces
 
-    return re.sub(r"[\t]+","text") #re.sub = Find nd Replace
+    return re.sub(r"[\t]+", " ",text) #re.sub = Find nd Replace
 
 def _collapse_blank_lines(text:str)->str:
     #Multiple blank lines to single blank line

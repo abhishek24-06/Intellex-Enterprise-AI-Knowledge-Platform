@@ -1,0 +1,205 @@
+from collections.abc import Iterator
+from typing import Any
+from docx import Document as DocxDocument
+from docx.document import Document
+from docx.table import Table
+from docx.text.paragraph import Paragraph
+import re
+
+from docx.oxml.text.paragraph import CT_P
+from docx.oxml.table import CT_Tbl
+
+from app.dto.extracted_element import ExtractedElement
+from app.enums.element_type import ElementType
+from app.services.extraction.base_extractor import BaseExtractor
+from app.dto.extraction_result import ExtractionResult
+
+HEADING_PATTERN = re.compile(r"heading\s+(\d+)",re.IGNORECASE)
+
+
+class DocxExtractor(BaseExtractor):
+
+    def extract(self,file_path:str)->ExtractionResult:
+
+        doc = DocxDocument(file_path)
+
+        elements=[]
+
+        for order_index, block in enumerate(self._iter_block_items(doc)):
+
+            element = None
+
+            if isinstance(block,Paragraph): #Is this block a paragraph
+                element = self._extract_paragraph(block,order_index)
+
+            elif isinstance(block,Table):
+                element = self._extract_table(block,order_index)
+
+            if element is not None:
+                elements.append(element)
+
+        return ExtractionResult(elements=elements)
+
+    def _iter_block_items(self,document:Document)->Iterator[Paragraph|Table]:
+
+        body=document.element.body
+
+        for child in body.iterchildren(): #Moves through every child i.e heading,para,table etc one by one in order
+
+            if isinstance(child,CT_P): #Checks if child is Para(CT_P)
+                yield Paragraph(child,document) #yield returns one child at a time
+
+            elif isinstance(child,CT_Tbl): #Checks if child is Table
+                yield Table(child,document)
+
+    def _map_paragraph_style(self,paragraph:Paragraph)->tuple[ElementType,dict[str,Any]]:
+
+        style_name=paragraph.style.name #Get style used
+        style = re.sub(r"\s+", " ", style_name.lower()).strip() #lowerdcase the style
+
+        metadata:dict[str,Any] = {"style":style_name}
+
+        if style == "title":
+            return ElementType.TITLE,metadata
+
+        if style.startswith("heading"):
+            metadata.update({
+                "level":self._extract_heading_level(style), #adds heading level i.e(1,2,3)
+                "numbering":self._extract_heading_numbering(paragraph), #adds sub headers number i.e(1.1,1.2,1.3)
+           
+            })
+
+            return ElementType.HEADING,metadata
+
+        if "quote" in style :
+            return ElementType.QUOTE,metadata
+
+        if (self._is_list_item(paragraph) or style.startswith("list")):
+            metadata.update(
+                self._extract_list_metadata(paragraph)
+            )
+            return ElementType.LIST, metadata
+
+        return ElementType.PARAGRAPH, metadata
+
+    def _extract_heading_level(self,style:str)->int|None: #Extracts heading lvl eg 1 2 3 
+
+
+        match = HEADING_PATTERN.search(style)
+
+        if match:
+            return int(match.group(1))
+
+        return None
+    
+    def _is_list_item(self,paragraph:Paragraph)->bool: #Check if a para is List
+
+        paragraph_properties = paragraph._p.pPr #Variable now contains paragraph properties
+
+        return (
+            paragraph_properties is not None #Check if para has properties
+            and paragraph_properties.numPr is not None #Check if para has numbering properties 
+        )
+
+    def _extract_list_metadata(self,paragraph:Paragraph)->dict[str,Any]: #Checks if list is numbered or has bullets
+
+        style = paragraph.style.name.lower()
+
+        if style.startswith("list bullet"):
+            ordered = False
+        elif style.startswith("list number"):
+            ordered = True
+        else:  
+            ordered = None
+
+        return{
+            "ordered":ordered
+        }
+
+    def _extract_heading_numbering(self,paragraph:Paragraph)->dict[str,Any]:
+
+        paragraph_properties = paragraph._p.pPr
+
+        has_num_pr=(
+            paragraph_properties is not None
+            and paragraph_properties.numPr is not None
+        )
+
+        return{
+            "has_num_pr": has_num_pr,
+            "resolved": False,
+            "value": None
+        }
+
+    def _extract_paragraph(self,paragraph:Paragraph,order_index:int)->ExtractedElement|None:
+
+        if not paragraph.text.strip(): #Checks if para is empty or only spaces, then None
+            return None
+
+        element_type, metadata = self._map_paragraph_style(paragraph)
+
+        return ExtractedElement(
+            order_index=order_index,
+            text= paragraph.text.strip(),
+            element_type=element_type,
+            metadata=metadata
+        )
+
+#TABLE
+    def _table_to_text(self,table:Table)-> str:
+
+        rows = []
+
+        for row in table.rows:
+
+            cells = [
+                cell.text.strip()
+                for cell in row.cells
+            ]
+
+            rows.append(" | ".join(cells))
+
+        return "\n".join(rows)
+
+    def _looks_like_header_row(self,row_cells:list[str])->bool:
+
+        if not row_cells:
+            return False
+
+        non_numeric = sum(
+            1
+            for cell in row_cells
+            if cell
+            and not cell.replace(".", "").replace(",", "").isdigit())
+
+        return non_numeric / len(row_cells) >= 0.7
+
+    def _extract_table_metadata(self,table:Table)->dict[str,Any]:
+
+        rows_data = [[
+            cell.text.strip()
+            for cell in row.cells
+        ]
+        for row in table.rows
+        ]
+        return {
+            "n_rows": len(rows_data),
+            "n_cols": max((len(row) for row in rows_data),default=0,),
+            "cells": rows_data,
+            "has_header_row": (self._looks_like_header_row(rows_data[0])
+                if rows_data
+                else False),}
+
+    def _extract_table(self,table:Table,order_index:int)->ExtractedElement | None:
+
+        text = self._table_to_text(table)
+
+        if not text.strip():
+            return None
+
+        return ExtractedElement(
+            order_index=order_index,
+            text=text,
+            element_type=ElementType.TABLE,
+            metadata=self._extract_table_metadata(table)
+        )
