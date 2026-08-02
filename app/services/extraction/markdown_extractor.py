@@ -1,7 +1,7 @@
 from pathlib import Path
 from markdown_it import MarkdownIt
 from markdown_it.token import Token
-
+from typing import Any
 from app.dto.extracted_element import ExtractedElement
 from app.dto.extraction_result import ExtractionResult
 from app.services.extraction.base_extractor import BaseExtractor
@@ -11,7 +11,7 @@ class MarkdownExtractor(BaseExtractor):
 
     def __init__(self):
 
-        self.md = MarkdownIt("commonmark")
+        self.md = MarkdownIt("commonmark").enable("table")
 
     def extract(self,file_path:str | Path)->ExtractionResult:
 
@@ -97,6 +97,18 @@ class MarkdownExtractor(BaseExtractor):
                 order_index +=1
                 continue
 
+            elif token.type == "table_open":
+
+                element, i = self._extract_table(
+                    tokens=tokens,
+                    index=i,
+                    order_index=order_index
+                )
+
+                elements.append(element)
+                order_index += 1
+                continue
+            
             else:
                 i += 1
 
@@ -132,7 +144,7 @@ class MarkdownExtractor(BaseExtractor):
 
         return element, index + 3
 
-    def _extract_list(self,tokens: list[Token],index:int,order_index:int,ordered:bool)->tuple[list[ExtractedElement], int]:
+    def _extract_list(self,tokens: list[Token],index:int,order_index:int,ordered:bool,depth:int = 0)->tuple[list[ExtractedElement], int]:
 
         elements = []
 
@@ -142,11 +154,27 @@ class MarkdownExtractor(BaseExtractor):
             else "bullet_list_close"
         )
 
+        start_index = index
         index +=1 # Skip *_list_open
 
         while index < len(tokens):
 
             token = tokens[index]
+
+            if (token.type in ("ordered_list_open","bullet_list_open")
+                              and index > start_index):
+
+                nested_ordered = (token.type == "ordered_list_open")
+            
+                nested_elements, index = self._extract_list(
+                    tokens=tokens,
+                    index=index,
+                    order_index=order_index + len(elements),
+                    ordered=nested_ordered,
+                    depth=depth + 1,
+                )
+                elements.extend(nested_elements)
+                continue
 
             if token.type == closing_token:
                 return elements,index +1
@@ -155,15 +183,15 @@ class MarkdownExtractor(BaseExtractor):
 
                 elements.append(
                     ExtractedElement(
-                        order_index=order_index,
+                        order_index=order_index + len(elements),
                         text=token.content,
                         element_type=ElementType.LIST,
                         metadata={
-                            "ordered":ordered
+                            "ordered":ordered,
+                            "indent_level": depth
                         }
                     )
                 )
-                order_index +=1
             index +=1
 
         return elements, index
@@ -209,6 +237,83 @@ class MarkdownExtractor(BaseExtractor):
         )
 
         return element, index +1
+
+    def _looks_like_header_row(self,row_cells:list[str])->bool:
+
+        if not row_cells:
+            return False
+
+        non_numeric = sum(
+            1
+            for cell in row_cells
+            if cell
+            and not cell.replace(".", "").replace(",", "").isdigit())
+
+        return non_numeric / len(row_cells) >= 0.7
+
+    def _extract_table_metadata(self,rows_data:list[list[str]])->dict[str,Any]:
+
+        return {
+            "n_rows": len(rows_data),
+            "n_cols": max((len(row) for row in rows_data),default=0,),
+            "cells": rows_data,
+            "has_header_row": (self._looks_like_header_row(rows_data[0])
+                if rows_data
+                else False),
+            }
+
+
+    def _extract_table(self,tokens:list[Token],index:int,order_index:int)-> tuple[ExtractedElement, int]:
+
+        rows_data: list[list[str]] = []
+        current_row: list[str] = []
+
+        index += 1 #Skip table_open
+
+        while index < len(tokens):
+            token = tokens[index]
+
+            if token.type == "table_close":
+                text = "\n".join(
+                    " | ".join(row)
+                    for row in rows_data
+                )
+                element = ExtractedElement(
+                    order_index=order_index,
+                    text=text,
+                    element_type=ElementType.TABLE,
+                    metadata=self._extract_table_metadata(rows_data)
+                )
+
+                return element, index+1
+
+            elif token.type == "tr_open":
+
+                current_row = []
+
+            elif token.type == "inline":
+
+                current_row.append(token.content)
+
+            elif token.type == "tr_close":
+
+                rows_data.append(current_row)
+
+            index += 1
+
+        text = "\n".join(
+            " | ".join(row)
+            for row in rows_data
+        )
+
+        element = ExtractedElement(
+            order_index=order_index,
+            text=text,
+            element_type=ElementType.TABLE,
+            metadata=self._extract_table_metadata(rows_data)
+        )
+
+        return element, index
     
 
     
