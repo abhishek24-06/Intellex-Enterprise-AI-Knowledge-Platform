@@ -71,6 +71,32 @@ class MarkdownExtractor(BaseExtractor):
                 order_index += len(list_elements)
                 continue
 
+            elif token.type == "blockquote_open":
+
+                element,i = self._extract_quote(
+                    index=i,
+                    tokens=tokens,
+                    order_index=order_index
+                )
+
+                elements.append(element)
+
+                order_index += 1
+                continue
+
+            elif token.type == "fence":
+
+                element,i = self._extract_code_block(
+                    tokens=tokens,
+                    index=i,
+                    order_index=order_index
+                )
+
+                elements.append(element)
+
+                order_index +=1
+                continue
+
             else:
                 i += 1
 
@@ -141,6 +167,49 @@ class MarkdownExtractor(BaseExtractor):
             index +=1
 
         return elements, index
+
+    def _extract_quote(self,tokens:list[Token],index:int,order_index:int)-> tuple[ExtractedElement, int]:
+
+        quote_lines = []
+        index += 1 #Skip blockquote_open
+
+        while index < len(tokens):
+            token = tokens[index]
+
+            if token.type == "blockquote_close":
+
+                index += 1
+                break
+
+            if token.type == "inline":
+                quote_lines.append(token.content)
+
+            index += 1
+
+        element = ExtractedElement(
+            order_index=order_index,
+            text="\n".join(quote_lines),
+            element_type=ElementType.QUOTE,
+            metadata={}
+        )
+
+        return element, index
+
+    def _extract_code_block(self,tokens:list[Token],index:int,order_index:int)->tuple[ExtractedElement,int]:
+
+        token = tokens[index]
+
+        element = ExtractedElement(
+            order_index=order_index,
+            text=token.content,
+            element_type=ElementType.CODE_BLOCK,
+            metadata={
+                "language": token.info.strip() or None
+            }
+        )
+
+        return element, index +1
+    
 
     
 

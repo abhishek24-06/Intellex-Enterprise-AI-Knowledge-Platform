@@ -7,7 +7,7 @@ class ElementType(str, Enum):
     TABLE = "TABLE"
     LIST = "LIST"
     QUOTE = "QUOTE"
-    CODE = "CODE"
+    CODE_BLOCK = "CODE_BLOCK"
     CAPTION = "CAPTION"
     IMAGE = "IMAGE"
     UNKNOWN = "UNKNOWN"
