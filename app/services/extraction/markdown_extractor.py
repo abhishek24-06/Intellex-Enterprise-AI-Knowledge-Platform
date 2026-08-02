@@ -199,17 +199,23 @@ class MarkdownExtractor(BaseExtractor):
     def _extract_quote(self,tokens:list[Token],index:int,order_index:int)-> tuple[ExtractedElement, int]:
 
         quote_lines = []
+        depth = 1
         index += 1 #Skip blockquote_open
 
         while index < len(tokens):
             token = tokens[index]
 
-            if token.type == "blockquote_close":
+            if token.type == "blockquote_open":
+                depth +=1
 
-                index += 1
-                break
+            elif token.type == "blockquote_close":
+                depth -= 1
 
-            if token.type == "inline":
+                if depth == 0:
+                    index += 1
+                    break
+
+            elif token.type == "inline":
                 quote_lines.append(token.content)
 
             index += 1
