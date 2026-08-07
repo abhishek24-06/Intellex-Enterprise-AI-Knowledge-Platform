@@ -13,7 +13,11 @@ class MarkdownExtractor(BaseExtractor):
 
         self.md = MarkdownIt("commonmark").enable("table")
 
-    def extract(self,file_path:str | Path)->ExtractionResult:
+    def extract(self,file_path:str | Path,
+                document_id:str |None=None,filename:str |None=None)->ExtractionResult:
+
+        self.document_id = document_id
+        self.filename = filename or Path(file_path).name
 
         text = Path(file_path).read_text(encoding="utf-8")
 
@@ -126,6 +130,8 @@ class MarkdownExtractor(BaseExtractor):
             text=inline_token.content,
             element_type=ElementType.HEADING,
             metadata={
+                **self._base_metadata(),
+                "source": "markdown",
                 "level": level
             }
         )
@@ -139,7 +145,10 @@ class MarkdownExtractor(BaseExtractor):
             order_index=order_index,
             text=inline_token.content,
             element_type=ElementType.PARAGRAPH,
-            metadata={}
+            metadata={
+                **self._base_metadata(),
+                "source": "markdown",
+            }
         )
 
         return element, index + 3
@@ -187,6 +196,8 @@ class MarkdownExtractor(BaseExtractor):
                         text=token.content,
                         element_type=ElementType.LIST,
                         metadata={
+                            **self._base_metadata(),
+                            "source": "markdown",
                             "ordered":ordered,
                             "indent_level": depth
                         }
@@ -224,7 +235,10 @@ class MarkdownExtractor(BaseExtractor):
             order_index=order_index,
             text="\n".join(quote_lines),
             element_type=ElementType.QUOTE,
-            metadata={}
+            metadata={
+                **self._base_metadata(),
+                "source": "markdown",
+            }
         )
 
         return element, index
@@ -238,6 +252,8 @@ class MarkdownExtractor(BaseExtractor):
             text=token.content,
             element_type=ElementType.CODE_BLOCK,
             metadata={
+                **self._base_metadata(),
+                "source": "markdown",
                 "language": token.info.strip() or None
             }
         )
@@ -259,15 +275,17 @@ class MarkdownExtractor(BaseExtractor):
 
     def _extract_table_metadata(self,rows_data:list[list[str]])->dict[str,Any]:
 
+        has_header_row = (self._looks_like_header_row(rows_data[0])
+                        if rows_data
+                        else False)
+
         return {
             "n_rows": len(rows_data),
             "n_cols": max((len(row) for row in rows_data),default=0,),
             "cells": rows_data,
-            "has_header_row": (self._looks_like_header_row(rows_data[0])
-                if rows_data
-                else False),
+            "has_header_row": has_header_row,
+            "markdown": self._table_to_markdown(rows_data,has_header_row)
             }
-
 
     def _extract_table(self,tokens:list[Token],index:int,order_index:int)-> tuple[ExtractedElement, int]:
 
@@ -288,8 +306,12 @@ class MarkdownExtractor(BaseExtractor):
                     order_index=order_index,
                     text=text,
                     element_type=ElementType.TABLE,
-                    metadata=self._extract_table_metadata(rows_data)
-                )
+                    metadata={
+                        **self._base_metadata(),
+                        "source": "markdown",
+                        **self._extract_table_metadata(rows_data)
+                }
+            )
 
                 return element, index+1
 
@@ -316,7 +338,11 @@ class MarkdownExtractor(BaseExtractor):
             order_index=order_index,
             text=text,
             element_type=ElementType.TABLE,
-            metadata=self._extract_table_metadata(rows_data)
+            metadata={
+                **self._base_metadata(),
+                "source": "markdown",
+                **self._extract_table_metadata(rows_data)
+            }
         )
 
         return element, index

@@ -2,7 +2,8 @@ from sqlalchemy import Integer,String,DateTime,ForeignKey,Boolean,Enum
 from sqlalchemy.orm import Mapped,mapped_column,relationship
 from datetime import datetime,UTC
 from app.models.base import Base
-from app.enums.enums import DocumentStatus,DocumentType,DocumentVisibility, EmbeddingStatus
+from app.enums.enums import DocumentStatus,DocumentType,DocumentVisibility
+from app.enums.embedding_status import EmbeddingStatus
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:

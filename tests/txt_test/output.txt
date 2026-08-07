@@ -1,0 +1,168 @@
+================================================================================
+Extracted 20 elements
+================================================================================
+
+================================================================================
+Order     : 0
+Type      : ElementType.PARAGRAPH
+Text      :
+Intellex Enterprise Knowledge Platform
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 1
+Type      : ElementType.PARAGRAPH
+Text      :
+Intellex is an enterprise Retrieval-Augmented Generation (RAG) platform that extracts, indexes, and retrieves information from documents.
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 2
+Type      : ElementType.PARAGRAPH
+Text      :
+This paragraph contains leading and trailing spaces.
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 3
+Type      : ElementType.PARAGRAPH
+Text      :
+This paragraph contains numbers.
+1234567890
+3.1415926535
+₹2500
+95%
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 4
+Type      : ElementType.PARAGRAPH
+Text      :
+Special Characters
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 5
+Type      : ElementType.PARAGRAPH
+Text      :
+! @ # $ % ^ & * ( )
+< > { } [ ]
+"Double Quotes"
+'Single Quotes'
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 6
+Type      : ElementType.PARAGRAPH
+Text      :
+Unicode Test
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 7
+Type      : ElementType.PARAGRAPH
+Text      :
+こんにちは
+नमस्ते
+안녕하세요
+😀 🚀 📚
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 8
+Type      : ElementType.PARAGRAPH
+Text      :
+Website and Email
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 9
+Type      : ElementType.PARAGRAPH
+Text      :
+Website:
+https://intellex.ai
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 10
+Type      : ElementType.PARAGRAPH
+Text      :
+Email:
+support@intellex.ai
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 11
+Type      : ElementType.PARAGRAPH
+Text      :
+Ordered List
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 12
+Type      : ElementType.PARAGRAPH
+Text      :
+1. Extract documents
+2. Chunk documents
+3. Generate embeddings
+4. Store in pgvector
+5. Retrieve relevant chunks
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 13
+Type      : ElementType.PARAGRAPH
+Text      :
+Unordered List
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 14
+Type      : ElementType.PARAGRAPH
+Text      :
+- Python
+- FastAPI
+- PostgreSQL
+- LangChain
+- Docling
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 15
+Type      : ElementType.PARAGRAPH
+Text      :
+Pseudo Code
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 16
+Type      : ElementType.PARAGRAPH
+Text      :
+def greet(name):
+    print(f"Hello {name}")
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 17
+Type      : ElementType.PARAGRAPH
+Text      :
+JSON Example
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 18
+Type      : ElementType.PARAGRAPH
+Text      :
+{
+    "model": "gemini",
+    "temperature": 0.2
+}
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+
+================================================================================
+Order     : 19
+Type      : ElementType.PARAGRAPH
+Text      :
+This is the last paragraph.
+Metadata  : {'document_id': None, 'filename': 'sample.txt', 'source': 'txt'}
+

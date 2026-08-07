@@ -8,7 +8,11 @@ from app.services.extraction.base_extractor import BaseExtractor
 
 class TxtExtractor(BaseExtractor):
 
-    def extract(self, file_path:str | Path)-> ExtractionResult:
+    def extract(self, file_path:str | Path,
+                document_id:str |None=None,filename:str |None=None)-> ExtractionResult:
+
+        self.document_id = document_id
+        self.filename = filename or Path(file_path).name
 
         text = Path(file_path).read_text(encoding="utf-8") #Read the file
 
@@ -31,6 +35,7 @@ class TxtExtractor(BaseExtractor):
                     text=paragraph,
                     element_type=ElementType.PARAGRAPH,
                     metadata={
+                        **self._base_metadata(),
                         "source":"txt"
                     }
                 )

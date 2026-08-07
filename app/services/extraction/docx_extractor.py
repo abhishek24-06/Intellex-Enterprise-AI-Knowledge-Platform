@@ -5,6 +5,7 @@ from docx.document import Document
 from docx.table import Table
 from docx.text.paragraph import Paragraph
 import re
+from pathlib import Path
 
 from docx.oxml.text.paragraph import CT_P
 from docx.oxml.table import CT_Tbl
@@ -16,10 +17,13 @@ from app.dto.extraction_result import ExtractionResult
 
 HEADING_PATTERN = re.compile(r"heading\s+(\d+)",re.IGNORECASE)
 
-
 class DocxExtractor(BaseExtractor):
 
-    def extract(self,file_path:str)->ExtractionResult:
+    def extract(self,file_path:str,
+                document_id:str |None=None,filename:str |None=None)->ExtractionResult:
+
+        self.document_id = document_id
+        self.filename = filename or Path(file_path).name
 
         doc = DocxDocument(file_path)
 
@@ -138,6 +142,12 @@ class DocxExtractor(BaseExtractor):
 
         element_type, metadata = self._map_paragraph_style(paragraph)
 
+        metadata = {
+            **self._base_metadata(),
+            "source": "docx",
+            **metadata,
+            }
+
         return ExtractedElement(
             order_index=order_index,
             text= paragraph.text.strip(),
@@ -182,13 +192,20 @@ class DocxExtractor(BaseExtractor):
         ]
         for row in table.rows
         ]
+
+        has_header_row = (self._looks_like_header_row(rows_data[0])
+                        if rows_data
+                        else False)
+
         return {
+            **self._base_metadata(),
+            "source": "docx",
             "n_rows": len(rows_data),
-            "n_cols": max((len(row) for row in rows_data),default=0,),
+            "n_cols": max((len(row) for row in rows_data),default=0 ),
             "cells": rows_data,
-            "has_header_row": (self._looks_like_header_row(rows_data[0])
-                if rows_data
-                else False),}
+            "has_header_row": has_header_row,
+            "markdown": self._table_to_markdown(rows_data,has_header_row)
+            }
 
     def _extract_table(self,table:Table,order_index:int)->ExtractedElement | None:
 

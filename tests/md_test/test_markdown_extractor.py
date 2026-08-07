@@ -2,7 +2,7 @@ from app.services.extraction.markdown_extractor import MarkdownExtractor
 
 extractor = MarkdownExtractor()
 
-result = extractor.extract("tests/MD Test/sample.md")
+result = extractor.extract("tests/md_test/sample.md")
 
 print("=" * 80)
 print(f"Total Elements: {len(result.elements)}")

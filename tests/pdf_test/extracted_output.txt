@@ -1,0 +1,2377 @@
+Extracted 330 elements
+
+================================================================================
+Element 1
+Type      : ElementType.HEADING
+Text      :
+A Mini Project Report on
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 1, 'bbox': (221.9671515, 756.1992179889453, 378.30843637500004, 744.6796036231929), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 2
+Type      : ElementType.HEADING
+Text      :
+'Deepfake Detector: A CNN-BiLSTM Attention-Based Web Application for Image and Video Forgery Detection'
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 1, 'bbox': (75.99814425, 715.5660171525, 520.7774449199999, 680.0568358675706), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 3
+Type      : ElementType.PARAGRAPH
+Text      :
+Submitted in partial fulfillment of the requirement for Degree in Bachelor of Technology (Information Technology)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 1, 'bbox': (77.648943, 627.8089780189454, 522.626662875, 598.9162708781929), 'source': 'docling'}
+
+================================================================================
+Element 4
+Type      : ElementType.PARAGRAPH
+Text      :
+By
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 1, 'bbox': (290.22339900000003, 575.8141480189453, 310.05217237500005, 564.2945336531928), 'source': 'docling'}
+
+================================================================================
+Element 5
+Type      : ElementType.PARAGRAPH
+Text      :
+Abhishek Tajane (5023158)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 1, 'bbox': (28.299999, 523.2616076525, 372.09297150000003, 513.3876521292137), 'source': 'docling'}
+
+================================================================================
+Element 6
+Type      : ElementType.HEADING
+Text      :
+Guided by:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 1, 'bbox': (264.7566765, 453.2727177639453, 335.518925625, 441.7531033981929), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 7
+Type      : ElementType.PARAGRAPH
+Text      :
+Dr. Mukta Nivelkar
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 1, 'bbox': (235.52821649999998, 421.7811601610547, 365.247355875, 408.61588571859164), 'source': 'docling'}
+
+================================================================================
+Element 8
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 1, 'bbox': (273.0990905761719, 367.7319641113281, 338.8517150878906, 301.2216796875), 'source': 'docling'}
+
+================================================================================
+Element 9
+Type      : ElementType.HEADING
+Text      :
+Department of Information Technology Fr. C. Rodrigues Institute of Technology, Vashi.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 1, 'bbox': (137.0683785, 276.4862108435548, 463.70721862499994, 233.88343640109156), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 10
+Type      : ElementType.PARAGRAPH
+Text      :
+(An Autonomous Institute & Permanently Affiliated to University of Mumbai)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 1, 'bbox': (93.66751875, 218.77965118105476, 506.358058875, 208.08286561941316), 'source': 'docling'}
+
+================================================================================
+Element 11
+Type      : ElementType.HEADING
+Text      :
+CERTIFICATE
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 2, 'bbox': (244.084944, 757.8062500110547, 357.440668125, 744.6409755685916), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 12
+Type      : ElementType.PARAGRAPH
+Text      :
+This is to certify that the Mini Project entitled
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 2, 'bbox': (188.7852615, 724.693775435, 411.7403415, 714.8198199117138), 'source': 'docling'}
+
+================================================================================
+Element 13
+Type      : ElementType.HEADING
+Text      :
+'Deepfake Detector: A CNN-BiLSTM Attention-Based Web Application for Image and Video Forgery Detection'
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 2, 'bbox': (75.875097375, 696.3659905899999, 526.150488, 658.9897263050707), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 14
+Type      : ElementType.PARAGRAPH
+Text      :
+Submitted By
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 2, 'bbox': (263.5889715, 629.05058761, 336.93662775, 619.1766320867138), 'source': 'docling'}
+
+================================================================================
+Element 15
+Type      : ElementType.PARAGRAPH
+Text      :
+Abhishek Tajane (5023158)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 2, 'bbox': (183.4913115, 574.9548076524999, 371.284284, 565.0808521292137), 'source': 'docling'}
+
+================================================================================
+Element 16
+Type      : ElementType.PARAGRAPH
+Text      :
+In partial fulfillment of degree of B.Tech . in Information Technology for term work of the Semester VI Mini Project - 2 B is approved.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 2, 'bbox': (78.91025325, 495.36132756, 521.6153332499999, 471.6885439117138), 'source': 'docling'}
+
+================================================================================
+Element 17
+Type      : ElementType.PARAGRAPH
+Text      :
+Internal Examiner
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 2, 'bbox': (73.299999, 361.00976834552733, 163.67619656249997, 351.95864224347423), 'source': 'docling'}
+
+================================================================================
+Element 18
+Type      : ElementType.PARAGRAPH
+Text      :
+Internal Guide
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 2, 'bbox': (381.549999, 361.67187756, 477.3800790000001, 351.79792203671377), 'source': 'docling'}
+
+================================================================================
+Element 19
+Type      : ElementType.PARAGRAPH
+Text      :
+Head of the Department
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 2, 'bbox': (73.299999, 277.8784175599999, 200.60664000000003, 268.0044620367137), 'source': 'docling'}
+
+================================================================================
+Element 20
+Type      : ElementType.PARAGRAPH
+Text      :
+Principal
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 2, 'bbox': (381.549999, 277.8784175599999, 461.88203400000003, 268.0044620367137), 'source': 'docling'}
+
+================================================================================
+Element 21
+Type      : ElementType.PARAGRAPH
+Text      :
+Date: -
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 2, 'bbox': (73.299999, 155.28783756000007, 111.28046775, 145.41388203671386), 'source': 'docling'}
+
+================================================================================
+Element 22
+Type      : ElementType.PARAGRAPH
+Text      :
+College Seal
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 2, 'bbox': (402.549999, 155.28783756000007, 467.8703115, 145.41388203671386), 'source': 'docling'}
+
+================================================================================
+Element 23
+Type      : ElementType.PARAGRAPH
+Text      :
+Date:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 3, 'bbox': (83.799999, 202.4350575599999, 112.7863275, 192.5611020367138), 'source': 'docling'}
+
+================================================================================
+Element 24
+Type      : ElementType.HEADING
+Text      :
+Declaration
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 3, 'bbox': (260.6592615, 741.3062504360547, 344.61633862499997, 728.1409759935916), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 25
+Type      : ElementType.PARAGRAPH
+Text      :
+We declare that this written submission represents our ideas in our own words and where others'  ideas  or  words  have  been  included,  we  have  adequately cited and referenced the original sources. We also declare that we have adhered to all principles of academic honesty and integrity and have not misrepresented or fabricated or falsified any idea/data/fact/source in  my  submission.  We  understand  that  any  violation  of  the  above  will  be  cause  for disciplinary action by the Institute and can also evoke penal action from the sources which have thus not been properly cited or from whom proper permission has not been taken when needed.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 3, 'bbox': (83.799999, 697.5953365600001, 531.690624, 542.8336829117138), 'source': 'docling'}
+
+================================================================================
+Element 26
+Type      : ElementType.PARAGRAPH
+Text      :
+Abhishek Tajane (5023158)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 3, 'bbox': (380.6826315, 421.51816765250004, 526.475604, 411.6442121292138), 'source': 'docling'}
+
+================================================================================
+Element 27
+Type      : ElementType.HEADING
+Text      :
+Abstract
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 4, 'bbox': (74.049999, 757.6562508360547, 325.528669125, 744.4909763935916), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 28
+Type      : ElementType.PARAGRAPH
+Text      :
+In  today's  digital  era,  misinformation  and  manipulated  media  have  become  major  challenges across social platforms. With the rise of artificial intelligence, deepfake images are increasingly being used to spread false information, damage reputations, and mislead audiences. To address this  issue,  we  are  developing  a  simple  and  effective solution - a Deepfake Detector that helps people verify the authenticity of digital images quickly and accurately.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 4, 'bbox': (56.799999, 717.24536156, 531.3449189999999, 624.5784369117138), 'source': 'docling'}
+
+================================================================================
+Element 29
+Type      : ElementType.PARAGRAPH
+Text      :
+The  main  goal  of  Deepfake  Detector is to create a web application that can analyze uploaded images  using  artificial  intelligence.  It  employs  a  Convolutional  Neural  Network  (CNN) model trained on real and fake image datasets to detect manipulation or forgery. The system generates a confidence score indicating whether an image is likely to be genuine or deepfake, empowering users to verify visual content before trusting or sharing it online.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 4, 'bbox': (56.799999, 593.05522761, 531.5441415, 500.38825196171376), 'source': 'docling'}
+
+================================================================================
+Element 30
+Type      : ElementType.PARAGRAPH
+Text      :
+The application is designed to be user-friendly and accessible from any device. With real-time image analysis and clear results, it simplifies the process of verifying authenticity for individuals, journalists,  and  organizations  alike.  Overall,  Deepfake  Detector  aims  to  promote  digital  safety and awareness by helping users distinguish between real and AI-generated media.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 4, 'bbox': (56.799999, 468.86528761, 531.6847665, 396.8965539617138), 'source': 'docling'}
+
+================================================================================
+Element 31
+Type      : ElementType.HEADING
+Text      :
+INDEX
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 5, 'bbox': (264.467874, 762.02773405, 316.55771775, 749.6852896458922), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 32
+Type      : ElementType.TABLE
+Text      :
+Sr. No. | Topic | Page No.
+1 | Introduction - Background - Motivation - Problem Definition - Scope - Issues / Limitation | 1 2 2 5 5 5
+2 | Literature Survey and Analysis - Referred paper - Literature Survey Comparison - Existing System - Requirement Analysis | 7 8 10 14 14
+3 | Architectural Design - Architectural Diagram / block diagram - Hardware & Software Requirement - Flow chart | 16 17 18 19
+4 | User Interface | 20
+5 | Results | 24
+6 | Conclusion | 26
+ | References | 28
+ | Acknowledgements | 29
+ | Appendix | 30
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 5, 'bbox': (63.95975875854492, 723.8060913085938, 536.0716552734375, 238.7802734375), 'source': 'docling', 'cells': [['Sr. No.', 'Topic', 'Page No.'], ['1', 'Introduction - Background - Motivation - Problem Definition - Scope - Issues / Limitation', '1 2 2 5 5 5'], ['2', 'Literature Survey and Analysis - Referred paper - Literature Survey Comparison - Existing System - Requirement Analysis', '7 8 10 14 14'], ['3', 'Architectural Design - Architectural Diagram / block diagram - Hardware & Software Requirement - Flow chart', '16 17 18 19'], ['4', 'User Interface', '20'], ['5', 'Results', '24'], ['6', 'Conclusion', '26'], ['', 'References', '28'], ['', 'Acknowledgements', '29'], ['', 'Appendix', '30']], 'n_rows': 10, 'n_cols': 3, 'has_header_row': True, 'markdown': '| Sr. No. | Topic | Page No. |\n| --- | --- | --- |\n| 1 | Introduction - Background - Motivation - Problem Definition - Scope - Issues / Limitation | 1 2 2 5 5 5 |\n| 2 | Literature Survey and Analysis - Referred paper - Literature Survey Comparison - Existing System - Requirement Analysis | 7 8 10 14 14 |\n| 3 | Architectural Design - Architectural Diagram / block diagram - Hardware & Software Requirement - Flow chart | 16 17 18 19 |\n| 4 | User Interface | 20 |\n| 5 | Results | 24 |\n| 6 | Conclusion | 26 |\n|  | References | 28 |\n|  | Acknowledgements | 29 |\n|  | Appendix | 30 |'}
+
+================================================================================
+Element 33
+Type      : ElementType.HEADING
+Text      :
+LIST OF FIGURES
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 6, 'bbox': (207.01226400000002, 762.2992188889453, 362.513331375, 750.7796045231929), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 34
+Type      : ElementType.TABLE
+Text      :
+Fig. No. | Name of the Figure | Page No.
+1.1 | Visual representation of Deepfake Manipulation | 3
+1.2 | Growth of Deepfake and Identity Fraud cases | 4
+2.2 | EDA: Pixel Statistics (Real vs. Fake) | 15
+3.1 | Architecture Diagram | 17
+3.3 | Flow Chart | 18
+4.1 | TruthLens Landing Page (Home) | 20
+4.2 | Deepfake Detector Upload Interface | 20
+4.3 | Deepfake Detected (Image) | 21
+4.4 | Authentic Image Verified | 21
+4.5 | Deepfake Detected (Video) | 22
+4.6 | Authentic Video Verified | 22
+5.1 | Training Curves of Baseline CNN Model | 24
+5.2 | Confusion Matrix and ROC Curve | 25
+5.3 | Classification Report | 25
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 6, 'bbox': (58.134063720703125, 738.5737152099609, 536.01904296875, 444.8226318359375), 'source': 'docling', 'cells': [['Fig. No.', 'Name of the Figure', 'Page No.'], ['1.1', 'Visual representation of Deepfake Manipulation', '3'], ['1.2', 'Growth of Deepfake and Identity Fraud cases', '4'], ['2.2', 'EDA: Pixel Statistics (Real vs. Fake)', '15'], ['3.1', 'Architecture Diagram', '17'], ['3.3', 'Flow Chart', '18'], ['4.1', 'TruthLens Landing Page (Home)', '20'], ['4.2', 'Deepfake Detector Upload Interface', '20'], ['4.3', 'Deepfake Detected (Image)', '21'], ['4.4', 'Authentic Image Verified', '21'], ['4.5', 'Deepfake Detected (Video)', '22'], ['4.6', 'Authentic Video Verified', '22'], ['5.1', 'Training Curves of Baseline CNN Model', '24'], ['5.2', 'Confusion Matrix and ROC Curve', '25'], ['5.3', 'Classification Report', '25']], 'n_rows': 15, 'n_cols': 3, 'has_header_row': True, 'markdown': '| Fig. No. | Name of the Figure | Page No. |\n| --- | --- | --- |\n| 1.1 | Visual representation of Deepfake Manipulation | 3 |\n| 1.2 | Growth of Deepfake and Identity Fraud cases | 4 |\n| 2.2 | EDA: Pixel Statistics (Real vs. Fake) | 15 |\n| 3.1 | Architecture Diagram | 17 |\n| 3.3 | Flow Chart | 18 |\n| 4.1 | TruthLens Landing Page (Home) | 20 |\n| 4.2 | Deepfake Detector Upload Interface | 20 |\n| 4.3 | Deepfake Detected (Image) | 21 |\n| 4.4 | Authentic Image Verified | 21 |\n| 4.5 | Deepfake Detected (Video) | 22 |\n| 4.6 | Authentic Video Verified | 22 |\n| 5.1 | Training Curves of Baseline CNN Model | 24 |\n| 5.2 | Confusion Matrix and ROC Curve | 25 |\n| 5.3 | Classification Report | 25 |'}
+
+================================================================================
+Element 35
+Type      : ElementType.HEADING
+Text      :
+LIST OF TABLES
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 7, 'bbox': (211.773009, 761.1992179889453, 359.252578875, 749.6796036231929), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 36
+Type      : ElementType.TABLE
+Text      :
+Table No. | Name of the Table | Page No.
+2.1 | Literature Survey | 10
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 7, 'bbox': (58.4654541015625, 735.5189819335938, 528.1207275390625, 686.8362274169922), 'source': 'docling', 'cells': [['Table No.', 'Name of the Table', 'Page No.'], ['2.1', 'Literature Survey', '10']], 'n_rows': 2, 'n_cols': 3, 'has_header_row': True, 'markdown': '| Table No. | Name of the Table | Page No. |\n| --- | --- | --- |\n| 2.1 | Literature Survey | 10 |'}
+
+================================================================================
+Element 37
+Type      : ElementType.HEADING
+Text      :
+CHAPTER 1 INTRODUCTION
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 8, 'bbox': (203.049999, 487.26201568460937, 417.51287925, 401.2395345613263), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 38
+Type      : ElementType.HEADING
+Text      :
+INTRODUCTION
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 9, 'bbox': (82.299999, 730.863282115, 379.317579, 716.0523488300707), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 39
+Type      : ElementType.HEADING
+Text      :
+1.1 Background
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 9, 'bbox': (82.299999, 691.0957035600001, 184.43476500000003, 681.2217480367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 40
+Type      : ElementType.PARAGRAPH
+Text      :
+With  the  rapid  advancement  of  artificial  intelligence, deepfake  technology has  made  it possible  to  generate  highly  realistic  but  fake  videos  and  images.  These  manipulations  can easily  deceive  the  human eye and are often misused for spreading misinformation, identity theft, and defamation.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 9, 'bbox': (82.299999, 663.49804756, 535.176954, 612.2276076617138), 'source': 'docling'}
+
+================================================================================
+Element 41
+Type      : ElementType.PARAGRAPH
+Text      :
+The Deepfake Detection System is an AI-based solution designed to detect and analyze such manipulated media  using deep learning and computer  vision. The  system  leverages Convolutional  Neural  Networks  (CNNs) trained  on  datasets  such  as  FaceForensics ++ to identify subtle inconsistencies and rendering artifacts that differentiate fake content from real ones.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 9, 'bbox': (82.299999, 594.50390756, 535.223829, 529.4346391617138), 'source': 'docling'}
+
+================================================================================
+Element 42
+Type      : ElementType.PARAGRAPH
+Text      :
+It also includes a user-friendly web interface built with React.js and a Python (Flask/FastAPI) backend, allowing users to upload media for verification and receive instant results.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 9, 'bbox': (82.299999, 511.71093756, 534.9542939999999, 488.0381539117138), 'source': 'docling'}
+
+================================================================================
+Element 43
+Type      : ElementType.HEADING
+Text      :
+1.2 Motivation
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 9, 'bbox': (82.299999, 470.31445756, 177.96015525, 460.4405020367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 44
+Type      : ElementType.PARAGRAPH
+Text      :
+Deepfakes pose a major threat to digital trust, enabling fake news, cyber fraud, and identity manipulation.  With  social  media  platforms  becoming  the  main  source  of  information, verifying  content  authenticity  has  become  critical.  As  illustrated  below  in Figure 1.1 ,  the visual  difference  between  real  and  manipulated  videos  can  be  nearly  indistinguishable, emphasizing the urgent need for automated detection systems.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 9, 'bbox': (82.299999, 442.71679756, 535.130079, 377.6475291617138), 'source': 'docling'}
+
+================================================================================
+Element 45
+Type      : ElementType.PARAGRAPH
+Text      :
+Our  motivation  is  to  restore  trust  in  digital  content  by  developing  an  intelligent  system capable of detecting deepfakes quickly and accurately. The project aims to:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 9, 'bbox': (82.299999, 359.92382756, 534.7316415, 336.2510439117138), 'source': 'docling'}
+
+================================================================================
+Element 46
+Type      : ElementType.LIST
+Text      :
+Ensure Safety: Protect individuals and organizations from misinformation and reputational harm.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 9, 'bbox': (82.299999, 320.32616755999993, 535.2179715, 296.6533839117137), 'source': 'docling', 'ordered': True, 'marker': '1.'}
+
+================================================================================
+Element 47
+Type      : ElementType.LIST
+Text      :
+Promote  Digital  Trust: Empower  users  to  verify  online  content  before  sharing  or believing it.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 9, 'bbox': (82.299999, 292.72851756, 535.3292939999999, 269.0557339117138), 'source': 'docling', 'ordered': True, 'marker': '2.'}
+
+================================================================================
+Element 48
+Type      : ElementType.LIST
+Text      :
+Support  Sustainable  Online  Practices: Encourage  responsible  use  of  AI  and  media through detection tools.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 9, 'bbox': (82.299999, 265.1308575600001, 535.241409, 241.45807391171388), 'source': 'docling', 'ordered': True, 'marker': '3.'}
+
+================================================================================
+Element 49
+Type      : ElementType.LIST
+Text      :
+By combining deep learning techniques with a real-time detection platform, this project contributes to a safer digital ecosystem and aligns with UN SDG 16 (Peace, Justice, and Strong Institutions) and SDG 12 (Responsible Consumption and Production).
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 9, 'bbox': (82.299999, 237.53320755999994, 535.0890615, 200.06159541171382), 'source': 'docling', 'ordered': True, 'marker': '4.'}
+
+================================================================================
+Element 50
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 10, 'bbox': (109.88764953613281, 768.5687942504883, 511.17596435546875, 566.0074157714844), 'source': 'docling'}
+
+================================================================================
+Element 51
+Type      : ElementType.HEADING
+Text      :
+1.2.1 Key Motivations
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 10, 'bbox': (86.799999, 503.08329761000005, 207.79023333000004, 493.20934208671383), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 52
+Type      : ElementType.LIST
+Text      :
+Digital Safety: Deepfakes can be used for misinformation, blackmail, and identity theft. Detecting them early helps protect individuals and organizations from serious harm.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 10, 'bbox': (86.799999, 462.336036935, 535.3410165, 438.6631557867138), 'source': 'docling', 'ordered': True, 'marker': '1.'}
+
+================================================================================
+Element 53
+Type      : ElementType.LIST
+Text      :
+Restoring  Trust: Online  platforms  are flooded with manipulated media. This project promotes transparency and helps rebuild trust in digital content.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 10, 'bbox': (86.799999, 434.73827756, 535.1417939999999, 409.05279841171375), 'source': 'docling', 'ordered': True, 'marker': '2.'}
+
+================================================================================
+Element 54
+Type      : ElementType.LIST
+Text      :
+Technological  Awareness: Educating  people  about  AI-generated  content  and  giving them tools to verify authenticity increases awareness of media manipulation.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 10, 'bbox': (86.799999, 403.11620755999996, 535.147659, 377.37311341171375), 'source': 'docling', 'ordered': True, 'marker': '3.'}
+
+================================================================================
+Element 55
+Type      : ElementType.LIST
+Text      :
+Accessibility: By providing a simple web-based interface, anyone can upload and verify videos or images - making AI detection tools available to all.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 10, 'bbox': (86.799999, 371.37890756, 535.2472665, 345.6358134117138), 'source': 'docling', 'ordered': True, 'marker': '4.'}
+
+================================================================================
+Element 56
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 11, 'bbox': (98.33468627929688, 717.9335479736328, 487.5939025878906, 514.6593017578125), 'source': 'docling'}
+
+================================================================================
+Element 57
+Type      : ElementType.PARAGRAPH
+Text      :
+As shown in the chart Figure 1.2 , the prevalence of deepfakes and related frauds has sharply increased between 2022 and 2024 - with audio and video deepfakes rising from 37% and 29%  to  49%,  respectively.  This  alarming  trend  highlights  the  urgent  need  for  reliable detection  systems.  Digital  safety  is  the  foremost  motivation,  as  deepfakes  are  increasingly used  for  misinformation,  blackmail,  and  identity  theft.  Detecting  them  early  helps  protect individuals and organizations from significant harm. Equally important is restoring trust in online media; with manipulated content spreading rapidly, this project promotes transparency and ensures that digital information remains credible.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 11, 'bbox': (71.799999, 479.03320756, 525.585159, 372.5674551617138), 'source': 'docling'}
+
+================================================================================
+Element 58
+Type      : ElementType.PARAGRAPH
+Text      :
+Another  major  goal  is  technological  awareness  -  empowering  users  to  understand  and identify AI-generated media. The system's accessible web-based interface allows anyone, not just experts, to upload and verify images or videos easily. Finally, this project reflects strong social  responsibility,  supporting  global  Sustainable  Development  Goals  such  as  SDG  16 (Peace, Justice, and Strong Institutions) by combating  misinformation,  and  SDG  12 (Responsible Consumption and Production) by encouraging ethical use of technology.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 11, 'bbox': (71.799999, 356.64257756, 525.4621064999999, 272.3125651617138), 'source': 'docling'}
+
+================================================================================
+Element 59
+Type      : ElementType.HEADING
+Text      :
+1.3 Problem Definition
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (82.299999, 783.9992181889453, 221.17837387500003, 772.4796038231929), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 60
+Type      : ElementType.PARAGRAPH
+Text      :
+With  the  rise  of  artificial  intelligence, deepfake technology has made it possible to create highly  realistic  fake  videos  and  images  that  are  difficult  for  the  human  eye  to  distinguish from real ones. These deepfakes can be misused for spreading misinformation, defamation, financial scams, identity theft, and other cybercrimes. Detecting such  manipulations manually is nearly impossible, creating a serious threat to digital trust and online authenticity.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (77.799999, 751.39492146, 530.8234365, 686.3252645617138), 'source': 'docling'}
+
+================================================================================
+Element 61
+Type      : ElementType.PARAGRAPH
+Text      :
+There is a need for an AI-based solution that can automatically identify deepfake content and provide users with an accurate and reliable verification system.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (77.799999, 678.00039046, 530.958204, 654.3272175617137), 'source': 'docling'}
+
+================================================================================
+Element 62
+Type      : ElementType.HEADING
+Text      :
+1.4 Scope
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (82.299999, 632.5613287814452, 141.76874887499997, 621.0417144156929), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 63
+Type      : ElementType.PARAGRAPH
+Text      :
+The main objective of this project is to build an AI-powered application that detects whether an image or video is real or artificially manipulated. The specific objectives are as follows:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (82.299999, 605.00488756, 534.409374, 580.2403086617138), 'source': 'docling'}
+
+================================================================================
+Element 64
+Type      : ElementType.HEADING
+Text      :
+1. Deepfake Detection System:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (82.299999, 563.22265756, 246.59101650000002, 553.3487020367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 65
+Type      : ElementType.PARAGRAPH
+Text      :
+To  develop  an  intelligent  system  capable  of  identifying  whether  an  image  or  video  is authentic or manipulated using advanced AI techniques.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (100.299999, 548.332034185, 534.0929715, 523.5664746617138), 'source': 'docling'}
+
+================================================================================
+Element 66
+Type      : ElementType.HEADING
+Text      :
+2. User Input Support:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (82.299999, 518.5488275600001, 207.98945250000003, 508.6748720367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 67
+Type      : ElementType.PARAGRAPH
+Text      :
+To  allow  users  to  upload  or  capture  images  and  videos  through  the  application  for verification.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (100.299999, 503.658204185, 534.3566415, 478.8926446617138), 'source': 'docling'}
+
+================================================================================
+Element 68
+Type      : ElementType.HEADING
+Text      :
+3. AI-Based Analysis:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (82.299999, 473.87499756, 201.64960875000003, 464.0010420367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 69
+Type      : ElementType.PARAGRAPH
+Text      :
+To  utilize  deep  learning  models  such  as  Convolutional  Neural  Networks (CNN) and transfer learning techniques to detect facial and visual manipulations.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (100.299999, 458.984374185, 534.5324189999999, 434.2188146617138), 'source': 'docling'}
+
+================================================================================
+Element 70
+Type      : ElementType.HEADING
+Text      :
+4. Real-Time Prediction:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (82.299999, 429.20214756, 217.1652315, 419.3281920367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 71
+Type      : ElementType.PARAGRAPH
+Text      :
+To  provide  instant  predictions  along  with  a  confidence  score  (%)  indicating  the likelihood of content being a deepfake.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (100.299999, 414.310546185, 534.426954, 389.5459646617138), 'source': 'docling'}
+
+================================================================================
+Element 72
+Type      : ElementType.HEADING
+Text      :
+5. Multi-Format Support:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (82.299999, 384.52734756, 223.62226650000002, 374.6533920367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 73
+Type      : ElementType.PARAGRAPH
+Text      :
+To  support  both  image-level  and  video-level  detection  for  enhanced  flexibility  and usability.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (100.299999, 369.636724185, 534.2453115, 344.8711646617138), 'source': 'docling'}
+
+================================================================================
+Element 74
+Type      : ElementType.HEADING
+Text      :
+6. Misinformation Reduction:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (82.299999, 339.85448756, 243.626169, 329.98053203671384), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 75
+Type      : ElementType.PARAGRAPH
+Text      :
+To  minimize the risk of misinformation, fraud, and misuse by enabling users to verify digital content authenticity.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (100.299999, 324.962886185, 534.210159, 300.1983046617138), 'source': 'docling'}
+
+================================================================================
+Element 76
+Type      : ElementType.HEADING
+Text      :
+7. Digital Safety Enhancement:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (82.299999, 295.1806675600001, 250.62226650000002, 285.30671203671386), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 77
+Type      : ElementType.PARAGRAPH
+Text      :
+To  improve public trust and digital safety by offering a simple, reliable, and accessible verification tool.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (100.299999, 280.289066185, 534.1984365, 255.5244846617138), 'source': 'docling'}
+
+================================================================================
+Element 78
+Type      : ElementType.HEADING
+Text      :
+8. Backend Processing:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (82.299999, 250.5068375599999, 209.41328025, 240.6328820367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 79
+Type      : ElementType.PARAGRAPH
+Text      :
+To  implement  cloud-based  backend  APIs  (such  as  Flask  or  FastAPI)  for  efficient handling of computationally intensive AI tasks.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (100.299999, 235.61523618499996, 534.6496064999999, 210.85065466171375), 'source': 'docling'}
+
+================================================================================
+Element 80
+Type      : ElementType.HEADING
+Text      :
+9. Data Logging (Optional):
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (82.299999, 205.83300755999994, 233.3078115, 195.95905203671384), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 81
+Type      : ElementType.PARAGRAPH
+Text      :
+To store user activity logs and analysis history for future reference and continuous model improvement.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (100.299999, 190.94238418500004, 534.4210965, 166.1768246617138), 'source': 'docling'}
+
+================================================================================
+Element 82
+Type      : ElementType.HEADING
+Text      :
+10. Scalability:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (82.299999, 161.16015756000002, 161.30195250000003, 151.2862020367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 83
+Type      : ElementType.PARAGRAPH
+Text      :
+To  ensure  the  system  can  scale  effectively  to  support  more  users,  larger  datasets,  and evolving deepfake detection techniques over time.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 12, 'bbox': (100.299999, 146.26757743500002, 534.2980439999999, 121.5029989117138), 'source': 'docling'}
+
+================================================================================
+Element 84
+Type      : ElementType.HEADING
+Text      :
+1.5 Issues / Limitations
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (82.299999, 773.3503907814453, 222.383756625, 761.830776415693), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 85
+Type      : ElementType.PARAGRAPH
+Text      :
+Despite the effectiveness of the proposed deepfake detection system, certain limitations exist:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (64.299999, 745.79492156, 534.268749, 735.9209660367138), 'source': 'docling'}
+
+================================================================================
+Element 86
+Type      : ElementType.HEADING
+Text      :
+1. Sensitivity to Media Quality:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (82.299999, 718.9033205600001, 250.9621065, 709.0293650367139), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 87
+Type      : ElementType.PARAGRAPH
+Text      :
+Detection  accuracy may decrease when processing low-quality, highly compressed, or blurry images and videos.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (100.299999, 704.0126971850001, 534.7023465, 679.2471376617139), 'source': 'docling'}
+
+================================================================================
+Element 88
+Type      : ElementType.HEADING
+Text      :
+2. Advanced Manipulation Techniques:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (82.299999, 674.2304685600001, 292.235544, 664.3565130367139), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 89
+Type      : ElementType.PARAGRAPH
+Text      :
+Highly  sophisticated  or  previously  unseen  deepfake  techniques may not be accurately recognized by the model.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (100.299999, 659.337888435, 533.9992215, 634.5733099117139), 'source': 'docling'}
+
+================================================================================
+Element 90
+Type      : ElementType.HEADING
+Text      :
+3. Dataset Dependency:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (82.299999, 629.5556675600001, 211.61640899999998, 619.6817120367139), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 91
+Type      : ElementType.PARAGRAPH
+Text      :
+The  system  relies  heavily  on  large  labeled  datasets  (e.g.,  FaceForensics++).  Limited diversity in training data may affect the model's ability to generalize.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (100.299999, 614.665044185, 534.239454, 589.8994846617138), 'source': 'docling'}
+
+================================================================================
+Element 92
+Type      : ElementType.HEADING
+Text      :
+4. Need for Continuous Updates:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (82.299999, 584.8828075600001, 258.9777315, 575.0088520367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 93
+Type      : ElementType.PARAGRAPH
+Text      :
+The model requires periodic retraining to adapt to newly emerging deepfake generation methods.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (100.299999, 569.991206185, 534.585159, 545.2256489117138), 'source': 'docling'}
+
+================================================================================
+Element 94
+Type      : ElementType.HEADING
+Text      :
+5. Computational Requirements:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (82.299999, 540.20898756, 259.411329, 530.3350320367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 95
+Type      : ElementType.PARAGRAPH
+Text      :
+Real-time video detection can be computationally expensive, especially on low-end or resource-constrained devices.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (100.299999, 525.3173861849999, 533.9933564999999, 500.5518289117137), 'source': 'docling'}
+
+================================================================================
+Element 96
+Type      : ElementType.HEADING
+Text      :
+6. Probabilistic Predictions:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (82.299999, 495.53515756, 233.18476650000002, 485.6612020367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 97
+Type      : ElementType.PARAGRAPH
+Text      :
+The model provides confidence scores rather than absolute certainty, which may lead to ambiguous interpretations in borderline cases.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (100.299999, 480.643556185, 534.5324189999999, 455.8789746617138), 'source': 'docling'}
+
+================================================================================
+Element 98
+Type      : ElementType.HEADING
+Text      :
+7. Scope Limitation:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (82.299999, 450.86132756, 194.9640615, 440.9873720367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 99
+Type      : ElementType.PARAGRAPH
+Text      :
+The  current  system  focuses  primarily  on  face-based  manipulations  and  may  not effectively detect non-face or audio-based deepfakes in its initial version.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 13, 'bbox': (100.299999, 435.970704185, 534.0167939999999, 411.2041689117138), 'source': 'docling'}
+
+================================================================================
+Element 100
+Type      : ElementType.HEADING
+Text      :
+CHAPTER 2 LITERATURE SURVEY
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 14, 'bbox': (146.799999, 513.3095677871094, 435.71033924999995, 427.3876766638263), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 101
+Type      : ElementType.HEADING
+Text      :
+LITERATURE SURVEY
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 15, 'bbox': (28.299999, 761.4562510360547, 393.055044, 748.2909765935916), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 102
+Type      : ElementType.LIST
+Text      :
+ FaceForensics++  (2019) -  Rössler  et  al.  Built  a  large-scale  benchmark  dataset  with manipulated facial images and tested multiple CNN architectures on it. Became the standard reference dataset for deepfake detection research.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 15, 'bbox': (73.299999, 732.14453156, 534.9953115, 694.6729194117138), 'source': 'docling', 'ordered': True, 'marker': '1.'}
+
+================================================================================
+Element 103
+Type      : ElementType.LIST
+Text      :
+ MesoNet  (2018) -  Afchar  et  al.  Designed  a  compact,  lightweight  CNN  (Meso-4  / MesoInception-4) that detects facial forgeries in real time. Trades off accuracy for speed and model size.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 15, 'bbox': (73.299999, 678.74804656, 535.018749, 641.2764344117138), 'source': 'docling', 'ordered': True, 'marker': '2.'}
+
+================================================================================
+Element 104
+Type      : ElementType.LIST
+Text      :
+ FakeCatcher  (2019/2020) -  Ciftci  et  al.  Detects  deepfakes  using  biological  signals  specifically  blood  flow  patterns  (rPPG)  extracted  from  skin  regions  -  rather  than  visual artifacts. Hard for generators to replicate.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 15, 'bbox': (73.299999, 625.3515575600001, 535.3527314999999, 587.8799454117138), 'source': 'docling', 'ordered': True, 'marker': '3.'}
+
+================================================================================
+Element 105
+Type      : ElementType.LIST
+Text      :
+ Face  X-Ray  (2020) -  Li  et  al.  Identifies  blending  boundary  artifacts  left  during  face swapping.  Generalizes  across  unseen  manipulation  types  but  fails  on  fully  synthesized (non-blended) fakes.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 15, 'bbox': (73.299999, 571.9550775600001, 534.9074189999999, 534.4834654117138), 'source': 'docling', 'ordered': True, 'marker': '4.'}
+
+================================================================================
+Element 106
+Type      : ElementType.LIST
+Text      :
+ Frequency  Analysis  for  Deepfake  Recognition  (2020) -  Frank  et  al.  Exploits  unique spectral artifacts in GAN-generated  images.  Works  across  multiple  generators  without retraining but may fail against diffusion-based fakes.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 15, 'bbox': (73.299999, 518.5585975600001, 534.9484365, 481.08698541171384), 'source': 'docling', 'ordered': True, 'marker': '5.'}
+
+================================================================================
+Element 107
+Type      : ElementType.LIST
+Text      :
+Thinking in Frequency (ECCV 2020) - Qian et al. Adds frequency-aware layers to CNNs so the network jointly learns spatial and frequency cues. Improves generalization but increases compute cost.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 15, 'bbox': (73.299999, 465.16210756, 535.440624, 427.69049541171375), 'source': 'docling', 'ordered': True, 'marker': '6.'}
+
+================================================================================
+Element 108
+Type      : ElementType.LIST
+Text      :
+Exploiting Temporal Information (IEEE ICIP) - Guera & Delp Combines CNN (spatial features  per  frame)  with  LSTM  (temporal  inconsistency  across  frames).  Simple  and  clean pipeline but uses older CNN backbones.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 15, 'bbox': (73.299999, 411.76562756, 535.3996064999999, 374.29401541171376), 'source': 'docling', 'ordered': True, 'marker': '7.'}
+
+================================================================================
+Element 109
+Type      : ElementType.LIST
+Text      :
+ Deepfake  Video  Detection  Using  RNNs  (IEEE  AVSS) -  Sabir  et  al.  CNN  extracts frame-level  features,  LSTM  classifies  at  video  level.  Effective  for  video-level  detection  but computationally heavy.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 15, 'bbox': (73.299999, 358.36913756, 535.2355439999999, 320.8975254117138), 'source': 'docling', 'ordered': True, 'marker': '8.'}
+
+================================================================================
+Element 110
+Type      : ElementType.LIST
+Text      :
+CNN + LSTM for Video Forgery Detection - Zhou et al. Hybrid CNN-LSTM framework focusing on spatio-temporal forgery detection. Improves accuracy but increases memory usage and pipeline complexity.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 15, 'bbox': (73.299999, 304.97265756, 535.346874, 267.5010454117138), 'source': 'docling', 'ordered': True, 'marker': '9.'}
+
+================================================================================
+Element 111
+Type      : ElementType.LIST
+Text      :
+ Deepfake Detection Using Spatiotemporal Features (IEEE Access) - Li et al. Jointly trains  CNN  and  LSTM  to  capture  both  spatial  and  temporal artifacts. Robust detection but struggles to generalize across datasets.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 15, 'bbox': (73.299999, 251.57616755999993, 535.3527314999999, 214.10455541171382), 'source': 'docling', 'ordered': True, 'marker': '10.'}
+
+================================================================================
+Element 112
+Type      : ElementType.LIST
+Text      :
+Convolutional Vision Transformer / CViT (2021) - Wodajo & Atnafu Combines CNN for  local  feature  extraction  with  Vision  Transformer  for  global  attention.  Achieves  91.5% accuracy and AUC of 0.91 on DFDC but limited cross-dataset generalization.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 15, 'bbox': (73.299999, 198.17968756000005, 535.428909, 160.70807541171382), 'source': 'docling', 'ordered': True, 'marker': '11.'}
+
+================================================================================
+Element 113
+Type      : ElementType.LIST
+Text      :
+ Deepfake Detection Using CNN-Based Architecture (2025) - Kapoor et al. Presents a complete  end-to-end  CNN  pipeline  with  detailed  preprocessing,  architecture  design,  and training strategy. Practical and systematic but  needs  continuous  updates  as  generation
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 15, 'bbox': (73.299999, 144.78320755999994, 535.1535165, 107.31159541171382), 'source': 'docling', 'ordered': True, 'marker': '12.'}
+
+================================================================================
+Element 114
+Type      : ElementType.PARAGRAPH
+Text      :
+techniques evolve.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 16, 'bbox': (73.299999, 765.74218756, 165.60273375000003, 755.8682320367138), 'source': 'docling'}
+
+================================================================================
+Element 115
+Type      : ElementType.LIST
+Text      :
+ A  Survey:  Deepfake  and  Current  Technologies  (2024) -  Banerjee  et  al.  Surveys forensics, ML, multimodal, and blockchain-based detection approaches. Covers both technical and societal dimensions but real-time detection remains an open problem.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 16, 'bbox': (73.299999, 739.9433595600001, 535.253124, 702.4717474117139), 'source': 'docling', 'ordered': True, 'marker': '13.'}
+
+================================================================================
+Element 116
+Type      : ElementType.LIST
+Text      :
+ DeepFakes  and  Beyond  (2020) -  Tolosana et al. Classifies face manipulations into 4 types (full  synthesis,  identity  swap,  attribute  manipulation,  expression  swap)  and  reviews all major datasets and benchmarks. Strong foundational reference.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 16, 'bbox': (73.299999, 686.5468745600001, 535.2941415, 649.0752624117139), 'source': 'docling', 'ordered': True, 'marker': '14.'}
+
+================================================================================
+Element 117
+Type      : ElementType.LIST
+Text      :
+ Deepfake  Generation  and  Detection:  A Benchmark and Survey (2024) - Pei et al. Covers  the  full  arc  from  GAN  to  diffusion-based  generation  and  benchmarks  detection methods  across  spatial,  temporal,  frequency,  and  hybrid  domains.  Most comprehensive and up-to-date survey.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 16, 'bbox': (73.299999, 633.15038756, 535.176954, 581.8799476617138), 'source': 'docling', 'ordered': True, 'marker': '15.'}
+
+================================================================================
+Element 118
+Type      : ElementType.TABLE
+Text      :
+Sr. No. | Paper / Year | Authors | Description | Advantages | Limitations
+1 | FaceForensics+ +: Learning to Detect Manipulated Facial Images (2019) | Andreas Rössler, Davide Cozzolino, Luisa Verdoliva, Christian Riess, Justus Thies, Matthias Nießner | Introduced a large-scale benchmark dataset for detecting manipulated facial images and evaluated various CNN architectures. | Standardized benchmark dataset; enables reproducible comparison across models; supports multiple manipulation types and compression levels. | Focuses mainly on early manipulation methods; detectors trained on it often overfit and fail to generalize to unseen generators.
+2 | MesoNet: A Compact Facial Video Forgery Detection Network (2018) | Darius Afchar, Vincent Nozick, Junichi Yamagishi, Isao Echizen | Proposed a lightweight CNN (Meso-4, MesoInception -4) for detecting facial forgery in images and videos. | Small model, fast inference (real-time use); easy to interpret activations and visualize results. | Lower accuracy than deeper models (Xception, ResNet); sensitive to compression and post-processing.
+3 | FakeCatcher: Detection of Synthetic Portrait Videos using Biological Signals (2019/2020) | Umur Aybars Ciftci, Ilke Demir, Lijun Yin | Uses biological signals (rPPG - blood flow patterns) from skin regions to detect fake videos or images. | Uses physiological cues that are hard for generative models to mimic; robust to some post-processing. | Mainly applicable to videos, not single images; sensitive to lighting and motion artifacts.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 17, 'bbox': (50.16470718383789, 734.4286727905273, 555.2180786132812, 149.747802734375), 'source': 'docling', 'cells': [['Sr. No.', 'Paper / Year', 'Authors', 'Description', 'Advantages', 'Limitations'], ['1', 'FaceForensics+ +: Learning to Detect Manipulated Facial Images (2019)', 'Andreas Rössler, Davide Cozzolino, Luisa Verdoliva, Christian Riess, Justus Thies, Matthias Nießner', 'Introduced a large-scale benchmark dataset for detecting manipulated facial images and evaluated various CNN architectures.', 'Standardized benchmark dataset; enables reproducible comparison across models; supports multiple manipulation types and compression levels.', 'Focuses mainly on early manipulation methods; detectors trained on it often overfit and fail to generalize to unseen generators.'], ['2', 'MesoNet: A Compact Facial Video Forgery Detection Network (2018)', 'Darius Afchar, Vincent Nozick, Junichi Yamagishi, Isao Echizen', 'Proposed a lightweight CNN (Meso-4, MesoInception -4) for detecting facial forgery in images and videos.', 'Small model, fast inference (real-time use); easy to interpret activations and visualize results.', 'Lower accuracy than deeper models (Xception, ResNet); sensitive to compression and post-processing.'], ['3', 'FakeCatcher: Detection of Synthetic Portrait Videos using Biological Signals (2019/2020)', 'Umur Aybars Ciftci, Ilke Demir, Lijun Yin', 'Uses biological signals (rPPG - blood flow patterns) from skin regions to detect fake videos or images.', 'Uses physiological cues that are hard for generative models to mimic; robust to some post-processing.', 'Mainly applicable to videos, not single images; sensitive to lighting and motion artifacts.']], 'n_rows': 4, 'n_cols': 6, 'has_header_row': True, 'markdown': '| Sr. No. | Paper / Year | Authors | Description | Advantages | Limitations |\n| --- | --- | --- | --- | --- | --- |\n| 1 | FaceForensics+ +: Learning to Detect Manipulated Facial Images (2019) | Andreas Rössler, Davide Cozzolino, Luisa Verdoliva, Christian Riess, Justus Thies, Matthias Nießner | Introduced a large-scale benchmark dataset for detecting manipulated facial images and evaluated various CNN architectures. | Standardized benchmark dataset; enables reproducible comparison across models; supports multiple manipulation types and compression levels. | Focuses mainly on early manipulation methods; detectors trained on it often overfit and fail to generalize to unseen generators. |\n| 2 | MesoNet: A Compact Facial Video Forgery Detection Network (2018) | Darius Afchar, Vincent Nozick, Junichi Yamagishi, Isao Echizen | Proposed a lightweight CNN (Meso-4, MesoInception -4) for detecting facial forgery in images and videos. | Small model, fast inference (real-time use); easy to interpret activations and visualize results. | Lower accuracy than deeper models (Xception, ResNet); sensitive to compression and post-processing. |\n| 3 | FakeCatcher: Detection of Synthetic Portrait Videos using Biological Signals (2019/2020) | Umur Aybars Ciftci, Ilke Demir, Lijun Yin | Uses biological signals (rPPG - blood flow patterns) from skin regions to detect fake videos or images. | Uses physiological cues that are hard for generative models to mimic; robust to some post-processing. | Mainly applicable to videos, not single images; sensitive to lighting and motion artifacts. |'}
+
+================================================================================
+Element 119
+Type      : ElementType.TABLE
+Text      :
+4 | Face X-Ray for More General Face Forgery Detection (2020) | Lingzhi Li, Jianmin Bao, Ting Zhang, Hao Yang, Dong Chen, Fang Wen, Baining Guo | Introduces a 'face X-ray' representation to identify image blending boundaries common in manipulated faces. | Generalizes across many manipulation types; localizes manipulated regions (interpretable). | Ineffective for full-synthesis (non-blended) fakes; post-processing can hide boundary cues.
+5 | Leveraging Frequency Analysis for Deepfake Image Recognition (2020) | Jörg Frank, T. Eisenhofer, L. Schönherr, Asja Fischer, D. Kolossa, T. Holz | Shows that GAN-generate d images have distinctive frequency artifacts; uses spectral-domai n features for detection. | Model-agnostic - frequency features apply across many generators; good complement to CNN spatial cues. | Vulnerable if generator uses spectral regularization or improved upsampling; may fail on diffusion-based fakes.
+6 | Thinking in Frequency: Face Forgery Detection via Frequency-awar e Feature Learning (ECCV 2020) | Yuezun Qian, Xianfeng Zhao, Guojun Yin, Jiajun Wu, Siwei Lyu | Improves CNNs by adding frequency-awa re layers for detecting fake faces more robustly. | Learns robust frequency features jointly with spatial cues; better generalization across datasets. | Requires high-quality input; performance degrades under compression; additional computation cost compared to standard CNNs.
+7 | Exploiting Temporal Information for Deepfake Detection (IEEE ICIP) | David Guera, Edward J. Delp | Uses CNN to extract spatial frame features from video frames and LSTM to learn temporal inconsistencies . | Clear CNN to LSTM pipeline; strong temporal modeling; easy to implement. | Uses older CNN architectures; comparatively lower accuracy.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 18, 'bbox': (49.99616241455078, 762.3242950439453, 555.8158569335938, 108.6591796875), 'source': 'docling', 'cells': [['4', 'Face X-Ray for More General Face Forgery Detection (2020)', 'Lingzhi Li, Jianmin Bao, Ting Zhang, Hao Yang, Dong Chen, Fang Wen, Baining Guo', "Introduces a 'face X-ray' representation to identify image blending boundaries common in manipulated faces.", 'Generalizes across many manipulation types; localizes manipulated regions (interpretable).', 'Ineffective for full-synthesis (non-blended) fakes; post-processing can hide boundary cues.'], ['5', 'Leveraging Frequency Analysis for Deepfake Image Recognition (2020)', 'Jörg Frank, T. Eisenhofer, L. Schönherr, Asja Fischer, D. Kolossa, T. Holz', 'Shows that GAN-generate d images have distinctive frequency artifacts; uses spectral-domai n features for detection.', 'Model-agnostic - frequency features apply across many generators; good complement to CNN spatial cues.', 'Vulnerable if generator uses spectral regularization or improved upsampling; may fail on diffusion-based fakes.'], ['6', 'Thinking in Frequency: Face Forgery Detection via Frequency-awar e Feature Learning (ECCV 2020)', 'Yuezun Qian, Xianfeng Zhao, Guojun Yin, Jiajun Wu, Siwei Lyu', 'Improves CNNs by adding frequency-awa re layers for detecting fake faces more robustly.', 'Learns robust frequency features jointly with spatial cues; better generalization across datasets.', 'Requires high-quality input; performance degrades under compression; additional computation cost compared to standard CNNs.'], ['7', 'Exploiting Temporal Information for Deepfake Detection (IEEE ICIP)', 'David Guera, Edward J. Delp', 'Uses CNN to extract spatial frame features from video frames and LSTM to learn temporal inconsistencies .', 'Clear CNN to LSTM pipeline; strong temporal modeling; easy to implement.', 'Uses older CNN architectures; comparatively lower accuracy.']], 'n_rows': 4, 'n_cols': 6, 'has_header_row': False, 'markdown': "| 4 | Face X-Ray for More General Face Forgery Detection (2020) | Lingzhi Li, Jianmin Bao, Ting Zhang, Hao Yang, Dong Chen, Fang Wen, Baining Guo | Introduces a 'face X-ray' representation to identify image blending boundaries common in manipulated faces. | Generalizes across many manipulation types; localizes manipulated regions (interpretable). | Ineffective for full-synthesis (non-blended) fakes; post-processing can hide boundary cues. |\n| --- | --- | --- | --- | --- | --- |\n| 4 | Face X-Ray for More General Face Forgery Detection (2020) | Lingzhi Li, Jianmin Bao, Ting Zhang, Hao Yang, Dong Chen, Fang Wen, Baining Guo | Introduces a 'face X-ray' representation to identify image blending boundaries common in manipulated faces. | Generalizes across many manipulation types; localizes manipulated regions (interpretable). | Ineffective for full-synthesis (non-blended) fakes; post-processing can hide boundary cues. |\n| 5 | Leveraging Frequency Analysis for Deepfake Image Recognition (2020) | Jörg Frank, T. Eisenhofer, L. Schönherr, Asja Fischer, D. Kolossa, T. Holz | Shows that GAN-generate d images have distinctive frequency artifacts; uses spectral-domai n features for detection. | Model-agnostic - frequency features apply across many generators; good complement to CNN spatial cues. | Vulnerable if generator uses spectral regularization or improved upsampling; may fail on diffusion-based fakes. |\n| 6 | Thinking in Frequency: Face Forgery Detection via Frequency-awar e Feature Learning (ECCV 2020) | Yuezun Qian, Xianfeng Zhao, Guojun Yin, Jiajun Wu, Siwei Lyu | Improves CNNs by adding frequency-awa re layers for detecting fake faces more robustly. | Learns robust frequency features jointly with spatial cues; better generalization across datasets. | Requires high-quality input; performance degrades under compression; additional computation cost compared to standard CNNs. |\n| 7 | Exploiting Temporal Information for Deepfake Detection (IEEE ICIP) | David Guera, Edward J. Delp | Uses CNN to extract spatial frame features from video frames and LSTM to learn temporal inconsistencies . | Clear CNN to LSTM pipeline; strong temporal modeling; easy to implement. | Uses older CNN architectures; comparatively lower accuracy. |"}
+
+================================================================================
+Element 120
+Type      : ElementType.TABLE
+Text      :
+8 | Deepfake Video Detection Using Recurrent Neural Networks (IEEE AVSS) | Sabir et al. | CNN-based frame feature extraction followed by LSTM for video-level classification. | Direct CNN + LSTM integration; effective video-level detection. | High computational cost; longer training time.
+9 | Combining CNN and LSTM for Video-Based Face Forgery Detection (Elsevier Neurocomputin g) | Zhou et al. | Hybrid CNN + LSTM framework for spatial and temporal forgery detection. | Strong spatio-temporal learning; improved accuracy. | More complex pipeline; higher memory usage.
+10 | Deepfake Detection Using Spatiotemporal Features (IEEE Access) | Li et al. | Joint CNN and LSTM model to capture spatial and temporal artifacts in videos. | Explicit spatio-temporal modeling; robust detection. | Dataset-dependent performance; generalization issues.
+11 | Deepfake Video Detection Using Convolutional Vision Transformer (2021) | Deressa Wodajo & Solomon Atnafu | Proposes a CNN + Vision Transformer (CViT) hybrid model for deepfake video detection on DFDC dataset. | High accuracy (91.5%, AUC=0.91); leverages both local and global features. | Generalization to unseen datasets is still limited.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 19, 'bbox': (50.02228927612305, 762.3744125366211, 555.473388671875, 191.8223876953125), 'source': 'docling', 'cells': [['8', 'Deepfake Video Detection Using Recurrent Neural Networks (IEEE AVSS)', 'Sabir et al.', 'CNN-based frame feature extraction followed by LSTM for video-level classification.', 'Direct CNN + LSTM integration; effective video-level detection.', 'High computational cost; longer training time.'], ['9', 'Combining CNN and LSTM for Video-Based Face Forgery Detection (Elsevier Neurocomputin g)', 'Zhou et al.', 'Hybrid CNN + LSTM framework for spatial and temporal forgery detection.', 'Strong spatio-temporal learning; improved accuracy.', 'More complex pipeline; higher memory usage.'], ['10', 'Deepfake Detection Using Spatiotemporal Features (IEEE Access)', 'Li et al.', 'Joint CNN and LSTM model to capture spatial and temporal artifacts in videos.', 'Explicit spatio-temporal modeling; robust detection.', 'Dataset-dependent performance; generalization issues.'], ['11', 'Deepfake Video Detection Using Convolutional Vision Transformer (2021)', 'Deressa Wodajo & Solomon Atnafu', 'Proposes a CNN + Vision Transformer (CViT) hybrid model for deepfake video detection on DFDC dataset.', 'High accuracy (91.5%, AUC=0.91); leverages both local and global features.', 'Generalization to unseen datasets is still limited.']], 'n_rows': 4, 'n_cols': 6, 'has_header_row': False, 'markdown': '| 8 | Deepfake Video Detection Using Recurrent Neural Networks (IEEE AVSS) | Sabir et al. | CNN-based frame feature extraction followed by LSTM for video-level classification. | Direct CNN + LSTM integration; effective video-level detection. | High computational cost; longer training time. |\n| --- | --- | --- | --- | --- | --- |\n| 8 | Deepfake Video Detection Using Recurrent Neural Networks (IEEE AVSS) | Sabir et al. | CNN-based frame feature extraction followed by LSTM for video-level classification. | Direct CNN + LSTM integration; effective video-level detection. | High computational cost; longer training time. |\n| 9 | Combining CNN and LSTM for Video-Based Face Forgery Detection (Elsevier Neurocomputin g) | Zhou et al. | Hybrid CNN + LSTM framework for spatial and temporal forgery detection. | Strong spatio-temporal learning; improved accuracy. | More complex pipeline; higher memory usage. |\n| 10 | Deepfake Detection Using Spatiotemporal Features (IEEE Access) | Li et al. | Joint CNN and LSTM model to capture spatial and temporal artifacts in videos. | Explicit spatio-temporal modeling; robust detection. | Dataset-dependent performance; generalization issues. |\n| 11 | Deepfake Video Detection Using Convolutional Vision Transformer (2021) | Deressa Wodajo & Solomon Atnafu | Proposes a CNN + Vision Transformer (CViT) hybrid model for deepfake video detection on DFDC dataset. | High accuracy (91.5%, AUC=0.91); leverages both local and global features. | Generalization to unseen datasets is still limited. |'}
+
+================================================================================
+Element 121
+Type      : ElementType.TABLE
+Text      :
+12 | A Survey: Deepfake and Current Technologies for Solutions (2024) | Sayan Banerjee, Sumit Kumar Yadav, Ankit Dhara, Md Ajij | Reviews detection methods including forensics, ML, multimodal approaches, and blockchain authentication. | Broad coverage including technical and societal aspects. | Real-time detection remains unsolved.
+13 | DeepFakes and Beyond: A Survey of Face Manipulation and Fake Detection (2020) | Ruben Tolosana, Ruben Vera-Rodriguez, Julian Fierrez, Aythami Morales, Javier Ortega-Garcia | Categorizes 4 main manipulation types; reviews datasets, benchmarks, and detection methods. | Strong classification framework; benchmark results summarized. | Traditional methods are less robust against new manipulations.
+14 | Deepfake Generation and Detection: A Benchmark and Survey (2024) | Gan Pei, Jiangning Zhang, Menghan Hu et al. | Benchmarks detection methods; covers evolution from GAN to diffusion models; unifies deepfake task definitions. | Unified definitions; cross-domain benchmarking; identifies future directions. | Diffusion-based detection at early stage; challenges in real-world deployment.
+15 | FakeFormer: Efficient Vulnerability-D riven Transformers for Generalizable Deepfake Detection (2023) | Viet-Tuan Le, Yibing Zhan, Xiangtai Li, Yunqian Li, Xiaochun Cao | Proposes a transformer-ba sed detector that focuses on vulnerability-d riven patches in video frames for generalizable detection. | Strong cross-dataset generalization; efficient patch-based attention; outperforms CNN baselines on multiple benchmarks. | Higher memory requirements; transformer training demands large datasets; less interpretable than CNN approaches.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 20, 'bbox': (50.094032287597656, 762.7644119262695, 555.3741455078125, 88.53375244140625), 'source': 'docling', 'cells': [['12', 'A Survey: Deepfake and Current Technologies for Solutions (2024)', 'Sayan Banerjee, Sumit Kumar Yadav, Ankit Dhara, Md Ajij', 'Reviews detection methods including forensics, ML, multimodal approaches, and blockchain authentication.', 'Broad coverage including technical and societal aspects.', 'Real-time detection remains unsolved.'], ['13', 'DeepFakes and Beyond: A Survey of Face Manipulation and Fake Detection (2020)', 'Ruben Tolosana, Ruben Vera-Rodriguez, Julian Fierrez, Aythami Morales, Javier Ortega-Garcia', 'Categorizes 4 main manipulation types; reviews datasets, benchmarks, and detection methods.', 'Strong classification framework; benchmark results summarized.', 'Traditional methods are less robust against new manipulations.'], ['14', 'Deepfake Generation and Detection: A Benchmark and Survey (2024)', 'Gan Pei, Jiangning Zhang, Menghan Hu et al.', 'Benchmarks detection methods; covers evolution from GAN to diffusion models; unifies deepfake task definitions.', 'Unified definitions; cross-domain benchmarking; identifies future directions.', 'Diffusion-based detection at early stage; challenges in real-world deployment.'], ['15', 'FakeFormer: Efficient Vulnerability-D riven Transformers for Generalizable Deepfake Detection (2023)', 'Viet-Tuan Le, Yibing Zhan, Xiangtai Li, Yunqian Li, Xiaochun Cao', 'Proposes a transformer-ba sed detector that focuses on vulnerability-d riven patches in video frames for generalizable detection.', 'Strong cross-dataset generalization; efficient patch-based attention; outperforms CNN baselines on multiple benchmarks.', 'Higher memory requirements; transformer training demands large datasets; less interpretable than CNN approaches.']], 'n_rows': 4, 'n_cols': 6, 'has_header_row': False, 'markdown': '| 12 | A Survey: Deepfake and Current Technologies for Solutions (2024) | Sayan Banerjee, Sumit Kumar Yadav, Ankit Dhara, Md Ajij | Reviews detection methods including forensics, ML, multimodal approaches, and blockchain authentication. | Broad coverage including technical and societal aspects. | Real-time detection remains unsolved. |\n| --- | --- | --- | --- | --- | --- |\n| 12 | A Survey: Deepfake and Current Technologies for Solutions (2024) | Sayan Banerjee, Sumit Kumar Yadav, Ankit Dhara, Md Ajij | Reviews detection methods including forensics, ML, multimodal approaches, and blockchain authentication. | Broad coverage including technical and societal aspects. | Real-time detection remains unsolved. |\n| 13 | DeepFakes and Beyond: A Survey of Face Manipulation and Fake Detection (2020) | Ruben Tolosana, Ruben Vera-Rodriguez, Julian Fierrez, Aythami Morales, Javier Ortega-Garcia | Categorizes 4 main manipulation types; reviews datasets, benchmarks, and detection methods. | Strong classification framework; benchmark results summarized. | Traditional methods are less robust against new manipulations. |\n| 14 | Deepfake Generation and Detection: A Benchmark and Survey (2024) | Gan Pei, Jiangning Zhang, Menghan Hu et al. | Benchmarks detection methods; covers evolution from GAN to diffusion models; unifies deepfake task definitions. | Unified definitions; cross-domain benchmarking; identifies future directions. | Diffusion-based detection at early stage; challenges in real-world deployment. |\n| 15 | FakeFormer: Efficient Vulnerability-D riven Transformers for Generalizable Deepfake Detection (2023) | Viet-Tuan Le, Yibing Zhan, Xiangtai Li, Yunqian Li, Xiaochun Cao | Proposes a transformer-ba sed detector that focuses on vulnerability-d riven patches in video frames for generalizable detection. | Strong cross-dataset generalization; efficient patch-based attention; outperforms CNN baselines on multiple benchmarks. | Higher memory requirements; transformer training demands large datasets; less interpretable than CNN approaches. |'}
+
+================================================================================
+Element 122
+Type      : ElementType.HEADING
+Text      :
+2.1 Existing Systems
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (73.299999, 761.1992180189453, 198.466441875, 749.6796036531929), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 123
+Type      : ElementType.PARAGRAPH
+Text      :
+Several existing platforms and tools offer deepfake detection capabilities for various use cases:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (65.799999, 733.64453156, 539.424999, 723.7705760367138), 'source': 'docling'}
+
+================================================================================
+Element 124
+Type      : ElementType.LIST
+Text      :
+Sensity  AI -  Enterprise-level  media  forensics  platform  for  detecting  synthetic  media. Targets organizations needing advanced detection tools and forensic reporting.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (77.799999, 707.8457035600001, 536.0148465, 684.1729199117138), 'source': 'docling', 'ordered': True, 'marker': 'i.'}
+
+================================================================================
+Element 125
+Type      : ElementType.LIST
+Text      :
+Reality Defender - Provides API and browser plugin for real-time fake media detection. Integrates with workflows to deliver detection scores and content analysis.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (74.799999, 667.598046685, 536.003124, 643.9248737867138), 'source': 'docling', 'ordered': True, 'marker': 'ii.'}
+
+================================================================================
+Element 126
+Type      : ElementType.LIST
+Text      :
+Deepware -Publicly available video deepfake scanner focusing on face-swap techniques. Allows users to upload videos and receive detection reports.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (71.799999, 627.3499976850001, 534.7667939999999, 603.6768247867138), 'source': 'docling', 'ordered': True, 'marker': 'iii.'}
+
+================================================================================
+Element 127
+Type      : ElementType.LIST
+Text      :
+Truepic -  Ensures content authenticity and tracks media provenance. Aims to prevent manipulation and verify the integrity of digital content.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (73.299999, 587.101957685, 534.9542939999999, 563.4287847867138), 'source': 'docling', 'ordered': True, 'marker': 'iv.'}
+
+================================================================================
+Element 128
+Type      : ElementType.LIST
+Text      :
+InVID/WeVerify - Verification toolkit for journalists and fact-checkers. Offers multiple media analysis tools, including deepfake detection.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (76.299999, 546.853907685, 536.114454, 523.1807347867137), 'source': 'docling', 'ordered': True, 'marker': 'v.'}
+
+================================================================================
+Element 129
+Type      : ElementType.HEADING
+Text      :
+2.2 Requirement Analysis
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (73.299999, 494.0652387814453, 230.07170137499998, 482.5456244156929), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 130
+Type      : ElementType.LIST
+Text      :
+Users will be provided with accessible deepfake detection through an intuitive web interface:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (77.799999, 466.50976756, 535.8566415, 442.8369839117138), 'source': 'docling', 'ordered': True, 'marker': 'i.'}
+
+================================================================================
+Element 131
+Type      : ElementType.PARAGRAPH
+Text      :
+The  system  will  allow  users  to  upload  images  or  videos  without  requiring  technical expertise  or  API  integration,  guiding  them  through the upload process and presenting results with clear confidence scores.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (101.799999, 438.91210756, 535.0421865, 401.44049541171375), 'source': 'docling'}
+
+================================================================================
+Element 132
+Type      : ElementType.LIST
+Text      :
+Users will be provided with transparent detection results that explain the basis for the system's conclusions:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (74.799999, 384.865627685, 536.1378915, 361.19245478671377), 'source': 'docling', 'ordered': True, 'marker': 'ii.'}
+
+================================================================================
+Element 133
+Type      : ElementType.PARAGRAPH
+Text      :
+The  system  will display confidence scores  (e.g.,  "82%  likely  fake")  along  with explanations of factors contributing to the detection decision, promoting AI transparency.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (101.799999, 357.26757756, 535.0773465, 333.5947939117138), 'source': 'docling'}
+
+================================================================================
+Element 134
+Type      : ElementType.LIST
+Text      :
+Users  will  be  provided  with  rapid  analysis  capabilities  for  quick  verification  of digital content:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (71.799999, 317.019917685, 534.924999, 293.34674478671377), 'source': 'docling', 'ordered': True, 'marker': 'iii.'}
+
+================================================================================
+Element 135
+Type      : ElementType.PARAGRAPH
+Text      :
+The system will process uploaded media efficiently, delivering detection results within seconds to minutes depending on file size, prioritizing real-time feedback.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (101.799999, 289.42187756, 534.942579, 265.74909391171377), 'source': 'docling'}
+
+================================================================================
+Element 136
+Type      : ElementType.LIST
+Text      :
+Users will be provided with a reporting mechanism to flag detected deepfakes and contribute to community awareness:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (73.299999, 249.17421768500003, 535.757034, 225.5010447867138), 'source': 'docling', 'ordered': True, 'marker': 'iv.'}
+
+================================================================================
+Element 137
+Type      : ElementType.PARAGRAPH
+Text      :
+The platform will include functionality to report suspicious media, creating a feedback loop for improving detection models and supporting broader efforts to  combat misinformation.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (101.799999, 221.57812755999998, 536.0792939999999, 184.10651541171387), 'source': 'docling'}
+
+================================================================================
+Element 138
+Type      : ElementType.LIST
+Text      :
+Users  will  be  provided  with  detection  capabilities  that  work  across  common deepfake manipulation techniques:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (76.299999, 167.529687685, 536.0910165, 143.85651478671377), 'source': 'docling', 'ordered': True, 'marker': 'v.'}
+
+================================================================================
+Element 139
+Type      : ElementType.PARAGRAPH
+Text      :
+The  system  will be trained on diverse datasets  (FaceForensics++,  DFDC)  using XceptionNet-based  architecture  to  recognize  various  manipulation  methods  including face swaps, facial reenactment, and synthetic face generation.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 21, 'bbox': (101.799999, 139.93359755999995, 536.178909, 102.46198541171384), 'source': 'docling'}
+
+================================================================================
+Element 140
+Type      : ElementType.HEADING
+Text      :
+EDA — Pixel Statistics (50 samples/class)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 22, 'bbox': (235.33333333333334, 761.6666666666666, 359.0, 748.0), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 141
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 22, 'bbox': (70.59333038330078, 742.5638580322266, 525.9652099609375, 565.0599670410156), 'source': 'docling'}
+
+================================================================================
+Element 142
+Type      : ElementType.PARAGRAPH
+Text      :
+As  part  of  our  preliminary  data  exploration,  an  Exploratory  Data  Analysis  (EDA)  was conducted  on  the  dataset  to  understand  pixel-level  differences  between real and deepfake images.  As  shown  in Figure 2.2, the mean brightness, pixel standard deviation, and mean RGB channel values across both classes reveal subtle but consistent statistical differences with  fake  images  showing  slightly  more  varied  brightness  distributions  and  marginally different  channel  intensities.  These  observations  confirmed  that  spatial  pixel features alone are  insufficient  for  reliable  deepfake  detection,  motivating  the  use  of  deeper  feature extraction via CNNs.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 22, 'bbox': (73.299999, 505.51562756, 526.0597665, 399.0518319117138), 'source': 'docling'}
+
+================================================================================
+Element 143
+Type      : ElementType.HEADING
+Text      :
+CHAPTER 3 ARCHITECTURAL DESIGN
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 23, 'bbox': (127.518558, 472.5632756846094, 471.25704075, 386.5896345613263), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 144
+Type      : ElementType.HEADING
+Text      :
+ARCHITECTURAL DESIGN
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 24, 'bbox': (28.299999, 765.6562508360547, 403.80309412500003, 752.4909763935916), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 145
+Type      : ElementType.HEADING
+Text      :
+3.1. Architecture Diagram
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 24, 'bbox': (28.299999, 732.1007807639454, 231.24653137500002, 720.581166398193), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 146
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 24, 'bbox': (84.79347229003906, 703.4129486083984, 509.6783752441406, 485.492431640625), 'source': 'docling'}
+
+================================================================================
+Element 147
+Type      : ElementType.PARAGRAPH
+Text      :
+Initial  experiments  using  a  plain  baseline  CNN  (without  attention  or  sequential  modeling) yielded unstable performance - accuracy hovered around 50-55% with high variance across epochs (refer  Figure  4.1).  To  address  this,  the  model  architecture  was  enhanced  by incorporating  Bi-directional  LSTM  layers after the CNN feature extractor, followed by an Attention  mechanism.  As  illustrated  in  Figure  3.2,  the  final  architecture  processes  input through a Convolutional layer and Max Pooling layer for spatial feature extraction, passes these  features  through  an  LSTM  layer  to  capture  temporal/contextual patterns, applies an Attention  mechanism  to  focus  on  the  most  discriminative  features,  and  finally  outputs  a classification via Dense and Softmax layers.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 24, 'bbox': (73.299999, 412.73632756, 526.4171865, 292.47174666171384), 'source': 'docling'}
+
+================================================================================
+Element 148
+Type      : ElementType.HEADING
+Text      :
+3.2 Hardware & Software Requirements
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 24, 'bbox': (64.299999, 264.0039092639454, 309.130671375, 252.48429489819296), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 149
+Type      : ElementType.HEADING
+Text      :
+3.2.1 Software Requirements
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 24, 'bbox': (64.299999, 230.17773327105465, 227.335886625, 219.48094770941316), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 150
+Type      : ElementType.LIST
+Text      :
+3.2.1.1 Operating System (OS): Windows 10/11, macOS, or Linux
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 24, 'bbox': (64.299999, 203.49999805999994, 392.676954, 193.62604253671373), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 151
+Type      : ElementType.LIST
+Text      :
+3.2.1.2 Programming Language: Python 3.x
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 24, 'bbox': (64.299999, 189.70116993499994, 283.944534, 179.82721441171373), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 152
+Type      : ElementType.LIST
+Text      :
+3.2.1.3 Framework: Flask 3.x
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 24, 'bbox': (64.299999, 175.90234143499993, 214.956249, 166.0283859117137), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 153
+Type      : ElementType.LIST
+Text      :
+3.2.1.4 Database: SQLite
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 24, 'bbox': (64.299999, 162.10351368499994, 194.27265899999998, 152.22955816171373), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 154
+Type      : ElementType.LIST
+Text      :
+3.2.1.5 Dependencies / Libraries: Flask-SQLAlchemy, SQLAlchemy, Jinja2, Werkzeug
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 24, 'bbox': (64.299999, 148.30468518499993, 492.3390615, 138.4307296617137), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 155
+Type      : ElementType.LIST
+Text      :
+3.2.1.6 Code Editor / IDE: Visual Studio Code, PyCharm, or any Python IDE
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 24, 'bbox': (64.299999, 134.50585743499994, 444.221874, 124.63190191171373), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 156
+Type      : ElementType.LIST
+Text      :
+3.2.1.7 Package Manager: pip
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 24, 'bbox': (64.299999, 120.70702893499993, 216.59101650000002, 110.83307341171371), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 157
+Type      : ElementType.LIST
+Text      :
+3.2.1.8 Web Browser: Google Chrome, Mozilla Firefox, or any modern web browser
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 24, 'bbox': (64.299999, 106.90820118499994, 480.2453115, 97.03424566171373), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 158
+Type      : ElementType.LIST
+Text      :
+3.2.1.9 Version Control (Optional): Git
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 25, 'bbox': (64.299999, 769.74218756, 260.284374, 759.8682320367138), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 159
+Type      : ElementType.LIST
+Text      :
+3.2.1.10 Virtual Environment: venv or virtualenv
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 25, 'bbox': (64.299999, 755.943359435, 308.53047150000003, 746.0694039117138), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 160
+Type      : ElementType.HEADING
+Text      :
+3.2.2 Hardware Requirements
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 25, 'bbox': (64.299999, 729.8730479685547, 234.55735912499995, 719.1762624069131), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 161
+Type      : ElementType.LIST
+Text      :
+3.2.2.1 Processor: Intel Core i7 or AMD Ryzen 7 (8-core or higher recommended)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 25, 'bbox': (64.299999, 703.19531256, 465.37422150000003, 693.3213570367138), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 162
+Type      : ElementType.LIST
+Text      :
+3.2.2.2 RAM: Minimum 16 GB (32 GB recommended)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 25, 'bbox': (64.299999, 689.396484435, 336.28047150000003, 679.5225289117138), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 163
+Type      : ElementType.LIST
+Text      :
+3.2.2.3 Storage: SSD with at least 512 GB free space
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 25, 'bbox': (64.299999, 675.597655935, 324.251169, 665.7237004117138), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 164
+Type      : ElementType.LIST
+Text      :
+3.2.2.4 Display: Minimum 15-inch display (17-inch or external monitor recommended)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 25, 'bbox': (64.299999, 661.798828185, 489.5441415000001, 651.9248726617138), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 165
+Type      : ElementType.LIST
+Text      :
+3.2.2.5 Operating System Compatibility: Windows 10/11 or Ubuntu 20.04 and above
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 25, 'bbox': (64.299999, 647.999999685, 478.00116899999995, 638.1260441617138), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 166
+Type      : ElementType.LIST
+Text      :
+3.2.2.6 Power Supply: Minimum 500W PSU
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 25, 'bbox': (64.299999, 634.201171935, 285.6496065, 624.3272164117138), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 167
+Type      : ElementType.HEADING
+Text      :
+3.3 Flow Chart
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 25, 'bbox': (28.299999, 608.1308639685548, 150.672431625, 597.4340784069132), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 168
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 25, 'bbox': (75.69661712646484, 595.5069274902344, 518.4827270507812, 473.6375732421875), 'source': 'docling'}
+
+================================================================================
+Element 169
+Type      : ElementType.PARAGRAPH
+Text      :
+As shown in Figure 3.3 , the system architecture for the image and video prediction pipeline consists of a React-based frontend, a Flask backend deployed on Cloud Run, and separate deep learning models for processing different media types, including a CNN model for image inputs  and  a  CNN-BiLSTM  model  for  video  inputs.  This  architecture  was  designed  and illustrated by the author using Whimsical.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 25, 'bbox': (71.799999, 416.793746435, 525.4621064999999, 351.7236942867138), 'source': 'docling'}
+
+================================================================================
+Element 170
+Type      : ElementType.HEADING
+Text      :
+CHAPTER 4 USER INTERFACE
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 26, 'bbox': (178.14437399999997, 443.04765568460937, 411.63122925000005, 357.07595456132634), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 171
+Type      : ElementType.HEADING
+Text      :
+USER INTERFACE(GUI)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 27, 'bbox': (205.21952249999998, 743.3593758435547, 389.78458912499997, 730.1941014010916), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 172
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 27, 'bbox': (112.20240020751953, 710.4967193603516, 493.12322998046875, 467.8359680175781), 'source': 'docling'}
+
+================================================================================
+Element 173
+Type      : ElementType.PARAGRAPH
+Text      :
+In Fig.4.1, this is the main landing page of the TruthLens web application, presenting the core value proposition: AI-powered deepfake detection for images and videos. The page outlines a simple three-step workflow - Upload, Analyze, and Get Result - making the tool accessible to  non-technical users. A prominent "Try Detector Now" button directs users to the detection interface.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 27, 'bbox': (73.299999, 450.36913756, 535.100784, 385.2998691617138), 'source': 'docling'}
+
+================================================================================
+Element 174
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 27, 'bbox': (112.17562103271484, 383.875244140625, 493.1489562988281, 146.08148193359375), 'source': 'docling'}
+
+================================================================================
+Element 175
+Type      : ElementType.PARAGRAPH
+Text      :
+In  Fig.4.2,  this  screen  shows  the  file  upload  interface  of  the  Deepfake  Detector  module, featuring a drag-and-drop zone for media submission. Users can upload image formats (JPG, PNG) as well as video formats (MP4, AVI, MOV) for authenticity analysis. The clean, minimal UI ensures a straightforward user experience before the analysis begins.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 27, 'bbox': (73.299999, 128.59570755999994, 535.4054715, 91.12409541171382), 'source': 'docling'}
+
+================================================================================
+Element 176
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 28, 'bbox': (111.40083312988281, 758.9730682373047, 493.19378662109375, 520.4967651367188), 'source': 'docling'}
+
+================================================================================
+Element 177
+Type      : ElementType.PARAGRAPH
+Text      :
+In  Fig.4.3,  the  TruthLens  Deepfake  Detector  analyzed  the  image  file  fake_1018.jpg  and flagged it as a deepfake with a confidence score of 78%. The result card displays a red warning icon and the message "This media shows signs of artificial manipulation." This demonstrates the system's ability to identify AI-generated or manipulated facial images with moderate-to-high confidence.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 28, 'bbox': (73.299999, 502.41601756, 535.0890615, 437.3467491617138), 'source': 'docling'}
+
+================================================================================
+Element 178
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 28, 'bbox': (109.05485534667969, 436.3152770996094, 496.2715759277344, 193.02532958984375), 'source': 'docling'}
+
+================================================================================
+Element 179
+Type      : ElementType.PARAGRAPH
+Text      :
+In  Fig.4.4,  the  detector  successfully  classified  real_10.jpg  as  an  authentic  image  with  a confidence score of 73.2%. A green checkmark icon and the label "Authentic" confirm that the media  appears  to  be  genuine. This result validates the model's capability to distinguish real human faces from synthetically generated ones.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 28, 'bbox': (73.299999, 175.60937755999998, 534.924999, 124.33893766171389), 'source': 'docling'}
+
+================================================================================
+Element 180
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 29, 'bbox': (100.28385162353516, 772.6623306274414, 505.0247802734375, 519.0548095703125), 'source': 'docling'}
+
+================================================================================
+Element 181
+Type      : ElementType.PARAGRAPH
+Text      :
+In  Fig.4.5,  The  system  analyzed  the  video  file  239_218.mp4  and  returned  a high-confidence deepfake verdict of 93.39%, indicating strong signs of artificial manipulation. The red-bordered result card and warning icon clearly communicate the risk level to the user. This highlights the model's effectiveness in detecting manipulated video content with near-certainty.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 29, 'bbox': (73.299999, 501.42968756, 535.4230439999999, 450.1592476617138), 'source': 'docling'}
+
+================================================================================
+Element 182
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 29, 'bbox': (117.74901580810547, 447.6704406738281, 487.1850891113281, 217.77142333984375), 'source': 'docling'}
+
+================================================================================
+Element 183
+Type      : ElementType.PARAGRAPH
+Text      :
+In  Fig.4.6,  the  video  file  841.mp4  was  classified  as  authentic  by  the  detector  with  a  high confidence score of 94.14%, represented by a green progress bar and checkmark. The result confirms that the media contains no detectable signs of synthetic manipulation. This outcome demonstrates the system's precision in correctly verifying genuine video content.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 29, 'bbox': (73.299999, 200.42382756000006, 535.2003915, 149.15338766171385), 'source': 'docling'}
+
+================================================================================
+Element 184
+Type      : ElementType.HEADING
+Text      :
+CHAPTER 5 RESULTS
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 30, 'bbox': (218.35074150000003, 460.8132756846094, 371.42484675000003, 374.84158456132633), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 185
+Type      : ElementType.HEADING
+Text      :
+RESULTS
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 31, 'bbox': (211.4514765, 765.6562508360547, 338.87413012499997, 752.4909763935916), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 186
+Type      : ElementType.HEADING
+Text      :
+5.1 Experimental Results
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 31, 'bbox': (82.299999, 722.8593758360547, 265.927391625, 709.6941013935916), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 187
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 31, 'bbox': (101.69989013671875, 700.6805725097656, 513.0619506835938, 412.9413146972656), 'source': 'docling'}
+
+================================================================================
+Element 188
+Type      : ElementType.PARAGRAPH
+Text      :
+Training Curves
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 31, 'bbox': (280.66666666666663, 703.0, 333.66666666666663, 694.3333333333334), 'source': 'docling'}
+
+================================================================================
+Element 189
+Type      : ElementType.PARAGRAPH
+Text      :
+Figure  5.1  presents  the  training  curves  of  the  initial  baseline  CNN  model  trained  over  40 epochs. The loss curves show minimal convergence, with validation loss remaining near 0.69 throughout  training.  The  accuracy  graph  reveals  that  both  train  and  validation  accuracy stagnate around 50-55%, indicating the model is barely above random chance. AUC-ROC and F1  scores  exhibit  high  variance  and  instability,  confirming  that  the  basic  CNN architecture  lacks  the  capacity  to  reliably  distinguish  real  from  fake  images.  These  results directly motivated the architectural improvements - the addition of BiLSTM and Attention layers - which form the basis of our enhanced proposed system.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 31, 'bbox': (82.299999, 332.54296755999997, 535.1828115, 226.07525841171378), 'source': 'docling'}
+
+================================================================================
+Element 190
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 32, 'bbox': (118.52206420898438, 770.0414886474609, 494.9770812988281, 598.8815155029297), 'source': 'docling'}
+
+================================================================================
+Element 191
+Type      : ElementType.PARAGRAPH
+Text      :
+The  Fig.5.2.  shows  the  confusion  matrix  where  the  model  correctly  predicts  most  real samples (91) but misclassifies a large number of fake samples as real (87).It detects only 13 fake  instances  correctly,  showing  poor  fake  detection.This  indicates  the  model  is  heavily biased toward predicting real content. And on the right side, The ROC curve has an AUC of 0.55, which is close to random performance (0.5). This means the model has weak ability to distinguish  between  real  and  fake  classes.  Overall,  the  classification  performance  is  not reliable and needs improvement.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 32, 'bbox': (82.299999, 547.78320756, 535.194534, 455.1162829117138), 'source': 'docling'}
+
+================================================================================
+Element 192
+Type      : ElementType.TABLE
+Text      :
+Class | Precision | Recall | F1-Score | Support
+Real | 0.51 | 0.91 | 0.65 | 100
+Fake | 0.59 | 0.13 | 0.21 | 100
+Accuracy |  |  | 0.52 | 200
+Macro Avg | 0.55 | 0.52 | 0.43 | 200
+Weighted Avg | 0.55 | 0.52 | 0.43 | 200
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 32, 'bbox': (115.05952453613281, 401.566650390625, 505.4068298339844, 266.768310546875), 'source': 'docling', 'cells': [['Class', 'Precision', 'Recall', 'F1-Score', 'Support'], ['Real', '0.51', '0.91', '0.65', '100'], ['Fake', '0.59', '0.13', '0.21', '100'], ['Accuracy', '', '', '0.52', '200'], ['Macro Avg', '0.55', '0.52', '0.43', '200'], ['Weighted Avg', '0.55', '0.52', '0.43', '200']], 'n_rows': 6, 'n_cols': 5, 'has_header_row': True, 'markdown': '| Class | Precision | Recall | F1-Score | Support |\n| --- | --- | --- | --- | --- |\n| Real | 0.51 | 0.91 | 0.65 | 100 |\n| Fake | 0.59 | 0.13 | 0.21 | 100 |\n| Accuracy |  |  | 0.52 | 200 |\n| Macro Avg | 0.55 | 0.52 | 0.43 | 200 |\n| Weighted Avg | 0.55 | 0.52 | 0.43 | 200 |'}
+
+================================================================================
+Element 193
+Type      : ElementType.PARAGRAPH
+Text      :
+The  Fig.5.3  shows  the  performance  of  the  deepfake  detection  model  for  Real  and  Fake classes.  The  model  performs  well  in  identifying  real  instances  with  high  recall  (0.91)  but struggles  to  detect  fake  ones,  with  a  very  low  recall  (0.13).  The  overall  accuracy  is  52%, indicating  limited  effectiveness.  This  suggests  the  model  is  biased  toward  predicting  real content and needs improvement in detecting fake data.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 32, 'bbox': (82.299999, 213.63280755999995, 534.971874, 148.56353916171383), 'source': 'docling'}
+
+================================================================================
+Element 194
+Type      : ElementType.HEADING
+Text      :
+CHAPTER 6 CONCLUSION
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 33, 'bbox': (143.70050400000002, 456.9792956846094, 391.38072761716796, 371.00564456132633), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 195
+Type      : ElementType.HEADING
+Text      :
+CONCLUSION
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 34, 'bbox': (196.82818650000002, 768.3847652314453, 354.49739137500006, 754.3966619848713), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 196
+Type      : ElementType.PARAGRAPH
+Text      :
+We successfully developed a Deepfake Detector, a web application designed to enhance digital security by analyzing images  and  detecting  manipulated  or  AI-generated  content.  The application  allows  users  to  upload  images  for  verification,  enabling  the  system  to  identify visual  inconsistencies  and  provide  a confidence score indicating the likelihood of forgery. By integrating deep learning and computer vision, this system offers users a simple and reliable way  to  assess  the  authenticity  of  digital  media.  It  helps  individuals  and  organizations  make informed  decisions  before trusting or sharing online content, thereby reducing the spread of misinformation and improving  online safety.  There  are  several  techniques  involved  in developing  such  an  application,  including  image  preprocessing,  feature  extraction  using Convolutional  Neural  Networks  (CNNs),  and  classification  based  on  trained  datasets  like FaceForensics++. Each component is crucial in delivering accurate detection results, and the combination of these  techniques  creates  a  highly  functional  and  user-friendly  tool  for identifying deepfake.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 34, 'bbox': (63.549999, 727.55078156, 526.2296865, 552.0908904117138), 'source': 'docling'}
+
+================================================================================
+Element 197
+Type      : ElementType.HEADING
+Text      :
+REFERENCES
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 35, 'bbox': (244.611849, 757.1062506360547, 356.16374437499996, 743.9409761935916), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 198
+Type      : ElementType.LIST
+Text      :
+ K.  Kapoor,  S.  P.  Singh,  G.  Aggarwal,  and  M.  Sharma,  'Deepfake  Detection  Using  CNN-Based Architecture,' IEEE Conference Publication , 2025.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 35, 'bbox': (56.799999, 728.0664055955274, 526.6582790625, 706.3648885684743), 'source': 'docling', 'ordered': True, 'marker': '[1]'}
+
+================================================================================
+Element 199
+Type      : ElementType.LIST
+Text      :
+L. Li, J. Bao, T. Zhang, H. Yang, D. Chen, F. Wen, and B. Guo, 'Face X-Ray for More General Face Forgery  Detection,'  in Proceedings  of  the  IEEE/CVF  Conference  on  Computer  Vision  and  Pattern Recognition (CVPR) , 2020, pp. 5001-5010.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 35, 'bbox': (56.799999, 690.7675783305274, 526.8632615624999, 656.4195778034742), 'source': 'docling', 'ordered': True, 'marker': '[2]'}
+
+================================================================================
+Element 200
+Type      : ElementType.LIST
+Text      :
+ J.  Frank,  T.  Eisenhofer,  L.  Schönherr,  A.  Fischer,  D. Kolossa, and T. Holz, 'Leveraging Frequency Analysis  for  Deep  Fake  Image  Recognition,'  in Proceedings of the 37th International Conference on Machine Learning (ICML) , 2020, pp. 3247-3258.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 35, 'bbox': (56.799999, 640.8203123305274, 526.6818065624999, 606.4703603034743), 'source': 'docling', 'ordered': True, 'marker': '[3]'}
+
+================================================================================
+Element 201
+Type      : ElementType.LIST
+Text      :
+Y. Qian, G. Yin, L. Sheng, Z. Chen, and J. Shao, 'Thinking in Frequency: Face Forgery Detection by Mining Frequency-Aware Clues,' in Computer Vision - ECCV 2020 , Lecture Notes in Computer Science, vol. 12357, Springer, Cham, 2020, pp. 86-103.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 35, 'bbox': (56.799999, 590.8750023305273, 526.9124240625, 556.5250503034742), 'source': 'docling', 'ordered': True, 'marker': '[4]'}
+
+================================================================================
+Element 202
+Type      : ElementType.LIST
+Text      :
+K. Patel et al. , 'An Improved Dense CNN Architecture for Deepfake Image Detection,' IEEE Access , vol. 11, pp. 22081-22094, 2023.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 35, 'bbox': (56.799999, 540.9277323305274, 526.3380215625, 519.2281683034743), 'source': 'docling', 'ordered': True, 'marker': '[5]'}
+
+================================================================================
+Element 203
+Type      : ElementType.LIST
+Text      :
+M. Al-Azrak et al. , 'Deepfake Detection Using Convolutional Vision Transformers and Convolutional Neural Networks,' Neural Computing and Applications , vol. 36, pp. 21259-21278, 2024.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 35, 'bbox': (56.799999, 503.62890233052735, 526.4757215625, 481.93129205347424), 'source': 'docling', 'ordered': True, 'marker': '[6]'}
+
+================================================================================
+Element 204
+Type      : ElementType.LIST
+Text      :
+ S.  Gupta et  al. ,  'CNN  Based  Deep  Learning  Model  for  Deepfake  Detection,' IEEE  Conference Publication , 2022.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 35, 'bbox': (56.799999, 466.3300823305274, 526.6513190625, 444.63247205347426), 'source': 'docling', 'ordered': True, 'marker': '[7]'}
+
+================================================================================
+Element 205
+Type      : ElementType.LIST
+Text      :
+A. Kumar et al. , 'Deepfake Video Detection System,' IEEE Conference Publication , 2023.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 35, 'bbox': (56.799999, 429.03320233052733, 477.27921656250004, 419.9820762284742), 'source': 'docling', 'ordered': True, 'marker': '[8]'}
+
+================================================================================
+Element 206
+Type      : ElementType.LIST
+Text      :
+ P.  Sharma et  al. ,  'AI-Powered Deepfake Detection Using CNN Architectures,' IEEE Publication , 2024.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 35, 'bbox': (56.799999, 404.38476233052734, 526.3728590625, 382.68519830347424), 'source': 'docling', 'ordered': True, 'marker': '[9]'}
+
+================================================================================
+Element 207
+Type      : ElementType.LIST
+Text      :
+S. Das et al. , 'DeepGuardNet: A Novel CNN Architecture for DeepFake Image Detection,' Procedia Computer Science , vol. 252, pp. 1431-1440, 2025.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 35, 'bbox': (56.799999, 367.0878923305274, 526.7552315625, 345.38637530347427), 'source': 'docling', 'ordered': True, 'marker': '[10]'}
+
+================================================================================
+Element 208
+Type      : ElementType.LIST
+Text      :
+R. Singh et al. , 'DeepFake Detection Using Enhanced D-CNN Architecture,' ResearchGate , 2025.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 35, 'bbox': (56.799999, 329.79101233052734, 516.6108215625, 320.73988622847423), 'source': 'docling', 'ordered': True, 'marker': '[11]'}
+
+================================================================================
+Element 209
+Type      : ElementType.LIST
+Text      :
+M. Rahman et al. , 'Hybrid Deepfake Image Detection: Frequency Domain Features,' arXiv preprint , 2025.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 35, 'bbox': (56.799999, 305.13867233052736, 526.3083590624999, 283.4410620534743), 'source': 'docling', 'ordered': True, 'marker': '[12]'}
+
+================================================================================
+Element 210
+Type      : ElementType.HEADING
+Text      :
+ACKNOWLEDGEMENT
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 36, 'bbox': (177.0, 783.927734165, 379.0971675, 771.5852897608922), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 211
+Type      : ElementType.PARAGRAPH
+Text      :
+The implementation of the project 'Deepfake Detector: A CNN-BiLSTM Attention-Based Web Application for Image and Video Forgery Detection' would not have been possible without the help and support of several individuals. We would like to express our sincere thanks to Dr. S.M. Khot, Principal of Fr. C. Rodrigues Institute of Technology, Vashi, for giving us the opportunity to work on this project and for providing us with the necessary facilities. We are also deeply grateful to the  Head  of  the  Information  Technology  Department,  Prof. Shubhangi Vaikole, for her ongoing support and encouragement throughout the project.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 36, 'bbox': (63.0, 740.5437496100001, 511.43554499999993, 647.8779987117139), 'source': 'docling'}
+
+================================================================================
+Element 212
+Type      : ElementType.PARAGRAPH
+Text      :
+We  would  especially  like  to  thank  our  guide,  Dr.  Mukta  Nivelkar,  for  her  continuous guidance,  valuable  suggestions,  and  pushing  us  to  explore  creative  solutions  during  the course of this project. We also extend our heartfelt thanks to our project coordinator, Prof. Sharlene Reberio, for her advice and consistent guidance, helping us stay on track.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 36, 'bbox': (63.0, 631.95312756, 511.33008000000007, 580.6826876617138), 'source': 'docling'}
+
+================================================================================
+Element 213
+Type      : ElementType.PARAGRAPH
+Text      :
+Finally, we would like to thank our families and well-wishers for their constant support and encouragement, which motivated us to complete this project successfully.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 36, 'bbox': (63.0, 564.7578075600001, 510.046875, 541.0850239117138), 'source': 'docling'}
+
+================================================================================
+Element 214
+Type      : ElementType.PARAGRAPH
+Text      :
+Yours sincerely.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 36, 'bbox': (64.5, 494.41405756, 144.1640625, 484.5401020367138), 'source': 'docling'}
+
+================================================================================
+Element 215
+Type      : ElementType.PARAGRAPH
+Text      :
+Abhishek Tajane (5023158)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 36, 'bbox': (383.68263, 376.4234376525, 526.4756025, 366.5494821292138), 'source': 'docling'}
+
+================================================================================
+Element 216
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 37, 'bbox': (45.96128845214844, 800.0363349914551, 107.38005828857422, 734.1777114868164), 'source': 'docling'}
+
+================================================================================
+Element 217
+Type      : ElementType.HEADING
+Text      :
+Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 37, 'bbox': (120.549999, 779.2007805889453, 492.558448875, 767.6811662231929), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 218
+Type      : ElementType.PARAGRAPH
+Text      :
+(An Autonomous Institute & Permanently Affiliated to University of Mumbai)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 37, 'bbox': (120.549999, 763.64453156, 501.60859650000003, 753.7705760367138), 'source': 'docling'}
+
+================================================================================
+Element 219
+Type      : ElementType.PARAGRAPH
+Text      :
+Department of Information Technology/Computer Science Engineering
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 37, 'bbox': (151.299999, 731.8964845600001, 518.829294, 722.0225290367139), 'source': 'docling'}
+
+================================================================================
+Element 220
+Type      : ElementType.HEADING
+Text      :
+APPENDIX-A: MAPPING TO SDGs, POs, and PSOs
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 37, 'bbox': (112.55004075, 690.1132818435548, 485.975530875, 676.9480074010917), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 221
+Type      : ElementType.PARAGRAPH
+Text      :
+Department of Information Technology
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 37, 'bbox': (190.94680650000004, 656.4578115139453, 415.32878887500004, 644.9381971481929), 'source': 'docling'}
+
+================================================================================
+Element 222
+Type      : ElementType.HEADING
+Text      :
+Mini Project Report Appendix
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 37, 'bbox': (221.994549, 619.5585880189453, 408.2810238750001, 608.0389736531929), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 223
+Type      : ElementType.TABLE
+Text      :
+Semester &Academic Year: | Sem VI SH2026
+Group Details: | TY4/07 Aarya Katikar (5023121) Abhishek Tajane (5023158) Angella Benjamin (5023104) Vaishnuvi Shettar (5023154)
+Title: | Deepfake Detector: An AI-Based Image and Videos Forgery Detection Web Application
+Key Domain/Technology: | AI&ML
+Category-I | Internal
+Category-II | Application
+SDG | SDG 16 - Peace, Justice and Strong Institutions SDG 12 - Responsible Consumption and Production SDG 9 - Industry, Innovation and Infrastructure
+*Remarks | 
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 37, 'bbox': (57.335086822509766, 575.5426635742188, 548.251708984375, 224.01971435546875), 'source': 'docling', 'cells': [['Semester &Academic Year:', 'Sem VI SH2026'], ['Group Details:', 'TY4/07 Aarya Katikar (5023121) Abhishek Tajane (5023158) Angella Benjamin (5023104) Vaishnuvi Shettar (5023154)'], ['Title:', 'Deepfake Detector: An AI-Based Image and Videos Forgery Detection Web Application'], ['Key Domain/Technology:', 'AI&ML'], ['Category-I', 'Internal'], ['Category-II', 'Application'], ['SDG', 'SDG 16 - Peace, Justice and Strong Institutions SDG 12 - Responsible Consumption and Production SDG 9 - Industry, Innovation and Infrastructure'], ['*Remarks', '']], 'n_rows': 8, 'n_cols': 2, 'has_header_row': True, 'markdown': '| Semester &Academic Year: | Sem VI SH2026 |\n| --- | --- |\n| Group Details: | TY4/07 Aarya Katikar (5023121) Abhishek Tajane (5023158) Angella Benjamin (5023104) Vaishnuvi Shettar (5023154) |\n| Title: | Deepfake Detector: An AI-Based Image and Videos Forgery Detection Web Application |\n| Key Domain/Technology: | AI&ML |\n| Category-I | Internal |\n| Category-II | Application |\n| SDG | SDG 16 - Peace, Justice and Strong Institutions SDG 12 - Responsible Consumption and Production SDG 9 - Industry, Innovation and Infrastructure |\n| *Remarks |  |'}
+
+================================================================================
+Element 224
+Type      : ElementType.PARAGRAPH
+Text      :
+Note: The guide should write remarks based on the observation of objective/achievement/outcome of the project.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 37, 'bbox': (71.799999, 204.1191375599999, 482.5363290000001, 178.3779941617138), 'source': 'docling'}
+
+================================================================================
+Element 225
+Type      : ElementType.PARAGRAPH
+Text      :
+Name and Signature of the Guide
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 37, 'bbox': (71.799999, 108.69140801894537, 275.221438875, 97.17179365319294), 'source': 'docling'}
+
+================================================================================
+Element 226
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (56.54088592529297, 783.73046875, 118.616455078125, 717.1860961914062), 'source': 'docling'}
+
+================================================================================
+Element 227
+Type      : ElementType.HEADING
+Text      :
+Agnel Charities
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (135.549999, 780.59218696, 214.20039000000003, 770.7182314367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 228
+Type      : ElementType.HEADING
+Text      :
+Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (119.049999, 763.3999995889453, 491.058448875, 751.8803852231929), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 229
+Type      : ElementType.PARAGRAPH
+Text      :
+(An Autonomous Institute & Permanently Affiliated to University of Mumbai)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (119.049999, 747.8457035600001, 500.10859650000003, 737.9717480367138), 'source': 'docling'}
+
+================================================================================
+Element 230
+Type      : ElementType.PARAGRAPH
+Text      :
+Department of Information Technology/Computer Science Engineering
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (119.049999, 716.04765661, 486.57929400000006, 706.1737010867138), 'source': 'docling'}
+
+================================================================================
+Element 231
+Type      : ElementType.HEADING
+Text      :
+APPENDIX-B: SOFTWARE REQUIREMENT SPECIFICATION (SRS)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (46.77735075, 682.0625008435547, 555.747258375, 668.8972264010916), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 232
+Type      : ElementType.PARAGRAPH
+Text      :
+Project Title:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (74.049999, 650.95312756, 144.90742125, 641.0791720367138), 'source': 'docling'}
+
+================================================================================
+Element 233
+Type      : ElementType.PARAGRAPH
+Text      :
+Deepfake Detector: An AI-Based Image and Videos Forgery Detection Web
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (144.90742125, 650.2910183455273, 481.9625015625, 641.2398922434742), 'source': 'docling'}
+
+================================================================================
+Element 234
+Type      : ElementType.PARAGRAPH
+Text      :
+Application
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (74.049999, 638.085939685, 128.94622049999998, 628.2119841617138), 'source': 'docling'}
+
+================================================================================
+Element 235
+Type      : ElementType.PARAGRAPH
+Text      :
+Semester:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (73.299999, 624.5058575600001, 126.93671775, 614.6319020367139), 'source': 'docling'}
+
+================================================================================
+Element 236
+Type      : ElementType.PARAGRAPH
+Text      :
+VI
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (126.93671775, 624.5058575600001, 142.5988275, 614.6319020367139), 'source': 'docling'}
+
+================================================================================
+Element 237
+Type      : ElementType.PARAGRAPH
+Text      :
+Version:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (317.799999, 624.5058575600001, 363.690624, 614.6319020367139), 'source': 'docling'}
+
+================================================================================
+Element 238
+Type      : ElementType.PARAGRAPH
+Text      :
+0.3 - Half-Year Submission
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (363.690624, 624.5058575600001, 500.1378915000001, 614.6319020367139), 'source': 'docling'}
+
+================================================================================
+Element 239
+Type      : ElementType.PARAGRAPH
+Text      :
+Date:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (73.299999, 610.70702756, 104.284374, 600.8330720367138), 'source': 'docling'}
+
+================================================================================
+Element 240
+Type      : ElementType.PARAGRAPH
+Text      :
+2026-04-26
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (104.284374, 610.70702756, 163.2765615, 600.8330720367138), 'source': 'docling'}
+
+================================================================================
+Element 241
+Type      : ElementType.HEADING
+Text      :
+Team Members & Roll Numbers:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (74.049999, 596.90820756, 248.57734649999998, 587.0342520367138), 'level': 2, 'source': 'docling'}
+
+================================================================================
+Element 242
+Type      : ElementType.PARAGRAPH
+Text      :
+Aarya Katikar (5023121)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (74.049999, 583.10937756, 198.3390615, 573.2354220367138), 'source': 'docling'}
+
+================================================================================
+Element 243
+Type      : ElementType.PARAGRAPH
+Text      :
+Abhishek Tajane (5023158)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (74.049999, 569.31054756, 210.84297149999998, 559.4365920367138), 'source': 'docling'}
+
+================================================================================
+Element 244
+Type      : ElementType.PARAGRAPH
+Text      :
+Angella Benjamin (5023104)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (74.049999, 555.4117176525, 217.68672149999998, 545.5377621292138), 'source': 'docling'}
+
+================================================================================
+Element 245
+Type      : ElementType.PARAGRAPH
+Text      :
+Vaishnuvi Shettar (5023154)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (74.049999, 541.5093776524999, 215.032419, 531.6354221292137), 'source': 'docling'}
+
+================================================================================
+Element 246
+Type      : ElementType.PARAGRAPH
+Text      :
+Guide / Mentor:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (74.049999, 527.71093756, 160.3703115, 517.8369820367138), 'source': 'docling'}
+
+================================================================================
+Element 247
+Type      : ElementType.PARAGRAPH
+Text      :
+Dr. Mukta Nivelkar
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (160.3703115, 527.71093756, 257.6828115, 517.8369820367138), 'source': 'docling'}
+
+================================================================================
+Element 248
+Type      : ElementType.HEADING
+Text      :
+1. Introduction
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (73.299999, 500.11327756, 174.42695199000002, 490.23932203671376), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 249
+Type      : ElementType.HEADING
+Text      :
+a. Purpose
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (73.299999, 486.31640756, 151.29999899999996, 476.4424520367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 250
+Type      : ElementType.PARAGRAPH
+Text      :
+The purpose of this document is to define the requirements for an AI-driven web platform designed  to  detect  manipulated  or  AI-generated  (deepfake)  images.  The  system  aims  to analyze uploaded visual content and
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (73.299999, 472.51562756, 526.3117215, 435.04401541171376), 'source': 'docling'}
+
+================================================================================
+Element 251
+Type      : ElementType.PARAGRAPH
+Text      :
+determine  its  authenticity  by  identifying  inconsistencies  using  deep  learning  and  computer vision.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (73.299999, 431.12109756, 525.9367215, 407.44636241171384), 'source': 'docling'}
+
+================================================================================
+Element 252
+Type      : ElementType.PARAGRAPH
+Text      :
+It  provides  users  with  a  confidence  score  indicating  the  likelihood  that  an  image  is  fake. Target  users  include  social  media  analysts,  journalists,  cybersecurity  professionals,  and general users concerned with online misinformation.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (73.299999, 403.52343756, 526.335159, 366.0518254117138), 'source': 'docling'}
+
+================================================================================
+Element 253
+Type      : ElementType.HEADING
+Text      :
+b. Scope
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (73.299999, 348.32812756, 139.299999, 338.45417203671377), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 254
+Type      : ElementType.PARAGRAPH
+Text      :
+The  Minimum  Viable  Product  (MVP)  focuses  on  the  detection  and  classification  of manipulated or synthetic images.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (73.299999, 334.52734756, 526.0714814999999, 310.8565154117139), 'source': 'docling'}
+
+================================================================================
+Element 255
+Type      : ElementType.HEADING
+Text      :
+Key features include:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (73.299999, 306.92968756000005, 178.92109275, 297.05573203671383), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 256
+Type      : ElementType.LIST
+Text      :
+Web-based upload interface for images and videos.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (82.299999, 293.13280755999995, 348.5734365, 283.25885203671373), 'source': 'docling', 'ordered': True, 'marker': '1.'}
+
+================================================================================
+Element 257
+Type      : ElementType.LIST
+Text      :
+Image preprocessing and feature extraction pipeline.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (82.299999, 279.3320275599999, 358.188669, 269.4580720367137), 'source': 'docling', 'ordered': True, 'marker': '2.'}
+
+================================================================================
+Element 258
+Type      : ElementType.LIST
+Text      :
+Deep learning-based classification using CNN+BiLSTMmodels.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (82.299999, 265.53515756, 415.68085650000006, 255.6612020367138), 'source': 'docling', 'ordered': True, 'marker': '3.'}
+
+================================================================================
+Element 259
+Type      : ElementType.LIST
+Text      :
+Confidence score display for authenticity verification.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (82.299999, 251.73437755999998, 362.5421865, 241.86042203671389), 'source': 'docling', 'ordered': True, 'marker': '4.'}
+
+================================================================================
+Element 260
+Type      : ElementType.LIST
+Text      :
+Visualization of detected anomalies.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (82.299999, 237.93749755999988, 277.1828115, 228.06354203671378), 'source': 'docling', 'ordered': True, 'marker': '5.'}
+
+================================================================================
+Element 261
+Type      : ElementType.LIST
+Text      :
+Secure result storage for auditing and history tracking.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (82.299999, 224.13671756000008, 364.5578115, 214.26276203671387), 'source': 'docling', 'ordered': True, 'marker': '6.'}
+
+================================================================================
+Element 262
+Type      : ElementType.HEADING
+Text      :
+c. References
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (73.299999, 196.53905755999995, 165.04609325999996, 186.66510203671385), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 263
+Type      : ElementType.LIST
+Text      :
+Project Report on 'Deepfake Detector: An AI-Based Image and Videos Forgery Detection Web Application' (core documentation).
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (82.299999, 182.74218756000005, 525.8618090625, 159.22817261847422), 'source': 'docling', 'ordered': True, 'marker': '1.'}
+
+================================================================================
+Element 264
+Type      : ElementType.LIST
+Text      :
+Dataset: FaceForensics++ , DeepFakeDetection, and related benchmark datasets.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (82.299999, 155.14452755999991, 492.268749, 145.27057203671382), 'source': 'docling', 'ordered': True, 'marker': '2.'}
+
+================================================================================
+Element 265
+Type      : ElementType.LIST
+Text      :
+IEEE Transactions on Information Forensics and Security (related research).
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 38, 'bbox': (82.299999, 141.34374755999988, 470.40741899999995, 131.46979203671378), 'source': 'docling', 'ordered': True, 'marker': '3.'}
+
+================================================================================
+Element 266
+Type      : ElementType.HEADING
+Text      :
+2. Preliminary Description
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (73.299999, 756.14453156, 233.38984317, 746.2705760367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 267
+Type      : ElementType.HEADING
+Text      :
+a. Proposed System Architecture
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (73.299999, 728.5468745600001, 264.60859317, 718.6729190367139), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 268
+Type      : ElementType.PARAGRAPH
+Text      :
+The proposed system uses a Web-Cloud architecture .
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (73.299999, 714.7499995600001, 342.157419, 704.8760440367139), 'source': 'docling'}
+
+================================================================================
+Element 269
+Type      : ElementType.LIST
+Text      :
+Frontend (Web Interface): Allows users to upload images and videos for analysis.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (68.02373475, 700.9492185600001, 478.4250073125, 691.0752630367139), 'source': 'docling', 'ordered': True, 'marker': 'i.'}
+
+================================================================================
+Element 270
+Type      : ElementType.LIST
+Text      :
+Backend  (Cloud): Hosts  the  trained  CNN  model,  preprocessing  scripts,  and  the  result database.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (65.24649375, 687.1523435600001, 525.8312737499999, 663.4776084117138), 'source': 'docling', 'ordered': True, 'marker': 'ii.'}
+
+================================================================================
+Element 271
+Type      : ElementType.LIST
+Text      :
+Model  Layer: Performs  classification  and  outputs  a  confidence  score  based on extracted features.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (62.46925349999999, 659.55468756, 526.399596, 635.8799524117138), 'source': 'docling', 'ordered': True, 'marker': 'iii.'}
+
+================================================================================
+Element 272
+Type      : ElementType.HEADING
+Text      :
+b. High-Level Features
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (73.299999, 618.1562475600001, 214.05976508999998, 608.2822920367139), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 273
+Type      : ElementType.PARAGRAPH
+Text      :
+i. Image/Video Authenticity Detection:
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (68.02373475, 604.35937756, 263.81758725000003, 594.4854220367138), 'source': 'docling'}
+
+================================================================================
+Element 274
+Type      : ElementType.LIST
+Text      :
+Confidence  Scoring: Quantify prediction probability.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (65.24649375, 590.5585975600001, 236.78242125000003, 566.8877654117139), 'source': 'docling', 'ordered': True, 'marker': 'ii.'}
+
+================================================================================
+Element 275
+Type      : ElementType.HEADING
+Text      :
+c. User Types
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (73.299999, 549.1640575600001, 166.07148342, 539.2901020367138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 276
+Type      : ElementType.TABLE
+Text      :
+User Type | Primary Responsibilities
+General User | Upload image/video, view authenticity result and confidence score.
+Researche r / Analyst | Validate model predictions, review dataset performance.
+System Admin | Manage model updates, user activity logs, and system health.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (78.97099304199219, 527.9987487792969, 533.9636840820312, 421.9220275878906), 'source': 'docling', 'cells': [['User Type', 'Primary Responsibilities'], ['General User', 'Upload image/video, view authenticity result and confidence score.'], ['Researche r / Analyst', 'Validate model predictions, review dataset performance.'], ['System Admin', 'Manage model updates, user activity logs, and system health.']], 'n_rows': 4, 'n_cols': 2, 'has_header_row': True, 'markdown': '| User Type | Primary Responsibilities |\n| --- | --- |\n| General User | Upload image/video, view authenticity result and confidence score. |\n| Researche r / Analyst | Validate model predictions, review dataset performance. |\n| System Admin | Manage model updates, user activity logs, and system health. |'}
+
+================================================================================
+Element 277
+Type      : ElementType.HEADING
+Text      :
+d. Operating Environment
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (73.299999, 404.00859761000004, 232.75117077000004, 394.1346420867138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 278
+Type      : ElementType.TABLE
+Text      :
+Components | Technology / Platform
+Interface | React / HTML / CSS / JS
+Backend | Python (Flask / Django), RESTful APIs
+ML Framework | TensorFlow / PyTorch (CNN-based models)
+Database | PostgreSQL / Firebase for result and user logs
+Cloud Storage | AWS S3 / Google Cloud Storage for image uploads
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (77.95243835449219, 382.6863708496094, 532.381103515625, 236.71331787109375), 'source': 'docling', 'cells': [['Components', 'Technology / Platform'], ['Interface', 'React / HTML / CSS / JS'], ['Backend', 'Python (Flask / Django), RESTful APIs'], ['ML Framework', 'TensorFlow / PyTorch (CNN-based models)'], ['Database', 'PostgreSQL / Firebase for result and user logs'], ['Cloud Storage', 'AWS S3 / Google Cloud Storage for image uploads']], 'n_rows': 6, 'n_cols': 2, 'has_header_row': True, 'markdown': '| Components | Technology / Platform |\n| --- | --- |\n| Interface | React / HTML / CSS / JS |\n| Backend | Python (Flask / Django), RESTful APIs |\n| ML Framework | TensorFlow / PyTorch (CNN-based models) |\n| Database | PostgreSQL / Firebase for result and user logs |\n| Cloud Storage | AWS S3 / Google Cloud Storage for image uploads |'}
+
+================================================================================
+Element 279
+Type      : ElementType.HEADING
+Text      :
+3. Draft Requirements Functional Requirements (Draft)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (73.299999, 219.02734755999995, 384.1457039400001, 209.15339203671385), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 280
+Type      : ElementType.TABLE
+Text      :
+Requireme nt ID | Description | Priority (M/S/C)
+FR-01 | The system shall allow users to upload images/videos up to 10MB. | M
+FR-02 | The system shall preprocess uploaded image/video (resize, normalize). | M
+FR-03 | The system shall classify image/video as 'Real' or 'Fake' using CNN. | M
+FR-04 | The system shall output a confidence score indicating the probability of forgery. | M
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (77.18052673339844, 196.24261474609375, 531.7752075195312, 70.25653076171875), 'source': 'docling', 'cells': [['Requireme nt ID', 'Description', 'Priority (M/S/C)'], ['FR-01', 'The system shall allow users to upload images/videos up to 10MB.', 'M'], ['FR-02', 'The system shall preprocess uploaded image/video (resize, normalize).', 'M'], ['FR-03', "The system shall classify image/video as 'Real' or 'Fake' using CNN.", 'M'], ['FR-04', 'The system shall output a confidence score indicating the probability of forgery.', 'M']], 'n_rows': 5, 'n_cols': 3, 'has_header_row': True, 'markdown': "| Requireme nt ID | Description | Priority (M/S/C) |\n| --- | --- | --- |\n| FR-01 | The system shall allow users to upload images/videos up to 10MB. | M |\n| FR-02 | The system shall preprocess uploaded image/video (resize, normalize). | M |\n| FR-03 | The system shall classify image/video as 'Real' or 'Fake' using CNN. | M |\n| FR-04 | The system shall output a confidence score indicating the probability of forgery. | M |"}
+
+================================================================================
+Element 281
+Type      : ElementType.PARAGRAPH
+Text      :
+Classify uploaded images/videos as 'Real' or 'Fake.' the  likelihood  of  manipulation  based  on  the  model's
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 39, 'bbox': (242.03242125000003, 604.35937756, 526.1554798125, 580.6846420367139), 'source': 'docling'}
+
+================================================================================
+Element 282
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 40, 'bbox': (28.95829963684082, 802.3967208862305, 91.72969055175781, 736.2405624389648), 'source': 'docling'}
+
+================================================================================
+Element 283
+Type      : ElementType.HEADING
+Text      :
+Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 40, 'bbox': (120.549999, 779.2007805889453, 492.558448875, 767.6811662231929), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 284
+Type      : ElementType.PARAGRAPH
+Text      :
+(An Autonomous Institute & Permanently Affiliated to University of Mumbai)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 40, 'bbox': (120.549999, 763.64453156, 501.60859650000003, 753.7705760367138), 'source': 'docling'}
+
+================================================================================
+Element 285
+Type      : ElementType.PARAGRAPH
+Text      :
+Department of Information Technology/Computer Science Engineering
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 40, 'bbox': (28.299999, 731.89843756, 488.82929399999995, 722.0244820367138), 'source': 'docling'}
+
+================================================================================
+Element 286
+Type      : ElementType.HEADING
+Text      :
+4. Non-Functional Requirements (Draft)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 40, 'bbox': (73.299999, 690.4999995600001, 303.7257839400001, 680.6260440367139), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 287
+Type      : ElementType.TABLE
+Text      :
+Requirem Ent ID | Description
+NFR-01 | Latency: The total detection time shall not exceed 6 seconds per image.
+NFR-02 | Accuracy: The model shall maintain ≥ 90% classificat accuracy.
+NFR-03 | Security: All uploaded images/videos shall be deleted after analysis unless the user opts to save results.
+NFR-04 | Scalability: The backend shall support up to 100 concurrent users.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 40, 'bbox': (77.46243286132812, 668.1394805908203, 552.2761840820312, 466.83551025390625), 'source': 'docling', 'cells': [['Requirem Ent ID', 'Description'], ['NFR-01', 'Latency: The total detection time shall not exceed 6 seconds per image.'], ['NFR-02', 'Accuracy: The model shall maintain ≥ 90% classificat accuracy.'], ['NFR-03', 'Security: All uploaded images/videos shall be deleted after analysis unless the user opts to save results.'], ['NFR-04', 'Scalability: The backend shall support up to 100 concurrent users.']], 'n_rows': 5, 'n_cols': 2, 'has_header_row': True, 'markdown': '| Requirem Ent ID | Description |\n| --- | --- |\n| NFR-01 | Latency: The total detection time shall not exceed 6 seconds per image. |\n| NFR-02 | Accuracy: The model shall maintain ≥ 90% classificat accuracy. |\n| NFR-03 | Security: All uploaded images/videos shall be deleted after analysis unless the user opts to save results. |\n| NFR-04 | Scalability: The backend shall support up to 100 concurrent users. |'}
+
+================================================================================
+Element 288
+Type      : ElementType.HEADING
+Text      :
+5. Initial Diagrams
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 40, 'bbox': (82.299999, 449.00468761, 202.63398380999996, 439.1307320867138), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 289
+Type      : ElementType.LIST
+Text      :
+System  Block Diagram: User → TruthLens Web Interface (React) → Flask API Backend  →  File  Type  Router  →  Media  Preprocessing  (MediaPipe/OpenCV)  →  AI Inference Engine (Custom CNN or CNN+LSTM) → Confidence Score Generation → JSON Result Display.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 40, 'bbox': (82.299999, 434.83984621999997, 535.2472627799999, 374.8009378056353), 'source': 'docling', 'ordered': False, 'marker': '●'}
+
+================================================================================
+Element 290
+Type      : ElementType.LIST
+Text      :
+Flow Chart: Media Upload (Image or Video) → Format Validation & Routing → Preprocessing  (Extract  frames  for  Video  /  Resize  for  Image)  →  Face  Localization (MediaPipe)  →  Model  Prediction  (Custom  CNN  /  Temporal  LSTM)  →  Softmax Confidence Scoring → Verdict Display (Authentic vs. Fake) → Privacy-Preserving Media Deletion.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 40, 'bbox': (82.299999, 369.84765622, 535.5988252799999, 293.55874980563533), 'source': 'docling', 'ordered': False, 'marker': '●'}
+
+================================================================================
+Element 291
+Type      : ElementType.HEADING
+Text      :
+6. Version History
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 40, 'bbox': (82.299999, 275.17187756, 198.85468652999998, 265.29792203671377), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 292
+Type      : ElementType.TABLE
+Text      :
+Date | Description | Author
+2025-08-13 | Second half-year SRS draft for Deepfake Detection System | Aarya Katikar Angella Benjamin Abhishek Tajane Vaishnuvi Shettar
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 40, 'bbox': (81.21665954589844, 251.84967041015625, 543.4881591796875, 134.92431640625), 'source': 'docling', 'cells': [['Date', 'Description', 'Author'], ['2025-08-13', 'Second half-year SRS draft for Deepfake Detection System', 'Aarya Katikar Angella Benjamin Abhishek Tajane Vaishnuvi Shettar']], 'n_rows': 2, 'n_cols': 3, 'has_header_row': True, 'markdown': '| Date | Description | Author |\n| --- | --- | --- |\n| 2025-08-13 | Second half-year SRS draft for Deepfake Detection System | Aarya Katikar Angella Benjamin Abhishek Tajane Vaishnuvi Shettar |'}
+
+================================================================================
+Element 293
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 42, 'bbox': (28.981904983520508, 802.5771026611328, 92.10028839111328, 735.952880859375), 'source': 'docling'}
+
+================================================================================
+Element 294
+Type      : ElementType.HEADING
+Text      :
+Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 42, 'bbox': (120.549999, 779.2007805889453, 492.558448875, 767.6811662231929), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 295
+Type      : ElementType.PARAGRAPH
+Text      :
+(An Autonomous Institute & Permanently Affiliated to University of Mumbai)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 42, 'bbox': (120.549999, 763.64453156, 501.60859650000003, 753.7705760367138), 'source': 'docling'}
+
+================================================================================
+Element 296
+Type      : ElementType.PARAGRAPH
+Text      :
+Department of Information Technology/Computer Science Engineering
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 42, 'bbox': (28.299999, 731.89843756, 488.82929399999995, 722.0244820367138), 'source': 'docling'}
+
+================================================================================
+Element 297
+Type      : ElementType.HEADING
+Text      :
+APPENDIX-C: PROJECT COMPETITION PARTICIPATION CERTIFICATES
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 42, 'bbox': (80.41390425, 704.3632818435548, 518.861656875, 672.7995699010917), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 298
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 42, 'bbox': (29.662368774414062, 654.0936737060547, 570.4117431640625, 271.7078857421875), 'source': 'docling'}
+
+================================================================================
+Element 299
+Type      : ElementType.IMAGE
+Text      :
+[IMAGE]
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (29.149564743041992, 783.7657012939453, 91.9202651977539, 717.6267395019531), 'source': 'docling'}
+
+================================================================================
+Element 300
+Type      : ElementType.HEADING
+Text      :
+Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (120.549999, 760.8023435889453, 492.558448875, 749.2827292231929), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 301
+Type      : ElementType.PARAGRAPH
+Text      :
+(An Autonomous Institute & Permanently Affiliated to University of Mumbai)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (120.549999, 745.2460935600001, 501.60859650000003, 735.3721380367139), 'source': 'docling'}
+
+================================================================================
+Element 302
+Type      : ElementType.PARAGRAPH
+Text      :
+Department of Information Technology/Computer Science Engineering
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (28.299999, 713.4999995600001, 488.82929399999995, 703.6260440367139), 'source': 'docling'}
+
+================================================================================
+Element 303
+Type      : ElementType.HEADING
+Text      :
+APPENDIX-D: PLAGIARISM
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (191.2223265, 685.9648448435547, 408.053276625, 672.7995704010916), 'level': 2, 'source': 'docling'}
+
+================================================================================
+Element 304
+Type      : ElementType.PARAGRAPH
+Text      :
+PAPER NAME
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (120.0, 600.0, 170.33333333333334, 590.0), 'source': 'docling'}
+
+================================================================================
+Element 305
+Type      : ElementType.PARAGRAPH
+Text      :
+MPREPORT.pdf
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (125.33333333333333, 585.0, 199.66666666666669, 572.6666666666667), 'source': 'docling'}
+
+================================================================================
+Element 306
+Type      : ElementType.PARAGRAPH
+Text      :
+WORD COUNT
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (120.0, 545.0, 172.0, 535.6666666666667), 'source': 'docling'}
+
+================================================================================
+Element 307
+Type      : ElementType.PARAGRAPH
+Text      :
+CHARACTER COUNT
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (315.33333333333337, 544.3333333333333, 389.3333333333333, 535.6666666666667), 'source': 'docling'}
+
+================================================================================
+Element 308
+Type      : ElementType.PARAGRAPH
+Text      :
+9113 Words
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (120.0, 530.0, 176.33333333333331, 518.3333333333333), 'source': 'docling'}
+
+================================================================================
+Element 309
+Type      : ElementType.PARAGRAPH
+Text      :
+51787 Characters
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (315.0, 530.0, 397.6666666666667, 518.3333333333333), 'source': 'docling'}
+
+================================================================================
+Element 310
+Type      : ElementType.PARAGRAPH
+Text      :
+PAGE COUNT
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (120.33333333333333, 503.6666666666667, 169.33333333333334, 495.3333333333333), 'source': 'docling'}
+
+================================================================================
+Element 311
+Type      : ElementType.PARAGRAPH
+Text      :
+FILE SIZE
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (315.0, 504.0, 350.33333333333337, 494.6666666666667), 'source': 'docling'}
+
+================================================================================
+Element 312
+Type      : ElementType.PARAGRAPH
+Text      :
+64 Pages
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (119.33333333333333, 489.6666666666667, 165.0, 477.0), 'source': 'docling'}
+
+================================================================================
+Element 313
+Type      : ElementType.PARAGRAPH
+Text      :
+25.3MB
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (314.66666666666663, 489.6666666666667, 352.33333333333337, 478.33333333333337), 'source': 'docling'}
+
+================================================================================
+Element 314
+Type      : ElementType.PARAGRAPH
+Text      :
+SUBMISSION DATE
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (120.33333333333333, 464.0, 189.33333333333331, 455.0), 'source': 'docling'}
+
+================================================================================
+Element 315
+Type      : ElementType.PARAGRAPH
+Text      :
+REPORT DATE
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (315.33333333333337, 464.0, 367.6666666666667, 454.66666666666663), 'source': 'docling'}
+
+================================================================================
+Element 316
+Type      : ElementType.PARAGRAPH
+Text      :
+Apr 28, 2026 7:18 AM GMT+5:30
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (119.66666666666667, 448.33333333333337, 269.66666666666663, 437.66666666666663), 'source': 'docling'}
+
+================================================================================
+Element 317
+Type      : ElementType.PARAGRAPH
+Text      :
+Apr 28, 2026 7:20 AM GMT+5:30
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (315.0, 448.33333333333337, 465.0, 437.66666666666663), 'source': 'docling'}
+
+================================================================================
+Element 318
+Type      : ElementType.HEADING
+Text      :
+12%Overall Similarity
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (124.66666666666667, 408.0, 235.33333333333331, 395.6666666666667), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 319
+Type      : ElementType.PARAGRAPH
+Text      :
+The combined total of all matches, including overlapping sources, for each database.
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (120.0, 389.6666666666667, 459.0, 378.6666666666667), 'source': 'docling'}
+
+================================================================================
+Element 320
+Type      : ElementType.LIST
+Text      :
+11% Internet database
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (125.0, 373.3333333333333, 223.0, 363.3333333333333), 'source': 'docling', 'ordered': False, 'marker': '·'}
+
+================================================================================
+Element 321
+Type      : ElementType.LIST
+Text      :
+Crossref database
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (125.66666666666667, 356.6666666666667, 207.66666666666669, 345.6666666666667), 'source': 'docling', 'ordered': False, 'marker': '·'}
+
+================================================================================
+Element 322
+Type      : ElementType.HEADING
+Text      :
+Excluded from Similarity Report
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (124.33333333333333, 326.33333333333337, 280.66666666666663, 313.66666666666663), 'level': 1, 'source': 'docling'}
+
+================================================================================
+Element 323
+Type      : ElementType.LIST
+Text      :
+·Submitted Works database
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (125.0, 305.66666666666663, 242.0, 294.66666666666663), 'source': 'docling', 'ordered': False, 'marker': ''}
+
+================================================================================
+Element 324
+Type      : ElementType.LIST
+Text      :
+Quoted material
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (125.33333333333333, 288.66666666666663, 198.33333333333331, 277.66666666666663), 'source': 'docling', 'ordered': False, 'marker': '·'}
+
+================================================================================
+Element 325
+Type      : ElementType.LIST
+Text      :
+Small Matches (Less then 8 words)
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (125.0, 271.33333333333337, 274.0, 260.33333333333337), 'source': 'docling', 'ordered': False, 'marker': '·'}
+
+================================================================================
+Element 326
+Type      : ElementType.LIST
+Text      :
+6%Publications database
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (314.66666666666663, 373.6666666666667, 426.3333333333333, 363.0), 'source': 'docling', 'ordered': False, 'marker': '·'}
+
+================================================================================
+Element 327
+Type      : ElementType.LIST
+Text      :
+Crossref Posted Content database
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (314.66666666666663, 356.3333333333333, 461.0, 345.6666666666667), 'source': 'docling', 'ordered': False, 'marker': '·'}
+
+================================================================================
+Element 328
+Type      : ElementType.LIST
+Text      :
+Bibliographic material · Bibliographic material
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (313.3333333333333, 308.33333333333337, 412.3333333333333, 291.66666666666663), 'source': 'docling', 'ordered': False, 'marker': '·'}
+
+================================================================================
+Element 329
+Type      : ElementType.LIST
+Text      :
+Cited material · Cited material
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (314.3333333333333, 290.0, 380.3333333333333, 276.66666666666663), 'source': 'docling', 'ordered': False, 'marker': '·'}
+
+================================================================================
+Element 330
+Type      : ElementType.PARAGRAPH
+Text      :
+Similarity Report
+Metadata  : {'document_id': None, 'filename': 'report.pdf', 'page': 43, 'bbox': (440.0, 638.6666666666666, 504.6666666666667, 625.3333333333334), 'source': 'docling'}
+
