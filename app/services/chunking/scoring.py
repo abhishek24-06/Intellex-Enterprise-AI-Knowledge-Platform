@@ -4,7 +4,7 @@ from app.enums.element_type import ElementType
 
 from .models import StructureScores
 
-class StrutureScorer:
+class StructureScorer:
 
     HEADING_WEIGHT = 0.55
     HIERARCHY_WEIGHT = 0.35
