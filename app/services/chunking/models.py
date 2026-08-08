@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from enum import Enum
 
 
-class DocumentStructureType(Enum):
+class StructureType(Enum):
     STRUCTURED = "STRUCTURED"
     UNSTRUCTURED = "UNSTRUCTURED"
     TABULAR = "TABULAR"
@@ -17,6 +17,6 @@ class StructureScores:
 
 @dataclass
 class StructureDetectionResult:
-    structure_type: DocumentStructureType
+    structure_type: StructureType
     confidence: float
     scores: StructureScores
