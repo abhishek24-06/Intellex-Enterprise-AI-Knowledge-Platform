@@ -1,5 +1,5 @@
-from app.services.chunking.detector import StructureDetector
-from app.services.chunking.models import StructureType, StructureScores
+from app.services.chunking.structure_detection.detector import StructureDetector
+from app.services.chunking.structure_detection.models import StructureType, StructureScores
 from app.dto.extracted_element import ExtractedElement
 from app.dto.extraction_result import ExtractionResult
 from app.enums.element_type import ElementType

@@ -18,7 +18,7 @@ class StructureDetector:
         scores = self.scorer.score(extraction_result=extraction_result)
 
         heading_count = self.scorer.count_headings(extraction_result.elements)
-        
+
         structure_type = self._determine_structure_type(scores=scores, heading_count=heading_count)
 
         confidence = self._calculate_confidence(structure_type=structure_type, scores=scores)

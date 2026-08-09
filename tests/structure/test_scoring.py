@@ -3,7 +3,7 @@ import pytest
 from app.dto.extracted_element import ExtractedElement
 from app.dto.extraction_result import ExtractionResult
 from app.enums.element_type import ElementType
-from app.services.chunking.scoring import StructureScorer
+from app.services.chunking.structure_detection.scoring import StructureScorer
 
 
 def make_element(
