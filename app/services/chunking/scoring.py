@@ -42,17 +42,18 @@ class StructureScorer:
             tabular=tabular_score
         )
 
+    def count_headings(self,elements: list[ExtractedElement]) -> int:
+        return sum(
+            1
+            for element in elements
+            if element.element_type == ElementType.HEADING
+        )
+
     def _heading_density(self,elements:list[ExtractedElement]) ->float:
         if not elements:
             return 0.0
         
-        heading_count = sum(
-            1
-            for element in elements
-            if element.element_type  == ElementType.HEADING
-        )
-
-        return heading_count / len(elements)
+        return self.count_headings(elements) / len(elements)
 
     def _table_density(self,elements:list[ExtractedElement])->float:
         if not elements:
@@ -100,4 +101,3 @@ class StructureScorer:
         )
 
         return valid_transitions/(len(levels)-1)
-    
