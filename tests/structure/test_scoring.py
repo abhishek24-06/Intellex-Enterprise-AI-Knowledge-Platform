@@ -3,7 +3,7 @@ import pytest
 from app.dto.extracted_element import ExtractedElement
 from app.dto.extraction_result import ExtractionResult
 from app.enums.element_type import ElementType
-from app.services.chunking.scoring import StrutureScorer
+from app.services.chunking.scoring import StructureScorer
 
 
 def make_element(
@@ -26,7 +26,7 @@ def make_element(
 
 def test_empty_extraction():
 
-    scorer = StrutureScorer()
+    scorer = StructureScorer()
 
     result = ExtractionResult(
         elements=[]
@@ -41,7 +41,7 @@ def test_empty_extraction():
 
 def test_only_paragraphs():
 
-    scorer = StrutureScorer()
+    scorer = StructureScorer()
 
     result = ExtractionResult(
         elements=[
@@ -59,7 +59,7 @@ def test_only_paragraphs():
 
 def test_heading_and_paragraphs():
 
-    scorer = StrutureScorer()
+    scorer = StructureScorer()
 
     result = ExtractionResult(
         elements=[
@@ -83,7 +83,7 @@ def test_heading_and_paragraphs():
 
 def test_perfect_heading_hierarchy():
 
-    scorer = StrutureScorer()
+    scorer = StructureScorer()
 
     result = ExtractionResult(
         elements=[
@@ -108,7 +108,7 @@ def test_perfect_heading_hierarchy():
 
 def test_invalid_heading_hierarchy():
 
-    scorer = StrutureScorer()
+    scorer = StructureScorer()
 
     result = ExtractionResult(
         elements=[
@@ -134,7 +134,7 @@ def test_invalid_heading_hierarchy():
 
 def test_table_only_document():
 
-    scorer = StrutureScorer()
+    scorer = StructureScorer()
 
     result = ExtractionResult(
         elements=[
@@ -152,7 +152,7 @@ def test_table_only_document():
 
 def test_list_only_document():
 
-    scorer = StrutureScorer()
+    scorer = StructureScorer()
 
     result = ExtractionResult(
         elements=[
@@ -177,7 +177,7 @@ def test_list_only_document():
 
 def test_mixed_document():
 
-    scorer = StrutureScorer()
+    scorer = StructureScorer()
 
     result = ExtractionResult(
         elements=[
