@@ -17,6 +17,7 @@ class DoclingExtractor(BaseExtractor):
 
         self.document_id = document_id
         self.filename = filename or Path(file_path).name
+        self.table_index = 0
 
         result = self.converter.convert(str(file_path))
 
@@ -48,8 +49,10 @@ class DoclingExtractor(BaseExtractor):
             case "text":
                 return self._extract_paragraph(order_index=order_index, item=item)
 
-            case "table":
-                return self._extract_table(order_index=order_index, item=item)
+            case "table": 
+                element = self._extract_table(order_index=order_index, item=item, table_index=self.table_index)
+                self.table_index +=1
+                return element
 
             case "picture":
                 return self._extract_picture(order_index=order_index, item=item)
@@ -110,7 +113,12 @@ class DoclingExtractor(BaseExtractor):
             }
         )
 
-    def _extract_table(self,item,order_index:int)-> ExtractedElement:
+    def _extract_table(self,item,order_index:int,table_index:int)-> ExtractedElement:
+
+        table_id = (f"{self.document_id}-table-{table_index}"
+                    if self.document_id
+                    else f"table-{table_index}"
+                   )
 
         page, bbox = self._extract_provenance(item)
 
@@ -133,6 +141,8 @@ class DoclingExtractor(BaseExtractor):
         
         metadata = {
             **self._base_metadata(),
+            "table_id": table_id,
+            "table_index":table_index,
             "page": page,
             "bbox": bbox,
             "source": "docling",

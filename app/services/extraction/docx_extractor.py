@@ -24,6 +24,7 @@ class DocxExtractor(BaseExtractor):
 
         self.document_id = document_id
         self.filename = filename or Path(file_path).name
+        self.table_index = 0
 
         doc = DocxDocument(file_path)
 
@@ -37,7 +38,8 @@ class DocxExtractor(BaseExtractor):
                 element = self._extract_paragraph(block,order_index)
 
             elif isinstance(block,Table):
-                element = self._extract_table(block,order_index)
+                element = self._extract_table(table=block,order_index=order_index,table_index=self.table_index)
+                self.table_index += 1
 
             if element is not None:
                 elements.append(element)
@@ -184,7 +186,7 @@ class DocxExtractor(BaseExtractor):
 
         return non_numeric / len(row_cells) >= 0.7
 
-    def _extract_table_metadata(self,table:Table)->dict[str,Any]:
+    def _extract_table_metadata(self,table:Table,table_index:int)->dict[str,Any]:
 
         rows_data = [[
             cell.text.strip()
@@ -200,6 +202,9 @@ class DocxExtractor(BaseExtractor):
         return {
             **self._base_metadata(),
             "source": "docx",
+            "table_id": (f"{self.document_id}-table-{table_index}"
+                         if self.document_id
+                         else f"table-{table_index}"),
             "n_rows": len(rows_data),
             "n_cols": max((len(row) for row in rows_data),default=0 ),
             "cells": rows_data,
@@ -207,7 +212,7 @@ class DocxExtractor(BaseExtractor):
             "markdown": self._table_to_markdown(rows_data,has_header_row)
             }
 
-    def _extract_table(self,table:Table,order_index:int)->ExtractedElement | None:
+    def _extract_table(self,table:Table,order_index:int,table_index:int)->ExtractedElement | None:
 
         text = self._table_to_text(table)
 
@@ -218,5 +223,5 @@ class DocxExtractor(BaseExtractor):
             order_index=order_index,
             text=text,
             element_type=ElementType.TABLE,
-            metadata=self._extract_table_metadata(table)
+            metadata=self._extract_table_metadata(table,table_index)
         )

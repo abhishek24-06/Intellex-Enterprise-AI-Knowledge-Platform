@@ -10,5 +10,7 @@ class PdfExtractor(BaseExtractor):
     def __init__(self):
         self.docling = DoclingExtractor()
 
-    def extract(self, file_path: str | Path) -> ExtractionResult:
-        return self.docling.extract(file_path)
+    def extract(self, file_path: str | Path, document_id: str | None=None,filename: str | None = None) -> ExtractionResult:
+        return self.docling.extract(file_path=file_path,
+                                    document_id=document_id,
+                                    filename=filename)

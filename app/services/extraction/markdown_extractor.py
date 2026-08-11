@@ -18,6 +18,7 @@ class MarkdownExtractor(BaseExtractor):
 
         self.document_id = document_id
         self.filename = filename or Path(file_path).name
+        self.table_index = 0
 
         text = Path(file_path).read_text(encoding="utf-8")
 
@@ -106,10 +107,12 @@ class MarkdownExtractor(BaseExtractor):
                 element, i = self._extract_table(
                     tokens=tokens,
                     index=i,
-                    order_index=order_index
+                    order_index=order_index,
+                    table_index=self.table_index
                 )
 
                 elements.append(element)
+                self.table_index += 1
                 order_index += 1
                 continue
             
@@ -273,13 +276,21 @@ class MarkdownExtractor(BaseExtractor):
 
         return non_numeric / len(row_cells) >= 0.7
 
-    def _extract_table_metadata(self,rows_data:list[list[str]])->dict[str,Any]:
+    def _extract_table_metadata(self,rows_data:list[list[str]],table_index: int)->dict[str,Any]:
 
         has_header_row = (self._looks_like_header_row(rows_data[0])
                         if rows_data
                         else False)
 
+        table_id = (
+            f"{self.document_id}-table-{table_index}"
+            if self.document_id
+            else f"table-{table_index}"
+            )
+
         return {
+            "table_id": table_id,
+            "table_index": table_index,
             "n_rows": len(rows_data),
             "n_cols": max((len(row) for row in rows_data),default=0,),
             "cells": rows_data,
@@ -287,7 +298,7 @@ class MarkdownExtractor(BaseExtractor):
             "markdown": self._table_to_markdown(rows_data,has_header_row)
             }
 
-    def _extract_table(self,tokens:list[Token],index:int,order_index:int)-> tuple[ExtractedElement, int]:
+    def _extract_table(self,tokens:list[Token],index:int,order_index:int,table_index: int)-> tuple[ExtractedElement, int]:
 
         rows_data: list[list[str]] = []
         current_row: list[str] = []
@@ -309,7 +320,7 @@ class MarkdownExtractor(BaseExtractor):
                     metadata={
                         **self._base_metadata(),
                         "source": "markdown",
-                        **self._extract_table_metadata(rows_data)
+                        **self._extract_table_metadata(rows_data,table_index)
                 }
             )
 
@@ -341,7 +352,7 @@ class MarkdownExtractor(BaseExtractor):
             metadata={
                 **self._base_metadata(),
                 "source": "markdown",
-                **self._extract_table_metadata(rows_data)
+                **self._extract_table_metadata(rows_data,table_index)
             }
         )
 
