@@ -21,46 +21,50 @@ class HierarchyChunker:
 
         candidates: list[ChunkCandidate] = []
 
-        heading_text = (node.element.text
-                        if node.element is not None
+        heading_text = (node.element.text.strip()
+                        if node.element is not None and node.element.text
                         else None)
 
         current_path = (path + [heading_text]
                         if heading_text
                         else path)
 
-        direct_content = [child     #Add everything in direct_content excpet Heading and ROOT node
-                          for child in node.children
-                          if(
-                              child.element is not None
-                              and child.element.element_type != ElementType.HEADING
-                          )]
-
-        narrative_elements = [
-            child               #Remove Tables and Code   
+        direct_content = [
+            child
+            for child in node.children
+            if (
+                child.element is not None
+                and child.element.element_type != ElementType.HEADING
+            )]
+        
+        meaningful_content = [
+            child
             for child in direct_content
-            if(
-               child.element.element_type not in self.DELEGATED_TYPES
-               and child.element.text.strip()
-            )
-        ]
-
-        if narrative_elements:
-
-            text = self._build_text(
-                section_path=current_path,
-                narrative_elements=narrative_elements
-            )
+            if (
+                child.element.element_type in self.DELEGATED_TYPES
+                or child.element.text.strip()
+            )]
+        
+        narrative_elements = [
+            child
+            for child in meaningful_content
+            if child.element.element_type not in self.DELEGATED_TYPES]
+        
+        if meaningful_content:
+        
             candidates.append(
-                ChunkCandidate(text=text,
-                               elements=[
-                                   child.element
-                                   for child in direct_content
-                            ],
-                            heading=heading_text,
-                            section_path=current_path
-                        )
-            )
+                ChunkCandidate(
+                    text=self._build_text(
+                        section_path=current_path,
+                        narrative_elements=narrative_elements,
+                    ),
+                    elements=[
+                        child.element
+                        for child in meaningful_content
+                    ],
+                    heading=heading_text,
+                    section_path=current_path,
+                ))
 
         for child  in node.children:
 

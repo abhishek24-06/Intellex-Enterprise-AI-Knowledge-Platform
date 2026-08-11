@@ -556,30 +556,48 @@ def test_table_and_code_are_preserved_in_candidate_elements():
     assert "print('hello')" not in candidate.text
 
 
-def test_section_with_only_table_produces_no_narrative_candidate():
+def test_section_with_only_table_creates_candidate_for_delegation():
+
+    table1 = make_table("Table 1")
+    table2 = make_table("Table 2")
 
     tree = make_tree([
         make_heading("Data", 1),
-        make_table("Table 1"),
-        make_table("Table 2"),
+        table1,
+        table2,
     ])
 
     candidates = HierarchyChunker().chunk(tree)
 
-    assert candidates == []
+    assert len(candidates) == 1
+
+    candidate = candidates[0]
+
+    assert candidate.section_path == ["Data"]
+    assert candidate.text == "Section: Data"
+    assert candidate.elements == [table1, table2]
 
 
-def test_section_with_only_code_produces_no_narrative_candidate():
+def test_section_with_only_code_creates_candidate_for_delegation():
+
+    code1 = make_code("print('one')")
+    code2 = make_code("print('two')")
 
     tree = make_tree([
         make_heading("Code", 1),
-        make_code("print('one')"),
-        make_code("print('two')"),
+        code1,
+        code2,
     ])
 
     candidates = HierarchyChunker().chunk(tree)
 
-    assert candidates == []
+    assert len(candidates) == 1
+
+    candidate = candidates[0]
+
+    assert candidate.section_path == ["Code"]
+    assert candidate.text == "Section: Code"
+    assert candidate.elements == [code1, code2]
 
 
 def test_multiple_tables_do_not_create_multiple_narrative_candidates():
@@ -654,83 +672,85 @@ def test_many_delegated_elements_between_paragraphs():
 
 def test_parent_only_table_child_has_narrative():
 
+    parent_table = make_table("Parent table")
+
     tree = make_tree([
         make_heading("Parent", 1),
-
-        make_table("Parent table"),
-
+        parent_table,
         make_heading("Child", 2),
-
         make_paragraph("Child content."),
     ])
 
     candidates = HierarchyChunker().chunk(tree)
 
-    assert len(candidates) == 1
+    assert len(candidates) == 2
 
-    candidate = candidates[0]
+    parent = candidates[0]
+    child = candidates[1]
 
-    assert candidate.section_path == [
-        "Parent",
-        "Child",
-    ]
+    assert parent.section_path == ["Parent"]
+    assert parent.text == "Section: Parent"
+    assert parent.elements == [parent_table]
 
-    assert candidate.text == (
+    assert child.section_path == ["Parent", "Child"]
+    assert child.text == (
         "Section: Parent > Child\n\n"
         "Child content."
     )
 
 
-def test_child_only_table_produces_no_child_candidate():
+def test_child_only_table_creates_child_candidate_for_delegation():
+
+    child_table = make_table("Child table")
 
     tree = make_tree([
         make_heading("Parent", 1),
-
         make_paragraph("Parent content."),
-
         make_heading("Child", 2),
-
-        make_table("Child table"),
+        child_table,
     ])
 
     candidates = HierarchyChunker().chunk(tree)
 
-    assert len(candidates) == 1
+    assert len(candidates) == 2
 
-    candidate = candidates[0]
+    parent = candidates[0]
+    child = candidates[1]
 
-    assert candidate.section_path == [
-        "Parent"
-    ]
+    assert parent.section_path == ["Parent"]
+    assert "Parent content." in parent.text
+    assert child_table not in parent.elements
 
-    assert "Parent content." in candidate.text
-    assert "Child table" not in candidate.text
+    assert child.section_path == ["Parent", "Child"]
+    assert child.text == "Section: Parent > Child"
+    assert child.elements == [child_table]
 
 
-def test_child_only_code_produces_no_child_candidate():
+def test_child_only_code_creates_child_candidate_for_delegation():
+
+    child_code = make_code("print('child')")
 
     tree = make_tree([
         make_heading("Parent", 1),
-
         make_paragraph("Parent content."),
-
         make_heading("Child", 2),
-
-        make_code("print('child')"),
+        child_code,
     ])
 
     candidates = HierarchyChunker().chunk(tree)
 
-    assert len(candidates) == 1
+    assert len(candidates) == 2
 
-    candidate = candidates[0]
+    parent = candidates[0]
+    child = candidates[1]
 
-    assert candidate.section_path == [
-        "Parent"
-    ]
+    assert parent.section_path == ["Parent"]
+    assert "Parent content." in parent.text
+    assert child_code not in parent.elements
 
-    assert "Parent content." in candidate.text
-    assert "print('child')" not in candidate.text
+    assert child.section_path == ["Parent", "Child"]
+    assert child.text == "Section: Parent > Child"
+    assert child.elements == [child_code]
 
 
 def test_child_table_does_not_leak_into_parent_candidate():
