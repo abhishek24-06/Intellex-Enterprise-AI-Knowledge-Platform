@@ -60,6 +60,9 @@ class DoclingExtractor(BaseExtractor):
             case "list_item":
                 return self._extract_list(order_index=order_index, item=item)
 
+            case "code":
+                return self._extract_code(order_index=order_index,item=item)
+            
             case _:
                 return None
 
@@ -193,3 +196,23 @@ class DoclingExtractor(BaseExtractor):
                 "marker": item.marker #Store symbol Eg "-" for - Python
             }
         )
+
+    def _extract_code(self,item,order_index:int)->ExtractedElement:
+
+        page,bbox = self._extract_provenance(item)
+
+        return ExtractedElement(order_index=order_index,
+                                text=item.text,
+                                element_type=ElementType.CODE_BLOCK,
+                                metadata={
+                                    **self._base_metadata(),
+                                    "page": page,
+                                    "bbox": bbox,
+                                    "source": "docling",
+                                    "language": getattr(
+                                        item,
+                                        "code_language",
+                                        None
+                                    )
+                                }
+                                )

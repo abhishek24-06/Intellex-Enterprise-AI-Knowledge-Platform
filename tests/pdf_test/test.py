@@ -16,10 +16,10 @@ def test_extract_real_pdf():
     test_dir = Path(__file__).parent
 
     # Real PDF
-    pdf_path = test_dir / "report.pdf"
+    pdf_path = test_dir / "Code.pdf"
 
     # Extracted output
-    output_path = test_dir / "extracted_report.txt"
+    output_path = test_dir / "extracted_code.txt"
 
     # Make sure the PDF actually exists
     assert pdf_path.exists(), f"PDF not found: {pdf_path}"
@@ -320,6 +320,27 @@ def test_extract_real_pdf():
                 f"Table {metadata.get('table_index')} "
                 f"has invalid column count: {n_cols}"
             )
+
+        # ------------------------------------------------------------
+        # CODE VALIDATION
+        # ------------------------------------------------------------
+        
+        codes = [
+            element
+            for element in elements
+            if element.element_type == ElementType.CODE_BLOCK
+        ]
+        
+        assert len(codes) > 0, (
+            "PDF contains no extracted CODE_BLOCK elements"
+        )
+        
+        for code in codes:
+            assert code.text is not None
+            assert code.text.strip() != ""
+        
+            assert code.metadata.get("page") is not None
+            assert code.metadata.get("source") == "docling"
 
     # ============================================================
     # FINAL SUCCESS MESSAGE
