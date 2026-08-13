@@ -1,0 +1,115 @@
+
+================================================================================
+Order Index: 0
+Element Type: ElementType.PARAGRAPH
+Text:
+Python and Java Code Notes
+Metadata: {'document_id': 'code-test', 'filename': 'code.docx', 'source': 'docx', 'style': 'Normal'}
+
+================================================================================
+Order Index: 1
+Element Type: ElementType.HEADING
+Text:
+1. Python Basics
+Metadata: {'document_id': 'code-test', 'filename': 'code.docx', 'source': 'docx', 'style': 'Heading 1', 'level': 1, 'numbering': {'has_num_pr': False, 'resolved': False, 'value': None}}
+
+================================================================================
+Order Index: 2
+Element Type: ElementType.CODE_BLOCK
+Text:
+# Python: simple program
+name = "Abhishek"
+age = 20
+
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet(name))
+print("Age:", age)
+Metadata: {'document_id': 'code-test', 'filename': 'code.docx', 'source': 'docx', 'style': 'Normal', 'detected_via': 'font'}
+
+================================================================================
+Order Index: 3
+Element Type: ElementType.HEADING
+Text:
+2. Python Function
+Metadata: {'document_id': 'code-test', 'filename': 'code.docx', 'source': 'docx', 'style': 'Heading 1', 'level': 1, 'numbering': {'has_num_pr': False, 'resolved': False, 'value': None}}
+
+================================================================================
+Order Index: 4
+Element Type: ElementType.CODE_BLOCK
+Text:
+# Python: loop and list
+numbers = [1, 2, 3, 4, 5]
+
+for number in numbers:
+    print(number * 2)
+Metadata: {'document_id': 'code-test', 'filename': 'code.docx', 'source': 'docx', 'style': 'Normal', 'detected_via': 'font'}
+
+================================================================================
+Order Index: 5
+Element Type: ElementType.HEADING
+Text:
+3. Java Basics
+Metadata: {'document_id': 'code-test', 'filename': 'code.docx', 'source': 'docx', 'style': 'Heading 1', 'level': 1, 'numbering': {'has_num_pr': False, 'resolved': False, 'value': None}}
+
+================================================================================
+Order Index: 6
+Element Type: ElementType.CODE_BLOCK
+Text:
+// Java: simple program
+public class Main {
+    public static void main(String[] args) {
+        String name = "Abhishek";
+        int age = 20;
+
+        System.out.println("Hello, " + name);
+        System.out.println("Age: " + age);
+    }
+}
+Metadata: {'document_id': 'code-test', 'filename': 'code.docx', 'source': 'docx', 'style': 'Normal', 'detected_via': 'font'}
+
+================================================================================
+Order Index: 7
+Element Type: ElementType.HEADING
+Text:
+4. Java Class and Method
+Metadata: {'document_id': 'code-test', 'filename': 'code.docx', 'source': 'docx', 'style': 'Heading 1', 'level': 1, 'numbering': {'has_num_pr': False, 'resolved': False, 'value': None}}
+
+================================================================================
+Order Index: 8
+Element Type: ElementType.CODE_BLOCK
+Text:
+// Java: class and method
+class Calculator {
+    int add(int a, int b) {
+        return a + b;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        System.out.println(calc.add(10, 20));
+    }
+}
+Metadata: {'document_id': 'code-test', 'filename': 'code.docx', 'source': 'docx', 'style': 'Normal', 'detected_via': 'font'}
+
+================================================================================
+Order Index: 9
+Element Type: ElementType.HEADING
+Text:
+5. Comparison Table
+Metadata: {'document_id': 'code-test', 'filename': 'code.docx', 'source': 'docx', 'style': 'Heading 1', 'level': 1, 'numbering': {'has_num_pr': False, 'resolved': False, 'value': None}}
+
+================================================================================
+Order Index: 10
+Element Type: ElementType.TABLE
+Text:
+Feature | Python | Java
+Typing | Dynamically typed | Statically typed
+Syntax | Short and concise | More verbose
+Execution | Interpreted / bytecode | Compiled to bytecode
+Common Use | AI, data science, automation | Backend, enterprise, Android
+Metadata: {'document_id': 'code-test', 'filename': 'code.docx', 'source': 'docx', 'table_id': 'code-test-table-0', 'n_rows': 5, 'n_cols': 3, 'cells': [['Feature', 'Python', 'Java'], ['Typing', 'Dynamically typed', 'Statically typed'], ['Syntax', 'Short and concise', 'More verbose'], ['Execution', 'Interpreted / bytecode', 'Compiled to bytecode'], ['Common Use', 'AI, data science, automation', 'Backend, enterprise, Android']], 'has_header_row': True, 'markdown': '| Feature | Python | Java |\n| --- | --- | --- |\n| Typing | Dynamically typed | Statically typed |\n| Syntax | Short and concise | More verbose |\n| Execution | Interpreted / bytecode | Compiled to bytecode |\n| Common Use | AI, data science, automation | Backend, enterprise, Android |'}
+

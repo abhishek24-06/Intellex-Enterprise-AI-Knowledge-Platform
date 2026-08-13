@@ -17,6 +17,22 @@ from app.dto.extraction_result import ExtractionResult
 
 HEADING_PATTERN = re.compile(r"heading\s+(\d+)",re.IGNORECASE)
 
+CODE_STYLE_NAMES = {
+    "code",
+    "source code",
+    "html code",
+    "macro text",
+}
+
+MONOSPACE_FONTS = {
+    "courier new",
+    "consolas",
+    "monaco",
+    "menlo",
+    "source code pro",
+    "fira code",
+}
+
 class DocxExtractor(BaseExtractor):
 
     def extract(self,file_path:str,
@@ -86,6 +102,17 @@ class DocxExtractor(BaseExtractor):
             )
             return ElementType.LIST, metadata
 
+        if self._has_semantic_code_style(style_name):
+            metadata["code_style"] = style_name
+            metadata["detected_via"] = "style"
+
+            return ElementType.CODE_BLOCK, metadata
+
+        if self._looks_like_code_by_font(paragraph):
+            metadata["detected_via"] = "font"
+
+            return ElementType.CODE_BLOCK, metadata
+
         return ElementType.PARAGRAPH, metadata
 
     def _extract_heading_level(self,style:str)->int|None: #Extracts heading lvl eg 1 2 3 
@@ -150,6 +177,12 @@ class DocxExtractor(BaseExtractor):
             **metadata,
             }
 
+        print(
+        f"ORDER={order_index} | "
+        f"STYLE={paragraph.style.name!r} | "
+        f"TEXT={paragraph.text[:100]!r}"
+    )
+        
         return ExtractedElement(
             order_index=order_index,
             text= paragraph.text.strip(),
@@ -225,3 +258,32 @@ class DocxExtractor(BaseExtractor):
             element_type=ElementType.TABLE,
             metadata=self._extract_table_metadata(table,table_index)
         )
+
+#CODE
+
+    def _has_semantic_code_style(self, style_name: str) -> bool:
+
+        return (style_name.strip().lower()
+                in CODE_STYLE_NAMES
+        )
+
+    def _looks_like_code_by_font(self, paragraph: Paragraph) -> bool:
+
+        runs = [run
+                for run in paragraph.runs
+                if run.text.strip()
+        ]
+    
+        if not runs:
+            return False
+    
+        monospace_runs = sum(1
+                for run in runs
+                if (
+                    run.font.name
+                    and run.font.name.strip().lower()
+                    in MONOSPACE_FONTS
+                )
+        )
+    
+        return monospace_runs / len(runs) >= 0.7
