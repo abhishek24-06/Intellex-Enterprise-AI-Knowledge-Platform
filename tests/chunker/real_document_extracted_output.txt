@@ -1,0 +1,1290 @@
+================================================================================
+REAL DOCUMENT EXTRACTION
+================================================================================
+
+Document: C:\Users\Abhishek\Desktop\Intellex\tests\doc_test\report.docx
+Total extracted elements: 259
+
+order=0 | type=ElementType.PARAGRAPH | text='A Mini Project Report on'
+order=2 | type=ElementType.HEADING | text='“Deepfake Detector: A CNN-BiLSTM Attention-Based Web Application for Image and Video Forgery Detection”'
+order=5 | type=ElementType.PARAGRAPH | text='Submitted in partial fulfillment of the requirement for Degree in Bachelor of Technology (Information Technology)'
+order=7 | type=ElementType.PARAGRAPH | text='By'
+order=10 | type=ElementType.PARAGRAPH | text='Abhishek Tajane (5023158)'
+order=13 | type=ElementType.PARAGRAPH | text='Guided by:'
+order=14 | type=ElementType.PARAGRAPH | text='Dr. Mukta Nivelkar'
+order=19 | type=ElementType.HEADING | text='Department of Information Technology'
+order=20 | type=ElementType.HEADING | text='Fr. C. Rodrigues Institute of Technology, Vashi.'
+order=21 | type=ElementType.PARAGRAPH | text='(An Autonomous Institute & Permanently Affiliated to University of Mumbai)'
+order=26 | type=ElementType.PARAGRAPH | text='Academic Year: 2025-26'
+order=27 | type=ElementType.HEADING | text='CERTIFICATE'
+order=28 | type=ElementType.PARAGRAPH | text='This is to certify that the Mini Project entitled'
+order=29 | type=ElementType.PARAGRAPH | text='“Deepfake Detector: A CNN-BiLSTM Attention-Based Web Application for Image and Video Forgery Detection”'
+order=31 | type=ElementType.PARAGRAPH | text='Submitted By'
+order=35 | type=ElementType.PARAGRAPH | text='Abhishek Tajane (5023158)'
+order=40 | type=ElementType.PARAGRAPH | text='In partial fulfillment of degree of B.Tech. in Information Technology for term work of the Semester VI Mini Project – 2 B is approved.'
+order=48 | type=ElementType.PARAGRAPH | text='Internal Examiner\t      Internal Guide'
+order=54 | type=ElementType.PARAGRAPH | text='Head of the Department\t          Principal'
+order=62 | type=ElementType.PARAGRAPH | text='Date: -\tCollege Seal'
+order=63 | type=ElementType.HEADING | text='Declaration'
+order=65 | type=ElementType.PARAGRAPH | text="We declare that this written submission represents our ideas in our own words and where others' ideas or words have been included, we have adequately cited and referenced the original sources. We also declare that we have adhered to all principles of academic honesty and integrity and have not misrepresented or fabricated or falsified any idea/data/fact/source in my submission. We understand that any violation of the above will be cause for disciplinary action by the Institute and can also evoke penal action from the sources which have thus not been properly cited or from whom proper permission has not been taken when needed."
+order=73 | type=ElementType.PARAGRAPH | text='Abhishek Tajane (5023158)'
+order=86 | type=ElementType.PARAGRAPH | text='Date:'
+order=87 | type=ElementType.HEADING | text='Abstract'
+order=89 | type=ElementType.PARAGRAPH | text='In today’s digital era, misinformation and manipulated media have become major challenges across social platforms. With the rise of artificial intelligence, deepfake images are increasingly being used to spread false information, damage reputations, and mislead audiences. To address this issue, we are developing a simple and effective solution — a Deepfake Detector that helps people verify the authenticity of digital images quickly and accurately.'
+order=91 | type=ElementType.PARAGRAPH | text='The main goal of Deepfake Detector is to create a web application that can analyze uploaded images using artificial intelligence. It employs a Convolutional Neural Network (CNN) model trained on real and fake image datasets to detect manipulation or forgery. The system generates a confidence score indicating whether an image is likely to be genuine or deepfake, empowering users to verify visual content before trusting or sharing it online.'
+order=93 | type=ElementType.PARAGRAPH | text='The application is designed to be user-friendly and accessible from any device. With real-time image analysis and clear results, it simplifies the process of verifying authenticity for individuals, journalists, and organizations alike. Overall, Deepfake Detector aims to promote digital safety and awareness by helping users distinguish between real and AI-generated media.'
+order=94 | type=ElementType.PARAGRAPH | text='INDEX'
+order=97 | type=ElementType.TABLE | text='Sr. No. | Topic | Page No.\n1 | Introduction\nBackground\nMotivation\nProblem Definition\nScope \nIssues / Limitation | 1\n2\n2\n5\n5\n5\n2 | Literature Survey and Analysis\nReferred paper\nLiterature Survey Comparison\nExisting System\nRequirement Analysis | 7\n8\n10\n14\n14\n3 | Architectural Design\nArchitectural Diagram / block diagram\nHardware & Software Requirement\nFlow chart | 16\n17\n18\n19\n4 | User Interface | 20\n5 | Results | 24\n6 | Conclusion | 26\n | References | 28\n | Acknowledgements | 29\n | Appendix | 30'
+order=99 | type=ElementType.PARAGRAPH | text='LIST OF FIGURES'
+order=101 | type=ElementType.TABLE | text='Fig. No. | Name of the Figure | Page No.\n1.1 | Visual representation of Deepfake Manipulation | 3\n1.2 | Growth of Deepfake and Identity Fraud cases | 4\n2.2 | EDA: Pixel Statistics (Real vs. Fake) | 15\n3.1 | Architecture Diagram | 17\n3.3 | Flow Chart | 18\n4.1 | TruthLens Landing Page (Home) | 20\n4.2 | Deepfake Detector Upload Interface | 20\n4.3 | Deepfake Detected (Image) | 21\n4.4 | Authentic Image Verified | 21\n4.5 | Deepfake Detected (Video) | 22\n4.6 | Authentic Video Verified | 22\n5.1 | Training Curves of Baseline CNN Model | 24\n5.2 | Confusion Matrix and ROC Curve | 25\n5.3 | Classification Report | 25'
+order=103 | type=ElementType.PARAGRAPH | text='LIST OF TABLES'
+order=105 | type=ElementType.TABLE | text='Table No. | Name of the Table | Page No.\n2.1 | Literature Survey | 10'
+order=115 | type=ElementType.HEADING | text='CHAPTER 1'
+order=117 | type=ElementType.HEADING | text='INTRODUCTION'
+order=118 | type=ElementType.HEADING | text='INTRODUCTION'
+order=120 | type=ElementType.LIST | text='Background'
+order=122 | type=ElementType.PARAGRAPH | text='With the rapid advancement of artificial intelligence, deepfake technology has made it possible to generate highly realistic but fake videos and images. These manipulations can easily deceive the human eye and are often misused for spreading misinformation, identity theft, and defamation.'
+order=124 | type=ElementType.PARAGRAPH | text='The Deepfake Detection System is an AI-based solution designed to detect and analyze such manipulated media using deep learning and computer vision. The system leverages Convolutional Neural Networks (CNNs) trained on datasets such as FaceForensics++ to identify subtle inconsistencies and rendering artifacts that differentiate fake content from real ones.'
+order=126 | type=ElementType.PARAGRAPH | text='It also includes a user-friendly web interface built with React.js and a Python (Flask/FastAPI) backend, allowing users to upload media for verification and receive instant results.'
+order=128 | type=ElementType.LIST | text='Motivation'
+order=130 | type=ElementType.PARAGRAPH | text='Deepfakes pose a major threat to digital trust, enabling fake news, cyber fraud, and identity manipulation. With social media platforms becoming the main source of information, verifying content authenticity has become critical. As illustrated below in Figure 1.1, the visual difference between real and manipulated videos can be nearly indistinguishable, emphasizing the urgent need for automated detection systems.'
+order=132 | type=ElementType.PARAGRAPH | text='Our motivation is to restore trust in digital content by developing an intelligent system capable of detecting deepfakes quickly and accurately. The project aims to:'
+order=133 | type=ElementType.LIST | text='Ensure Safety: Protect individuals and organizations from misinformation and reputational harm.'
+order=134 | type=ElementType.LIST | text='Promote Digital Trust: Empower users to verify online content before sharing or believing it.'
+order=135 | type=ElementType.LIST | text='Support Sustainable Online Practices: Encourage responsible use of AI and media through detection tools.'
+order=136 | type=ElementType.LIST | text='By combining deep learning techniques with a real-time detection platform, this project contributes to a safer digital ecosystem and aligns with UN SDG 16 (Peace, Justice, and Strong Institutions) and SDG 12 (Responsible Consumption and Production).'
+order=139 | type=ElementType.PARAGRAPH | text='Figure 1.1 – Visual Representation of Deepfake Manipulation'
+order=142 | type=ElementType.LIST | text='Key Motivations'
+order=144 | type=ElementType.LIST | text='Digital Safety: Deepfakes can be used for misinformation, blackmail, and identity theft. Detecting them early helps protect individuals and organizations from serious harm.'
+order=145 | type=ElementType.LIST | text='Restoring Trust: Online platforms are flooded with manipulated media. This project promotes transparency and helps rebuild trust in digital content.'
+order=146 | type=ElementType.LIST | text='Technological Awareness: Educating people about AI-generated content and giving them tools to verify authenticity increases awareness of media manipulation.'
+order=147 | type=ElementType.LIST | text='Accessibility: By providing a simple web-based interface, anyone can upload and verify videos or images — making AI detection tools available to all.'
+order=151 | type=ElementType.PARAGRAPH | text='Figure 1.2 Growth of Deepfake and Identity Fraud Cases from 2022 to 2024'
+order=153 | type=ElementType.PARAGRAPH | text='As shown in the chart Figure 1.2 , the prevalence of deepfakes and related frauds has sharply increased between 2022 and 2024 — with audio and video deepfakes rising from 37% and 29% to 49%, respectively. This alarming trend highlights the urgent need for reliable detection systems. Digital safety is the foremost motivation, as deepfakes are increasingly used for misinformation, blackmail, and identity theft. Detecting them early helps protect individuals and organizations from significant harm. Equally important is restoring trust in online media; with manipulated content spreading rapidly, this project promotes transparency and ensures that digital information remains credible.'
+order=154 | type=ElementType.PARAGRAPH | text='Another major goal is technological awareness — empowering users to understand and identify AI-generated media. The system’s accessible web-based interface allows anyone, not just experts, to upload and verify images or videos easily. Finally, this project reflects strong social responsibility, supporting global Sustainable Development Goals such as SDG 16 (Peace, Justice, and Strong Institutions) by combating misinformation, and SDG 12 (Responsible Consumption and Production) by encouraging ethical use of technology.'
+order=155 | type=ElementType.HEADING | text='1.3 Problem Definition'
+order=157 | type=ElementType.PARAGRAPH | text='With the rise of artificial intelligence, deepfake technology has made it possible to create highly realistic fake videos and images that are difficult for the human eye to distinguish from real ones. These deepfakes can be misused for spreading misinformation, defamation, financial scams, identity theft, and other cybercrimes. Detecting such manipulations manually is nearly impossible, creating a serious threat to digital trust and online authenticity.'
+order=158 | type=ElementType.PARAGRAPH | text='There is a need for an AI-based solution that can automatically identify deepfake content and provide users with an accurate and reliable verification system.'
+order=160 | type=ElementType.HEADING | text='1.4 Scope'
+order=161 | type=ElementType.PARAGRAPH | text='The main objective of this project is to build an AI-powered application that detects whether an image or video is real or artificially manipulated. The specific objectives are as follows:'
+order=162 | type=ElementType.LIST | text='Deepfake Detection System:\n To develop an intelligent system capable of identifying whether an image or video is authentic or manipulated using advanced AI techniques.'
+order=163 | type=ElementType.LIST | text='User Input Support:\n To allow users to upload or capture images and videos through the application for verification.'
+order=164 | type=ElementType.LIST | text='AI-Based Analysis:\n To utilize deep learning models such as Convolutional Neural Networks (CNN) and transfer learning techniques to detect facial and visual manipulations.'
+order=165 | type=ElementType.LIST | text='Real-Time Prediction:\n To provide instant predictions along with a confidence score (%) indicating the likelihood of content being a deepfake.'
+order=166 | type=ElementType.LIST | text='Multi-Format Support:\n To support both image-level and video-level detection for enhanced flexibility and usability.'
+order=167 | type=ElementType.LIST | text='Misinformation Reduction:\n To minimize the risk of misinformation, fraud, and misuse by enabling users to verify digital content authenticity.'
+order=168 | type=ElementType.LIST | text='Digital Safety Enhancement:\n To improve public trust and digital safety by offering a simple, reliable, and accessible verification tool.'
+order=169 | type=ElementType.LIST | text='Backend Processing:\n To implement cloud-based backend APIs (such as Flask or FastAPI) for efficient handling of computationally intensive AI tasks.'
+order=170 | type=ElementType.LIST | text='Data Logging (Optional):\n To store user activity logs and analysis history for future reference and continuous model improvement.'
+order=171 | type=ElementType.LIST | text='Scalability:\n To ensure the system can scale effectively to support more users, larger datasets, and evolving deepfake detection techniques over time.'
+order=175 | type=ElementType.HEADING | text='1.5 Issues / Limitations'
+order=176 | type=ElementType.PARAGRAPH | text='Despite the effectiveness of the proposed deepfake detection system, certain limitations exist:'
+order=177 | type=ElementType.LIST | text='Sensitivity to Media Quality:\n Detection accuracy may decrease when processing low-quality, highly compressed, or blurry images and videos.'
+order=178 | type=ElementType.LIST | text='Advanced Manipulation Techniques:\n Highly sophisticated or previously unseen deepfake techniques may not be accurately recognized by the model.'
+order=179 | type=ElementType.LIST | text='Dataset Dependency:\n The system relies heavily on large labeled datasets (e.g., FaceForensics++). Limited diversity in training data may affect the model’s ability to generalize.'
+order=180 | type=ElementType.LIST | text='Need for Continuous Updates:\n The model requires periodic retraining to adapt to newly emerging deepfake generation methods.'
+order=181 | type=ElementType.LIST | text='Computational Requirements:\n Real-time video detection can be computationally expensive, especially on low-end or resource-constrained devices.'
+order=182 | type=ElementType.LIST | text='Probabilistic Predictions:\n The model provides confidence scores rather than absolute certainty, which may lead to ambiguous interpretations in borderline cases.'
+order=183 | type=ElementType.LIST | text='Scope Limitation:\n The current system focuses primarily on face-based manipulations and may not effectively detect non-face or audio-based deepfakes in its initial version.'
+order=191 | type=ElementType.HEADING | text='CHAPTER 2 LITERATURE SURVEY'
+order=192 | type=ElementType.HEADING | text='LITERATURE SURVEY'
+order=193 | type=ElementType.PARAGRAPH | text='1. FaceForensics++ (2019) — Rössler et al. Built a large-scale benchmark dataset with manipulated facial images and tested multiple CNN architectures on it. Became the standard reference dataset for deepfake detection research.'
+order=194 | type=ElementType.PARAGRAPH | text='2. MesoNet (2018) — Afchar et al. Designed a compact, lightweight CNN (Meso-4 / MesoInception-4) that detects facial forgeries in real time. Trades off accuracy for speed and model size.'
+order=195 | type=ElementType.PARAGRAPH | text='3. FakeCatcher (2019/2020) — Ciftci et al. Detects deepfakes using biological signals — specifically blood flow patterns (rPPG) extracted from skin regions — rather than visual artifacts. Hard for generators to replicate.'
+order=196 | type=ElementType.PARAGRAPH | text='4. Face X-Ray (2020) — Li et al. Identifies blending boundary artifacts left during face swapping. Generalizes across unseen manipulation types but fails on fully synthesized (non-blended) fakes.'
+order=197 | type=ElementType.PARAGRAPH | text='5. Frequency Analysis for Deepfake Recognition (2020) — Frank et al. Exploits unique spectral artifacts in GAN-generated images. Works across multiple generators without retraining but may fail against diffusion-based fakes.'
+order=198 | type=ElementType.PARAGRAPH | text='6. Thinking in Frequency (ECCV 2020) — Qian et al. Adds frequency-aware layers to CNNs so the network jointly learns spatial and frequency cues. Improves generalization but increases compute cost.'
+order=199 | type=ElementType.PARAGRAPH | text='7. Exploiting Temporal Information (IEEE ICIP) — Guera & Delp Combines CNN (spatial features per frame) with LSTM (temporal inconsistency across frames). Simple and clean pipeline but uses older CNN backbones.'
+order=200 | type=ElementType.PARAGRAPH | text='8. Deepfake Video Detection Using RNNs (IEEE AVSS) — Sabir et al. CNN extracts frame-level features, LSTM classifies at video level. Effective for video-level detection but computationally heavy.'
+order=201 | type=ElementType.PARAGRAPH | text='9. CNN + LSTM for Video Forgery Detection — Zhou et al. Hybrid CNN-LSTM framework focusing on spatio-temporal forgery detection. Improves accuracy but increases memory usage and pipeline complexity.'
+order=202 | type=ElementType.PARAGRAPH | text='10. Deepfake Detection Using Spatiotemporal Features (IEEE Access) — Li et al. Jointly trains CNN and LSTM to capture both spatial and temporal artifacts. Robust detection but struggles to generalize across datasets.'
+order=203 | type=ElementType.PARAGRAPH | text='11. Convolutional Vision Transformer / CViT (2021) — Wodajo & Atnafu Combines CNN for local feature extraction with Vision Transformer for global attention. Achieves 91.5% accuracy and AUC of 0.91 on DFDC but limited cross-dataset generalization.'
+order=204 | type=ElementType.PARAGRAPH | text='12. Deepfake Detection Using CNN-Based Architecture (2025) — Kapoor et al. Presents a complete end-to-end CNN pipeline with detailed preprocessing, architecture design, and training strategy. Practical and systematic but needs continuous updates as generation techniques evolve.'
+order=205 | type=ElementType.PARAGRAPH | text='13. A Survey: Deepfake and Current Technologies (2024) — Banerjee et al. Surveys forensics, ML, multimodal, and blockchain-based detection approaches. Covers both technical and societal dimensions but real-time detection remains an open problem.'
+order=206 | type=ElementType.PARAGRAPH | text='14. DeepFakes and Beyond (2020) — Tolosana et al. Classifies face manipulations into 4 types (full synthesis, identity swap, attribute manipulation, expression swap) and reviews all major datasets and benchmarks. Strong foundational reference.'
+order=207 | type=ElementType.PARAGRAPH | text='15. Deepfake Generation and Detection: A Benchmark and Survey (2024) — Pei et al. Covers the full arc from GAN to diffusion-based generation and benchmarks detection methods across spatial, temporal, frequency, and hybrid domains. Most comprehensive and up-to-date survey.'
+order=208 | type=ElementType.PARAGRAPH | text='Table 2.1 Literature Survey'
+order=210 | type=ElementType.TABLE | text="Sr. No. | Paper / Year | Authors | Description | Advantages | Limitations\n1 | FaceForensics++: Learning to Detect Manipulated Facial Images (2019) | Andreas Rössler, Davide Cozzolino, Luisa Verdoliva, Christian Riess, Justus Thies, Matthias Nießner | Introduced a large-scale benchmark dataset for detecting manipulated facial images and evaluated various CNN architectures. | Standardized benchmark dataset; enables reproducible comparison across models; supports multiple manipulation types and compression levels. | Focuses mainly on early manipulation methods; detectors trained on it often overfit and fail to generalize to unseen generators.\n2 | MesoNet: A Compact Facial Video Forgery Detection Network (2018) | Darius Afchar, Vincent Nozick, Junichi Yamagishi, Isao Echizen | Proposed a lightweight CNN (Meso-4, MesoInception-4) for detecting facial forgery in images and videos. | Small model, fast inference (real-time use); easy to interpret activations and visualize results. | Lower accuracy than deeper models (Xception, ResNet); sensitive to compression and post-processing.\n3 | FakeCatcher: Detection of Synthetic Portrait Videos using Biological Signals (2019/2020) | Umur Aybars Ciftci, Ilke Demir, Lijun Yin | Uses biological signals (rPPG — blood flow patterns) from skin regions to detect fake videos or images. | Uses physiological cues that are hard for generative models to mimic; robust to some post-processing. | Mainly applicable to videos, not single images; sensitive to lighting and motion artifacts.\n4 | Face X-Ray for More General Face Forgery Detection (2020) | Lingzhi Li, Jianmin Bao, Ting Zhang, Hao Yang, Dong Chen, Fang Wen, Baining Guo | Introduces a 'face X-ray' representation to identify image blending boundaries common in manipulated faces. | Generalizes across many manipulation types; localizes manipulated regions (interpretable). | Ineffective for full-synthesis (non-blended) fakes; post-processing can hide boundary cues.\n5 | Leveraging Frequency Analysis for Deepfake Image Recognition (2020) | Jörg Frank, T. Eisenhofer, L. Schönherr, Asja Fischer, D. Kolossa, T. Holz | Shows that GAN-generated images have distinctive frequency artifacts; uses spectral-domain features for detection. | Model-agnostic — frequency features apply across many generators; good complement to CNN spatial cues. | Vulnerable if generator uses spectral regularization or improved upsampling; may fail on diffusion-based fakes.\n6 | Thinking in Frequency: Face Forgery Detection via Frequency-aware Feature Learning (ECCV 2020) | Yuezun Qian, Xianfeng Zhao, Guojun Yin, Jiajun Wu, Siwei Lyu | Improves CNNs by adding frequency-aware layers for detecting fake faces more robustly. | Learns robust frequency features jointly with spatial cues; better generalization across datasets. | Requires high-quality input; performance degrades under compression; additional computation cost compared to standard CNNs.\n7 | Exploiting Temporal Information for Deepfake Detection (IEEE ICIP) | David Guera, Edward J. Delp | Uses CNN to extract spatial frame features from video frames and LSTM to learn temporal inconsistencies. | Clear CNN to LSTM pipeline; strong temporal modeling; easy to implement. | Uses older CNN architectures; comparatively lower accuracy.\n8 | Deepfake Video Detection Using Recurrent Neural Networks (IEEE AVSS) | Sabir et al. | CNN-based frame feature extraction followed by LSTM for video-level classification. | Direct CNN + LSTM integration; effective video-level detection. | High computational cost; longer training time.\n9 | Combining CNN and LSTM for Video-Based Face Forgery Detection (Elsevier Neurocomputing) | Zhou et al. | Hybrid CNN + LSTM framework for spatial and temporal forgery detection. | Strong spatio-temporal learning; improved accuracy. | More complex pipeline; higher memory usage.\n10 | Deepfake Detection Using Spatiotemporal Features (IEEE Access) | Li et al. | Joint CNN and LSTM model to capture spatial and temporal artifacts in videos. | Explicit spatio-temporal modeling; robust detection. | Dataset-dependent performance; generalization issues.\n11 | Deepfake Video Detection Using Convolutional Vision Transformer (2021) | Deressa Wodajo & Solomon Atnafu | Proposes a CNN + Vision Transformer (CViT) hybrid model for deepfake video detection on DFDC dataset. | High accuracy (91.5%, AUC=0.91); leverages both local and global features. | Generalization to unseen datasets is still limited.\n12 | A Survey: Deepfake and Current Technologies for Solutions (2024) | Sayan Banerjee, Sumit Kumar Yadav, Ankit Dhara, Md Ajij | Reviews detection methods including forensics, ML, multimodal approaches, and blockchain authentication. | Broad coverage including technical and societal aspects. | Real-time detection remains unsolved.\n13 | DeepFakes and Beyond: A Survey of Face Manipulation and Fake Detection (2020) | Ruben Tolosana, Ruben Vera-Rodriguez, Julian Fierrez, Aythami Morales, Javier Ortega-Garcia | Categorizes 4 main manipulation types; reviews datasets, benchmarks, and detection methods. | Strong classification framework; benchmark results summarized. | Traditional methods are less robust against new manipulations.\n14 | Deepfake Generation and Detection: A Benchmark and Survey (2024) | Gan Pei, Jiangning Zhang, Menghan Hu et al. | Benchmarks detection methods; covers evolution from GAN to diffusion models; unifies deepfake task definitions. | Unified definitions; cross-domain benchmarking; identifies future directions. | Diffusion-based detection at early stage; challenges in real-world deployment.\n15 | FakeFormer: Efficient Vulnerability-Driven Transformers for Generalizable Deepfake Detection (2023) | Viet-Tuan Le, Yibing Zhan, Xiangtai Li, Yunqian Li, Xiaochun Cao | Proposes a transformer-based detector that focuses on vulnerability-driven patches in video frames for generalizable detection. | Strong cross-dataset generalization; efficient patch-based attention; outperforms CNN baselines on multiple benchmarks. | Higher memory requirements; transformer training demands large datasets; less interpretable than CNN approaches."
+order=212 | type=ElementType.PARAGRAPH | text='2.1 Existing Systems'
+order=213 | type=ElementType.PARAGRAPH | text='Several existing platforms and tools offer deepfake detection capabilities for various use cases:'
+order=214 | type=ElementType.LIST | text='Sensity AI – Enterprise-level media forensics platform for detecting synthetic media. Targets organizations needing advanced detection tools and forensic reporting.'
+order=215 | type=ElementType.LIST | text='Reality Defender – Provides API and browser plugin for real-time fake media detection. Integrates with workflows to deliver detection scores and content analysis.'
+order=216 | type=ElementType.LIST | text='Deepware – Publicly available video deepfake scanner focusing on face-swap techniques. Allows users to upload videos and receive detection reports.'
+order=217 | type=ElementType.LIST | text='Truepic – Ensures content authenticity and tracks media provenance. Aims to prevent manipulation and verify the integrity of digital content.'
+order=218 | type=ElementType.LIST | text='InVID/WeVerify – Verification toolkit for journalists and fact-checkers. Offers multiple media analysis tools, including deepfake detection.'
+order=220 | type=ElementType.PARAGRAPH | text='2.2 Requirement Analysis'
+order=221 | type=ElementType.LIST | text='Users will be provided with accessible deepfake detection through an intuitive web interface:'
+order=222 | type=ElementType.PARAGRAPH | text='The system will allow users to upload images or videos without requiring technical expertise or API integration, guiding them through the upload process and presenting results with clear confidence scores.'
+order=223 | type=ElementType.LIST | text="Users will be provided with transparent detection results that explain the basis for the system's conclusions:"
+order=224 | type=ElementType.PARAGRAPH | text='The system will display confidence scores (e.g., "82% likely fake") along with explanations of factors contributing to the detection decision, promoting AI transparency.'
+order=225 | type=ElementType.LIST | text='Users will be provided with rapid analysis capabilities for quick verification of digital content:'
+order=226 | type=ElementType.PARAGRAPH | text='The system will process uploaded media efficiently, delivering detection results within seconds to minutes depending on file size, prioritizing real-time feedback.'
+order=227 | type=ElementType.LIST | text='Users will be provided with a reporting mechanism to flag detected deepfakes and contribute to community awareness:'
+order=228 | type=ElementType.PARAGRAPH | text='The platform will include functionality to report suspicious media, creating a feedback loop for improving detection models and supporting broader efforts to combat misinformation.'
+order=229 | type=ElementType.LIST | text='Users will be provided with detection capabilities that work across common deepfake manipulation techniques:'
+order=230 | type=ElementType.PARAGRAPH | text='The system will be trained on diverse datasets (FaceForensics++, DFDC) using XceptionNet-based architecture to recognize various manipulation methods including face swaps, facial reenactment, and synthetic face generation.'
+order=235 | type=ElementType.PARAGRAPH | text='Figure 2.2–EDA : Pixel Statistics of Real vs. Fake Images(50 samples/class)'
+order=238 | type=ElementType.PARAGRAPH | text='As part of our preliminary data exploration, an Exploratory Data Analysis (EDA) was conducted on the dataset to understand pixel-level differences between real and deepfake images. As shown in Figure 2.2, the mean brightness, pixel standard deviation, and mean RGB channel values across both classes reveal subtle but consistent statistical differences — with fake images showing slightly more varied brightness distributions and marginally different channel intensities. These observations confirmed that spatial pixel features alone are insufficient for reliable deepfake detection, motivating the use of deeper feature extraction via CNNs.'
+order=247 | type=ElementType.HEADING | text='CHAPTER 3'
+order=248 | type=ElementType.HEADING | text='ARCHITECTURAL DESIGN'
+order=249 | type=ElementType.HEADING | text='ARCHITECTURAL DESIGN'
+order=250 | type=ElementType.HEADING | text='3.1. Architecture Diagram'
+order=254 | type=ElementType.PARAGRAPH | text='Figure 3.1  Architecture Diagram'
+order=256 | type=ElementType.PARAGRAPH | text='Initial experiments using a plain baseline CNN (without attention or sequential modeling) yielded unstable performance — accuracy hovered around 50–55% with high variance across epochs (refer Figure 4.1). To address this, the model architecture was enhanced by incorporating Bi-directional LSTM layers after the CNN feature extractor, followed by an Attention mechanism. As illustrated in Figure 3.2, the final architecture processes input through a Convolutional layer and Max Pooling layer for spatial feature extraction, passes these features through an LSTM layer to capture temporal/contextual patterns, applies an Attention mechanism to focus on the most discriminative features, and finally outputs a classification via Dense and Softmax layers.'
+order=257 | type=ElementType.HEADING | text='3.2 Hardware & Software Requirements'
+order=258 | type=ElementType.HEADING | text='3.2.1 Software Requirements'
+order=259 | type=ElementType.PARAGRAPH | text='3.2.1.1 Operating System (OS): Windows 10/11, macOS, or Linux\n  3.2.1.2 Programming Language: Python 3.x\n  3.2.1.3 Framework: Flask 3.x\n  3.2.1.4 Database: SQLite\n  3.2.1.5 Dependencies / Libraries: Flask-SQLAlchemy, SQLAlchemy, Jinja2, Werkzeug\n  3.2.1.6 Code Editor / IDE: Visual Studio Code, PyCharm, or any Python IDE\n  3.2.1.7 Package Manager: pip\n  3.2.1.8 Web Browser: Google Chrome, Mozilla Firefox, or any modern web browser\n  3.2.1.9 Version Control (Optional): Git\n  3.2.1.10 Virtual Environment: venv or virtualenv'
+order=260 | type=ElementType.PARAGRAPH | text='3.2.2 Hardware Requirements'
+order=261 | type=ElementType.PARAGRAPH | text='3.2.2.1 Processor: Intel Core i7 or AMD Ryzen 7 (8-core or higher recommended)\n 3.2.2.2 RAM: Minimum 16 GB (32 GB recommended)\n 3.2.2.3 Storage: SSD with at least 512 GB free space\n 3.2.2.4 Display: Minimum 15-inch display (17-inch or external monitor recommended)\n 3.2.2.5 Operating System Compatibility: Windows 10/11 or Ubuntu 20.04 and above\n 3.2.2.6 Power Supply: Minimum 500W PSU'
+order=262 | type=ElementType.HEADING | text='3.3 Flow Chart'
+order=265 | type=ElementType.PARAGRAPH | text='Fig 3.3 Flow Chart'
+order=266 | type=ElementType.PARAGRAPH | text='As shown in Figure 3.3, the system architecture for the image and video prediction pipeline consists of a React-based frontend, a Flask backend deployed on Cloud Run, and separate deep learning models for processing different media types, including a CNN model for image inputs and a CNN-BiLSTM model for video inputs. This architecture was designed and illustrated by the author using Whimsical.'
+order=276 | type=ElementType.HEADING | text='CHAPTER 4'
+order=277 | type=ElementType.HEADING | text='USER INTERFACE'
+order=298 | type=ElementType.PARAGRAPH | text='USER INTERFACE(GUI)'
+order=301 | type=ElementType.PARAGRAPH | text='Figure 4.1. TruthLens Landing Page (Home)'
+order=302 | type=ElementType.PARAGRAPH | text='In Fig.4.1, this is the main landing page of the TruthLens web application, presenting the core value proposition: AI-powered deepfake detection for images and videos. The page outlines a simple three-step workflow — Upload, Analyze, and Get Result — making the tool accessible to non-technical users. A prominent "Try Detector Now" button directs users to the detection interface.'
+order=304 | type=ElementType.PARAGRAPH | text='Figure 4.2. Deepfake Detector Upload Interface'
+order=305 | type=ElementType.PARAGRAPH | text='In Fig.4.2, this screen shows the file upload interface of the Deepfake Detector module, featuring a drag-and-drop zone for media submission. Users can upload image formats (JPG, PNG) as well as video formats (MP4, AVI, MOV) for authenticity analysis. The clean, minimal UI ensures a straightforward user experience before the analysis begins.'
+order=307 | type=ElementType.PARAGRAPH | text='Figure 4.3. Deepfake Detected (Image): fake_1018.jpg'
+order=308 | type=ElementType.PARAGRAPH | text='In Fig.4.3, the TruthLens Deepfake Detector analyzed the image file fake_1018.jpg and flagged it as a deepfake with a confidence score of 78%. The result card displays a red warning icon and the message "This media shows signs of artificial manipulation." This demonstrates the system\'s ability to identify AI-generated or manipulated facial images with moderate-to-high confidence.'
+order=310 | type=ElementType.PARAGRAPH | text='Figure 4.4. Authentic Image Verified: real_10.jpg'
+order=311 | type=ElementType.PARAGRAPH | text='In Fig.4.4, the detector successfully classified real_10.jpg as an authentic image with a confidence score of 73.2%. A green checkmark icon and the label "Authentic" confirm that the media appears to be genuine. This result validates the model\'s capability to distinguish real human faces from synthetically generated ones.'
+order=315 | type=ElementType.PARAGRAPH | text='Figure 4.5. Deepfake Detected (Video): 239_218.mp4'
+order=316 | type=ElementType.PARAGRAPH | text="In Fig.4.5, The system analyzed the video file 239_218.mp4 and returned a high-confidence deepfake verdict of 93.39%, indicating strong signs of artificial manipulation. The red-bordered result card and warning icon clearly communicate the risk level to the user. This highlights the model's effectiveness in detecting manipulated video content with near-certainty."
+order=318 | type=ElementType.PARAGRAPH | text='Figure 4.6. Authentic Video Verified: 841.mp4'
+order=319 | type=ElementType.PARAGRAPH | text="In Fig.4.6, the video file 841.mp4 was classified as authentic by the detector with a high confidence score of 94.14%, represented by a green progress bar and checkmark. The result confirms that the media contains no detectable signs of synthetic manipulation. This outcome demonstrates the system's precision in correctly verifying genuine video content."
+order=331 | type=ElementType.HEADING | text='CHAPTER 5'
+order=332 | type=ElementType.HEADING | text='RESULTS'
+order=333 | type=ElementType.HEADING | text='RESULTS'
+order=335 | type=ElementType.HEADING | text='5.1 Experimental Results'
+order=338 | type=ElementType.HEADING | text='Figure 5.1 – Training Curves of Baseline CNN Model (Loss, Accuracy, AUC-ROC, F1 Score over 40 Epochs)'
+order=340 | type=ElementType.HEADING | text='Figure 5.1 presents the training curves of the initial baseline CNN model trained over 40 epochs. The loss curves show minimal convergence, with validation loss remaining near 0.69 throughout training. The accuracy graph reveals that both train and validation accuracy stagnate around 50–55%, indicating the model is barely above random chance. AUC-ROC and F1 scores exhibit high variance and instability, confirming that the basic CNN architecture lacks the capacity to reliably distinguish real from fake images. These results directly motivated the architectural improvements — the addition of BiLSTM and Attention layers — which form the basis of our enhanced proposed system.'
+order=342 | type=ElementType.PARAGRAPH | text='Figure 5.2 - Confusion Matrix and ROC Curve'
+order=343 | type=ElementType.PARAGRAPH | text='The Fig.5.2. shows the confusion matrix where the model correctly predicts most real samples (91) but misclassifies a large number of fake samples as real (87).It detects only 13 fake instances correctly, showing poor fake detection.This indicates the model is heavily biased toward predicting real content. And on the right side, The ROC curve has an AUC of 0.55, which is close to random performance (0.5). This means the model has weak ability to distinguish between real and fake classes. Overall, the classification performance is not reliable and needs improvement.'
+order=346 | type=ElementType.PARAGRAPH | text='Figure 5.3 - Classification Report'
+order=347 | type=ElementType.PARAGRAPH | text='The Fig.5.3 shows the performance of the deepfake detection model for Real and Fake classes. The model performs well in identifying real instances with high recall (0.91) but struggles to detect fake ones, with a very low recall (0.13). The overall accuracy is 52%, indicating limited effectiveness. This suggests the model is biased toward predicting real content and needs improvement in detecting fake data.'
+order=354 | type=ElementType.HEADING | text='CHAPTER 6'
+order=355 | type=ElementType.HEADING | text='CONCLUSION'
+order=356 | type=ElementType.HEADING | text='CONCLUSION'
+order=357 | type=ElementType.PARAGRAPH | text='We successfully developed a Deepfake Detector, a web application designed to enhance digital security by analyzing images and detecting manipulated or AI-generated content. The application allows users to upload images for verification, enabling the system to identify visual inconsistencies and provide a confidence score indicating the likelihood of forgery. By integrating deep learning and computer vision, this system offers users a simple and reliable way to assess the authenticity of digital media. It helps individuals and organizations make informed decisions before trusting or sharing online content, thereby reducing the spread of misinformation and improving online safety. There are several techniques involved in developing such an application, including image preprocessing, feature extraction using Convolutional Neural Networks (CNNs), and classification based on trained datasets like FaceForensics++. Each component is crucial in delivering accurate detection results, and the combination of these techniques creates a highly functional and user-friendly tool for identifying deepfake.'
+order=358 | type=ElementType.HEADING | text='REFERENCES'
+order=359 | type=ElementType.PARAGRAPH | text='[1] K. Kapoor, S. P. Singh, G. Aggarwal, and M. Sharma, “Deepfake Detection Using CNN-Based Architecture,” IEEE Conference Publication, 2025.'
+order=360 | type=ElementType.PARAGRAPH | text='[2] L. Li, J. Bao, T. Zhang, H. Yang, D. Chen, F. Wen, and B. Guo, “Face X-Ray for More General Face Forgery Detection,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2020, pp. 5001–5010.'
+order=361 | type=ElementType.PARAGRAPH | text='[3] J. Frank, T. Eisenhofer, L. Schönherr, A. Fischer, D. Kolossa, and T. Holz, “Leveraging Frequency Analysis for Deep Fake Image Recognition,” in Proceedings of the 37th International Conference on Machine Learning (ICML), 2020, pp. 3247–3258.'
+order=362 | type=ElementType.PARAGRAPH | text='[4] Y. Qian, G. Yin, L. Sheng, Z. Chen, and J. Shao, “Thinking in Frequency: Face Forgery Detection by Mining Frequency-Aware Clues,” in Computer Vision – ECCV 2020, Lecture Notes in Computer Science, vol. 12357, Springer, Cham, 2020, pp. 86–103.'
+order=363 | type=ElementType.PARAGRAPH | text='[5] K. Patel et al., “An Improved Dense CNN Architecture for Deepfake Image Detection,” IEEE Access, vol. 11, pp. 22081–22094, 2023.'
+order=364 | type=ElementType.PARAGRAPH | text='[6] M. Al-Azrak et al., “Deepfake Detection Using Convolutional Vision Transformers and Convolutional Neural Networks,” Neural Computing and Applications, vol. 36, pp. 21259–21278, 2024.'
+order=365 | type=ElementType.PARAGRAPH | text='[7] S. Gupta et al., “CNN Based Deep Learning Model for Deepfake Detection,” IEEE Conference Publication, 2022.'
+order=366 | type=ElementType.PARAGRAPH | text='[8] A. Kumar et al., “Deepfake Video Detection System,” IEEE Conference Publication, 2023.'
+order=367 | type=ElementType.PARAGRAPH | text='[9] P. Sharma et al., “AI-Powered Deepfake Detection Using CNN Architectures,” IEEE Publication, 2024.'
+order=368 | type=ElementType.PARAGRAPH | text='[10] S. Das et al., “DeepGuardNet: A Novel CNN Architecture for DeepFake Image Detection,” Procedia Computer Science, vol. 252, pp. 1431–1440, 2025.'
+order=369 | type=ElementType.PARAGRAPH | text='[11] R. Singh et al., “DeepFake Detection Using Enhanced D-CNN Architecture,” ResearchGate, 2025.'
+order=370 | type=ElementType.PARAGRAPH | text='[12] M. Rahman et al., “Hybrid Deepfake Image Detection: Frequency Domain Features,” arXiv preprint, 2025.'
+order=371 | type=ElementType.HEADING | text='ACKNOWLEDGEMENT'
+order=373 | type=ElementType.PARAGRAPH | text='The implementation of the project “Deepfake Detector: A CNN-BiLSTM Attention-Based Web Application for Image and Video Forgery Detection” would not have been possible without the help and support of several individuals. We would like to express our sincere thanks to Dr. S.M. Khot, Principal of Fr. C. Rodrigues Institute of Technology, Vashi, for giving us the opportunity to work on this project and for providing us with the necessary facilities. We are also deeply grateful to the Head of the Information Technology Department, Prof. Shubhangi Vaikole, for her ongoing support and encouragement throughout the project.'
+order=374 | type=ElementType.PARAGRAPH | text='We would especially like to thank our guide, Dr. Mukta Nivelkar, for her continuous guidance, valuable suggestions, and pushing us to explore creative solutions during the course of this project. We also extend our heartfelt thanks to our project coordinator, Prof. Sharlene Reberio, for her advice and consistent guidance, helping us stay on track.'
+order=375 | type=ElementType.PARAGRAPH | text='Finally, we would like to thank our families and well-wishers for their constant support and encouragement, which motivated us to complete this project successfully.'
+order=379 | type=ElementType.PARAGRAPH | text='Yours sincerely.'
+order=387 | type=ElementType.PARAGRAPH | text='Abhishek Tajane (5023158)'
+order=393 | type=ElementType.PARAGRAPH | text='Agnel Charities'
+order=394 | type=ElementType.PARAGRAPH | text='Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai'
+order=395 | type=ElementType.PARAGRAPH | text='(An Autonomous Institute & Permanently Affiliated to University of Mumbai)'
+order=397 | type=ElementType.PARAGRAPH | text='Department of Information Technology/Computer Science Engineering'
+order=399 | type=ElementType.HEADING | text='APPENDIX–A: MAPPING TO SDGs, POs, and PSOs'
+order=400 | type=ElementType.PARAGRAPH | text='Department of Information Technology'
+order=402 | type=ElementType.PARAGRAPH | text='Mini Project Report Appendix'
+order=405 | type=ElementType.TABLE | text='Semester &Academic\nYear: | Sem VI SH2026\nGroup Details: | TY4/07\nAarya Katikar (5023121)\nAbhishek Tajane (5023158)\nAngella Benjamin (5023104)\nVaishnuvi Shettar (5023154)\nTitle: | Deepfake\tDetector:\tAn\tAI-Based\tImage and Videos Forgery Detection Web Application\nKey Domain/Technology: | AI&ML\nCategory-I | Internal\nCategory-II | Application\nSDG | SDG\t16\t–\tPeace,\tJustice\tand\tStrong Institutions\nSDG 12 – Responsible Consumption and Production\nSDG 9 - Industry, Innovation and Infrastructure\n*Remarks | '
+order=407 | type=ElementType.PARAGRAPH | text='Note:\tThe\tguide\tshould\twrite\tremarks\tbased\ton\tthe\tobservation\tof objective/achievement/outcome of the project.'
+order=412 | type=ElementType.PARAGRAPH | text='Name and Signature of the Guide'
+order=413 | type=ElementType.PARAGRAPH | text='Agnel Charities'
+order=414 | type=ElementType.PARAGRAPH | text='Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai'
+order=415 | type=ElementType.PARAGRAPH | text='(An Autonomous Institute & Permanently Affiliated to University of Mumbai)'
+order=417 | type=ElementType.PARAGRAPH | text='Department of Information Technology/Computer Science Engineering'
+order=419 | type=ElementType.HEADING | text='APPENDIX–B: SOFTWARE REQUIREMENT SPECIFICATION (SRS)'
+order=421 | type=ElementType.PARAGRAPH | text='Project Title: Deepfake Detector: An AI-Based Image and Videos Forgery Detection Web Application'
+order=422 | type=ElementType.PARAGRAPH | text='Semester: VI\tVersion: 0.3 – Half-Year Submission'
+order=423 | type=ElementType.PARAGRAPH | text='Date: 2026-04-26'
+order=424 | type=ElementType.PARAGRAPH | text='Team Members & Roll Numbers:'
+order=425 | type=ElementType.PARAGRAPH | text='Aarya Katikar (5023121)'
+order=426 | type=ElementType.PARAGRAPH | text='Abhishek Tajane (5023158)'
+order=427 | type=ElementType.PARAGRAPH | text='Angella Benjamin (5023104)'
+order=428 | type=ElementType.PARAGRAPH | text='Vaishnuvi Shettar (5023154)'
+order=429 | type=ElementType.PARAGRAPH | text='Guide / Mentor: Dr. Mukta Nivelkar'
+order=431 | type=ElementType.LIST | text='Introduction'
+order=432 | type=ElementType.LIST | text='Purpose'
+order=433 | type=ElementType.PARAGRAPH | text='The purpose of this document is to define the requirements for an AI-driven web platform designed to detect manipulated or AI-generated (deepfake) images. The system aims to analyze uploaded visual content and'
+order=434 | type=ElementType.PARAGRAPH | text='determine its authenticity by identifying inconsistencies using deep learning and computer vision.'
+order=435 | type=ElementType.PARAGRAPH | text='It provides users with a confidence score indicating the likelihood that an image is fake. Target users include social media analysts, journalists, cybersecurity professionals, and general users concerned with online misinformation.'
+order=437 | type=ElementType.LIST | text='Scope'
+order=438 | type=ElementType.PARAGRAPH | text='The Minimum Viable Product (MVP) focuses on the detection and classification of manipulated or synthetic images.'
+order=439 | type=ElementType.PARAGRAPH | text='Key features include:'
+order=440 | type=ElementType.LIST | text='Web-based upload interface for images and videos.'
+order=441 | type=ElementType.LIST | text='Image preprocessing and feature extraction pipeline.'
+order=442 | type=ElementType.LIST | text='Deep learning–based classification using CNN+BiLSTMmodels.'
+order=443 | type=ElementType.LIST | text='Confidence score display for authenticity verification.'
+order=444 | type=ElementType.LIST | text='Visualization of detected anomalies.'
+order=445 | type=ElementType.LIST | text='Secure result storage for auditing and history tracking.'
+order=447 | type=ElementType.LIST | text='References'
+order=448 | type=ElementType.LIST | text='Project Report on “Deepfake\tDetector:\tAn\tAI-Based\tImage and Videos Forgery Detection Web Application” (core documentation).'
+order=449 | type=ElementType.LIST | text='Dataset: FaceForensics++, DeepFakeDetection, and related benchmark datasets.'
+order=450 | type=ElementType.LIST | text='IEEE Transactions on Information Forensics and Security (related research).'
+order=461 | type=ElementType.LIST | text='Preliminary Description'
+order=463 | type=ElementType.LIST | text='Proposed System Architecture'
+order=464 | type=ElementType.PARAGRAPH | text='The proposed system uses a Web–Cloud architecture.'
+order=465 | type=ElementType.LIST | text='Frontend (Web Interface): Allows users to upload images and videos for analysis.'
+order=466 | type=ElementType.LIST | text='Backend (Cloud): Hosts the trained CNN model, preprocessing scripts, and the result database.'
+order=467 | type=ElementType.LIST | text='Model Layer: Performs classification and outputs a confidence score based on extracted features.'
+order=469 | type=ElementType.LIST | text='High-Level Features'
+order=470 | type=ElementType.LIST | text='Image/Video Authenticity Detection: Classify uploaded images/videos as “Real” or “Fake.”'
+order=471 | type=ElementType.LIST | text='Confidence Scoring: Quantify the likelihood of manipulation based on the model’s prediction probability.'
+order=473 | type=ElementType.LIST | text='User Types'
+order=475 | type=ElementType.TABLE | text='User Type | Primary Responsibilities\nGeneral User | Upload image/video, view authenticity result and confidence\nscore.\nResearcher / Analyst | Validate model predictions, review dataset performance.\nSystem Admin | Manage model updates, user activity logs, and system\nhealth.'
+order=477 | type=ElementType.LIST | text='Operating Environment'
+order=479 | type=ElementType.TABLE | text='Components | Technology / Platform\nInterface | React / HTML / CSS / JS\nBackend | Python (Flask / Django), RESTful APIs\nML\nFramework | TensorFlow / PyTorch (CNN-based models)\nDatabase | PostgreSQL / Firebase for result and user logs\nCloud Storage | AWS S3 / Google Cloud Storage for image\nuploads'
+order=481 | type=ElementType.LIST | text='Draft Requirements Functional Requirements (Draft)'
+order=482 | type=ElementType.TABLE | text='Requirement ID | Description | Priority\n(M/S/C)\nFR-01 | The system shall allow users to upload images/videos up to 10MB. | M\nFR-02 | The system shall preprocess uploaded image/video (resize, normalize). | M\nFR-03 | The system shall classify image/video as “Real” or “Fake” using CNN. | M\nFR-04 | The system shall output a confidence score indicating the probability of forgery. | M'
+order=484 | type=ElementType.PARAGRAPH | text='Agnel'
+order=485 | type=ElementType.PARAGRAPH | text='Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai'
+order=486 | type=ElementType.PARAGRAPH | text='(An Autonomous Institute & Permanently Affiliated to University of Mumbai)'
+order=488 | type=ElementType.PARAGRAPH | text='Department of Information Technology/Computer Science Engineering'
+order=490 | type=ElementType.LIST | text='Non-Functional Requirements (Draft)'
+order=491 | type=ElementType.TABLE | text='Requirem\nEnt ID | Description | Description\nNFR-01 | Latency: The total detection time shall not exceed 6 seconds per image. | '
+order=493 | type=ElementType.TABLE | text='NFR-02 | Accuracy: The model shall maintain ≥ 90% classification accuracy.\nNFR-03 | Security: All uploaded images/videos shall be deleted after analysis unless the \nuser opts to save results.\nNFR-04 | Scalability: The backend shall support up to 100 concurrent users.'
+order=495 | type=ElementType.LIST | text='Initial Diagrams'
+order=496 | type=ElementType.LIST | text='System Block Diagram: User → TruthLens Web Interface (React) → Flask API Backend → File Type Router → Media Preprocessing (MediaPipe/OpenCV) → AI Inference Engine (Custom CNN or CNN+LSTM) → Confidence Score Generation → JSON Result Display.'
+order=497 | type=ElementType.LIST | text='Flow Chart: Media Upload (Image or Video) → Format Validation & Routing → Preprocessing (Extract frames for Video / Resize for Image) → Face Localization (MediaPipe) → Model Prediction (Custom CNN / Temporal LSTM) → Softmax Confidence Scoring → Verdict Display (Authentic vs. Fake) → Privacy-Preserving Media Deletion.'
+order=499 | type=ElementType.LIST | text='Version History'
+order=501 | type=ElementType.TABLE | text='Date | Description | Author\n2025-08-13 | Second half-year SRS draft for Deepfake Detection System | Aarya Katikar\nAngella Benjamin Abhishek Tajane Vaishnuvi Shettar'
+order=513 | type=ElementType.PARAGRAPH | text='Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai'
+order=514 | type=ElementType.PARAGRAPH | text='(An Autonomous Institute & Permanently Affiliated to University of Mumbai)'
+order=516 | type=ElementType.PARAGRAPH | text='Department of Information Technology/Computer Science Engineering'
+order=518 | type=ElementType.PARAGRAPH | text='APPENDIX-C: PROJECT COMPETITION PARTICIPATION CERTIFICATES'
+order=536 | type=ElementType.PARAGRAPH | text='Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai'
+order=537 | type=ElementType.PARAGRAPH | text='(An Autonomous Institute & Permanently Affiliated to University of Mumbai)'
+order=539 | type=ElementType.PARAGRAPH | text='Department of Information Technology/Computer Science Engineering'
+order=541 | type=ElementType.PARAGRAPH | text='APPENDIX-D: PLAGIARISM'
+
+
+================================================================================
+REAL GEMINI SEMANTIC CHUNKING RESULT
+================================================================================
+
+Number of candidates: 26
+
+--------------------------------------------------------------------------------
+CANDIDATE 0
+--------------------------------------------------------------------------------
+
+TEXT:
+
+A Mini Project Report on
+
+“Deepfake Detector: A CNN-BiLSTM Attention-Based Web Application for Image and Video Forgery Detection”
+
+Submitted in partial fulfillment of the requirement for Degree in Bachelor of Technology (Information Technology)
+
+By
+
+Abhishek Tajane (5023158)
+
+Guided by:
+
+Dr. Mukta Nivelkar
+
+Department of Information Technology
+
+Fr. C. Rodrigues Institute of Technology, Vashi.
+
+(An Autonomous Institute & Permanently Affiliated to University of Mumbai)
+
+Academic Year: 2025-26
+
+ELEMENTS:
+  order_index=0 | type=ElementType.PARAGRAPH | text='A Mini Project Report on'
+  order_index=2 | type=ElementType.HEADING | text='“Deepfake Detector: A CNN-BiLSTM Attention-Based Web Application for Image and Video Forgery Detection”'
+  order_index=5 | type=ElementType.PARAGRAPH | text='Submitted in partial fulfillment of the requirement for Degree in Bachelor of Technology (Information Technology)'
+  order_index=7 | type=ElementType.PARAGRAPH | text='By'
+  order_index=10 | type=ElementType.PARAGRAPH | text='Abhishek Tajane (5023158)'
+  order_index=13 | type=ElementType.PARAGRAPH | text='Guided by:'
+  order_index=14 | type=ElementType.PARAGRAPH | text='Dr. Mukta Nivelkar'
+  order_index=19 | type=ElementType.HEADING | text='Department of Information Technology'
+  order_index=20 | type=ElementType.HEADING | text='Fr. C. Rodrigues Institute of Technology, Vashi.'
+  order_index=21 | type=ElementType.PARAGRAPH | text='(An Autonomous Institute & Permanently Affiliated to University of Mumbai)'
+  order_index=26 | type=ElementType.PARAGRAPH | text='Academic Year: 2025-26'
+
+--------------------------------------------------------------------------------
+CANDIDATE 1
+--------------------------------------------------------------------------------
+
+TEXT:
+
+CERTIFICATE
+
+This is to certify that the Mini Project entitled
+
+“Deepfake Detector: A CNN-BiLSTM Attention-Based Web Application for Image and Video Forgery Detection”
+
+Submitted By
+
+Abhishek Tajane (5023158)
+
+In partial fulfillment of degree of B.Tech. in Information Technology for term work of the Semester VI Mini Project – 2 B is approved.
+
+Internal Examiner	      Internal Guide
+
+Head of the Department	          Principal
+
+Date: -	College Seal
+
+ELEMENTS:
+  order_index=27 | type=ElementType.HEADING | text='CERTIFICATE'
+  order_index=28 | type=ElementType.PARAGRAPH | text='This is to certify that the Mini Project entitled'
+  order_index=29 | type=ElementType.PARAGRAPH | text='“Deepfake Detector: A CNN-BiLSTM Attention-Based Web Application for Image and Video Forgery Detection”'
+  order_index=31 | type=ElementType.PARAGRAPH | text='Submitted By'
+  order_index=35 | type=ElementType.PARAGRAPH | text='Abhishek Tajane (5023158)'
+  order_index=40 | type=ElementType.PARAGRAPH | text='In partial fulfillment of degree of B.Tech. in Information Technology for term work of the Semester VI Mini Project – 2 B is approved.'
+  order_index=48 | type=ElementType.PARAGRAPH | text='Internal Examiner\t      Internal Guide'
+  order_index=54 | type=ElementType.PARAGRAPH | text='Head of the Department\t          Principal'
+  order_index=62 | type=ElementType.PARAGRAPH | text='Date: -\tCollege Seal'
+
+--------------------------------------------------------------------------------
+CANDIDATE 2
+--------------------------------------------------------------------------------
+
+TEXT:
+
+Declaration
+
+We declare that this written submission represents our ideas in our own words and where others' ideas or words have been included, we have adequately cited and referenced the original sources. We also declare that we have adhered to all principles of academic honesty and integrity and have not misrepresented or fabricated or falsified any idea/data/fact/source in my submission. We understand that any violation of the above will be cause for disciplinary action by the Institute and can also evoke penal action from the sources which have thus not been properly cited or from whom proper permission has not been taken when needed.
+
+Abhishek Tajane (5023158)
+
+Date:
+
+ELEMENTS:
+  order_index=63 | type=ElementType.HEADING | text='Declaration'
+  order_index=65 | type=ElementType.PARAGRAPH | text="We declare that this written submission represents our ideas in our own words and where others' ideas or words have been included, we have adequately cited and referenced the original sources. We also declare that we have adhered to all principles of academic honesty and integrity and have not misrepresented or fabricated or falsified any idea/data/fact/source in my submission. We understand that any violation of the above will be cause for disciplinary action by the Institute and can also evoke penal action from the sources which have thus not been properly cited or from whom proper permission has not been taken when needed."
+  order_index=73 | type=ElementType.PARAGRAPH | text='Abhishek Tajane (5023158)'
+  order_index=86 | type=ElementType.PARAGRAPH | text='Date:'
+
+--------------------------------------------------------------------------------
+CANDIDATE 3
+--------------------------------------------------------------------------------
+
+TEXT:
+
+Abstract
+
+In today’s digital era, misinformation and manipulated media have become major challenges across social platforms. With the rise of artificial intelligence, deepfake images are increasingly being used to spread false information, damage reputations, and mislead audiences. To address this issue, we are developing a simple and effective solution — a Deepfake Detector that helps people verify the authenticity of digital images quickly and accurately.
+
+The main goal of Deepfake Detector is to create a web application that can analyze uploaded images using artificial intelligence. It employs a Convolutional Neural Network (CNN) model trained on real and fake image datasets to detect manipulation or forgery. The system generates a confidence score indicating whether an image is likely to be genuine or deepfake, empowering users to verify visual content before trusting or sharing it online.
+
+The application is designed to be user-friendly and accessible from any device. With real-time image analysis and clear results, it simplifies the process of verifying authenticity for individuals, journalists, and organizations alike. Overall, Deepfake Detector aims to promote digital safety and awareness by helping users distinguish between real and AI-generated media.
+
+ELEMENTS:
+  order_index=87 | type=ElementType.HEADING | text='Abstract'
+  order_index=89 | type=ElementType.PARAGRAPH | text='In today’s digital era, misinformation and manipulated media have become major challenges across social platforms. With the rise of artificial intelligence, deepfake images are increasingly being used to spread false information, damage reputations, and mislead audiences. To address this issue, we are developing a simple and effective solution — a Deepfake Detector that helps people verify the authenticity of digital images quickly and accurately.'
+  order_index=91 | type=ElementType.PARAGRAPH | text='The main goal of Deepfake Detector is to create a web application that can analyze uploaded images using artificial intelligence. It employs a Convolutional Neural Network (CNN) model trained on real and fake image datasets to detect manipulation or forgery. The system generates a confidence score indicating whether an image is likely to be genuine or deepfake, empowering users to verify visual content before trusting or sharing it online.'
+  order_index=93 | type=ElementType.PARAGRAPH | text='The application is designed to be user-friendly and accessible from any device. With real-time image analysis and clear results, it simplifies the process of verifying authenticity for individuals, journalists, and organizations alike. Overall, Deepfake Detector aims to promote digital safety and awareness by helping users distinguish between real and AI-generated media.'
+
+--------------------------------------------------------------------------------
+CANDIDATE 4
+--------------------------------------------------------------------------------
+
+TEXT:
+
+INDEX
+
+ELEMENTS:
+  order_index=94 | type=ElementType.PARAGRAPH | text='INDEX'
+  order_index=97 | type=ElementType.TABLE | text='Sr. No. | Topic | Page No.\n1 | Introduction\nBackground\nMotivation\nProblem Definition\nScope \nIssues / Limitation | 1\n2\n2\n5\n5\n5\n2 | Literature Survey and Analysis\nReferred paper\nLiterature Survey Comparison\nExisting System\nRequirement Analysis | 7\n8\n10\n14\n14\n3 | Architectural Design\nArchitectural Diagram / block diagram\nHardware & Software Requirement\nFlow chart | 16\n17\n18\n19\n4 | User Interface | 20\n5 | Results | 24\n6 | Conclusion | 26\n | References | 28\n | Acknowledgements | 29\n | Appendix | 30'
+
+--------------------------------------------------------------------------------
+CANDIDATE 5
+--------------------------------------------------------------------------------
+
+TEXT:
+
+LIST OF FIGURES
+
+ELEMENTS:
+  order_index=99 | type=ElementType.PARAGRAPH | text='LIST OF FIGURES'
+  order_index=101 | type=ElementType.TABLE | text='Fig. No. | Name of the Figure | Page No.\n1.1 | Visual representation of Deepfake Manipulation | 3\n1.2 | Growth of Deepfake and Identity Fraud cases | 4\n2.2 | EDA: Pixel Statistics (Real vs. Fake) | 15\n3.1 | Architecture Diagram | 17\n3.3 | Flow Chart | 18\n4.1 | TruthLens Landing Page (Home) | 20\n4.2 | Deepfake Detector Upload Interface | 20\n4.3 | Deepfake Detected (Image) | 21\n4.4 | Authentic Image Verified | 21\n4.5 | Deepfake Detected (Video) | 22\n4.6 | Authentic Video Verified | 22\n5.1 | Training Curves of Baseline CNN Model | 24\n5.2 | Confusion Matrix and ROC Curve | 25\n5.3 | Classification Report | 25'
+
+--------------------------------------------------------------------------------
+CANDIDATE 6
+--------------------------------------------------------------------------------
+
+TEXT:
+
+LIST OF TABLES
+
+ELEMENTS:
+  order_index=103 | type=ElementType.PARAGRAPH | text='LIST OF TABLES'
+  order_index=105 | type=ElementType.TABLE | text='Table No. | Name of the Table | Page No.\n2.1 | Literature Survey | 10'
+
+--------------------------------------------------------------------------------
+CANDIDATE 7
+--------------------------------------------------------------------------------
+
+TEXT:
+
+CHAPTER 1
+
+INTRODUCTION
+
+INTRODUCTION
+
+Background
+
+With the rapid advancement of artificial intelligence, deepfake technology has made it possible to generate highly realistic but fake videos and images. These manipulations can easily deceive the human eye and are often misused for spreading misinformation, identity theft, and defamation.
+
+The Deepfake Detection System is an AI-based solution designed to detect and analyze such manipulated media using deep learning and computer vision. The system leverages Convolutional Neural Networks (CNNs) trained on datasets such as FaceForensics++ to identify subtle inconsistencies and rendering artifacts that differentiate fake content from real ones.
+
+It also includes a user-friendly web interface built with React.js and a Python (Flask/FastAPI) backend, allowing users to upload media for verification and receive instant results.
+
+Motivation
+
+Deepfakes pose a major threat to digital trust, enabling fake news, cyber fraud, and identity manipulation. With social media platforms becoming the main source of information, verifying content authenticity has become critical. As illustrated below in Figure 1.1, the visual difference between real and manipulated videos can be nearly indistinguishable, emphasizing the urgent need for automated detection systems.
+
+Our motivation is to restore trust in digital content by developing an intelligent system capable of detecting deepfakes quickly and accurately. The project aims to:
+
+Ensure Safety: Protect individuals and organizations from misinformation and reputational harm.
+
+Promote Digital Trust: Empower users to verify online content before sharing or believing it.
+
+Support Sustainable Online Practices: Encourage responsible use of AI and media through detection tools.
+
+By combining deep learning techniques with a real-time detection platform, this project contributes to a safer digital ecosystem and aligns with UN SDG 16 (Peace, Justice, and Strong Institutions) and SDG 12 (Responsible Consumption and Production).
+
+Figure 1.1 – Visual Representation of Deepfake Manipulation
+
+Key Motivations
+
+Digital Safety: Deepfakes can be used for misinformation, blackmail, and identity theft. Detecting them early helps protect individuals and organizations from serious harm.
+
+Restoring Trust: Online platforms are flooded with manipulated media. This project promotes transparency and helps rebuild trust in digital content.
+
+Technological Awareness: Educating people about AI-generated content and giving them tools to verify authenticity increases awareness of media manipulation.
+
+Accessibility: By providing a simple web-based interface, anyone can upload and verify videos or images — making AI detection tools available to all.
+
+Figure 1.2 Growth of Deepfake and Identity Fraud Cases from 2022 to 2024
+
+As shown in the chart Figure 1.2 , the prevalence of deepfakes and related frauds has sharply increased between 2022 and 2024 — with audio and video deepfakes rising from 37% and 29% to 49%, respectively. This alarming trend highlights the urgent need for reliable detection systems. Digital safety is the foremost motivation, as deepfakes are increasingly used for misinformation, blackmail, and identity theft. Detecting them early helps protect individuals and organizations from significant harm. Equally important is restoring trust in online media; with manipulated content spreading rapidly, this project promotes transparency and ensures that digital information remains credible.
+
+Another major goal is technological awareness — empowering users to understand and identify AI-generated media. The system’s accessible web-based interface allows anyone, not just experts, to upload and verify images or videos easily. Finally, this project reflects strong social responsibility, supporting global Sustainable Development Goals such as SDG 16 (Peace, Justice, and Strong Institutions) by combating misinformation, and SDG 12 (Responsible Consumption and Production) by encouraging ethical use of technology.
+
+ELEMENTS:
+  order_index=115 | type=ElementType.HEADING | text='CHAPTER 1'
+  order_index=117 | type=ElementType.HEADING | text='INTRODUCTION'
+  order_index=118 | type=ElementType.HEADING | text='INTRODUCTION'
+  order_index=120 | type=ElementType.LIST | text='Background'
+  order_index=122 | type=ElementType.PARAGRAPH | text='With the rapid advancement of artificial intelligence, deepfake technology has made it possible to generate highly realistic but fake videos and images. These manipulations can easily deceive the human eye and are often misused for spreading misinformation, identity theft, and defamation.'
+  order_index=124 | type=ElementType.PARAGRAPH | text='The Deepfake Detection System is an AI-based solution designed to detect and analyze such manipulated media using deep learning and computer vision. The system leverages Convolutional Neural Networks (CNNs) trained on datasets such as FaceForensics++ to identify subtle inconsistencies and rendering artifacts that differentiate fake content from real ones.'
+  order_index=126 | type=ElementType.PARAGRAPH | text='It also includes a user-friendly web interface built with React.js and a Python (Flask/FastAPI) backend, allowing users to upload media for verification and receive instant results.'
+  order_index=128 | type=ElementType.LIST | text='Motivation'
+  order_index=130 | type=ElementType.PARAGRAPH | text='Deepfakes pose a major threat to digital trust, enabling fake news, cyber fraud, and identity manipulation. With social media platforms becoming the main source of information, verifying content authenticity has become critical. As illustrated below in Figure 1.1, the visual difference between real and manipulated videos can be nearly indistinguishable, emphasizing the urgent need for automated detection systems.'
+  order_index=132 | type=ElementType.PARAGRAPH | text='Our motivation is to restore trust in digital content by developing an intelligent system capable of detecting deepfakes quickly and accurately. The project aims to:'
+  order_index=133 | type=ElementType.LIST | text='Ensure Safety: Protect individuals and organizations from misinformation and reputational harm.'
+  order_index=134 | type=ElementType.LIST | text='Promote Digital Trust: Empower users to verify online content before sharing or believing it.'
+  order_index=135 | type=ElementType.LIST | text='Support Sustainable Online Practices: Encourage responsible use of AI and media through detection tools.'
+  order_index=136 | type=ElementType.LIST | text='By combining deep learning techniques with a real-time detection platform, this project contributes to a safer digital ecosystem and aligns with UN SDG 16 (Peace, Justice, and Strong Institutions) and SDG 12 (Responsible Consumption and Production).'
+  order_index=139 | type=ElementType.PARAGRAPH | text='Figure 1.1 – Visual Representation of Deepfake Manipulation'
+  order_index=142 | type=ElementType.LIST | text='Key Motivations'
+  order_index=144 | type=ElementType.LIST | text='Digital Safety: Deepfakes can be used for misinformation, blackmail, and identity theft. Detecting them early helps protect individuals and organizations from serious harm.'
+  order_index=145 | type=ElementType.LIST | text='Restoring Trust: Online platforms are flooded with manipulated media. This project promotes transparency and helps rebuild trust in digital content.'
+  order_index=146 | type=ElementType.LIST | text='Technological Awareness: Educating people about AI-generated content and giving them tools to verify authenticity increases awareness of media manipulation.'
+  order_index=147 | type=ElementType.LIST | text='Accessibility: By providing a simple web-based interface, anyone can upload and verify videos or images — making AI detection tools available to all.'
+  order_index=151 | type=ElementType.PARAGRAPH | text='Figure 1.2 Growth of Deepfake and Identity Fraud Cases from 2022 to 2024'
+  order_index=153 | type=ElementType.PARAGRAPH | text='As shown in the chart Figure 1.2 , the prevalence of deepfakes and related frauds has sharply increased between 2022 and 2024 — with audio and video deepfakes rising from 37% and 29% to 49%, respectively. This alarming trend highlights the urgent need for reliable detection systems. Digital safety is the foremost motivation, as deepfakes are increasingly used for misinformation, blackmail, and identity theft. Detecting them early helps protect individuals and organizations from significant harm. Equally important is restoring trust in online media; with manipulated content spreading rapidly, this project promotes transparency and ensures that digital information remains credible.'
+  order_index=154 | type=ElementType.PARAGRAPH | text='Another major goal is technological awareness — empowering users to understand and identify AI-generated media. The system’s accessible web-based interface allows anyone, not just experts, to upload and verify images or videos easily. Finally, this project reflects strong social responsibility, supporting global Sustainable Development Goals such as SDG 16 (Peace, Justice, and Strong Institutions) by combating misinformation, and SDG 12 (Responsible Consumption and Production) by encouraging ethical use of technology.'
+
+--------------------------------------------------------------------------------
+CANDIDATE 8
+--------------------------------------------------------------------------------
+
+TEXT:
+
+1.3 Problem Definition
+
+With the rise of artificial intelligence, deepfake technology has made it possible to create highly realistic fake videos and images that are difficult for the human eye to distinguish from real ones. These deepfakes can be misused for spreading misinformation, defamation, financial scams, identity theft, and other cybercrimes. Detecting such manipulations manually is nearly impossible, creating a serious threat to digital trust and online authenticity.
+
+There is a need for an AI-based solution that can automatically identify deepfake content and provide users with an accurate and reliable verification system.
+
+ELEMENTS:
+  order_index=155 | type=ElementType.HEADING | text='1.3 Problem Definition'
+  order_index=157 | type=ElementType.PARAGRAPH | text='With the rise of artificial intelligence, deepfake technology has made it possible to create highly realistic fake videos and images that are difficult for the human eye to distinguish from real ones. These deepfakes can be misused for spreading misinformation, defamation, financial scams, identity theft, and other cybercrimes. Detecting such manipulations manually is nearly impossible, creating a serious threat to digital trust and online authenticity.'
+  order_index=158 | type=ElementType.PARAGRAPH | text='There is a need for an AI-based solution that can automatically identify deepfake content and provide users with an accurate and reliable verification system.'
+
+--------------------------------------------------------------------------------
+CANDIDATE 9
+--------------------------------------------------------------------------------
+
+TEXT:
+
+1.4 Scope
+
+The main objective of this project is to build an AI-powered application that detects whether an image or video is real or artificially manipulated. The specific objectives are as follows:
+
+Deepfake Detection System:
+ To develop an intelligent system capable of identifying whether an image or video is authentic or manipulated using advanced AI techniques.
+
+User Input Support:
+ To allow users to upload or capture images and videos through the application for verification.
+
+AI-Based Analysis:
+ To utilize deep learning models such as Convolutional Neural Networks (CNN) and transfer learning techniques to detect facial and visual manipulations.
+
+Real-Time Prediction:
+ To provide instant predictions along with a confidence score (%) indicating the likelihood of content being a deepfake.
+
+Multi-Format Support:
+ To support both image-level and video-level detection for enhanced flexibility and usability.
+
+Misinformation Reduction:
+ To minimize the risk of misinformation, fraud, and misuse by enabling users to verify digital content authenticity.
+
+Digital Safety Enhancement:
+ To improve public trust and digital safety by offering a simple, reliable, and accessible verification tool.
+
+Backend Processing:
+ To implement cloud-based backend APIs (such as Flask or FastAPI) for efficient handling of computationally intensive AI tasks.
+
+Data Logging (Optional):
+ To store user activity logs and analysis history for future reference and continuous model improvement.
+
+Scalability:
+ To ensure the system can scale effectively to support more users, larger datasets, and evolving deepfake detection techniques over time.
+
+ELEMENTS:
+  order_index=160 | type=ElementType.HEADING | text='1.4 Scope'
+  order_index=161 | type=ElementType.PARAGRAPH | text='The main objective of this project is to build an AI-powered application that detects whether an image or video is real or artificially manipulated. The specific objectives are as follows:'
+  order_index=162 | type=ElementType.LIST | text='Deepfake Detection System:\n To develop an intelligent system capable of identifying whether an image or video is authentic or manipulated using advanced AI techniques.'
+  order_index=163 | type=ElementType.LIST | text='User Input Support:\n To allow users to upload or capture images and videos through the application for verification.'
+  order_index=164 | type=ElementType.LIST | text='AI-Based Analysis:\n To utilize deep learning models such as Convolutional Neural Networks (CNN) and transfer learning techniques to detect facial and visual manipulations.'
+  order_index=165 | type=ElementType.LIST | text='Real-Time Prediction:\n To provide instant predictions along with a confidence score (%) indicating the likelihood of content being a deepfake.'
+  order_index=166 | type=ElementType.LIST | text='Multi-Format Support:\n To support both image-level and video-level detection for enhanced flexibility and usability.'
+  order_index=167 | type=ElementType.LIST | text='Misinformation Reduction:\n To minimize the risk of misinformation, fraud, and misuse by enabling users to verify digital content authenticity.'
+  order_index=168 | type=ElementType.LIST | text='Digital Safety Enhancement:\n To improve public trust and digital safety by offering a simple, reliable, and accessible verification tool.'
+  order_index=169 | type=ElementType.LIST | text='Backend Processing:\n To implement cloud-based backend APIs (such as Flask or FastAPI) for efficient handling of computationally intensive AI tasks.'
+  order_index=170 | type=ElementType.LIST | text='Data Logging (Optional):\n To store user activity logs and analysis history for future reference and continuous model improvement.'
+  order_index=171 | type=ElementType.LIST | text='Scalability:\n To ensure the system can scale effectively to support more users, larger datasets, and evolving deepfake detection techniques over time.'
+
+--------------------------------------------------------------------------------
+CANDIDATE 10
+--------------------------------------------------------------------------------
+
+TEXT:
+
+1.5 Issues / Limitations
+
+Despite the effectiveness of the proposed deepfake detection system, certain limitations exist:
+
+Sensitivity to Media Quality:
+ Detection accuracy may decrease when processing low-quality, highly compressed, or blurry images and videos.
+
+Advanced Manipulation Techniques:
+ Highly sophisticated or previously unseen deepfake techniques may not be accurately recognized by the model.
+
+Dataset Dependency:
+ The system relies heavily on large labeled datasets (e.g., FaceForensics++). Limited diversity in training data may affect the model’s ability to generalize.
+
+Need for Continuous Updates:
+ The model requires periodic retraining to adapt to newly emerging deepfake generation methods.
+
+Computational Requirements:
+ Real-time video detection can be computationally expensive, especially on low-end or resource-constrained devices.
+
+Probabilistic Predictions:
+ The model provides confidence scores rather than absolute certainty, which may lead to ambiguous interpretations in borderline cases.
+
+Scope Limitation:
+ The current system focuses primarily on face-based manipulations and may not effectively detect non-face or audio-based deepfakes in its initial version.
+
+ELEMENTS:
+  order_index=175 | type=ElementType.HEADING | text='1.5 Issues / Limitations'
+  order_index=176 | type=ElementType.PARAGRAPH | text='Despite the effectiveness of the proposed deepfake detection system, certain limitations exist:'
+  order_index=177 | type=ElementType.LIST | text='Sensitivity to Media Quality:\n Detection accuracy may decrease when processing low-quality, highly compressed, or blurry images and videos.'
+  order_index=178 | type=ElementType.LIST | text='Advanced Manipulation Techniques:\n Highly sophisticated or previously unseen deepfake techniques may not be accurately recognized by the model.'
+  order_index=179 | type=ElementType.LIST | text='Dataset Dependency:\n The system relies heavily on large labeled datasets (e.g., FaceForensics++). Limited diversity in training data may affect the model’s ability to generalize.'
+  order_index=180 | type=ElementType.LIST | text='Need for Continuous Updates:\n The model requires periodic retraining to adapt to newly emerging deepfake generation methods.'
+  order_index=181 | type=ElementType.LIST | text='Computational Requirements:\n Real-time video detection can be computationally expensive, especially on low-end or resource-constrained devices.'
+  order_index=182 | type=ElementType.LIST | text='Probabilistic Predictions:\n The model provides confidence scores rather than absolute certainty, which may lead to ambiguous interpretations in borderline cases.'
+  order_index=183 | type=ElementType.LIST | text='Scope Limitation:\n The current system focuses primarily on face-based manipulations and may not effectively detect non-face or audio-based deepfakes in its initial version.'
+
+--------------------------------------------------------------------------------
+CANDIDATE 11
+--------------------------------------------------------------------------------
+
+TEXT:
+
+CHAPTER 2 LITERATURE SURVEY
+
+LITERATURE SURVEY
+
+1. FaceForensics++ (2019) — Rössler et al. Built a large-scale benchmark dataset with manipulated facial images and tested multiple CNN architectures on it. Became the standard reference dataset for deepfake detection research.
+
+2. MesoNet (2018) — Afchar et al. Designed a compact, lightweight CNN (Meso-4 / MesoInception-4) that detects facial forgeries in real time. Trades off accuracy for speed and model size.
+
+3. FakeCatcher (2019/2020) — Ciftci et al. Detects deepfakes using biological signals — specifically blood flow patterns (rPPG) extracted from skin regions — rather than visual artifacts. Hard for generators to replicate.
+
+4. Face X-Ray (2020) — Li et al. Identifies blending boundary artifacts left during face swapping. Generalizes across unseen manipulation types but fails on fully synthesized (non-blended) fakes.
+
+5. Frequency Analysis for Deepfake Recognition (2020) — Frank et al. Exploits unique spectral artifacts in GAN-generated images. Works across multiple generators without retraining but may fail against diffusion-based fakes.
+
+6. Thinking in Frequency (ECCV 2020) — Qian et al. Adds frequency-aware layers to CNNs so the network jointly learns spatial and frequency cues. Improves generalization but increases compute cost.
+
+7. Exploiting Temporal Information (IEEE ICIP) — Guera & Delp Combines CNN (spatial features per frame) with LSTM (temporal inconsistency across frames). Simple and clean pipeline but uses older CNN backbones.
+
+8. Deepfake Video Detection Using RNNs (IEEE AVSS) — Sabir et al. CNN extracts frame-level features, LSTM classifies at video level. Effective for video-level detection but computationally heavy.
+
+9. CNN + LSTM for Video Forgery Detection — Zhou et al. Hybrid CNN-LSTM framework focusing on spatio-temporal forgery detection. Improves accuracy but increases memory usage and pipeline complexity.
+
+10. Deepfake Detection Using Spatiotemporal Features (IEEE Access) — Li et al. Jointly trains CNN and LSTM to capture both spatial and temporal artifacts. Robust detection but struggles to generalize across datasets.
+
+11. Convolutional Vision Transformer / CViT (2021) — Wodajo & Atnafu Combines CNN for local feature extraction with Vision Transformer for global attention. Achieves 91.5% accuracy and AUC of 0.91 on DFDC but limited cross-dataset generalization.
+
+12. Deepfake Detection Using CNN-Based Architecture (2025) — Kapoor et al. Presents a complete end-to-end CNN pipeline with detailed preprocessing, architecture design, and training strategy. Practical and systematic but needs continuous updates as generation techniques evolve.
+
+13. A Survey: Deepfake and Current Technologies (2024) — Banerjee et al. Surveys forensics, ML, multimodal, and blockchain-based detection approaches. Covers both technical and societal dimensions but real-time detection remains an open problem.
+
+14. DeepFakes and Beyond (2020) — Tolosana et al. Classifies face manipulations into 4 types (full synthesis, identity swap, attribute manipulation, expression swap) and reviews all major datasets and benchmarks. Strong foundational reference.
+
+15. Deepfake Generation and Detection: A Benchmark and Survey (2024) — Pei et al. Covers the full arc from GAN to diffusion-based generation and benchmarks detection methods across spatial, temporal, frequency, and hybrid domains. Most comprehensive and up-to-date survey.
+
+Table 2.1 Literature Survey
+
+ELEMENTS:
+  order_index=191 | type=ElementType.HEADING | text='CHAPTER 2 LITERATURE SURVEY'
+  order_index=192 | type=ElementType.HEADING | text='LITERATURE SURVEY'
+  order_index=193 | type=ElementType.PARAGRAPH | text='1. FaceForensics++ (2019) — Rössler et al. Built a large-scale benchmark dataset with manipulated facial images and tested multiple CNN architectures on it. Became the standard reference dataset for deepfake detection research.'
+  order_index=194 | type=ElementType.PARAGRAPH | text='2. MesoNet (2018) — Afchar et al. Designed a compact, lightweight CNN (Meso-4 / MesoInception-4) that detects facial forgeries in real time. Trades off accuracy for speed and model size.'
+  order_index=195 | type=ElementType.PARAGRAPH | text='3. FakeCatcher (2019/2020) — Ciftci et al. Detects deepfakes using biological signals — specifically blood flow patterns (rPPG) extracted from skin regions — rather than visual artifacts. Hard for generators to replicate.'
+  order_index=196 | type=ElementType.PARAGRAPH | text='4. Face X-Ray (2020) — Li et al. Identifies blending boundary artifacts left during face swapping. Generalizes across unseen manipulation types but fails on fully synthesized (non-blended) fakes.'
+  order_index=197 | type=ElementType.PARAGRAPH | text='5. Frequency Analysis for Deepfake Recognition (2020) — Frank et al. Exploits unique spectral artifacts in GAN-generated images. Works across multiple generators without retraining but may fail against diffusion-based fakes.'
+  order_index=198 | type=ElementType.PARAGRAPH | text='6. Thinking in Frequency (ECCV 2020) — Qian et al. Adds frequency-aware layers to CNNs so the network jointly learns spatial and frequency cues. Improves generalization but increases compute cost.'
+  order_index=199 | type=ElementType.PARAGRAPH | text='7. Exploiting Temporal Information (IEEE ICIP) — Guera & Delp Combines CNN (spatial features per frame) with LSTM (temporal inconsistency across frames). Simple and clean pipeline but uses older CNN backbones.'
+  order_index=200 | type=ElementType.PARAGRAPH | text='8. Deepfake Video Detection Using RNNs (IEEE AVSS) — Sabir et al. CNN extracts frame-level features, LSTM classifies at video level. Effective for video-level detection but computationally heavy.'
+  order_index=201 | type=ElementType.PARAGRAPH | text='9. CNN + LSTM for Video Forgery Detection — Zhou et al. Hybrid CNN-LSTM framework focusing on spatio-temporal forgery detection. Improves accuracy but increases memory usage and pipeline complexity.'
+  order_index=202 | type=ElementType.PARAGRAPH | text='10. Deepfake Detection Using Spatiotemporal Features (IEEE Access) — Li et al. Jointly trains CNN and LSTM to capture both spatial and temporal artifacts. Robust detection but struggles to generalize across datasets.'
+  order_index=203 | type=ElementType.PARAGRAPH | text='11. Convolutional Vision Transformer / CViT (2021) — Wodajo & Atnafu Combines CNN for local feature extraction with Vision Transformer for global attention. Achieves 91.5% accuracy and AUC of 0.91 on DFDC but limited cross-dataset generalization.'
+  order_index=204 | type=ElementType.PARAGRAPH | text='12. Deepfake Detection Using CNN-Based Architecture (2025) — Kapoor et al. Presents a complete end-to-end CNN pipeline with detailed preprocessing, architecture design, and training strategy. Practical and systematic but needs continuous updates as generation techniques evolve.'
+  order_index=205 | type=ElementType.PARAGRAPH | text='13. A Survey: Deepfake and Current Technologies (2024) — Banerjee et al. Surveys forensics, ML, multimodal, and blockchain-based detection approaches. Covers both technical and societal dimensions but real-time detection remains an open problem.'
+  order_index=206 | type=ElementType.PARAGRAPH | text='14. DeepFakes and Beyond (2020) — Tolosana et al. Classifies face manipulations into 4 types (full synthesis, identity swap, attribute manipulation, expression swap) and reviews all major datasets and benchmarks. Strong foundational reference.'
+  order_index=207 | type=ElementType.PARAGRAPH | text='15. Deepfake Generation and Detection: A Benchmark and Survey (2024) — Pei et al. Covers the full arc from GAN to diffusion-based generation and benchmarks detection methods across spatial, temporal, frequency, and hybrid domains. Most comprehensive and up-to-date survey.'
+  order_index=208 | type=ElementType.PARAGRAPH | text='Table 2.1 Literature Survey'
+  order_index=210 | type=ElementType.TABLE | text="Sr. No. | Paper / Year | Authors | Description | Advantages | Limitations\n1 | FaceForensics++: Learning to Detect Manipulated Facial Images (2019) | Andreas Rössler, Davide Cozzolino, Luisa Verdoliva, Christian Riess, Justus Thies, Matthias Nießner | Introduced a large-scale benchmark dataset for detecting manipulated facial images and evaluated various CNN architectures. | Standardized benchmark dataset; enables reproducible comparison across models; supports multiple manipulation types and compression levels. | Focuses mainly on early manipulation methods; detectors trained on it often overfit and fail to generalize to unseen generators.\n2 | MesoNet: A Compact Facial Video Forgery Detection Network (2018) | Darius Afchar, Vincent Nozick, Junichi Yamagishi, Isao Echizen | Proposed a lightweight CNN (Meso-4, MesoInception-4) for detecting facial forgery in images and videos. | Small model, fast inference (real-time use); easy to interpret activations and visualize results. | Lower accuracy than deeper models (Xception, ResNet); sensitive to compression and post-processing.\n3 | FakeCatcher: Detection of Synthetic Portrait Videos using Biological Signals (2019/2020) | Umur Aybars Ciftci, Ilke Demir, Lijun Yin | Uses biological signals (rPPG — blood flow patterns) from skin regions to detect fake videos or images. | Uses physiological cues that are hard for generative models to mimic; robust to some post-processing. | Mainly applicable to videos, not single images; sensitive to lighting and motion artifacts.\n4 | Face X-Ray for More General Face Forgery Detection (2020) | Lingzhi Li, Jianmin Bao, Ting Zhang, Hao Yang, Dong Chen, Fang Wen, Baining Guo | Introduces a 'face X-ray' representation to identify image blending boundaries common in manipulated faces. | Generalizes across many manipulation types; localizes manipulated regions (interpretable). | Ineffective for full-synthesis (non-blended) fakes; post-processing can hide boundary cues.\n5 | Leveraging Frequency Analysis for Deepfake Image Recognition (2020) | Jörg Frank, T. Eisenhofer, L. Schönherr, Asja Fischer, D. Kolossa, T. Holz | Shows that GAN-generated images have distinctive frequency artifacts; uses spectral-domain features for detection. | Model-agnostic — frequency features apply across many generators; good complement to CNN spatial cues. | Vulnerable if generator uses spectral regularization or improved upsampling; may fail on diffusion-based fakes.\n6 | Thinking in Frequency: Face Forgery Detection via Frequency-aware Feature Learning (ECCV 2020) | Yuezun Qian, Xianfeng Zhao, Guojun Yin, Jiajun Wu, Siwei Lyu | Improves CNNs by adding frequency-aware layers for detecting fake faces more robustly. | Learns robust frequency features jointly with spatial cues; better generalization across datasets. | Requires high-quality input; performance degrades under compression; additional computation cost compared to standard CNNs.\n7 | Exploiting Temporal Information for Deepfake Detection (IEEE ICIP) | David Guera, Edward J. Delp | Uses CNN to extract spatial frame features from video frames and LSTM to learn temporal inconsistencies. | Clear CNN to LSTM pipeline; strong temporal modeling; easy to implement. | Uses older CNN architectures; comparatively lower accuracy.\n8 | Deepfake Video Detection Using Recurrent Neural Networks (IEEE AVSS) | Sabir et al. | CNN-based frame feature extraction followed by LSTM for video-level classification. | Direct CNN + LSTM integration; effective video-level detection. | High computational cost; longer training time.\n9 | Combining CNN and LSTM for Video-Based Face Forgery Detection (Elsevier Neurocomputing) | Zhou et al. | Hybrid CNN + LSTM framework for spatial and temporal forgery detection. | Strong spatio-temporal learning; improved accuracy. | More complex pipeline; higher memory usage.\n10 | Deepfake Detection Using Spatiotemporal Features (IEEE Access) | Li et al. | Joint CNN and LSTM model to capture spatial and temporal artifacts in videos. | Explicit spatio-temporal modeling; robust detection. | Dataset-dependent performance; generalization issues.\n11 | Deepfake Video Detection Using Convolutional Vision Transformer (2021) | Deressa Wodajo & Solomon Atnafu | Proposes a CNN + Vision Transformer (CViT) hybrid model for deepfake video detection on DFDC dataset. | High accuracy (91.5%, AUC=0.91); leverages both local and global features. | Generalization to unseen datasets is still limited.\n12 | A Survey: Deepfake and Current Technologies for Solutions (2024) | Sayan Banerjee, Sumit Kumar Yadav, Ankit Dhara, Md Ajij | Reviews detection methods including forensics, ML, multimodal approaches, and blockchain authentication. | Broad coverage including technical and societal aspects. | Real-time detection remains unsolved.\n13 | DeepFakes and Beyond: A Survey of Face Manipulation and Fake Detection (2020) | Ruben Tolosana, Ruben Vera-Rodriguez, Julian Fierrez, Aythami Morales, Javier Ortega-Garcia | Categorizes 4 main manipulation types; reviews datasets, benchmarks, and detection methods. | Strong classification framework; benchmark results summarized. | Traditional methods are less robust against new manipulations.\n14 | Deepfake Generation and Detection: A Benchmark and Survey (2024) | Gan Pei, Jiangning Zhang, Menghan Hu et al. | Benchmarks detection methods; covers evolution from GAN to diffusion models; unifies deepfake task definitions. | Unified definitions; cross-domain benchmarking; identifies future directions. | Diffusion-based detection at early stage; challenges in real-world deployment.\n15 | FakeFormer: Efficient Vulnerability-Driven Transformers for Generalizable Deepfake Detection (2023) | Viet-Tuan Le, Yibing Zhan, Xiangtai Li, Yunqian Li, Xiaochun Cao | Proposes a transformer-based detector that focuses on vulnerability-driven patches in video frames for generalizable detection. | Strong cross-dataset generalization; efficient patch-based attention; outperforms CNN baselines on multiple benchmarks. | Higher memory requirements; transformer training demands large datasets; less interpretable than CNN approaches."
+
+--------------------------------------------------------------------------------
+CANDIDATE 12
+--------------------------------------------------------------------------------
+
+TEXT:
+
+2.1 Existing Systems
+
+Several existing platforms and tools offer deepfake detection capabilities for various use cases:
+
+Sensity AI – Enterprise-level media forensics platform for detecting synthetic media. Targets organizations needing advanced detection tools and forensic reporting.
+
+Reality Defender – Provides API and browser plugin for real-time fake media detection. Integrates with workflows to deliver detection scores and content analysis.
+
+Deepware – Publicly available video deepfake scanner focusing on face-swap techniques. Allows users to upload videos and receive detection reports.
+
+Truepic – Ensures content authenticity and tracks media provenance. Aims to prevent manipulation and verify the integrity of digital content.
+
+InVID/WeVerify – Verification toolkit for journalists and fact-checkers. Offers multiple media analysis tools, including deepfake detection.
+
+ELEMENTS:
+  order_index=212 | type=ElementType.PARAGRAPH | text='2.1 Existing Systems'
+  order_index=213 | type=ElementType.PARAGRAPH | text='Several existing platforms and tools offer deepfake detection capabilities for various use cases:'
+  order_index=214 | type=ElementType.LIST | text='Sensity AI – Enterprise-level media forensics platform for detecting synthetic media. Targets organizations needing advanced detection tools and forensic reporting.'
+  order_index=215 | type=ElementType.LIST | text='Reality Defender – Provides API and browser plugin for real-time fake media detection. Integrates with workflows to deliver detection scores and content analysis.'
+  order_index=216 | type=ElementType.LIST | text='Deepware – Publicly available video deepfake scanner focusing on face-swap techniques. Allows users to upload videos and receive detection reports.'
+  order_index=217 | type=ElementType.LIST | text='Truepic – Ensures content authenticity and tracks media provenance. Aims to prevent manipulation and verify the integrity of digital content.'
+  order_index=218 | type=ElementType.LIST | text='InVID/WeVerify – Verification toolkit for journalists and fact-checkers. Offers multiple media analysis tools, including deepfake detection.'
+
+--------------------------------------------------------------------------------
+CANDIDATE 13
+--------------------------------------------------------------------------------
+
+TEXT:
+
+2.2 Requirement Analysis
+
+Users will be provided with accessible deepfake detection through an intuitive web interface:
+
+The system will allow users to upload images or videos without requiring technical expertise or API integration, guiding them through the upload process and presenting results with clear confidence scores.
+
+Users will be provided with transparent detection results that explain the basis for the system's conclusions:
+
+The system will display confidence scores (e.g., "82% likely fake") along with explanations of factors contributing to the detection decision, promoting AI transparency.
+
+Users will be provided with rapid analysis capabilities for quick verification of digital content:
+
+The system will process uploaded media efficiently, delivering detection results within seconds to minutes depending on file size, prioritizing real-time feedback.
+
+Users will be provided with a reporting mechanism to flag detected deepfakes and contribute to community awareness:
+
+The platform will include functionality to report suspicious media, creating a feedback loop for improving detection models and supporting broader efforts to combat misinformation.
+
+Users will be provided with detection capabilities that work across common deepfake manipulation techniques:
+
+The system will be trained on diverse datasets (FaceForensics++, DFDC) using XceptionNet-based architecture to recognize various manipulation methods including face swaps, facial reenactment, and synthetic face generation.
+
+Figure 2.2–EDA : Pixel Statistics of Real vs. Fake Images(50 samples/class)
+
+As part of our preliminary data exploration, an Exploratory Data Analysis (EDA) was conducted on the dataset to understand pixel-level differences between real and deepfake images. As shown in Figure 2.2, the mean brightness, pixel standard deviation, and mean RGB channel values across both classes reveal subtle but consistent statistical differences — with fake images showing slightly more varied brightness distributions and marginally different channel intensities. These observations confirmed that spatial pixel features alone are insufficient for reliable deepfake detection, motivating the use of deeper feature extraction via CNNs.
+
+ELEMENTS:
+  order_index=220 | type=ElementType.PARAGRAPH | text='2.2 Requirement Analysis'
+  order_index=221 | type=ElementType.LIST | text='Users will be provided with accessible deepfake detection through an intuitive web interface:'
+  order_index=222 | type=ElementType.PARAGRAPH | text='The system will allow users to upload images or videos without requiring technical expertise or API integration, guiding them through the upload process and presenting results with clear confidence scores.'
+  order_index=223 | type=ElementType.LIST | text="Users will be provided with transparent detection results that explain the basis for the system's conclusions:"
+  order_index=224 | type=ElementType.PARAGRAPH | text='The system will display confidence scores (e.g., "82% likely fake") along with explanations of factors contributing to the detection decision, promoting AI transparency.'
+  order_index=225 | type=ElementType.LIST | text='Users will be provided with rapid analysis capabilities for quick verification of digital content:'
+  order_index=226 | type=ElementType.PARAGRAPH | text='The system will process uploaded media efficiently, delivering detection results within seconds to minutes depending on file size, prioritizing real-time feedback.'
+  order_index=227 | type=ElementType.LIST | text='Users will be provided with a reporting mechanism to flag detected deepfakes and contribute to community awareness:'
+  order_index=228 | type=ElementType.PARAGRAPH | text='The platform will include functionality to report suspicious media, creating a feedback loop for improving detection models and supporting broader efforts to combat misinformation.'
+  order_index=229 | type=ElementType.LIST | text='Users will be provided with detection capabilities that work across common deepfake manipulation techniques:'
+  order_index=230 | type=ElementType.PARAGRAPH | text='The system will be trained on diverse datasets (FaceForensics++, DFDC) using XceptionNet-based architecture to recognize various manipulation methods including face swaps, facial reenactment, and synthetic face generation.'
+  order_index=235 | type=ElementType.PARAGRAPH | text='Figure 2.2–EDA : Pixel Statistics of Real vs. Fake Images(50 samples/class)'
+  order_index=238 | type=ElementType.PARAGRAPH | text='As part of our preliminary data exploration, an Exploratory Data Analysis (EDA) was conducted on the dataset to understand pixel-level differences between real and deepfake images. As shown in Figure 2.2, the mean brightness, pixel standard deviation, and mean RGB channel values across both classes reveal subtle but consistent statistical differences — with fake images showing slightly more varied brightness distributions and marginally different channel intensities. These observations confirmed that spatial pixel features alone are insufficient for reliable deepfake detection, motivating the use of deeper feature extraction via CNNs.'
+
+--------------------------------------------------------------------------------
+CANDIDATE 14
+--------------------------------------------------------------------------------
+
+TEXT:
+
+CHAPTER 3
+
+ARCHITECTURAL DESIGN
+
+ARCHITECTURAL DESIGN
+
+3.1. Architecture Diagram
+
+Figure 3.1  Architecture Diagram
+
+Initial experiments using a plain baseline CNN (without attention or sequential modeling) yielded unstable performance — accuracy hovered around 50–55% with high variance across epochs (refer Figure 4.1). To address this, the model architecture was enhanced by incorporating Bi-directional LSTM layers after the CNN feature extractor, followed by an Attention mechanism. As illustrated in Figure 3.2, the final architecture processes input through a Convolutional layer and Max Pooling layer for spatial feature extraction, passes these features through an LSTM layer to capture temporal/contextual patterns, applies an Attention mechanism to focus on the most discriminative features, and finally outputs a classification via Dense and Softmax layers.
+
+ELEMENTS:
+  order_index=247 | type=ElementType.HEADING | text='CHAPTER 3'
+  order_index=248 | type=ElementType.HEADING | text='ARCHITECTURAL DESIGN'
+  order_index=249 | type=ElementType.HEADING | text='ARCHITECTURAL DESIGN'
+  order_index=250 | type=ElementType.HEADING | text='3.1. Architecture Diagram'
+  order_index=254 | type=ElementType.PARAGRAPH | text='Figure 3.1  Architecture Diagram'
+  order_index=256 | type=ElementType.PARAGRAPH | text='Initial experiments using a plain baseline CNN (without attention or sequential modeling) yielded unstable performance — accuracy hovered around 50–55% with high variance across epochs (refer Figure 4.1). To address this, the model architecture was enhanced by incorporating Bi-directional LSTM layers after the CNN feature extractor, followed by an Attention mechanism. As illustrated in Figure 3.2, the final architecture processes input through a Convolutional layer and Max Pooling layer for spatial feature extraction, passes these features through an LSTM layer to capture temporal/contextual patterns, applies an Attention mechanism to focus on the most discriminative features, and finally outputs a classification via Dense and Softmax layers.'
+
+--------------------------------------------------------------------------------
+CANDIDATE 15
+--------------------------------------------------------------------------------
+
+TEXT:
+
+3.2 Hardware & Software Requirements
+
+3.2.1 Software Requirements
+
+3.2.1.1 Operating System (OS): Windows 10/11, macOS, or Linux
+  3.2.1.2 Programming Language: Python 3.x
+  3.2.1.3 Framework: Flask 3.x
+  3.2.1.4 Database: SQLite
+  3.2.1.5 Dependencies / Libraries: Flask-SQLAlchemy, SQLAlchemy, Jinja2, Werkzeug
+  3.2.1.6 Code Editor / IDE: Visual Studio Code, PyCharm, or any Python IDE
+  3.2.1.7 Package Manager: pip
+  3.2.1.8 Web Browser: Google Chrome, Mozilla Firefox, or any modern web browser
+  3.2.1.9 Version Control (Optional): Git
+  3.2.1.10 Virtual Environment: venv or virtualenv
+
+3.2.2 Hardware Requirements
+
+3.2.2.1 Processor: Intel Core i7 or AMD Ryzen 7 (8-core or higher recommended)
+ 3.2.2.2 RAM: Minimum 16 GB (32 GB recommended)
+ 3.2.2.3 Storage: SSD with at least 512 GB free space
+ 3.2.2.4 Display: Minimum 15-inch display (17-inch or external monitor recommended)
+ 3.2.2.5 Operating System Compatibility: Windows 10/11 or Ubuntu 20.04 and above
+ 3.2.2.6 Power Supply: Minimum 500W PSU
+
+ELEMENTS:
+  order_index=257 | type=ElementType.HEADING | text='3.2 Hardware & Software Requirements'
+  order_index=258 | type=ElementType.HEADING | text='3.2.1 Software Requirements'
+  order_index=259 | type=ElementType.PARAGRAPH | text='3.2.1.1 Operating System (OS): Windows 10/11, macOS, or Linux\n  3.2.1.2 Programming Language: Python 3.x\n  3.2.1.3 Framework: Flask 3.x\n  3.2.1.4 Database: SQLite\n  3.2.1.5 Dependencies / Libraries: Flask-SQLAlchemy, SQLAlchemy, Jinja2, Werkzeug\n  3.2.1.6 Code Editor / IDE: Visual Studio Code, PyCharm, or any Python IDE\n  3.2.1.7 Package Manager: pip\n  3.2.1.8 Web Browser: Google Chrome, Mozilla Firefox, or any modern web browser\n  3.2.1.9 Version Control (Optional): Git\n  3.2.1.10 Virtual Environment: venv or virtualenv'
+  order_index=260 | type=ElementType.PARAGRAPH | text='3.2.2 Hardware Requirements'
+  order_index=261 | type=ElementType.PARAGRAPH | text='3.2.2.1 Processor: Intel Core i7 or AMD Ryzen 7 (8-core or higher recommended)\n 3.2.2.2 RAM: Minimum 16 GB (32 GB recommended)\n 3.2.2.3 Storage: SSD with at least 512 GB free space\n 3.2.2.4 Display: Minimum 15-inch display (17-inch or external monitor recommended)\n 3.2.2.5 Operating System Compatibility: Windows 10/11 or Ubuntu 20.04 and above\n 3.2.2.6 Power Supply: Minimum 500W PSU'
+
+--------------------------------------------------------------------------------
+CANDIDATE 16
+--------------------------------------------------------------------------------
+
+TEXT:
+
+3.3 Flow Chart
+
+Fig 3.3 Flow Chart
+
+As shown in Figure 3.3, the system architecture for the image and video prediction pipeline consists of a React-based frontend, a Flask backend deployed on Cloud Run, and separate deep learning models for processing different media types, including a CNN model for image inputs and a CNN-BiLSTM model for video inputs. This architecture was designed and illustrated by the author using Whimsical.
+
+ELEMENTS:
+  order_index=262 | type=ElementType.HEADING | text='3.3 Flow Chart'
+  order_index=265 | type=ElementType.PARAGRAPH | text='Fig 3.3 Flow Chart'
+  order_index=266 | type=ElementType.PARAGRAPH | text='As shown in Figure 3.3, the system architecture for the image and video prediction pipeline consists of a React-based frontend, a Flask backend deployed on Cloud Run, and separate deep learning models for processing different media types, including a CNN model for image inputs and a CNN-BiLSTM model for video inputs. This architecture was designed and illustrated by the author using Whimsical.'
+
+--------------------------------------------------------------------------------
+CANDIDATE 17
+--------------------------------------------------------------------------------
+
+TEXT:
+
+CHAPTER 4
+
+USER INTERFACE
+
+USER INTERFACE(GUI)
+
+Figure 4.1. TruthLens Landing Page (Home)
+
+In Fig.4.1, this is the main landing page of the TruthLens web application, presenting the core value proposition: AI-powered deepfake detection for images and videos. The page outlines a simple three-step workflow — Upload, Analyze, and Get Result — making the tool accessible to non-technical users. A prominent "Try Detector Now" button directs users to the detection interface.
+
+Figure 4.2. Deepfake Detector Upload Interface
+
+In Fig.4.2, this screen shows the file upload interface of the Deepfake Detector module, featuring a drag-and-drop zone for media submission. Users can upload image formats (JPG, PNG) as well as video formats (MP4, AVI, MOV) for authenticity analysis. The clean, minimal UI ensures a straightforward user experience before the analysis begins.
+
+Figure 4.3. Deepfake Detected (Image): fake_1018.jpg
+
+In Fig.4.3, the TruthLens Deepfake Detector analyzed the image file fake_1018.jpg and flagged it as a deepfake with a confidence score of 78%. The result card displays a red warning icon and the message "This media shows signs of artificial manipulation." This demonstrates the system's ability to identify AI-generated or manipulated facial images with moderate-to-high confidence.
+
+Figure 4.4. Authentic Image Verified: real_10.jpg
+
+In Fig.4.4, the detector successfully classified real_10.jpg as an authentic image with a confidence score of 73.2%. A green checkmark icon and the label "Authentic" confirm that the media appears to be genuine. This result validates the model's capability to distinguish real human faces from synthetically generated ones.
+
+Figure 4.5. Deepfake Detected (Video): 239_218.mp4
+
+In Fig.4.5, The system analyzed the video file 239_218.mp4 and returned a high-confidence deepfake verdict of 93.39%, indicating strong signs of artificial manipulation. The red-bordered result card and warning icon clearly communicate the risk level to the user. This highlights the model's effectiveness in detecting manipulated video content with near-certainty.
+
+Figure 4.6. Authentic Video Verified: 841.mp4
+
+In Fig.4.6, the video file 841.mp4 was classified as authentic by the detector with a high confidence score of 94.14%, represented by a green progress bar and checkmark. The result confirms that the media contains no detectable signs of synthetic manipulation. This outcome demonstrates the system's precision in correctly verifying genuine video content.
+
+ELEMENTS:
+  order_index=276 | type=ElementType.HEADING | text='CHAPTER 4'
+  order_index=277 | type=ElementType.HEADING | text='USER INTERFACE'
+  order_index=298 | type=ElementType.PARAGRAPH | text='USER INTERFACE(GUI)'
+  order_index=301 | type=ElementType.PARAGRAPH | text='Figure 4.1. TruthLens Landing Page (Home)'
+  order_index=302 | type=ElementType.PARAGRAPH | text='In Fig.4.1, this is the main landing page of the TruthLens web application, presenting the core value proposition: AI-powered deepfake detection for images and videos. The page outlines a simple three-step workflow — Upload, Analyze, and Get Result — making the tool accessible to non-technical users. A prominent "Try Detector Now" button directs users to the detection interface.'
+  order_index=304 | type=ElementType.PARAGRAPH | text='Figure 4.2. Deepfake Detector Upload Interface'
+  order_index=305 | type=ElementType.PARAGRAPH | text='In Fig.4.2, this screen shows the file upload interface of the Deepfake Detector module, featuring a drag-and-drop zone for media submission. Users can upload image formats (JPG, PNG) as well as video formats (MP4, AVI, MOV) for authenticity analysis. The clean, minimal UI ensures a straightforward user experience before the analysis begins.'
+  order_index=307 | type=ElementType.PARAGRAPH | text='Figure 4.3. Deepfake Detected (Image): fake_1018.jpg'
+  order_index=308 | type=ElementType.PARAGRAPH | text='In Fig.4.3, the TruthLens Deepfake Detector analyzed the image file fake_1018.jpg and flagged it as a deepfake with a confidence score of 78%. The result card displays a red warning icon and the message "This media shows signs of artificial manipulation." This demonstrates the system\'s ability to identify AI-generated or manipulated facial images with moderate-to-high confidence.'
+  order_index=310 | type=ElementType.PARAGRAPH | text='Figure 4.4. Authentic Image Verified: real_10.jpg'
+  order_index=311 | type=ElementType.PARAGRAPH | text='In Fig.4.4, the detector successfully classified real_10.jpg as an authentic image with a confidence score of 73.2%. A green checkmark icon and the label "Authentic" confirm that the media appears to be genuine. This result validates the model\'s capability to distinguish real human faces from synthetically generated ones.'
+  order_index=315 | type=ElementType.PARAGRAPH | text='Figure 4.5. Deepfake Detected (Video): 239_218.mp4'
+  order_index=316 | type=ElementType.PARAGRAPH | text="In Fig.4.5, The system analyzed the video file 239_218.mp4 and returned a high-confidence deepfake verdict of 93.39%, indicating strong signs of artificial manipulation. The red-bordered result card and warning icon clearly communicate the risk level to the user. This highlights the model's effectiveness in detecting manipulated video content with near-certainty."
+  order_index=318 | type=ElementType.PARAGRAPH | text='Figure 4.6. Authentic Video Verified: 841.mp4'
+  order_index=319 | type=ElementType.PARAGRAPH | text="In Fig.4.6, the video file 841.mp4 was classified as authentic by the detector with a high confidence score of 94.14%, represented by a green progress bar and checkmark. The result confirms that the media contains no detectable signs of synthetic manipulation. This outcome demonstrates the system's precision in correctly verifying genuine video content."
+
+--------------------------------------------------------------------------------
+CANDIDATE 18
+--------------------------------------------------------------------------------
+
+TEXT:
+
+CHAPTER 5
+
+RESULTS
+
+RESULTS
+
+5.1 Experimental Results
+
+Figure 5.1 – Training Curves of Baseline CNN Model (Loss, Accuracy, AUC-ROC, F1 Score over 40 Epochs)
+
+Figure 5.1 presents the training curves of the initial baseline CNN model trained over 40 epochs. The loss curves show minimal convergence, with validation loss remaining near 0.69 throughout training. The accuracy graph reveals that both train and validation accuracy stagnate around 50–55%, indicating the model is barely above random chance. AUC-ROC and F1 scores exhibit high variance and instability, confirming that the basic CNN architecture lacks the capacity to reliably distinguish real from fake images. These results directly motivated the architectural improvements — the addition of BiLSTM and Attention layers — which form the basis of our enhanced proposed system.
+
+Figure 5.2 - Confusion Matrix and ROC Curve
+
+The Fig.5.2. shows the confusion matrix where the model correctly predicts most real samples (91) but misclassifies a large number of fake samples as real (87).It detects only 13 fake instances correctly, showing poor fake detection.This indicates the model is heavily biased toward predicting real content. And on the right side, The ROC curve has an AUC of 0.55, which is close to random performance (0.5). This means the model has weak ability to distinguish between real and fake classes. Overall, the classification performance is not reliable and needs improvement.
+
+Figure 5.3 - Classification Report
+
+The Fig.5.3 shows the performance of the deepfake detection model for Real and Fake classes. The model performs well in identifying real instances with high recall (0.91) but struggles to detect fake ones, with a very low recall (0.13). The overall accuracy is 52%, indicating limited effectiveness. This suggests the model is biased toward predicting real content and needs improvement in detecting fake data.
+
+ELEMENTS:
+  order_index=331 | type=ElementType.HEADING | text='CHAPTER 5'
+  order_index=332 | type=ElementType.HEADING | text='RESULTS'
+  order_index=333 | type=ElementType.HEADING | text='RESULTS'
+  order_index=335 | type=ElementType.HEADING | text='5.1 Experimental Results'
+  order_index=338 | type=ElementType.HEADING | text='Figure 5.1 – Training Curves of Baseline CNN Model (Loss, Accuracy, AUC-ROC, F1 Score over 40 Epochs)'
+  order_index=340 | type=ElementType.HEADING | text='Figure 5.1 presents the training curves of the initial baseline CNN model trained over 40 epochs. The loss curves show minimal convergence, with validation loss remaining near 0.69 throughout training. The accuracy graph reveals that both train and validation accuracy stagnate around 50–55%, indicating the model is barely above random chance. AUC-ROC and F1 scores exhibit high variance and instability, confirming that the basic CNN architecture lacks the capacity to reliably distinguish real from fake images. These results directly motivated the architectural improvements — the addition of BiLSTM and Attention layers — which form the basis of our enhanced proposed system.'
+  order_index=342 | type=ElementType.PARAGRAPH | text='Figure 5.2 - Confusion Matrix and ROC Curve'
+  order_index=343 | type=ElementType.PARAGRAPH | text='The Fig.5.2. shows the confusion matrix where the model correctly predicts most real samples (91) but misclassifies a large number of fake samples as real (87).It detects only 13 fake instances correctly, showing poor fake detection.This indicates the model is heavily biased toward predicting real content. And on the right side, The ROC curve has an AUC of 0.55, which is close to random performance (0.5). This means the model has weak ability to distinguish between real and fake classes. Overall, the classification performance is not reliable and needs improvement.'
+  order_index=346 | type=ElementType.PARAGRAPH | text='Figure 5.3 - Classification Report'
+  order_index=347 | type=ElementType.PARAGRAPH | text='The Fig.5.3 shows the performance of the deepfake detection model for Real and Fake classes. The model performs well in identifying real instances with high recall (0.91) but struggles to detect fake ones, with a very low recall (0.13). The overall accuracy is 52%, indicating limited effectiveness. This suggests the model is biased toward predicting real content and needs improvement in detecting fake data.'
+
+--------------------------------------------------------------------------------
+CANDIDATE 19
+--------------------------------------------------------------------------------
+
+TEXT:
+
+CHAPTER 6
+
+CONCLUSION
+
+CONCLUSION
+
+We successfully developed a Deepfake Detector, a web application designed to enhance digital security by analyzing images and detecting manipulated or AI-generated content. The application allows users to upload images for verification, enabling the system to identify visual inconsistencies and provide a confidence score indicating the likelihood of forgery. By integrating deep learning and computer vision, this system offers users a simple and reliable way to assess the authenticity of digital media. It helps individuals and organizations make informed decisions before trusting or sharing online content, thereby reducing the spread of misinformation and improving online safety. There are several techniques involved in developing such an application, including image preprocessing, feature extraction using Convolutional Neural Networks (CNNs), and classification based on trained datasets like FaceForensics++. Each component is crucial in delivering accurate detection results, and the combination of these techniques creates a highly functional and user-friendly tool for identifying deepfake.
+
+ELEMENTS:
+  order_index=354 | type=ElementType.HEADING | text='CHAPTER 6'
+  order_index=355 | type=ElementType.HEADING | text='CONCLUSION'
+  order_index=356 | type=ElementType.HEADING | text='CONCLUSION'
+  order_index=357 | type=ElementType.PARAGRAPH | text='We successfully developed a Deepfake Detector, a web application designed to enhance digital security by analyzing images and detecting manipulated or AI-generated content. The application allows users to upload images for verification, enabling the system to identify visual inconsistencies and provide a confidence score indicating the likelihood of forgery. By integrating deep learning and computer vision, this system offers users a simple and reliable way to assess the authenticity of digital media. It helps individuals and organizations make informed decisions before trusting or sharing online content, thereby reducing the spread of misinformation and improving online safety. There are several techniques involved in developing such an application, including image preprocessing, feature extraction using Convolutional Neural Networks (CNNs), and classification based on trained datasets like FaceForensics++. Each component is crucial in delivering accurate detection results, and the combination of these techniques creates a highly functional and user-friendly tool for identifying deepfake.'
+
+--------------------------------------------------------------------------------
+CANDIDATE 20
+--------------------------------------------------------------------------------
+
+TEXT:
+
+REFERENCES
+
+[1] K. Kapoor, S. P. Singh, G. Aggarwal, and M. Sharma, “Deepfake Detection Using CNN-Based Architecture,” IEEE Conference Publication, 2025.
+
+[2] L. Li, J. Bao, T. Zhang, H. Yang, D. Chen, F. Wen, and B. Guo, “Face X-Ray for More General Face Forgery Detection,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2020, pp. 5001–5010.
+
+[3] J. Frank, T. Eisenhofer, L. Schönherr, A. Fischer, D. Kolossa, and T. Holz, “Leveraging Frequency Analysis for Deep Fake Image Recognition,” in Proceedings of the 37th International Conference on Machine Learning (ICML), 2020, pp. 3247–3258.
+
+[4] Y. Qian, G. Yin, L. Sheng, Z. Chen, and J. Shao, “Thinking in Frequency: Face Forgery Detection by Mining Frequency-Aware Clues,” in Computer Vision – ECCV 2020, Lecture Notes in Computer Science, vol. 12357, Springer, Cham, 2020, pp. 86–103.
+
+[5] K. Patel et al., “An Improved Dense CNN Architecture for Deepfake Image Detection,” IEEE Access, vol. 11, pp. 22081–22094, 2023.
+
+[6] M. Al-Azrak et al., “Deepfake Detection Using Convolutional Vision Transformers and Convolutional Neural Networks,” Neural Computing and Applications, vol. 36, pp. 21259–21278, 2024.
+
+[7] S. Gupta et al., “CNN Based Deep Learning Model for Deepfake Detection,” IEEE Conference Publication, 2022.
+
+[8] A. Kumar et al., “Deepfake Video Detection System,” IEEE Conference Publication, 2023.
+
+[9] P. Sharma et al., “AI-Powered Deepfake Detection Using CNN Architectures,” IEEE Publication, 2024.
+
+[10] S. Das et al., “DeepGuardNet: A Novel CNN Architecture for DeepFake Image Detection,” Procedia Computer Science, vol. 252, pp. 1431–1440, 2025.
+
+[11] R. Singh et al., “DeepFake Detection Using Enhanced D-CNN Architecture,” ResearchGate, 2025.
+
+[12] M. Rahman et al., “Hybrid Deepfake Image Detection: Frequency Domain Features,” arXiv preprint, 2025.
+
+ELEMENTS:
+  order_index=358 | type=ElementType.HEADING | text='REFERENCES'
+  order_index=359 | type=ElementType.PARAGRAPH | text='[1] K. Kapoor, S. P. Singh, G. Aggarwal, and M. Sharma, “Deepfake Detection Using CNN-Based Architecture,” IEEE Conference Publication, 2025.'
+  order_index=360 | type=ElementType.PARAGRAPH | text='[2] L. Li, J. Bao, T. Zhang, H. Yang, D. Chen, F. Wen, and B. Guo, “Face X-Ray for More General Face Forgery Detection,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2020, pp. 5001–5010.'
+  order_index=361 | type=ElementType.PARAGRAPH | text='[3] J. Frank, T. Eisenhofer, L. Schönherr, A. Fischer, D. Kolossa, and T. Holz, “Leveraging Frequency Analysis for Deep Fake Image Recognition,” in Proceedings of the 37th International Conference on Machine Learning (ICML), 2020, pp. 3247–3258.'
+  order_index=362 | type=ElementType.PARAGRAPH | text='[4] Y. Qian, G. Yin, L. Sheng, Z. Chen, and J. Shao, “Thinking in Frequency: Face Forgery Detection by Mining Frequency-Aware Clues,” in Computer Vision – ECCV 2020, Lecture Notes in Computer Science, vol. 12357, Springer, Cham, 2020, pp. 86–103.'
+  order_index=363 | type=ElementType.PARAGRAPH | text='[5] K. Patel et al., “An Improved Dense CNN Architecture for Deepfake Image Detection,” IEEE Access, vol. 11, pp. 22081–22094, 2023.'
+  order_index=364 | type=ElementType.PARAGRAPH | text='[6] M. Al-Azrak et al., “Deepfake Detection Using Convolutional Vision Transformers and Convolutional Neural Networks,” Neural Computing and Applications, vol. 36, pp. 21259–21278, 2024.'
+  order_index=365 | type=ElementType.PARAGRAPH | text='[7] S. Gupta et al., “CNN Based Deep Learning Model for Deepfake Detection,” IEEE Conference Publication, 2022.'
+  order_index=366 | type=ElementType.PARAGRAPH | text='[8] A. Kumar et al., “Deepfake Video Detection System,” IEEE Conference Publication, 2023.'
+  order_index=367 | type=ElementType.PARAGRAPH | text='[9] P. Sharma et al., “AI-Powered Deepfake Detection Using CNN Architectures,” IEEE Publication, 2024.'
+  order_index=368 | type=ElementType.PARAGRAPH | text='[10] S. Das et al., “DeepGuardNet: A Novel CNN Architecture for DeepFake Image Detection,” Procedia Computer Science, vol. 252, pp. 1431–1440, 2025.'
+  order_index=369 | type=ElementType.PARAGRAPH | text='[11] R. Singh et al., “DeepFake Detection Using Enhanced D-CNN Architecture,” ResearchGate, 2025.'
+  order_index=370 | type=ElementType.PARAGRAPH | text='[12] M. Rahman et al., “Hybrid Deepfake Image Detection: Frequency Domain Features,” arXiv preprint, 2025.'
+
+--------------------------------------------------------------------------------
+CANDIDATE 21
+--------------------------------------------------------------------------------
+
+TEXT:
+
+ACKNOWLEDGEMENT
+
+The implementation of the project “Deepfake Detector: A CNN-BiLSTM Attention-Based Web Application for Image and Video Forgery Detection” would not have been possible without the help and support of several individuals. We would like to express our sincere thanks to Dr. S.M. Khot, Principal of Fr. C. Rodrigues Institute of Technology, Vashi, for giving us the opportunity to work on this project and for providing us with the necessary facilities. We are also deeply grateful to the Head of the Information Technology Department, Prof. Shubhangi Vaikole, for her ongoing support and encouragement throughout the project.
+
+We would especially like to thank our guide, Dr. Mukta Nivelkar, for her continuous guidance, valuable suggestions, and pushing us to explore creative solutions during the course of this project. We also extend our heartfelt thanks to our project coordinator, Prof. Sharlene Reberio, for her advice and consistent guidance, helping us stay on track.
+
+Finally, we would like to thank our families and well-wishers for their constant support and encouragement, which motivated us to complete this project successfully.
+
+Yours sincerely.
+
+Abhishek Tajane (5023158)
+
+Agnel Charities
+
+Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai
+
+(An Autonomous Institute & Permanently Affiliated to University of Mumbai)
+
+Department of Information Technology/Computer Science Engineering
+
+ELEMENTS:
+  order_index=371 | type=ElementType.HEADING | text='ACKNOWLEDGEMENT'
+  order_index=373 | type=ElementType.PARAGRAPH | text='The implementation of the project “Deepfake Detector: A CNN-BiLSTM Attention-Based Web Application for Image and Video Forgery Detection” would not have been possible without the help and support of several individuals. We would like to express our sincere thanks to Dr. S.M. Khot, Principal of Fr. C. Rodrigues Institute of Technology, Vashi, for giving us the opportunity to work on this project and for providing us with the necessary facilities. We are also deeply grateful to the Head of the Information Technology Department, Prof. Shubhangi Vaikole, for her ongoing support and encouragement throughout the project.'
+  order_index=374 | type=ElementType.PARAGRAPH | text='We would especially like to thank our guide, Dr. Mukta Nivelkar, for her continuous guidance, valuable suggestions, and pushing us to explore creative solutions during the course of this project. We also extend our heartfelt thanks to our project coordinator, Prof. Sharlene Reberio, for her advice and consistent guidance, helping us stay on track.'
+  order_index=375 | type=ElementType.PARAGRAPH | text='Finally, we would like to thank our families and well-wishers for their constant support and encouragement, which motivated us to complete this project successfully.'
+  order_index=379 | type=ElementType.PARAGRAPH | text='Yours sincerely.'
+  order_index=387 | type=ElementType.PARAGRAPH | text='Abhishek Tajane (5023158)'
+  order_index=393 | type=ElementType.PARAGRAPH | text='Agnel Charities'
+  order_index=394 | type=ElementType.PARAGRAPH | text='Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai'
+  order_index=395 | type=ElementType.PARAGRAPH | text='(An Autonomous Institute & Permanently Affiliated to University of Mumbai)'
+  order_index=397 | type=ElementType.PARAGRAPH | text='Department of Information Technology/Computer Science Engineering'
+
+--------------------------------------------------------------------------------
+CANDIDATE 22
+--------------------------------------------------------------------------------
+
+TEXT:
+
+APPENDIX–A: MAPPING TO SDGs, POs, and PSOs
+
+Department of Information Technology
+
+Mini Project Report Appendix
+
+Note:	The	guide	should	write	remarks	based	on	the	observation	of objective/achievement/outcome of the project.
+
+Name and Signature of the Guide
+
+Agnel Charities
+
+Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai
+
+(An Autonomous Institute & Permanently Affiliated to University of Mumbai)
+
+Department of Information Technology/Computer Science Engineering
+
+ELEMENTS:
+  order_index=399 | type=ElementType.HEADING | text='APPENDIX–A: MAPPING TO SDGs, POs, and PSOs'
+  order_index=400 | type=ElementType.PARAGRAPH | text='Department of Information Technology'
+  order_index=402 | type=ElementType.PARAGRAPH | text='Mini Project Report Appendix'
+  order_index=405 | type=ElementType.TABLE | text='Semester &Academic\nYear: | Sem VI SH2026\nGroup Details: | TY4/07\nAarya Katikar (5023121)\nAbhishek Tajane (5023158)\nAngella Benjamin (5023104)\nVaishnuvi Shettar (5023154)\nTitle: | Deepfake\tDetector:\tAn\tAI-Based\tImage and Videos Forgery Detection Web Application\nKey Domain/Technology: | AI&ML\nCategory-I | Internal\nCategory-II | Application\nSDG | SDG\t16\t–\tPeace,\tJustice\tand\tStrong Institutions\nSDG 12 – Responsible Consumption and Production\nSDG 9 - Industry, Innovation and Infrastructure\n*Remarks | '
+  order_index=407 | type=ElementType.PARAGRAPH | text='Note:\tThe\tguide\tshould\twrite\tremarks\tbased\ton\tthe\tobservation\tof objective/achievement/outcome of the project.'
+  order_index=412 | type=ElementType.PARAGRAPH | text='Name and Signature of the Guide'
+  order_index=413 | type=ElementType.PARAGRAPH | text='Agnel Charities'
+  order_index=414 | type=ElementType.PARAGRAPH | text='Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai'
+  order_index=415 | type=ElementType.PARAGRAPH | text='(An Autonomous Institute & Permanently Affiliated to University of Mumbai)'
+  order_index=417 | type=ElementType.PARAGRAPH | text='Department of Information Technology/Computer Science Engineering'
+
+--------------------------------------------------------------------------------
+CANDIDATE 23
+--------------------------------------------------------------------------------
+
+TEXT:
+
+APPENDIX–B: SOFTWARE REQUIREMENT SPECIFICATION (SRS)
+
+Project Title: Deepfake Detector: An AI-Based Image and Videos Forgery Detection Web Application
+
+Semester: VI	Version: 0.3 – Half-Year Submission
+
+Date: 2026-04-26
+
+Team Members & Roll Numbers:
+
+Aarya Katikar (5023121)
+
+Abhishek Tajane (5023158)
+
+Angella Benjamin (5023104)
+
+Vaishnuvi Shettar (5023154)
+
+Guide / Mentor: Dr. Mukta Nivelkar
+
+Introduction
+
+Purpose
+
+The purpose of this document is to define the requirements for an AI-driven web platform designed to detect manipulated or AI-generated (deepfake) images. The system aims to analyze uploaded visual content and
+
+determine its authenticity by identifying inconsistencies using deep learning and computer vision.
+
+It provides users with a confidence score indicating the likelihood that an image is fake. Target users include social media analysts, journalists, cybersecurity professionals, and general users concerned with online misinformation.
+
+Scope
+
+The Minimum Viable Product (MVP) focuses on the detection and classification of manipulated or synthetic images.
+
+Key features include:
+
+Web-based upload interface for images and videos.
+
+Image preprocessing and feature extraction pipeline.
+
+Deep learning–based classification using CNN+BiLSTMmodels.
+
+Confidence score display for authenticity verification.
+
+Visualization of detected anomalies.
+
+Secure result storage for auditing and history tracking.
+
+References
+
+Project Report on “Deepfake	Detector:	An	AI-Based	Image and Videos Forgery Detection Web Application” (core documentation).
+
+Dataset: FaceForensics++, DeepFakeDetection, and related benchmark datasets.
+
+IEEE Transactions on Information Forensics and Security (related research).
+
+Preliminary Description
+
+Proposed System Architecture
+
+The proposed system uses a Web–Cloud architecture.
+
+Frontend (Web Interface): Allows users to upload images and videos for analysis.
+
+Backend (Cloud): Hosts the trained CNN model, preprocessing scripts, and the result database.
+
+Model Layer: Performs classification and outputs a confidence score based on extracted features.
+
+High-Level Features
+
+Image/Video Authenticity Detection: Classify uploaded images/videos as “Real” or “Fake.”
+
+Confidence Scoring: Quantify the likelihood of manipulation based on the model’s prediction probability.
+
+User Types
+
+Operating Environment
+
+Draft Requirements Functional Requirements (Draft)
+
+Agnel
+
+Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai
+
+(An Autonomous Institute & Permanently Affiliated to University of Mumbai)
+
+Department of Information Technology/Computer Science Engineering
+
+Non-Functional Requirements (Draft)
+
+Initial Diagrams
+
+System Block Diagram: User → TruthLens Web Interface (React) → Flask API Backend → File Type Router → Media Preprocessing (MediaPipe/OpenCV) → AI Inference Engine (Custom CNN or CNN+LSTM) → Confidence Score Generation → JSON Result Display.
+
+Flow Chart: Media Upload (Image or Video) → Format Validation & Routing → Preprocessing (Extract frames for Video / Resize for Image) → Face Localization (MediaPipe) → Model Prediction (Custom CNN / Temporal LSTM) → Softmax Confidence Scoring → Verdict Display (Authentic vs. Fake) → Privacy-Preserving Media Deletion.
+
+Version History
+
+Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai
+
+(An Autonomous Institute & Permanently Affiliated to University of Mumbai)
+
+Department of Information Technology/Computer Science Engineering
+
+ELEMENTS:
+  order_index=419 | type=ElementType.HEADING | text='APPENDIX–B: SOFTWARE REQUIREMENT SPECIFICATION (SRS)'
+  order_index=421 | type=ElementType.PARAGRAPH | text='Project Title: Deepfake Detector: An AI-Based Image and Videos Forgery Detection Web Application'
+  order_index=422 | type=ElementType.PARAGRAPH | text='Semester: VI\tVersion: 0.3 – Half-Year Submission'
+  order_index=423 | type=ElementType.PARAGRAPH | text='Date: 2026-04-26'
+  order_index=424 | type=ElementType.PARAGRAPH | text='Team Members & Roll Numbers:'
+  order_index=425 | type=ElementType.PARAGRAPH | text='Aarya Katikar (5023121)'
+  order_index=426 | type=ElementType.PARAGRAPH | text='Abhishek Tajane (5023158)'
+  order_index=427 | type=ElementType.PARAGRAPH | text='Angella Benjamin (5023104)'
+  order_index=428 | type=ElementType.PARAGRAPH | text='Vaishnuvi Shettar (5023154)'
+  order_index=429 | type=ElementType.PARAGRAPH | text='Guide / Mentor: Dr. Mukta Nivelkar'
+  order_index=431 | type=ElementType.LIST | text='Introduction'
+  order_index=432 | type=ElementType.LIST | text='Purpose'
+  order_index=433 | type=ElementType.PARAGRAPH | text='The purpose of this document is to define the requirements for an AI-driven web platform designed to detect manipulated or AI-generated (deepfake) images. The system aims to analyze uploaded visual content and'
+  order_index=434 | type=ElementType.PARAGRAPH | text='determine its authenticity by identifying inconsistencies using deep learning and computer vision.'
+  order_index=435 | type=ElementType.PARAGRAPH | text='It provides users with a confidence score indicating the likelihood that an image is fake. Target users include social media analysts, journalists, cybersecurity professionals, and general users concerned with online misinformation.'
+  order_index=437 | type=ElementType.LIST | text='Scope'
+  order_index=438 | type=ElementType.PARAGRAPH | text='The Minimum Viable Product (MVP) focuses on the detection and classification of manipulated or synthetic images.'
+  order_index=439 | type=ElementType.PARAGRAPH | text='Key features include:'
+  order_index=440 | type=ElementType.LIST | text='Web-based upload interface for images and videos.'
+  order_index=441 | type=ElementType.LIST | text='Image preprocessing and feature extraction pipeline.'
+  order_index=442 | type=ElementType.LIST | text='Deep learning–based classification using CNN+BiLSTMmodels.'
+  order_index=443 | type=ElementType.LIST | text='Confidence score display for authenticity verification.'
+  order_index=444 | type=ElementType.LIST | text='Visualization of detected anomalies.'
+  order_index=445 | type=ElementType.LIST | text='Secure result storage for auditing and history tracking.'
+  order_index=447 | type=ElementType.LIST | text='References'
+  order_index=448 | type=ElementType.LIST | text='Project Report on “Deepfake\tDetector:\tAn\tAI-Based\tImage and Videos Forgery Detection Web Application” (core documentation).'
+  order_index=449 | type=ElementType.LIST | text='Dataset: FaceForensics++, DeepFakeDetection, and related benchmark datasets.'
+  order_index=450 | type=ElementType.LIST | text='IEEE Transactions on Information Forensics and Security (related research).'
+  order_index=461 | type=ElementType.LIST | text='Preliminary Description'
+  order_index=463 | type=ElementType.LIST | text='Proposed System Architecture'
+  order_index=464 | type=ElementType.PARAGRAPH | text='The proposed system uses a Web–Cloud architecture.'
+  order_index=465 | type=ElementType.LIST | text='Frontend (Web Interface): Allows users to upload images and videos for analysis.'
+  order_index=466 | type=ElementType.LIST | text='Backend (Cloud): Hosts the trained CNN model, preprocessing scripts, and the result database.'
+  order_index=467 | type=ElementType.LIST | text='Model Layer: Performs classification and outputs a confidence score based on extracted features.'
+  order_index=469 | type=ElementType.LIST | text='High-Level Features'
+  order_index=470 | type=ElementType.LIST | text='Image/Video Authenticity Detection: Classify uploaded images/videos as “Real” or “Fake.”'
+  order_index=471 | type=ElementType.LIST | text='Confidence Scoring: Quantify the likelihood of manipulation based on the model’s prediction probability.'
+  order_index=473 | type=ElementType.LIST | text='User Types'
+  order_index=475 | type=ElementType.TABLE | text='User Type | Primary Responsibilities\nGeneral User | Upload image/video, view authenticity result and confidence\nscore.\nResearcher / Analyst | Validate model predictions, review dataset performance.\nSystem Admin | Manage model updates, user activity logs, and system\nhealth.'
+  order_index=477 | type=ElementType.LIST | text='Operating Environment'
+  order_index=479 | type=ElementType.TABLE | text='Components | Technology / Platform\nInterface | React / HTML / CSS / JS\nBackend | Python (Flask / Django), RESTful APIs\nML\nFramework | TensorFlow / PyTorch (CNN-based models)\nDatabase | PostgreSQL / Firebase for result and user logs\nCloud Storage | AWS S3 / Google Cloud Storage for image\nuploads'
+  order_index=481 | type=ElementType.LIST | text='Draft Requirements Functional Requirements (Draft)'
+  order_index=482 | type=ElementType.TABLE | text='Requirement ID | Description | Priority\n(M/S/C)\nFR-01 | The system shall allow users to upload images/videos up to 10MB. | M\nFR-02 | The system shall preprocess uploaded image/video (resize, normalize). | M\nFR-03 | The system shall classify image/video as “Real” or “Fake” using CNN. | M\nFR-04 | The system shall output a confidence score indicating the probability of forgery. | M'
+  order_index=484 | type=ElementType.PARAGRAPH | text='Agnel'
+  order_index=485 | type=ElementType.PARAGRAPH | text='Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai'
+  order_index=486 | type=ElementType.PARAGRAPH | text='(An Autonomous Institute & Permanently Affiliated to University of Mumbai)'
+  order_index=488 | type=ElementType.PARAGRAPH | text='Department of Information Technology/Computer Science Engineering'
+  order_index=490 | type=ElementType.LIST | text='Non-Functional Requirements (Draft)'
+  order_index=491 | type=ElementType.TABLE | text='Requirem\nEnt ID | Description | Description\nNFR-01 | Latency: The total detection time shall not exceed 6 seconds per image. | '
+  order_index=493 | type=ElementType.TABLE | text='NFR-02 | Accuracy: The model shall maintain ≥ 90% classification accuracy.\nNFR-03 | Security: All uploaded images/videos shall be deleted after analysis unless the \nuser opts to save results.\nNFR-04 | Scalability: The backend shall support up to 100 concurrent users.'
+  order_index=495 | type=ElementType.LIST | text='Initial Diagrams'
+  order_index=496 | type=ElementType.LIST | text='System Block Diagram: User → TruthLens Web Interface (React) → Flask API Backend → File Type Router → Media Preprocessing (MediaPipe/OpenCV) → AI Inference Engine (Custom CNN or CNN+LSTM) → Confidence Score Generation → JSON Result Display.'
+  order_index=497 | type=ElementType.LIST | text='Flow Chart: Media Upload (Image or Video) → Format Validation & Routing → Preprocessing (Extract frames for Video / Resize for Image) → Face Localization (MediaPipe) → Model Prediction (Custom CNN / Temporal LSTM) → Softmax Confidence Scoring → Verdict Display (Authentic vs. Fake) → Privacy-Preserving Media Deletion.'
+  order_index=499 | type=ElementType.LIST | text='Version History'
+  order_index=501 | type=ElementType.TABLE | text='Date | Description | Author\n2025-08-13 | Second half-year SRS draft for Deepfake Detection System | Aarya Katikar\nAngella Benjamin Abhishek Tajane Vaishnuvi Shettar'
+  order_index=513 | type=ElementType.PARAGRAPH | text='Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai'
+  order_index=514 | type=ElementType.PARAGRAPH | text='(An Autonomous Institute & Permanently Affiliated to University of Mumbai)'
+  order_index=516 | type=ElementType.PARAGRAPH | text='Department of Information Technology/Computer Science Engineering'
+
+--------------------------------------------------------------------------------
+CANDIDATE 24
+--------------------------------------------------------------------------------
+
+TEXT:
+
+APPENDIX-C: PROJECT COMPETITION PARTICIPATION CERTIFICATES
+
+Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai
+
+(An Autonomous Institute & Permanently Affiliated to University of Mumbai)
+
+Department of Information Technology/Computer Science Engineering
+
+ELEMENTS:
+  order_index=518 | type=ElementType.PARAGRAPH | text='APPENDIX-C: PROJECT COMPETITION PARTICIPATION CERTIFICATES'
+  order_index=536 | type=ElementType.PARAGRAPH | text='Fr. C. Rodrigues Institute of Technology, Vashi, Navi Mumbai'
+  order_index=537 | type=ElementType.PARAGRAPH | text='(An Autonomous Institute & Permanently Affiliated to University of Mumbai)'
+  order_index=539 | type=ElementType.PARAGRAPH | text='Department of Information Technology/Computer Science Engineering'
+
+--------------------------------------------------------------------------------
+CANDIDATE 25
+--------------------------------------------------------------------------------
+
+TEXT:
+
+APPENDIX-D: PLAGIARISM
+
+ELEMENTS:
+  order_index=541 | type=ElementType.PARAGRAPH | text='APPENDIX-D: PLAGIARISM'
+
+
+================================================================================
+INTEGRATION VALIDATION
+================================================================================
+
+1. No content loss: PASS
+   Original elements: 259
+   Chunked elements: 259
+
+2. No duplication: PASS
+
+3. Element order preserved: PASS
+
+4. Tables/code preserved: PASS
+   Original delegated elements: 11
+   Chunked delegated elements: 11
+
+5. Delegated content excluded from text: PASS
+
+================================================================================
+ALL VALIDATION CHECKS PASSED
+================================================================================
