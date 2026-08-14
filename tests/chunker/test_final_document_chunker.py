@@ -12,7 +12,7 @@ from app.dto.table_chunk import TableChunk
 from app.enums.chunk_type import ChunkType
 from app.enums.element_type import ElementType
 
-from app.services.chunking.final_chunk.document_chunker import DocumentChunker
+from app.services.chunking.final_chunker.document_chunker import DocumentChunker
 
 from app.services.chunking.structure_detection.models import (
     StructureDetectionResult,
@@ -217,6 +217,7 @@ def make_document_chunker(
     narrative_splitter=None,
     table_chunker=None,
     code_chunker=None,
+    final_chunk_validator=None
 ):
 
     return DocumentChunker(
@@ -228,6 +229,7 @@ def make_document_chunker(
         narrative_safety_splitter=narrative_splitter or Mock(),
         table_chunker=table_chunker or Mock(),
         code_chunker=code_chunker or Mock(),
+        final_chunk_validator=final_chunk_validator or Mock()
     )
 
 
@@ -1668,3 +1670,76 @@ def test_tabular_candidate_excludes_all_table_text():
         paragraph,
         table_2,
     ]
+
+def test_narrative_metadata_is_preserved_from_first_source_element():
+    metadata = {
+        "document_id": "doc-123",
+        "filename": "report.pdf",
+        "page": 4,
+        "source": "docling",
+    }
+
+    element_0 = make_element(
+        order_index=0,
+        text="First paragraph",
+        metadata=metadata,
+    )
+
+    element_1 = make_element(
+        order_index=1,
+        text="Second paragraph",
+        metadata={
+            "document_id": "doc-123",
+            "filename": "report.pdf",
+            "page": 5,
+            "source": "docling",
+        },
+    )
+
+    candidate = ChunkCandidate(
+        text="First paragraph\n\nSecond paragraph",
+        elements=[element_0, element_1],
+        heading=None,
+        section_path=[],
+    )
+
+    routed = RoutedChunk(
+        chunk_type=ChunkType.NARRATIVE,
+        elements=[element_0, element_1],
+        text=candidate.text,
+        section_path=[],
+        order_index=0,
+    )
+
+    detector = make_detector(
+        StructureType.UNSTRUCTURED
+    )
+
+    semantic_chunker = Mock()
+    semantic_chunker.chunk.return_value = [candidate]
+
+    router = Mock()
+    router.route.return_value = [routed]
+
+    narrative_splitter = Mock()
+    narrative_splitter.split.return_value = [routed]
+
+    final_chunk_validator = Mock()
+
+    chunker = make_document_chunker(
+        detector=detector,
+        semantic_chunker=semantic_chunker,
+        router=router,
+        narrative_splitter=narrative_splitter,
+        final_chunk_validator=final_chunk_validator,
+    )
+
+    result = chunker.chunk(
+        make_extraction_result(
+            [element_0, element_1]
+        )
+    )
+
+    assert len(result) == 1
+
+    assert result[0].metadata == metadata

@@ -11,6 +11,7 @@ from app.services.chunking.structure_detection.detector import StructureDetector
 from app.services.chunking.structure_builder.structure_builder import DocumentStructureBuilder
 from app.services.chunking.hierarchy.hierarchy_chunker import HierarchyChunker
 from app.services.chunking.llm_chunker.semantic_chunker import SemanticChunker
+from app.services.chunking.final_chunker_validator.validator import FinalChunkValidator
 
 from app.services.chunking.routing.element_router import ElementRouter
 from app.services.chunking.recursive_splitter.narrative_safety_splitter import NarrativeSafetySplitter
@@ -34,7 +35,8 @@ class DocumentChunker:
         element_router: ElementRouter,
         narrative_safety_splitter: NarrativeSafetySplitter,
         table_chunker: TableChunker,
-        code_chunker: CodeChunker
+        code_chunker: CodeChunker,
+        final_chunk_validator: FinalChunkValidator
     ): 
 
         self.structure_detector = structure_detector
@@ -45,13 +47,14 @@ class DocumentChunker:
         self.narrative_safety_splitter = narrative_safety_splitter
         self.table_chunker = table_chunker
         self.code_chunker = code_chunker
+        self.final_chunk_validator = final_chunk_validator
 
     def chunk(self,extraction_result: ExtractionResult) -> list[FinalChunk]:
 
         if not extraction_result.elements:
             return []
 
-        detection = self.structure_detector.detect(extraction_result)
+        detection = self.structure_detector.detect(extraction_result) #Detect type of Document
 
         candidates = self._build_candidates(
             extraction_result=extraction_result,
@@ -68,7 +71,9 @@ class DocumentChunker:
         for routed_chunk in routed_chunks:
             final_chunks.extend(self._process_routed_chunk(routed_chunk))
 
-        final_chunks.sort(key=lambda chunk: chunk.order_index)
+        final_chunks.sort(key=lambda chunk: chunk.order_index)#Sort chunks by order index
+
+        self.final_chunk_validator.validate(chunks=final_chunks,source_elements=extraction_result.elements)
 
         return final_chunks
 
@@ -140,7 +145,14 @@ class DocumentChunker:
                           chunk_type=ChunkType.NARRATIVE,
                           section_path=chunk.section_path,
                           order_index=chunk.order_index,
-                          metadata={})
+                          metadata=self._build_narrative_metadata(chunk))
+
+    def _build_narrative_metadata(self,chunk: RoutedChunk)-> dict:
+
+        if not chunk.elements:
+            return {}
+
+        return dict(chunk.elements[0].metadata)
     
     def _process_table(self,routed_chunk:RoutedChunk)->list[FinalChunk]:
 
@@ -172,12 +184,16 @@ class DocumentChunker:
                                     source:RoutedChunk,
                                     chunk,
                                     chunk_type:ChunkType)->FinalChunk:
+        #Routed Chunk To Final Chunk
 
+        order_index = min(element.order_index
+                          for element in chunk.elements)
+        
         return FinalChunk(
             text=chunk.text,
             elements=chunk.elements,
             chunk_type=chunk_type,
             section_path=source.section_path,
-            order_index=source.order_index,
+            order_index=order_index,
             metadata=dict(chunk.metadata)
         )
