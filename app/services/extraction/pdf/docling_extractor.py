@@ -15,13 +15,13 @@ class DoclingExtractor(BaseExtractor):
     def extract(self,file_path: str | Path,
                 document_id:str |None=None,filename:str |None=None)-> ExtractionResult:
 
-        self.document_id = document_id
-        self.filename = filename or Path(file_path).name
-        self.table_index = 0
+        filename = filename or Path(file_path).name      
 
         result = self.converter.convert(str(file_path))
 
         document = result.document
+        
+        table_index = 0
 
         elements: list[ExtractedElement] = []
 
@@ -30,38 +30,42 @@ class DoclingExtractor(BaseExtractor):
             element = self._extract_element(
                     order_index=order_index, 
                     item=item,
-                    level=level)
+                    level=level,
+                    table_index=table_index,
+                    document_id=document_id,
+                    filename=filename)
 
             if element is not None:
                 elements.append(element)
 
-        return ExtractionResult(
-            elements=elements
-        )
+            if item.label == "table":
+                table_index += 1
 
-    def _extract_element(self,item,level:int,order_index:int)-> ExtractedElement | None:
+        return ExtractionResult(elements=elements)
+
+    def _extract_element(self,item,level:int,order_index:int,table_index:int,
+                document_id:str |None=None,filename:str |None=None)-> ExtractedElement | None:
 
         match item.label:
 
             case "section_header":
-                return self._extract_heading(order_index=order_index, item=item, level=level)
+                return self._extract_heading(order_index=order_index, item=item, level=level,document_id=document_id,filename=filename)
 
             case "text":
-                return self._extract_paragraph(order_index=order_index, item=item)
+                return self._extract_paragraph(order_index=order_index, item=item,document_id=document_id,filename=filename)
 
             case "table": 
-                element = self._extract_table(order_index=order_index, item=item, table_index=self.table_index)
-                self.table_index +=1
+                element = self._extract_table(order_index=order_index, item=item, table_index=table_index,document_id=document_id,filename=filename)
                 return element
 
             case "picture":
-                return self._extract_picture(order_index=order_index, item=item)
+                return self._extract_picture(order_index=order_index, item=item,document_id=document_id,filename=filename)
 
             case "list_item":
-                return self._extract_list(order_index=order_index, item=item)
+                return self._extract_list(order_index=order_index, item=item,document_id=document_id,filename=filename)
 
             case "code":
-                return self._extract_code(order_index=order_index,item=item)
+                return self._extract_code(order_index=order_index,item=item,document_id=document_id,filename=filename)
             
             case _:
                 return None
@@ -83,7 +87,7 @@ class DoclingExtractor(BaseExtractor):
             ),
         )
     
-    def _extract_heading(self,item,level:int,order_index:int)-> ExtractedElement:
+    def _extract_heading(self,item,level:int,order_index:int,document_id:int|None,filename:int|None)-> ExtractedElement:
 
         page, bbox = self._extract_provenance(item)
 
@@ -92,7 +96,10 @@ class DoclingExtractor(BaseExtractor):
             text=item.text,
             element_type=ElementType.HEADING,
             metadata={
-                **self._base_metadata(),
+                **self._base_metadata(
+                    document_id=document_id,
+                    filename=filename
+                ),
                 "page": page,
                 "bbox": bbox,
                 "level": level,
@@ -100,7 +107,7 @@ class DoclingExtractor(BaseExtractor):
             }
         )
 
-    def _extract_paragraph(self,item,order_index:int)-> ExtractedElement:
+    def _extract_paragraph(self,item,order_index:int,document_id:int|None,filename:int|None)-> ExtractedElement:
 
         page, bbox = self._extract_provenance(item)
 
@@ -109,17 +116,20 @@ class DoclingExtractor(BaseExtractor):
             text=item.text,
             element_type=ElementType.PARAGRAPH,
             metadata={
-                **self._base_metadata(),
+                **self._base_metadata(
+                    document_id=document_id,
+                    filename=filename
+                ),
                 "page": page,
                 "bbox": bbox,
                 "source": "docling"
             }
         )
 
-    def _extract_table(self,item,order_index:int,table_index:int)-> ExtractedElement:
+    def _extract_table(self,item,order_index:int,table_index:int,document_id:int|None,filename:int|None)-> ExtractedElement:
 
-        table_id = (f"{self.document_id}-table-{table_index}"
-                    if self.document_id
+        table_id = (f"{document_id}-table-{table_index}"
+                    if document_id
                     else f"table-{table_index}"
                    )
 
@@ -143,7 +153,10 @@ class DoclingExtractor(BaseExtractor):
                         for cell in item.data.table_cells)
         
         metadata = {
-            **self._base_metadata(),
+            **self._base_metadata(
+                document_id=document_id,
+                filename=filename
+            ),
             "table_id": table_id,
             "table_index":table_index,
             "page": page,
@@ -163,7 +176,7 @@ class DoclingExtractor(BaseExtractor):
             metadata=metadata,
         )
 
-    def _extract_picture(self,item,order_index:int)-> ExtractedElement:
+    def _extract_picture(self,item,order_index:int,document_id:int|None,filename:int|None)-> ExtractedElement:
 
         page, bbox = self._extract_provenance(item)
 
@@ -172,14 +185,17 @@ class DoclingExtractor(BaseExtractor):
             text="[IMAGE]",
             element_type=ElementType.IMAGE,
             metadata={
-                **self._base_metadata(),
+                **self._base_metadata(
+                    document_id=document_id,
+                    filename=filename
+                ),
                 "page": page,
                 "bbox": bbox,
                 "source":"docling"
             }
         )
 
-    def _extract_list(self,item,order_index:int)->ExtractedElement:
+    def _extract_list(self,item,order_index:int,document_id:int|None,filename:int|None)->ExtractedElement:
 
         page, bbox = self._extract_provenance(item)
 
@@ -188,7 +204,10 @@ class DoclingExtractor(BaseExtractor):
             text=item.text,
             element_type=ElementType.LIST,
             metadata={
-                **self._base_metadata(),
+                **self._base_metadata(
+                    document_id=document_id,
+                    filename=filename
+                ),
                 "page": page,
                 "bbox": bbox,
                 "source": "docling",
@@ -197,7 +216,7 @@ class DoclingExtractor(BaseExtractor):
             }
         )
 
-    def _extract_code(self,item,order_index:int)->ExtractedElement:
+    def _extract_code(self,item,order_index:int,document_id:int|None,filename:int|None)->ExtractedElement:
 
         page,bbox = self._extract_provenance(item)
 
@@ -205,7 +224,10 @@ class DoclingExtractor(BaseExtractor):
                                 text=item.text,
                                 element_type=ElementType.CODE_BLOCK,
                                 metadata={
-                                    **self._base_metadata(),
+                                    **self._base_metadata(
+                                        document_id=document_id,
+                                        filename=filename
+                                    ),
                                     "page": page,
                                     "bbox": bbox,
                                     "source": "docling",

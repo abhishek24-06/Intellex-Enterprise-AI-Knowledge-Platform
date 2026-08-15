@@ -16,9 +16,7 @@ class MarkdownExtractor(BaseExtractor):
     def extract(self,file_path:str | Path,
                 document_id:str |None=None,filename:str |None=None)->ExtractionResult:
 
-        self.document_id = document_id
-        self.filename = filename or Path(file_path).name
-        self.table_index = 0
+        filename = filename or Path(file_path).name
 
         text = Path(file_path).read_text(encoding="utf-8")
 
@@ -27,6 +25,7 @@ class MarkdownExtractor(BaseExtractor):
         elements = []
 
         order_index=0
+        table_index=0
         i = 0
 
         while i < len(tokens):
@@ -38,7 +37,9 @@ class MarkdownExtractor(BaseExtractor):
                 element, i = self._extract_heading(
                     tokens=tokens,
                     index=i,
-                    order_index=order_index
+                    order_index=order_index,
+                    document_id=document_id,
+                    filename=filename
                 )
 
                 elements.append(element)
@@ -52,7 +53,9 @@ class MarkdownExtractor(BaseExtractor):
                 element, i = self._extract_paragraph(
                     tokens=tokens,
                     index=i,
-                    order_index=order_index
+                    order_index=order_index,
+                    document_id=document_id,
+                    filename=filename
                 )
 
                 elements.append(element)
@@ -69,7 +72,9 @@ class MarkdownExtractor(BaseExtractor):
                     tokens=tokens,
                     index=i,
                     ordered=ordered,
-                    order_index=order_index
+                    order_index=order_index,
+                    document_id=document_id,
+                    filename=filename
                 )
                 elements.extend(list_elements)
 
@@ -81,7 +86,9 @@ class MarkdownExtractor(BaseExtractor):
                 element,i = self._extract_quote(
                     index=i,
                     tokens=tokens,
-                    order_index=order_index
+                    order_index=order_index,
+                    document_id=document_id,
+                    filename=filename
                 )
 
                 elements.append(element)
@@ -94,7 +101,9 @@ class MarkdownExtractor(BaseExtractor):
                 element,i = self._extract_code_block(
                     tokens=tokens,
                     index=i,
-                    order_index=order_index
+                    order_index=order_index,
+                    document_id=document_id,
+                    filename=filename
                 )
 
                 elements.append(element)
@@ -108,11 +117,13 @@ class MarkdownExtractor(BaseExtractor):
                     tokens=tokens,
                     index=i,
                     order_index=order_index,
-                    table_index=self.table_index
+                    table_index=table_index,
+                    document_id=document_id,
+                    filename=filename
                 )
 
                 elements.append(element)
-                self.table_index += 1
+                table_index += 1
                 order_index += 1
                 continue
             
@@ -121,7 +132,8 @@ class MarkdownExtractor(BaseExtractor):
 
         return ExtractionResult(elements=elements)
 
-    def _extract_heading(self,tokens: list[Token],index:int,order_index:int)->tuple[ExtractedElement,int]:
+    def _extract_heading(self,tokens: list[Token],index:int,order_index:int,
+                document_id:str |None=None,filename:str |None=None)->tuple[ExtractedElement,int]:
 
         opening_token = tokens[index]
         inline_token = tokens[index+1]
@@ -133,14 +145,18 @@ class MarkdownExtractor(BaseExtractor):
             text=inline_token.content,
             element_type=ElementType.HEADING,
             metadata={
-                **self._base_metadata(),
+                **self._base_metadata(
+                    document_id=document_id,
+                    filename=filename
+                ),
                 "source": "markdown",
                 "level": level
             }
         )
         return element, index+3
 
-    def _extract_paragraph(self,tokens: list[Token],index:int,order_index:int)-> tuple[ExtractedElement,int]:
+    def _extract_paragraph(self,tokens: list[Token],index:int,order_index:int,
+                document_id:str |None=None,filename:str |None=None)-> tuple[ExtractedElement,int]:
 
         inline_token = tokens[index+1]
 
@@ -149,14 +165,18 @@ class MarkdownExtractor(BaseExtractor):
             text=inline_token.content,
             element_type=ElementType.PARAGRAPH,
             metadata={
-                **self._base_metadata(),
+                **self._base_metadata(
+                    document_id=document_id,
+                    filename=filename
+                ),
                 "source": "markdown",
             }
         )
 
         return element, index + 3
 
-    def _extract_list(self,tokens: list[Token],index:int,order_index:int,ordered:bool,depth:int = 0)->tuple[list[ExtractedElement], int]:
+    def _extract_list(self,tokens: list[Token],index:int,order_index:int,ordered:bool,depth:int = 0,
+                document_id:str |None=None,filename:str |None=None)->tuple[list[ExtractedElement], int]:
 
         elements = []
 
@@ -184,6 +204,8 @@ class MarkdownExtractor(BaseExtractor):
                     order_index=order_index + len(elements),
                     ordered=nested_ordered,
                     depth=depth + 1,
+                    document_id=document_id,
+                    filename=filename
                 )
                 elements.extend(nested_elements)
                 continue
@@ -199,7 +221,10 @@ class MarkdownExtractor(BaseExtractor):
                         text=token.content,
                         element_type=ElementType.LIST,
                         metadata={
-                            **self._base_metadata(),
+                            **self._base_metadata(
+                                document_id=document_id,
+                                filename=filename
+                            ),
                             "source": "markdown",
                             "ordered":ordered,
                             "indent_level": depth
@@ -210,7 +235,8 @@ class MarkdownExtractor(BaseExtractor):
 
         return elements, index
 
-    def _extract_quote(self,tokens:list[Token],index:int,order_index:int)-> tuple[ExtractedElement, int]:
+    def _extract_quote(self,tokens:list[Token],index:int,order_index:int,
+                document_id:str |None=None,filename:str |None=None)-> tuple[ExtractedElement, int]:
 
         quote_lines = []
         depth = 1
@@ -239,14 +265,18 @@ class MarkdownExtractor(BaseExtractor):
             text="\n".join(quote_lines),
             element_type=ElementType.QUOTE,
             metadata={
-                **self._base_metadata(),
+                **self._base_metadata(
+                    document_id=document_id,
+                    filename=filename
+                ),
                 "source": "markdown",
             }
         )
 
         return element, index
 
-    def _extract_code_block(self,tokens:list[Token],index:int,order_index:int)->tuple[ExtractedElement,int]:
+    def _extract_code_block(self,tokens:list[Token],index:int,order_index:int,
+                document_id:str |None=None,filename:str |None=None)->tuple[ExtractedElement,int]:
 
         token = tokens[index]
 
@@ -255,7 +285,10 @@ class MarkdownExtractor(BaseExtractor):
             text=token.content,
             element_type=ElementType.CODE_BLOCK,
             metadata={
-                **self._base_metadata(),
+                **self._base_metadata(
+                    document_id=document_id,
+                    filename=filename
+                ),
                 "source": "markdown",
                 "language": token.info.strip() or None
             }
@@ -276,15 +309,16 @@ class MarkdownExtractor(BaseExtractor):
 
         return non_numeric / len(row_cells) >= 0.7
 
-    def _extract_table_metadata(self,rows_data:list[list[str]],table_index: int)->dict[str,Any]:
+    def _extract_table_metadata(self,rows_data:list[list[str]],table_index: int,
+                document_id:str |None=None,filename:str |None=None)->dict[str,Any]:
 
         has_header_row = (self._looks_like_header_row(rows_data[0])
                         if rows_data
                         else False)
 
         table_id = (
-            f"{self.document_id}-table-{table_index}"
-            if self.document_id
+            f"{document_id}-table-{table_index}"
+            if document_id
             else f"table-{table_index}"
             )
 
@@ -295,10 +329,11 @@ class MarkdownExtractor(BaseExtractor):
             "n_cols": max((len(row) for row in rows_data),default=0,),
             "cells": rows_data,
             "has_header_row": has_header_row,
-            "markdown": self._table_to_markdown(rows_data,has_header_row)
+            "markdown": self._table_to_markdown(rows_data,has_header_row,),
             }
 
-    def _extract_table(self,tokens:list[Token],index:int,order_index:int,table_index: int)-> tuple[ExtractedElement, int]:
+    def _extract_table(self,tokens:list[Token],index:int,order_index:int,table_index: int,
+                document_id:str |None=None,filename:str |None=None)-> tuple[ExtractedElement, int]:
 
         rows_data: list[list[str]] = []
         current_row: list[str] = []
@@ -318,9 +353,12 @@ class MarkdownExtractor(BaseExtractor):
                     text=text,
                     element_type=ElementType.TABLE,
                     metadata={
-                        **self._base_metadata(),
+                        **self._base_metadata(
+                            document_id=document_id,
+                            filename=filename
+                        ),
                         "source": "markdown",
-                        **self._extract_table_metadata(rows_data,table_index)
+                        **self._extract_table_metadata(rows_data,table_index,document_id,filename)
                 }
             )
 
@@ -350,9 +388,12 @@ class MarkdownExtractor(BaseExtractor):
             text=text,
             element_type=ElementType.TABLE,
             metadata={
-                **self._base_metadata(),
+                **self._base_metadata(
+                    document_id=document_id,
+                    filename=filename
+                ),
                 "source": "markdown",
-                **self._extract_table_metadata(rows_data,table_index)
+                **self._extract_table_metadata(rows_data,table_index,document_id,filename)
             }
         )
 

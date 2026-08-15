@@ -16,10 +16,10 @@ def test_extract_real_pdf():
     test_dir = Path(__file__).parent
 
     # Real PDF
-    pdf_path = test_dir / "Code.pdf"
+    pdf_path = test_dir / "report.pdf"
 
     # Extracted output
-    output_path = test_dir / "extracted_code.txt"
+    output_path = test_dir / "extracted_doc.txt"
 
     # Make sure the PDF actually exists
     assert pdf_path.exists(), f"PDF not found: {pdf_path}"

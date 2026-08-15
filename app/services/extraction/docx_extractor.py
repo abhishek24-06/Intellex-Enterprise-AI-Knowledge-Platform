@@ -38,24 +38,22 @@ class DocxExtractor(BaseExtractor):
     def extract(self,file_path:str,
                 document_id:str |None=None,filename:str |None=None)->ExtractionResult:
 
-        self.document_id = document_id
-        self.filename = filename or Path(file_path).name
-        self.table_index = 0
-
+        filename = filename or Path(file_path).name
         doc = DocxDocument(file_path)
 
-        elements=[]
+        elements = []
+        table_index = 0
 
         for order_index, block in enumerate(self._iter_block_items(doc)):
 
             element = None
 
             if isinstance(block,Paragraph): #Is this block a paragraph
-                element = self._extract_paragraph(block,order_index)
+                element = self._extract_paragraph(block,order_index,document_id,filename)
 
             elif isinstance(block,Table):
-                element = self._extract_table(table=block,order_index=order_index,table_index=self.table_index)
-                self.table_index += 1
+                element = self._extract_table(table=block,order_index=order_index,table_index=table_index,document_id=document_id,filename=filename)
+                table_index += 1
 
             if element is not None:
                 elements.append(element)
@@ -113,8 +111,13 @@ class DocxExtractor(BaseExtractor):
 
             return ElementType.CODE_BLOCK, metadata
 
-        return ElementType.PARAGRAPH, metadata
+        if self._looks_like_code_by_content(paragraph):
+            metadata['detected_via'] = "content"
 
+            return ElementType.CODE_BLOCK, metadata
+
+        return ElementType.PARAGRAPH, metadata
+    
     def _extract_heading_level(self,style:str)->int|None: #Extracts heading lvl eg 1 2 3 
 
 
@@ -164,7 +167,7 @@ class DocxExtractor(BaseExtractor):
             "value": None
         }
 
-    def _extract_paragraph(self,paragraph:Paragraph,order_index:int)->ExtractedElement|None:
+    def _extract_paragraph(self,paragraph:Paragraph,order_index:int,document_id:str|None,filename:str|None)->ExtractedElement|None:
 
         if not paragraph.text.strip(): #Checks if para is empty or only spaces, then None
             return None
@@ -172,20 +175,22 @@ class DocxExtractor(BaseExtractor):
         element_type, metadata = self._map_paragraph_style(paragraph)
 
         metadata = {
-            **self._base_metadata(),
+            **self._base_metadata(
+                document_id=document_id,
+                filename=filename
+            ),
             "source": "docx",
             **metadata,
             }
 
-        print(
-        f"ORDER={order_index} | "
-        f"STYLE={paragraph.style.name!r} | "
-        f"TEXT={paragraph.text[:100]!r}"
-    )
+        text = paragraph.text.rstrip()
+
+        if element_type != ElementType.CODE_BLOCK:
+            text = text.strip()
         
         return ExtractedElement(
             order_index=order_index,
-            text= paragraph.text.strip(),
+            text= text,
             element_type=element_type,
             metadata=metadata
         )
@@ -219,7 +224,7 @@ class DocxExtractor(BaseExtractor):
 
         return non_numeric / len(row_cells) >= 0.7
 
-    def _extract_table_metadata(self,table:Table,table_index:int)->dict[str,Any]:
+    def _extract_table_metadata(self,table:Table,table_index:int,document_id:str|None,filename:str|None)->dict[str,Any]:
 
         rows_data = [[
             cell.text.strip()
@@ -233,10 +238,13 @@ class DocxExtractor(BaseExtractor):
                         else False)
 
         return {
-            **self._base_metadata(),
+            **self._base_metadata(
+                document_id=document_id,
+                filename=filename
+            ),
             "source": "docx",
-            "table_id": (f"{self.document_id}-table-{table_index}"
-                         if self.document_id
+            "table_id": (f"{document_id}-table-{table_index}"
+                         if document_id
                          else f"table-{table_index}"),
             "n_rows": len(rows_data),
             "n_cols": max((len(row) for row in rows_data),default=0 ),
@@ -245,7 +253,7 @@ class DocxExtractor(BaseExtractor):
             "markdown": self._table_to_markdown(rows_data,has_header_row)
             }
 
-    def _extract_table(self,table:Table,order_index:int,table_index:int)->ExtractedElement | None:
+    def _extract_table(self,table:Table,order_index:int,table_index:int,document_id:str|None,filename:str|None)->ExtractedElement | None:
 
         text = self._table_to_text(table)
 
@@ -256,7 +264,7 @@ class DocxExtractor(BaseExtractor):
             order_index=order_index,
             text=text,
             element_type=ElementType.TABLE,
-            metadata=self._extract_table_metadata(table,table_index)
+            metadata=self._extract_table_metadata(table,table_index,document_id,filename)
         )
 
 #CODE
@@ -287,3 +295,51 @@ class DocxExtractor(BaseExtractor):
         )
     
         return monospace_runs / len(runs) >= 0.7
+
+    def _looks_like_code_by_content(self, paragraph: Paragraph) -> bool:
+        """Detect code based on textual patterns when style/font detection fails."""
+    
+        text = paragraph.text
+    
+        if not text.strip():
+            return False
+    
+        # Code is often multiline.
+        lines = text.splitlines()
+    
+        if len(lines) < 2:
+            return False
+    
+        code_patterns = [
+            r"^\s*(from|import)\s+\w+",
+            r"^\s*class\s+\w+[\w\s():]*:",
+            r"^\s*def\s+\w+\s*\(",
+            r"^\s*@\w+",
+            r"^\s*(if|elif|else|for|while|try|except|finally|with)\b.*:",
+            r"^\s*return\b",
+            r"^\s*(public|private|protected|static|final)\b",
+            r"^\s*(const|let|var)\s+\w+",
+            r"^\s*#.*",
+            r"^\s*//.*",
+            r"^\s*[\w.]+\s*=\s*.+",
+        ]
+    
+        matches = 0
+    
+        for line in lines:
+            line = line.rstrip()
+    
+            if not line.strip():
+                continue
+    
+            if any(re.search(pattern, line) for pattern in code_patterns):
+                matches += 1
+    
+        non_empty_lines = sum(
+            1 for line in lines if line.strip()
+        )
+    
+        if non_empty_lines == 0:
+            return False
+    
+        return matches / non_empty_lines >= 0.30

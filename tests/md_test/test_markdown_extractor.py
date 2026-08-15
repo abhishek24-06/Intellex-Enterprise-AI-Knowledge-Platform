@@ -7,18 +7,57 @@ def test_extract_real_sample_markdown():
 
     file_path = Path("tests/md_test/sample.md")
 
+    output_path = Path(
+        "tests/md_test/md_extraction_result.txt"
+    )
+
     extractor = MarkdownExtractor()
 
     result = extractor.extract(file_path)
 
-    print("\n========== EXTRACTED ELEMENTS ==========\n")
+    # ---------------------------------------------------------
+    # Write extracted elements to TXT
+    # ---------------------------------------------------------
 
-    for element in result.elements:
-        print(f"Order Index : {element.order_index}")
-        print(f"Type        : {element.element_type}")
-        print(f"Text        : {element.text!r}")
-        print(f"Metadata    : {element.metadata}")
-        print("-" * 80)
+    with open(
+        output_path,
+        "w",
+        encoding="utf-8",
+    ) as file:
+
+        file.write(
+            "========== EXTRACTED ELEMENTS ==========\n\n"
+        )
+
+        for element in result.elements:
+
+            file.write(
+                f"Order Index : {element.order_index}\n"
+            )
+
+            file.write(
+                f"Type        : {element.element_type}\n"
+            )
+
+            file.write(
+                f"Text        : {element.text!r}\n"
+            )
+
+            file.write(
+                f"Metadata    : {element.metadata}\n"
+            )
+
+            file.write(
+                "-" * 80 + "\n"
+            )
+
+    # ---------------------------------------------------------
+    # Assertions
+    # ---------------------------------------------------------
 
     assert result is not None
     assert result.elements
+
+    print(
+        f"\nExtraction written to: {output_path}"
+    )
