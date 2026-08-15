@@ -19,11 +19,12 @@ from app.services.chunking.final_chunker_validator.validator import (
 def make_element(
     order_index: int,
     text: str = "element text",
+    element_type: ElementType = ElementType.PARAGRAPH,
 ):
     return ExtractedElement(
         order_index=order_index,
         text=text,
-        element_type=ElementType.PARAGRAPH,
+        element_type=element_type,
         metadata={},
     )
 
@@ -482,7 +483,9 @@ def test_duplicate_element_inside_chunk_rejected(validator):
         validator.validate([chunk])
 
 
-def test_two_different_elements_with_same_order_index_rejected(validator):
+def test_two_different_elements_with_same_order_index_rejected(
+    validator,
+):
 
     element_a = make_element(
         5,
@@ -611,6 +614,164 @@ def test_all_source_elements_are_covered(validator):
     )
 
 
+def test_source_coverage_ignores_heading_elements(
+    validator,
+):
+
+    heading = make_element(
+        0,
+        "Introduction",
+        ElementType.HEADING,
+    )
+
+    paragraph = make_element(
+        1,
+        "Important content",
+        ElementType.PARAGRAPH,
+    )
+
+    chunk = make_chunk(
+        order_index=1,
+        elements=[paragraph],
+        text="Important content",
+        section_path=["Introduction"],
+    )
+
+    # The heading is intentionally not present in
+    # chunk.elements. It is represented structurally through
+    # section_path.
+    validator.validate(
+        chunks=[chunk],
+        source_elements=[
+            heading,
+            paragraph,
+        ],
+    )
+
+
+def test_missing_non_heading_source_element_is_rejected(
+    validator,
+):
+
+    paragraph_1 = make_element(
+        0,
+        "Content 1",
+        ElementType.PARAGRAPH,
+    )
+
+    paragraph_2 = make_element(
+        1,
+        "Content 2",
+        ElementType.PARAGRAPH,
+    )
+
+    chunk = make_chunk(
+        order_index=0,
+        elements=[paragraph_1],
+        text="Content 1",
+    )
+
+    with pytest.raises(FinalChunkValidationError):
+
+        validator.validate(
+            chunks=[chunk],
+            source_elements=[
+                paragraph_1,
+                paragraph_2,
+            ],
+        )
+
+
+def test_missing_heading_does_not_cause_source_coverage_failure(
+    validator,
+):
+
+    heading_1 = make_element(
+        0,
+        "Introduction",
+        ElementType.HEADING,
+    )
+
+    heading_2 = make_element(
+        1,
+        "Architecture",
+        ElementType.HEADING,
+    )
+
+    paragraph = make_element(
+        2,
+        "Architecture explanation",
+        ElementType.PARAGRAPH,
+    )
+
+    chunk = make_chunk(
+        order_index=2,
+        elements=[paragraph],
+        text="Architecture explanation",
+        section_path=["Architecture"],
+    )
+
+    # Neither heading is inside FinalChunk.elements.
+    #
+    # This is valid for source coverage because headings are
+    # structural elements, not content elements.
+    validator.validate(
+        chunks=[chunk],
+        source_elements=[
+            heading_1,
+            heading_2,
+            paragraph,
+        ],
+    )
+
+
+def test_all_content_elements_are_covered_even_with_headings(
+    validator,
+):
+
+    heading = make_element(
+        0,
+        "Results",
+        ElementType.HEADING,
+    )
+
+    paragraph_1 = make_element(
+        1,
+        "Result one",
+        ElementType.PARAGRAPH,
+    )
+
+    paragraph_2 = make_element(
+        2,
+        "Result two",
+        ElementType.PARAGRAPH,
+    )
+
+    chunks = [
+        make_chunk(
+            order_index=1,
+            elements=[paragraph_1],
+            text="Result one",
+            section_path=["Results"],
+        ),
+        make_chunk(
+            order_index=2,
+            elements=[paragraph_2],
+            text="Result two",
+            section_path=["Results"],
+        ),
+    ]
+
+    validator.validate(
+        chunks=chunks,
+        source_elements=[
+            heading,
+            paragraph_1,
+            paragraph_2,
+        ],
+    )
+
+
 def test_source_coverage_is_optional(validator):
 
     element = make_element(0)
@@ -701,16 +862,19 @@ def test_realistic_mixed_document_passes(validator):
     paragraph = make_element(
         0,
         "This is a narrative paragraph.",
+        ElementType.PARAGRAPH,
     )
 
     table = make_element(
         2,
         "A | B\n1 | 2",
+        ElementType.TABLE,
     )
 
     code = make_element(
         4,
         "print('hello')",
+        ElementType.CODE_BLOCK,
     )
 
     chunks = [

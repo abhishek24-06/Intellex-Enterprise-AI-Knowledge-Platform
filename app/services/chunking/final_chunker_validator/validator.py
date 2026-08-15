@@ -1,6 +1,7 @@
 from app.dto.final_chunk import FinalChunk
 from app.dto.extracted_element import ExtractedElement
 from app.enums.chunk_type import ChunkType
+from app.enums.element_type import ElementType
 
 
 class FinalChunkValidationError(ValueError):
@@ -179,9 +180,10 @@ class FinalChunkValidator:
         source_elements: list[ExtractedElement],
     ) -> None:
 
-        source_order_indexes = {
+        conten_order_indexes = {
             element.order_index
             for element in source_elements
+            if element.element_type != ElementType.HEADING
         }
 
         covered_order_indexes = {
@@ -190,10 +192,11 @@ class FinalChunkValidator:
             for element in chunk.elements
         }
 
-        missing = source_order_indexes - covered_order_indexes
+        missing = conten_order_indexes - covered_order_indexes
 
         if missing:
             raise FinalChunkValidationError(
                 "Source elements were lost during chunking. "
                 f"Missing order_index values: {sorted(missing)}"
             )
+
