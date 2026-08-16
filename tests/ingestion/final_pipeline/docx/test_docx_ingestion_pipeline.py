@@ -1,5 +1,14 @@
 from pathlib import Path
 
+from app.models.documents import Document
+from app.enums.enums import (
+    DocumentStatus,
+    DocumentType,
+    DocumentVisibility,
+)
+from app.services.extraction.extraction_factory import ExtractorFactory
+from app.services.cleaning.element_cleaner import ElementCleaner
+
 from app.services.extraction.docx_extractor import DocxExtractor
 
 from app.services.chunking.structure_detection.detector import (
@@ -42,11 +51,11 @@ from app.services.chunking.final_chunker_validator.validator import (
     FinalChunkValidator,
 )
 
-from app.services.chunking.final_chunker.document_chunker import (
+from app.services.pipeline.document_chunker_pipeline import (
     DocumentChunker,
 )
 
-from app.services.ingestion.document_ingestion_pipeline import (
+from app.services.ingestion.ingestion_dependencies import (
     DocumentIngestionPipeline,
 )
 
@@ -58,21 +67,11 @@ from app.services.ingestion.metadata.chunk_attacher import (
     ChunkContextAttacher,
 )
 
-from app.dto.chunk_context import (
-    ChunkContext,
-)
-
-from app.enums.chunk_type import (
-    ChunkType,
-)
-
-from app.enums.enums import (
-    DocumentVisibility,
-)
+from app.enums.chunk_type import ChunkType
 
 
 # ============================================================================
-# REAL DOCUMENT
+# REAL DOCX DOCUMENT
 # ============================================================================
 
 TEST_DOCX = Path(
@@ -81,45 +80,12 @@ TEST_DOCX = Path(
 
 
 # ============================================================================
-# REAL EXTRACTOR
-# ============================================================================
-
-def build_real_extractor() -> DocxExtractor:
-    return DocxExtractor()
-
-
-def extract_real_document():
-    """
-    Run the actual DOCX extractor against the real test document.
-    """
-
-    assert TEST_DOCX.exists(), (
-        f"Real test document does not exist: {TEST_DOCX}"
-    )
-
-    extractor = build_real_extractor()
-
-    extraction_result = extractor.extract(
-        file_path=str(TEST_DOCX),
-        document_id="real-docx-full-pipeline-test",
-        filename=TEST_DOCX.name,
-    )
-
-    assert extraction_result is not None
-
-    assert extraction_result.elements
-
-    return extraction_result
-
-
-# ============================================================================
 # REAL DOCUMENT CHUNKER
 # ============================================================================
 
 def build_real_document_chunker() -> DocumentChunker:
     """
-    Construct the exact real DocumentChunker used by the existing
-    production-style chunking tests.
+    Build the exact real DocumentChunker dependency graph.
     """
 
     structure_detector = StructureDetector()
@@ -171,14 +137,30 @@ def build_real_document_chunker() -> DocumentChunker:
 
 def build_real_ingestion_pipeline() -> DocumentIngestionPipeline:
     """
-    Complete real pipeline:
+    Build the complete real ingestion pipeline.
 
-        DocumentChunker
-            ↓
-        MetadataEnricher
-            ↓
-        ChunkContextAttacher
+    Document
+        ↓
+    ExtractorFactory
+        ↓
+    Extractor
+        ↓
+    ExtractionResult
+        ↓
+    ElementCleaner
+        ↓
+    DocumentChunker
+        ↓
+    MetadataEnricher
+        ↓
+    ChunkContextAttacher
+        ↓
+    FinalChunk[]
     """
+
+    extractor_factory = ExtractorFactory()
+
+    element_cleaner = ElementCleaner()
 
     document_chunker = (
         build_real_document_chunker()
@@ -189,6 +171,8 @@ def build_real_ingestion_pipeline() -> DocumentIngestionPipeline:
     context_attacher = ChunkContextAttacher()
 
     return DocumentIngestionPipeline(
+        extractor_factory=extractor_factory,
+        element_cleaner=element_cleaner,
         document_chunker=document_chunker,
         metadata_enricher=metadata_enricher,
         context_attacher=context_attacher,
@@ -196,23 +180,57 @@ def build_real_ingestion_pipeline() -> DocumentIngestionPipeline:
 
 
 # ============================================================================
-# REAL UPLOAD CONTEXT
+# REAL DOCUMENT OBJECT
 # ============================================================================
 
-def build_real_upload_context() -> ChunkContext:
+def build_real_document() -> Document:
     """
-    Simulates the authoritative context supplied by the upload/document
-    service.
+    Build a persisted-Document-like object.
 
-    These values do NOT come from the DOCX itself.
+    No database is used here.
+
+    The ingestion pipeline only needs the authoritative
+    document-level information required for validation,
+    extraction selection and context attachment.
     """
 
-    return ChunkContext(
+    assert TEST_DOCX.exists(), (
+        f"Real test document does not exist: {TEST_DOCX}"
+    )
+
+    return Document(
         document_id=1001,
         organization_id=10,
         uploaded_by=5,
+
+        document_type=DocumentType.REPORT,
+
         visibility=DocumentVisibility.RESTRICTED,
-        document_version=1,
+
+        title="Real DOCX Full Pipeline Test",
+
+        description=(
+            "Real DOCX integration test for the complete "
+            "document ingestion pipeline."
+        ),
+
+        original_filename=TEST_DOCX.name,
+
+        stored_filename=TEST_DOCX.name,
+
+        status=DocumentStatus.PROCESSING,
+
+        file_path=str(TEST_DOCX),
+
+        file_size=TEST_DOCX.stat().st_size,
+
+        mime_type=(
+            "application/"
+            "vnd.openxmlformats-officedocument."
+            "wordprocessingml.document"
+        ),
+
+        version=1,
     )
 
 
@@ -220,72 +238,84 @@ def build_real_upload_context() -> ChunkContext:
 # TEST
 # ============================================================================
 
-def test_real_docx_from_extractor_to_final_ingestion_output():
+def test_real_docx_from_document_to_final_ingestion_output():
     """
-    Full real-document regression test.
+    Full real-document integration test.
 
-    DOCX
-      ↓
-    Extractor
-      ↓
+    Document
+        ↓
+    ExtractorFactory
+        ↓
+    DocxExtractor
+        ↓
     ExtractionResult
-      ↓
-    DocumentChunker
-      ↓
+        ↓
+    ElementCleaner
+        ↓
+    StructureDetector
+        ↓
+    DocumentStructureBuilder
+        ↓
+    HierarchyChunker / SemanticChunker
+        ↓
+    ElementRouter
+        ↓
+    Specialized Chunkers
+        ↓
     FinalChunkValidator
-      ↓
+        ↓
     MetadataEnricher
-      ↓
+        ↓
     ChunkContextAttacher
-      ↓
+        ↓
     FinalChunk[]
     """
 
     # ========================================================================
-    # STEP 1 — REAL EXTRACTION
+    # STEP 1 — BUILD REAL DOCUMENT
     # ========================================================================
 
-    extraction_result = extract_real_document()
+    document = build_real_document()
 
-    source_elements = extraction_result.elements
+    assert document.document_id == 1001
 
-    assert source_elements
+    assert document.organization_id == 10
 
-    # Every extracted element must have a valid position.
-    assert all(
-        element.order_index >= 0
-        for element in source_elements
+    assert document.uploaded_by == 5
+
+    assert document.mime_type == (
+        "application/"
+        "vnd.openxmlformats-officedocument."
+        "wordprocessingml.document"
     )
 
-    source_order_indexes = [
-        element.order_index
-        for element in source_elements
-    ]
+    assert document.original_filename == TEST_DOCX.name
 
-    # The extractor's source order must be unique.
-    assert len(source_order_indexes) == len(
-        set(source_order_indexes)
-    )
+    assert document.version == 1
+
+    assert document.file_path == str(TEST_DOCX)
+
 
     # ========================================================================
-    # STEP 2 — REAL INGESTION PIPELINE
+    # STEP 2 — BUILD REAL INGESTION PIPELINE
     # ========================================================================
 
     pipeline = (
         build_real_ingestion_pipeline()
     )
 
-    context = (
-        build_real_upload_context()
-    )
-
-    final_chunks = pipeline.process(
-        extraction_result,
-        context,
-    )
 
     # ========================================================================
-    # STEP 3 — BASIC FINAL OUTPUT CHECKS
+    # STEP 3 — RUN COMPLETE PIPELINE
+    # ========================================================================
+
+    final_chunks = pipeline.ingest(
+        document
+    )
+
+
+    # ========================================================================
+    # STEP 4 — BASIC FINAL OUTPUT CHECKS
     # ========================================================================
 
     assert final_chunks is not None
@@ -297,8 +327,9 @@ def test_real_docx_from_extractor_to_final_ingestion_output():
 
     assert final_chunks
 
+
     # ========================================================================
-    # STEP 4 — EVERY FINAL CHUNK MUST BE VALID
+    # STEP 5 — EVERY FINAL CHUNK MUST BE VALID
     # ========================================================================
 
     for chunk in final_chunks:
@@ -317,7 +348,7 @@ def test_real_docx_from_extractor_to_final_ingestion_output():
             dict,
         )
 
-        # Only supported final chunk types may exist.
+        # Supported final chunk types only.
         assert chunk.chunk_type in {
             ChunkType.NARRATIVE,
             ChunkType.TABLE,
@@ -327,32 +358,40 @@ def test_real_docx_from_extractor_to_final_ingestion_output():
         # Source position must be valid.
         assert chunk.order_index >= 0
 
-        # Section path remains a list.
+        # section_path must always be a list.
         assert isinstance(
             chunk.section_path,
             list,
         )
 
+
     # ========================================================================
-    # STEP 5 — FINAL CHUNKS MUST REFER TO REAL SOURCE ELEMENTS
+    # STEP 6 — SOURCE ELEMENT ORDER
     # ========================================================================
 
-    source_order_index_set = {
-        element.order_index
-        for element in source_elements
-    }
+    source_elements = []
 
     for chunk in final_chunks:
 
-        for element in chunk.elements:
+        source_elements.extend(
+            chunk.elements
+        )
 
-            assert (
-                element.order_index
-                in source_order_index_set
-            )
+    assert source_elements
+
+    source_order_indexes = [
+        element.order_index
+        for element in source_elements
+    ]
+
+    assert all(
+        index >= 0
+        for index in source_order_indexes
+    )
+
 
     # ========================================================================
-    # STEP 6 — ORDER INDEX MUST REPRESENT DOCUMENT POSITION
+    # STEP 7 — FINAL CHUNKS MUST BE ORDERED
     # ========================================================================
 
     final_order_indexes = [
@@ -364,11 +403,11 @@ def test_real_docx_from_extractor_to_final_ingestion_output():
         final_order_indexes
     )
 
-    # Every FinalChunk order_index must correspond to the earliest source
-    # element represented by that chunk.
-    #
-    # Multiple chunks are allowed to share an order_index because a single
-    # source element can be split into multiple fragments.
+
+    # ========================================================================
+    # STEP 8 — ORDER INDEX CONTRACT
+    # ========================================================================
+
     for chunk in final_chunks:
 
         minimum_source_order = min(
@@ -381,8 +420,9 @@ def test_real_docx_from_extractor_to_final_ingestion_output():
             == minimum_source_order
         )
 
+
     # ========================================================================
-    # STEP 7 — DOCUMENT CONTEXT MUST EXIST ON EVERY CHUNK
+    # STEP 9 — DOCUMENT CONTEXT
     # ========================================================================
 
     for chunk in final_chunks:
@@ -412,8 +452,9 @@ def test_real_docx_from_extractor_to_final_ingestion_output():
             == 1
         )
 
+
     # ========================================================================
-    # STEP 8 — CONTEXT MUST BE CONSISTENT ACROSS THE DOCUMENT
+    # STEP 10 — CONTEXT MUST BE CONSISTENT
     # ========================================================================
 
     assert {
@@ -443,23 +484,12 @@ def test_real_docx_from_extractor_to_final_ingestion_output():
         for chunk in final_chunks
     } == {1}
 
+
     # ========================================================================
-    # STEP 9 — EXTRACTOR PROVENANCE MUST SURVIVE
+    # STEP 11 — DOCX PROVENANCE
     # ========================================================================
 
-    # The DOCX extractor establishes these fields on its source elements.
-    assert all(
-        element.metadata.get("source") == "docx"
-        for element in source_elements
-    )
-
-    assert all(
-        element.metadata.get("filename")
-        == TEST_DOCX.name
-        for element in source_elements
-    )
-
-    # At least one final chunk must retain the DOCX provenance.
+    # At least one final chunk must retain DOCX provenance.
     assert any(
         chunk.metadata.get("source") == "docx"
         for chunk in final_chunks
@@ -471,44 +501,128 @@ def test_real_docx_from_extractor_to_final_ingestion_output():
         for chunk in final_chunks
     )
 
-    # ========================================================================
-    # STEP 10 — CHECK THAT SPECIALIZED CHUNKS EXIST WHEN PRESENT
-    # ========================================================================
 
-    source_element_types = {
-        element.element_type
-        for element in source_elements
-    }
+    # ========================================================================
+    # STEP 12 — SPECIALIZED CHUNKS
+    # ========================================================================
 
     final_chunk_types = {
         chunk.chunk_type
         for chunk in final_chunks
     }
 
-    # If the real document contains tables, the final pipeline must preserve
-    # them as TABLE chunks.
-    if any(
-        str(element_type).upper().endswith("TABLE")
-        for element_type in source_element_types
-    ):
-        assert (
-            ChunkType.TABLE in final_chunk_types
-        )
+    assert (
+        ChunkType.NARRATIVE
+        in final_chunk_types
+    )
 
-    # If the real document contains code blocks, the final pipeline must
-    # preserve them as CODE chunks.
-    if any(
-        str(element_type).upper().endswith(
-            "CODE_BLOCK"
-        )
-        for element_type in source_element_types
-    ):
-        assert (
-            ChunkType.CODE in final_chunk_types
-        )
 
     # ========================================================================
-    # STEP 11 — FINAL OUTPUT MUST BE NON-EMPTY AND USEFUL
+    # STEP 13 — SECTION PATH DIAGNOSTIC
+    # ========================================================================
+
+    print()
+    print("=" * 80)
+    print("SECTION PATH DIAGNOSTIC")
+    print("=" * 80)
+
+    non_empty_section_paths = []
+
+    for chunk in final_chunks:
+
+        if chunk.section_path:
+
+            non_empty_section_paths.append(
+                (
+                    chunk.order_index,
+                    chunk.section_path,
+                    chunk.text[:100],
+                )
+            )
+
+    print(
+        "Chunks with non-empty section_path:",
+        len(non_empty_section_paths),
+    )
+
+    for (
+        order_index,
+        section_path,
+        text_preview,
+    ) in non_empty_section_paths[:30]:
+
+        print()
+        print(
+            f"order_index : {order_index}"
+        )
+
+        print(
+            f"section_path: {section_path}"
+        )
+
+        print(
+            f"text        : {text_preview!r}"
+        )
+
+    print("=" * 80)
+
+
+    # ========================================================================
+    # STEP 14 — SECTION PATH SHOULD EXIST FOR A STRUCTURED DOCX
+    # ========================================================================
+
+    heading_elements = [
+        element
+        for element in source_elements
+        if str(element.element_type).upper().endswith(
+            "HEADING"
+        )
+    ]
+
+    print()
+    print(
+        "Heading elements found:",
+        len(heading_elements),
+    )
+
+    for heading in heading_elements[:20]:
+
+        print(
+            f"HEADING "
+            f"{heading.order_index}: "
+            f"{heading.text!r} "
+            f"level={heading.metadata.get('level')}"
+        )
+
+
+    # IMPORTANT:
+    #
+    # Do NOT assert that every chunk has a non-empty section_path.
+    #
+    # Some document-level content may legitimately exist outside
+    # a heading.
+    #
+    # Instead, if the document contains headings, at least one
+    # final chunk should carry hierarchy information.
+    #
+    # This assertion is intentionally useful for catching the
+    # current DOCX section_path bug.
+
+    assert heading_elements, (
+        "The DOCX fixture must contain headings "
+        "for this section-path integration test."
+    )
+
+    assert non_empty_section_paths, (
+        "DOCX contains heading elements but no final chunk "
+        "contains a non-empty section_path. "
+        "This indicates that the structured hierarchy is not "
+        "reaching the final chunk pipeline."
+    )
+
+
+    # ========================================================================
+    # STEP 15 — FINAL OUTPUT MUST BE USEFUL
     # ========================================================================
 
     total_text_length = sum(
@@ -518,44 +632,61 @@ def test_real_docx_from_extractor_to_final_ingestion_output():
 
     assert total_text_length > 0
 
-    # Every chunk must contain at least one source element.
     assert all(
         len(chunk.elements) >= 1
         for chunk in final_chunks
     )
+
 
     # ========================================================================
     # FINAL SUMMARY
     # ========================================================================
 
     print()
-    print("=" * 70)
-    print("REAL DOCX → FULL INGESTION PIPELINE")
-    print("=" * 70)
+    print("=" * 80)
+    print("REAL DOCX → COMPLETE INGESTION PIPELINE")
+    print("=" * 80)
 
     print(
-        f"Source elements : {len(source_elements)}"
+        f"Document ID    : {document.document_id}"
     )
 
     print(
-        f"Final chunks    : {len(final_chunks)}"
+        f"Source file    : {document.original_filename}"
     )
 
     print(
-        "Chunk types     : "
-        f"{sorted(chunk_type.value for chunk_type in final_chunk_types)}"
+        f"MIME type      : {document.mime_type}"
     )
 
     print(
-        f"Total text      : {total_text_length} chars"
+        f"Final chunks   : {len(final_chunks)}"
     )
 
     print(
-        "Context         : attached to all chunks"
+    "Chunk types    : "
+    f"{sorted(chunk_type.value for chunk_type in final_chunk_types)}"
+)
+
+    print(
+        f"Total text     : {total_text_length} chars"
     )
 
     print(
-        "Validation      : passed"
+        f"Headings found : {len(heading_elements)}"
     )
 
-    print("=" * 70)
+    print(
+        "Section paths  : "
+        f"{len(non_empty_section_paths)} chunks"
+    )
+
+    print(
+        "Context        : attached to all chunks"
+    )
+
+    print(
+        "Validation     : passed"
+    )
+
+    print("=" * 80)

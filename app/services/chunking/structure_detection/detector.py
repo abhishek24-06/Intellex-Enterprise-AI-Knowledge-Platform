@@ -7,7 +7,7 @@ class StructureDetector:
 
     TABULAR_DOMINANCE_THRESHOLD = 0.50
     STRUCTURED_SUPPRESSION_THRESHOLD = 0.25
-    STRUCTURED_MINIMUM_THRESHOLD = 0.35
+    STRUCTURED_MINIMUM_THRESHOLD = 0.30
 
     def __init__(self):
 
@@ -19,6 +19,14 @@ class StructureDetector:
 
         heading_count = self.scorer.count_headings(extraction_result.elements)
 
+            # TEMPORARY DEBUG
+        print("\n========== STRUCTURE DETECTION DEBUG ==========")
+        print("HEADING COUNT:", heading_count)
+        print("STRUCTURED SCORE:", scores.structured)
+        print("UNSTRUCTURED SCORE:", scores.unstructured)
+        print("TABULAR SCORE:", scores.tabular)
+        print("===============================================\n")
+        
         structure_type = self._determine_structure_type(scores=scores, heading_count=heading_count)
 
         confidence = self._calculate_confidence(structure_type=structure_type, scores=scores)

@@ -31,6 +31,22 @@ EXPECTED_MIME_TYPES = {
     ".md": "text/markdown",
 }
 
+ALLOWED_DETECTED_MIME_TYPES = {
+    ".pdf": {
+        "application/pdf",
+    },
+    ".txt": {
+        "text/plain",
+    },
+    ".docx": {
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    },
+    ".md": {
+        "text/plain",
+        "text/markdown",
+    },
+}
+
 def get_document_by_id(db:Session,document_id:int)->Document|None:
 
     stmt=(select(Document).where(Document.document_id==document_id,Document.is_deleted==False))
@@ -78,12 +94,14 @@ def validate_file(file:UploadFile)->str:
     if detected_mime not in ALLOWED_MIME_TYPES :
         raise ValueError(f"Invalid file content: {detected_mime}")
 
-    expected_mime= EXPECTED_MIME_TYPES[extension]
+    allowed_detected_mimes = (
+    ALLOWED_DETECTED_MIME_TYPES[extension])
 
-    if detected_mime != expected_mime:
-        raise ValueError("File extension does not match actual file content.")
-
-    return detected_mime
+    if detected_mime not in allowed_detected_mimes:
+        raise ValueError(
+            "File extension does not match actual file content."
+    )
+    return EXPECTED_MIME_TYPES[extension]
 
 def create_document(db:Session,
                     document_data:CreateDocumentRequest,
@@ -164,7 +182,7 @@ def create_document(db:Session,
                 db.add(acl)
     
         #Update status
-        document.status=DocumentStatus.READY
+        document.status=DocumentStatus.PROCESSING
     
         db.commit()
         db.refresh(document)

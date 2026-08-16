@@ -9,7 +9,7 @@ from app.dto.routed_chunk import RoutedChunk
 from app.enums.chunk_type import ChunkType
 from app.enums.element_type import ElementType
 
-from app.services.chunking.final_chunker.document_chunker import DocumentChunker
+from app.services.pipeline.document_chunker_pipeline import DocumentChunker
 from app.services.chunking.structure_detection.models import StructureType
 
 def make_paragraph(order_index: int, text: str):

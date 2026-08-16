@@ -42,7 +42,7 @@ from app.services.chunking.final_chunker_validator.validator import (
     FinalChunkValidator,
 )
 
-from app.services.chunking.final_chunker.document_chunker import (
+from app.services.pipeline.document_chunker_pipeline import (
     DocumentChunker,
 )
 

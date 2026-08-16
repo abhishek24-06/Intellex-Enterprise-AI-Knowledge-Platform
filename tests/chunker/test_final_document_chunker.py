@@ -12,7 +12,7 @@ from app.dto.table_chunk import TableChunk
 from app.enums.chunk_type import ChunkType
 from app.enums.element_type import ElementType
 
-from app.services.chunking.final_chunker.document_chunker import DocumentChunker
+from app.services.pipeline.document_chunker_pipeline import DocumentChunker
 
 from app.services.chunking.structure_detection.models import (
     StructureDetectionResult,

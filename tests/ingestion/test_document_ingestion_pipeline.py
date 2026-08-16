@@ -7,7 +7,7 @@ from app.dto.extracted_element import ExtractedElement
 from app.enums.chunk_type import ChunkType
 from app.enums.element_type import ElementType
 from app.enums.enums import DocumentVisibility
-from app.services.ingestion.document_ingestion_pipeline import (
+from app.services.pipeline.document_ingestion_pipeline import (
     DocumentIngestionPipeline,
 )
 from app.services.ingestion.metadata.metadata_enricher import (

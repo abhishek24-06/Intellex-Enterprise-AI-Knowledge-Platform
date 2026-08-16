@@ -1,5 +1,8 @@
 from pathlib import Path
-from docling.document_converter import DocumentConverter
+from docling.document_converter import DocumentConverter, PdfFormatOption
+from docling.datamodel.base_models import InputFormat
+from docling.datamodel.pipeline_options import PdfPipelineOptions
+from docling.datamodel.object_detection_engine_options import TransformersObjectDetectionEngineOptions
 
 from app.enums.element_type import ElementType
 from app.dto.extracted_element import ExtractedElement
@@ -10,8 +13,22 @@ class DoclingExtractor(BaseExtractor):
 
     def __init__(self):
 
-        self.converter = DocumentConverter()
-        
+        pdf_pipeline_options = (PdfPipelineOptions())
+
+        pdf_pipeline_options.layout_options.engine_options = (
+            TransformersObjectDetectionEngineOptions(
+                compile_model=False,
+            )
+        )
+
+        self.converter = DocumentConverter(
+            format_options={
+                InputFormat.PDF: PdfFormatOption(
+                    pipeline_options=pdf_pipeline_options,
+                )
+            }
+        )
+      
     def extract(self,file_path: str | Path,
                 document_id:str |None=None,filename:str |None=None)-> ExtractionResult:
 
@@ -70,7 +87,7 @@ class DoclingExtractor(BaseExtractor):
             case _:
                 return None
 
-    def _extract_provenance(self,item)->tuple[int, tuple[float, float, float, float]]:
+    def _extract_provenance(self,item)->tuple[int | None, tuple[float, float, float, float] | None]:
 
         if not item.prov:
             return None,None

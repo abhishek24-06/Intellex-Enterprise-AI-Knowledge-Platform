@@ -35,7 +35,7 @@ from app.services.chunking.final_chunker_validator.validator import (
 
 from app.enums.chunk_type import ChunkType
 
-from app.services.chunking.final_chunker.document_chunker import (
+from app.services.pipeline.document_chunker_pipeline import (
     DocumentChunker,
 )
 
