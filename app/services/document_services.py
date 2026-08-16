@@ -14,7 +14,7 @@ from app.services.user_service import get_user_by_id
 from app.services.team_service import get_team_by_id
 from app.services.department_service import get_department_by_id
 
-MAX_FILE_SIZE=25*1024*1024
+MAX_FILE_SIZE=50*1024*1024
 ##ALLOWED FILE TYPES
 ALLOWED_MIME_TYPES = {
     "application/pdf",
@@ -28,8 +28,7 @@ EXPECTED_MIME_TYPES = {
     ".pdf": "application/pdf",
     ".txt": "text/plain",
     ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    ".doc": "application/msword",
-    ".md": "text/plain",
+    ".md": "text/markdown",
 }
 
 def get_document_by_id(db:Session,document_id:int)->Document|None:
@@ -107,7 +106,7 @@ def create_document(db:Session,
 
 
     if file_size > MAX_FILE_SIZE:
-        raise ValueError("File size exceeds 25 MB.")
+        raise ValueError("File size exceeds 50 MB.")
 
     #Generate Storage Filename
     extension=Path(file.filename).suffix.lower()
