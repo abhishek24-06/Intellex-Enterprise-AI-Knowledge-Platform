@@ -3,7 +3,7 @@ from sqlalchemy import Integer,String,ForeignKey,DateTime,UniqueConstraint,JSON,
 from sqlalchemy.orm import mapped_column,Mapped,relationship
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING
-
+from pgvector.sqlalchemy import Vector
 
 if TYPE_CHECKING:
     from app.models.documents import Document
@@ -29,7 +29,7 @@ class DocumentChunk(Base):
 
     token_count:Mapped[int]=mapped_column(Integer,nullable=False)
 
-    vector_id:Mapped[str|None]=mapped_column(String(255),unique=True,nullable=True)
+    embedding:Mapped[list[float] | None]=mapped_column(Vector(1024),nullable=True)
 
     metadata_json:Mapped[dict]=mapped_column(JSON,nullable=False)
 

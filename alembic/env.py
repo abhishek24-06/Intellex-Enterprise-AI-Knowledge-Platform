@@ -22,7 +22,7 @@ load_dotenv()
 
 config=context.config
 
-database_url = os.getenv("DATABASE_URL")
+database_url = os.getenv("DIRECT_URL")
 
 if not database_url:
     raise ValueError("DATABASE_URL not found in .env")

@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 from app.services.chunking.code.code_chunker import CodeChunker
 from app.services.chunking.final_chunker_validator.validator import FinalChunkValidator
 from app.services.chunking.hierarchy.hierarchy_chunker import HierarchyChunker
@@ -14,7 +16,9 @@ from app.services.ingestion.metadata.chunk_attacher import ChunkContextAttacher
 from app.services.ingestion.metadata.metadata_enricher import MetadataEnricher
 from app.services.pipeline.document_chunker_pipeline import DocumentChunker
 from app.services.pipeline.document_ingestion_pipeline import DocumentIngestionPipeline
-
+from app.services.embedding.bge_m3_embedding_service import BGEM3EmbeddingService
+from app.services.embedding.document_embedding_ingestion_service import DocumentEmbeddingIngestionService
+from app.services.document_processing_service import DocumentProcessingService
 
 def build_document_chunker():
 
@@ -67,4 +71,29 @@ def build_document_ingestion_pipeline() -> DocumentIngestionPipeline:
         document_chunker=document_chunker,
         metadata_enricher=metadata_enricher,
         context_attacher=context_attacher,
+    )
+
+@lru_cache(maxsize=1)
+def build_embedding_ingestion_service():
+
+    embedding_service = BGEM3EmbeddingService()
+
+    return DocumentEmbeddingIngestionService(
+        embedding_service=embedding_service
+    )
+
+def build_document_processing_service():
+    """
+    Combines:
+        extraction/chunking
+                +
+        embedding/pgvector persistence
+    """
+    ingestion_pipeline = (build_document_ingestion_pipeline())
+
+    embedding_ingestion_service = (build_embedding_ingestion_service())
+
+    return DocumentProcessingService(
+        ingestion_pipeline=ingestion_pipeline,
+        embedding_ingestion_service=(embedding_ingestion_service),
     )
