@@ -5,6 +5,7 @@ from typing import Any
 class RetrievedChunk:
 
     document_id: int
+    original_filename:str
     chunk_id: int
     chunk_index: int
     chunk_text: str

@@ -80,10 +80,11 @@ class VectorSearchRepository:
         cosine_distance = (DocumentChunk.embedding.cosine_distance(query_embedding))
 
         vector_score = (1.0 - cosine_distance)  #cosine simi = 1 - cosine distance
-        
+
         stmt = (
             select(
                 DocumentChunk,
+                Document.original_filename,
                 vector_score.label("vector_score"),
             )
             .join(
@@ -116,10 +117,11 @@ class VectorSearchRepository:
             .all()
         )
         results: list[RetrievedChunk] = []
-        for chunk,score in rows:
+        for chunk, original_filename , score in rows:
             results.append(
                 RetrievedChunk(
                     document_id=chunk.document_id,
+                    original_filename=original_filename,
                     chunk_id=chunk.chunk_id,
                     chunk_index=chunk.chunk_index,
                     chunk_text=chunk.chunk_text,
