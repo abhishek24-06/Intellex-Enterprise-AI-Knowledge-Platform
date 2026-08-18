@@ -1,0 +1,95 @@
+# IT Department Infrastructure Operations
+
+**Visibility:** DEPARTMENT: IT
+
+**ACL Test Marker:** `DEPT-IT-05-EPSILON`
+
+
+## 1. Infrastructure Scope
+
+This document describes internal infrastructure operations for the IT department. It covers service health, deployment environments, monitoring, configuration changes, incident records, and recovery validation.
+
+
+## 2. Service Inventory
+
+Infrastructure records should identify important services, dependencies, owners, and operational state. The inventory provides context during incidents and reduces the risk of changing the wrong component.
+
+
+### Reference Table
+
+| Field | Example | Purpose |
+|---|---|---|
+| Owner | Assigned employee | Accountability |
+| Status | In progress | Current state |
+| Priority | High | Ordering work |
+| Review | Required | Quality control |
+
+
+## 3. Health Checks
+
+Routine health checks should verify application availability, database connectivity, queue status, monitoring state, and recent deployment activity. Results should be recorded when they are relevant to an operational decision.
+
+
+## 4. Deployment
+
+A deployment should identify the version, target, owner, validation checks, and rollback method. A successful deployment is not merely the absence of an error; the operator should confirm expected behavior.
+
+
+## 5. Configuration Management
+
+Configuration changes should be documented with the reason, old and new values where appropriate, affected service, and verification result. Sensitive credentials should never be copied into ordinary documentation.
+
+
+## 6. Monitoring
+
+Monitoring alerts are signals rather than complete diagnoses. Operators correlate alerts with recent changes, service logs, and dependency health before deciding on mitigation.
+
+
+## 7. Incident Response
+
+An infrastructure incident record should contain an identifier, affected service, start time, impact, mitigation, owner, and final resolution.
+
+
+## 8. Example Record
+
+The following code excerpt illustrates a synthetic incident record.
+
+
+## 9. Access Boundary
+
+This document is restricted to IT department members. Being part of the broader Apple organization does not provide access to these chunks.
+
+
+## 10. Test Marker
+
+The validation marker DEPT-IT-05-EPSILON must only be retrievable by IT department users.
+
+
+## Appendix 1: Operational Example
+
+This synthetic appendix expands the IT Department Infrastructure Operations scenario with an additional operational example. It provides enough natural-language context to exercise document parsing, chunk boundaries, metadata propagation, vector retrieval, reranking, and ACL filtering. The example remains within the same authorization boundary as the parent document. Test marker DEPT-IT-05-EPSILON remains associated with the document, while the surrounding prose provides semantically related material that can produce multiple retrieval candidates for the same query. This is appendix 1 of 6.
+
+
+## Appendix 2: Operational Example
+
+This synthetic appendix expands the IT Department Infrastructure Operations scenario with an additional operational example. It provides enough natural-language context to exercise document parsing, chunk boundaries, metadata propagation, vector retrieval, reranking, and ACL filtering. The example remains within the same authorization boundary as the parent document. Test marker DEPT-IT-05-EPSILON remains associated with the document, while the surrounding prose provides semantically related material that can produce multiple retrieval candidates for the same query. This is appendix 2 of 6.
+
+
+## Appendix 3: Operational Example
+
+This synthetic appendix expands the IT Department Infrastructure Operations scenario with an additional operational example. It provides enough natural-language context to exercise document parsing, chunk boundaries, metadata propagation, vector retrieval, reranking, and ACL filtering. The example remains within the same authorization boundary as the parent document. Test marker DEPT-IT-05-EPSILON remains associated with the document, while the surrounding prose provides semantically related material that can produce multiple retrieval candidates for the same query. This is appendix 3 of 6.
+
+
+## Appendix 4: Operational Example
+
+This synthetic appendix expands the IT Department Infrastructure Operations scenario with an additional operational example. It provides enough natural-language context to exercise document parsing, chunk boundaries, metadata propagation, vector retrieval, reranking, and ACL filtering. The example remains within the same authorization boundary as the parent document. Test marker DEPT-IT-05-EPSILON remains associated with the document, while the surrounding prose provides semantically related material that can produce multiple retrieval candidates for the same query. This is appendix 4 of 6.
+
+
+## Appendix 5: Operational Example
+
+This synthetic appendix expands the IT Department Infrastructure Operations scenario with an additional operational example. It provides enough natural-language context to exercise document parsing, chunk boundaries, metadata propagation, vector retrieval, reranking, and ACL filtering. The example remains within the same authorization boundary as the parent document. Test marker DEPT-IT-05-EPSILON remains associated with the document, while the surrounding prose provides semantically related material that can produce multiple retrieval candidates for the same query. This is appendix 5 of 6.
+
+
+## Appendix 6: Operational Example
+
+This synthetic appendix expands the IT Department Infrastructure Operations scenario with an additional operational example. It provides enough natural-language context to exercise document parsing, chunk boundaries, metadata propagation, vector retrieval, reranking, and ACL filtering. The example remains within the same authorization boundary as the parent document. Test marker DEPT-IT-05-EPSILON remains associated with the document, while the surrounding prose provides semantically related material that can produce multiple retrieval candidates for the same query. This is appendix 6 of 6.

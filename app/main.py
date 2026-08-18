@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.api.auth import router as auth_router
-from app.api import departments, organizations, team, users, documents,document_access, retrieval
+from app.api import departments, organizations, team, users, documents,document_access, retrieval, chat
 from app.core.exceptions import value_error_handler
 
 app=FastAPI()
@@ -22,3 +22,5 @@ app.include_router(documents.router)
 app.include_router(document_access.router)
 
 app.include_router(retrieval.router)
+
+app.include_router(chat.router)

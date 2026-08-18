@@ -4,6 +4,7 @@ from sqlalchemy import and_, or_, select
 from pathlib import Path
 import uuid,shutil
 import magic
+from zipfile import ZipFile, BadZipFile
 
 from app.models.document_acl import DocumentACL
 from app.models.documents import Document
@@ -83,6 +84,37 @@ def validate_file(file:UploadFile)->str:
 
     if extension not in EXPECTED_MIME_TYPES:
         raise ValueError(f"Unsupported file extension: {extension}")
+
+    if extension == ".docx":
+
+        file.file.seek(0)
+
+        try:
+            with ZipFile(file.file, "r") as archive:
+
+                names = set(
+                    archive.namelist()
+                )
+
+                if (
+                    "[Content_Types].xml" not in names
+                    or "word/document.xml" not in names
+                ):
+                    raise ValueError(
+                        "Invalid DOCX content."
+                    )
+
+        except BadZipFile:
+            raise ValueError(
+                "Invalid DOCX content."
+            )
+
+        finally:
+            file.file.seek(0)
+
+        return EXPECTED_MIME_TYPES[
+            ".docx"
+        ]
 
     file.file.seek(0) #Resets the file cursor to the absolute beginning (position 0) 
 

@@ -1,0 +1,105 @@
+# Sagar Rajput Private Project Notes
+
+**Visibility:** USER: Sagar Rajput (user_id 8)
+
+**ACL Test Marker:** `USER-SAGAR-09-IOTA`
+
+
+## 1. Private Scope
+
+These notes are synthetic private project notes assigned specifically to Sagar Rajput. The document is user-restricted rather than merely department-restricted.
+
+
+## 2. Project Objective
+
+The project objective is to maintain a private record of Finance-related analysis tasks, validation checkpoints, and follow-up actions. The notes are intended for the named user only.
+
+
+### Reference Table
+
+| Field | Example | Purpose |
+|---|---|---|
+| Owner | Assigned employee | Accountability |
+| Status | In progress | Current state |
+| Priority | High | Ordering work |
+| Review | Required | Quality control |
+
+
+## 3. Task Tracking
+
+Each task has an owner, priority, status, and next action. Private notes can contain details that are unnecessary for a broader department audience.
+
+
+## 4. Analysis Workflow
+
+The workflow starts with collecting the relevant input, validating the assumptions, performing the analysis, checking the result, and recording a concise conclusion.
+
+
+## 5. Validation
+
+Validation should identify calculation errors, missing supporting information, and inconsistencies. A failed validation should create a follow-up item.
+
+
+## 6. Follow-up
+
+Follow-up actions should identify the next step and a useful completion condition. The purpose is to keep private project work actionable rather than simply storing observations.
+
+
+## 7. Private Record
+
+The record intentionally demonstrates that access can be narrower than department or team membership. Another Finance employee should not be able to retrieve these chunks merely because the subject matter is Finance-related.
+
+
+## 8. Example Data
+
+A synthetic private record can be represented as a dictionary.
+
+
+```python
+record = {
+    "owner": "assigned-user",
+    "status": "in_progress",
+    "priority": "high",
+    "validated": True,
+}
+```
+
+
+## 9. Access Boundary
+
+Only user_id 8 should receive the chunks from this document.
+
+
+## 10. Test Marker
+
+The marker USER-SAGAR-09-IOTA is unique to Sagar Rajput's private document and should never be returned to another user.
+
+
+## Appendix 1: Operational Example
+
+This synthetic appendix expands the Sagar Rajput Private Project Notes scenario with an additional operational example. It provides enough natural-language context to exercise document parsing, chunk boundaries, metadata propagation, vector retrieval, reranking, and ACL filtering. The example remains within the same authorization boundary as the parent document. Test marker USER-SAGAR-09-IOTA remains associated with the document, while the surrounding prose provides semantically related material that can produce multiple retrieval candidates for the same query. This is appendix 1 of 6.
+
+
+## Appendix 2: Operational Example
+
+This synthetic appendix expands the Sagar Rajput Private Project Notes scenario with an additional operational example. It provides enough natural-language context to exercise document parsing, chunk boundaries, metadata propagation, vector retrieval, reranking, and ACL filtering. The example remains within the same authorization boundary as the parent document. Test marker USER-SAGAR-09-IOTA remains associated with the document, while the surrounding prose provides semantically related material that can produce multiple retrieval candidates for the same query. This is appendix 2 of 6.
+
+
+## Appendix 3: Operational Example
+
+This synthetic appendix expands the Sagar Rajput Private Project Notes scenario with an additional operational example. It provides enough natural-language context to exercise document parsing, chunk boundaries, metadata propagation, vector retrieval, reranking, and ACL filtering. The example remains within the same authorization boundary as the parent document. Test marker USER-SAGAR-09-IOTA remains associated with the document, while the surrounding prose provides semantically related material that can produce multiple retrieval candidates for the same query. This is appendix 3 of 6.
+
+
+## Appendix 4: Operational Example
+
+This synthetic appendix expands the Sagar Rajput Private Project Notes scenario with an additional operational example. It provides enough natural-language context to exercise document parsing, chunk boundaries, metadata propagation, vector retrieval, reranking, and ACL filtering. The example remains within the same authorization boundary as the parent document. Test marker USER-SAGAR-09-IOTA remains associated with the document, while the surrounding prose provides semantically related material that can produce multiple retrieval candidates for the same query. This is appendix 4 of 6.
+
+
+## Appendix 5: Operational Example
+
+This synthetic appendix expands the Sagar Rajput Private Project Notes scenario with an additional operational example. It provides enough natural-language context to exercise document parsing, chunk boundaries, metadata propagation, vector retrieval, reranking, and ACL filtering. The example remains within the same authorization boundary as the parent document. Test marker USER-SAGAR-09-IOTA remains associated with the document, while the surrounding prose provides semantically related material that can produce multiple retrieval candidates for the same query. This is appendix 5 of 6.
+
+
+## Appendix 6: Operational Example
+
+This synthetic appendix expands the Sagar Rajput Private Project Notes scenario with an additional operational example. It provides enough natural-language context to exercise document parsing, chunk boundaries, metadata propagation, vector retrieval, reranking, and ACL filtering. The example remains within the same authorization boundary as the parent document. Test marker USER-SAGAR-09-IOTA remains associated with the document, while the surrounding prose provides semantically related material that can produce multiple retrieval candidates for the same query. This is appendix 6 of 6.
