@@ -92,6 +92,8 @@ def test_session_ownership_is_required():
     result = Mock()
     result.scalar_one_or_none.return_value = None
 
+    contextualizer = Mock()
+
     db.execute.return_value = result
 
     with pytest.raises(
@@ -104,6 +106,7 @@ def test_session_ownership_is_required():
             query="Test",
             current_user=user,
             rag_service=rag_service,
+            query_contextualizer=contextualizer
         )
 
     rag_service.answer.assert_not_called()
@@ -112,6 +115,7 @@ def test_session_ownership_is_required():
 def test_empty_query_is_rejected():
 
     session = make_session()
+    contextualizer = Mock()
 
     db = configure_db(
         session=session,
@@ -127,6 +131,8 @@ def test_empty_query_is_rejected():
             query="   ",
             current_user=make_user(),
             rag_service=Mock(),
+            query_contextualizer=contextualizer
+
         )
 
 def test_rag_is_called_with_normalized_query():
@@ -136,6 +142,7 @@ def test_rag_is_called_with_normalized_query():
     db = configure_db(
         session=session,
     )
+    contextualizer = Mock()
 
     rag_service = make_rag_service()
 
@@ -149,6 +156,7 @@ def test_rag_is_called_with_normalized_query():
         query="   What is deepfake detection?   ",
         current_user=user,
         rag_service=rag_service,
+        query_contextualizer=contextualizer
     )
 
     rag_service.answer.assert_called_once_with(
@@ -164,6 +172,8 @@ def test_sources_are_deduplicated():
         session=session,
     )
 
+    contextualizer = Mock()
+
     rag_service = make_rag_service()
 
     db.flush.side_effect = lambda: None
@@ -174,6 +184,7 @@ def test_sources_are_deduplicated():
         query="What is deepfake detection?",
         current_user=make_user(),
         rag_service=rag_service,
+        query_contextualizer=contextualizer
     )
 
     # ChatHistory + 2 unique ChatSource objects
@@ -189,6 +200,7 @@ def test_session_last_active_is_updated():
     db = configure_db(
         session=session,
     )
+    contextualizer = Mock()
 
     rag_service = make_rag_service()
 
@@ -200,6 +212,7 @@ def test_session_last_active_is_updated():
         query="Test query",
         current_user=make_user(),
         rag_service=rag_service,
+        query_contextualizer=contextualizer
     )
 
     assert session.last_active != old_timestamp
@@ -211,6 +224,7 @@ def test_database_commit_occurs():
     db = configure_db(
         session=session,
     )
+    contextualizer = Mock()
 
     rag_service = make_rag_service()
 
@@ -222,6 +236,7 @@ def test_database_commit_occurs():
         query="Test query",
         current_user=make_user(),
         rag_service=rag_service,
+        query_contextualizer=contextualizer
     )
 
     db.commit.assert_called_once()
@@ -240,6 +255,7 @@ def test_commit_failure_rolls_back():
     db.commit.side_effect = RuntimeError(
         "Database failure"
     )
+    contextualizer = Mock()
 
     rag_service = make_rag_service()
 
@@ -253,6 +269,112 @@ def test_commit_failure_rolls_back():
             query="Test query",
             current_user=make_user(),
             rag_service=rag_service,
+            query_contextualizer=contextualizer
         )
 
     db.rollback.assert_called_once()
+
+def test_first_message_does_not_contextualize():
+
+    session = make_session()
+
+    db = configure_db(
+        session=session,
+    )
+
+    # Existing history query returns no rows.
+    history_result = Mock()
+    history_result.all.return_value = []
+
+    # First DB call = session lookup.
+    session_result = Mock()
+    session_result.scalar_one_or_none.return_value = session
+
+    db.execute.side_effect = [
+        session_result,
+        history_result,
+    ]
+
+    rag_service = make_rag_service()
+    contextualizer = Mock()
+
+    db.flush.side_effect = lambda: None
+
+    create_chat_message(
+        db=db,
+        session_id=10,
+        query="What is annual leave?",
+        current_user=make_user(),
+        rag_service=rag_service,
+        query_contextualizer=contextualizer,
+    )
+
+    contextualizer.contextualize.assert_not_called()
+
+    rag_service.answer.assert_called_once()
+
+def test_follow_up_message_is_contextualized():
+
+    session = make_session()
+
+    db = configure_db(
+        session=session,
+    )
+
+    # Session lookup.
+    session_result = Mock()
+    session_result.scalar_one_or_none.return_value = session
+
+    # Existing conversation.
+    history_result = Mock()
+    history_result.all.return_value = [
+        (
+            "What is the annual leave policy?",
+            "Employees receive annual leave.",
+        )
+    ]
+
+    db.execute.side_effect = [
+        session_result,
+        history_result,
+    ]
+
+    rag_service = make_rag_service()
+
+    contextualizer = Mock()
+
+    contextualizer.contextualize.return_value = (
+        "What is the procedure for applying for annual leave?"
+    )
+
+    db.flush.side_effect = lambda: None
+
+    user = make_user()
+
+    create_chat_message(
+        db=db,
+        session_id=10,
+        query="How do I apply for it?",
+        current_user=user,
+        rag_service=rag_service,
+        query_contextualizer=contextualizer,
+    )
+
+    contextualizer.contextualize.assert_called_once_with(
+        query="How do I apply for it?",
+        history=[
+            (
+                "What is the annual leave policy?",
+                "Employees receive annual leave.",
+            )
+        ],
+    )
+
+    rag_service.answer.assert_called_once_with(
+        db=db,
+        query=(
+            "What is the procedure for applying "
+            "for annual leave?"
+        ),
+        current_user=user,
+    )

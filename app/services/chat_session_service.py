@@ -41,3 +41,31 @@ def delete_chat_session(*,db: Session,session_id: int,current_user: User) -> boo
     db.commit()
 
     return True
+
+def update_chat_session(*,db: Session,session_id: int,current_user: User,title: str | None = None,is_pinned: bool | None = None) -> ChatSession | None:
+
+    session = get_chat_session(
+        db=db,
+        session_id=session_id,
+        current_user=current_user,
+    )
+
+    if session is None:
+        return None
+
+    if title is not None:
+        normalized_title = title.strip()
+
+        session.title = (
+            normalized_title
+            if normalized_title
+            else None
+        )
+
+    if is_pinned is not None:
+        session.is_pinned = is_pinned
+
+    db.commit()
+    db.refresh(session)
+
+    return session

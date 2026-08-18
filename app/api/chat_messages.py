@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.database.database import get_db
 from app.dependencies.auth import get_current_user
-from app.dependencies.rag import get_rag_service
+from app.dependencies.rag import get_rag_service, get_query_contextualizer
 
 from app.dto.chat import (
     ChatQueryRequest,
@@ -18,6 +18,7 @@ from app.services.chat_message_service import (
     get_chat_sources,
 )
 
+from app.services.query_contextualizer import QueryContextualizer
 from app.services.rag.rag_service import RAGService
 
 router = APIRouter(
@@ -33,7 +34,8 @@ def send_messages(session_id:int,
                   request: ChatQueryRequest,
                   db:Session = Depends(get_db),
                   current_user: User = Depends(get_current_user),
-                  rag_service: RAGService = Depends(get_rag_service)
+                  rag_service: RAGService = Depends(get_rag_service),
+                  query_contextualizer: QueryContextualizer = Depends(get_query_contextualizer)
                 ):
     try:
         chat_history = create_chat_message(
@@ -42,6 +44,7 @@ def send_messages(session_id:int,
             query=request.query,
             current_user=current_user,
             rag_service=rag_service,
+            query_contextualizer=query_contextualizer
         )
     except LookupError:
         raise HTTPException(

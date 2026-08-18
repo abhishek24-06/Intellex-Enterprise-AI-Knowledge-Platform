@@ -3,6 +3,8 @@ from functools import lru_cache
 from app.services.embedding.bge_m3_embedding_service import (
     BGEM3EmbeddingService,
 )
+from app.services.query_contextualizer import QueryContextualizer
+
 from app.services.reranking.bge_reranker_service import (
     BGERerankerService,
 )
@@ -58,6 +60,11 @@ def get_answer_generation_service() -> AnswerGenerationService:
         prompt_builder=RAGPromptBuilder(),
     )
 
+@lru_cache(maxsize=1)
+def get_query_contextualizer() -> QueryContextualizer:
+    return QueryContextualizer(
+        llm_client=get_gemini_client(),
+    )
 
 @lru_cache(maxsize=1)
 def get_rag_service() -> RAGService:

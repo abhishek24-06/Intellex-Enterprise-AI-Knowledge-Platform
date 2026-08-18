@@ -11,10 +11,36 @@ from app.models.chat_source import ChatSource
 from app.models.documents import Document
 from app.models.users import User
 from app.services.rag.rag_service import RAGService
+from app.services.query_contextualizer import QueryContextualizer
+
+MAX_CONTEXT_MESSAGES = 10
+
+def get_recent_chat_history(*,db:Session,session_id:int,limit:int = MAX_CONTEXT_MESSAGES)->list[tuple[str,str]]:
+
+    rows = db.execute(
+        select(
+            ChatHistory.question,
+            ChatHistory.answer,
+        )
+        .where(
+            ChatHistory.session_id == session_id,
+        )
+        .order_by(
+            ChatHistory.created_at.desc(),
+            ChatHistory.chat_id.desc(),
+        )
+        .limit(limit)
+    ).all()
+
+    return [
+        (question, answer)
+        for question, answer in reversed(rows)
+    ]
 
 def create_chat_message(*,db:Session,session_id:int,
                         query:str,current_user:User,
-                        rag_service:RAGService)->ChatHistory:
+                        rag_service:RAGService,
+                        query_contextualizer: QueryContextualizer)->ChatHistory:
 
     session = db.execute(
         select(ChatSession)
@@ -34,9 +60,23 @@ def create_chat_message(*,db:Session,session_id:int,
     if not normalised_query:
         raise ValueError("Query cannot be empty.")
 
+    history = get_recent_chat_history(
+        db=db,
+        session_id=session.session_id,
+    )
+
+    retrieval_query = (
+        query_contextualizer.contextualize(
+            query=normalised_query,
+            history=history,
+        )
+        if history
+        else normalised_query
+    )
+
     #Answer the Query
     rag_result = rag_service.answer(db=db,
-                                    query=normalised_query,
+                                    query=retrieval_query,
                                     current_user=current_user)
 
     chat_history = ChatHistory(
@@ -104,3 +144,78 @@ def get_chat_sources(*,db:Session,chat_id: int)->list[tuple[int,str]]:
         for document_id, original_filename in rows
     ]
 
+def get_chat_history(*,db: Session,session_id: int,current_user: User,) -> list[
+    tuple[
+        ChatHistory,
+        list[tuple[int, str]],
+    ]
+]:
+
+    session_exists = db.execute(
+        select(ChatSession.session_id)
+        .where(
+            ChatSession.session_id == session_id,
+            ChatSession.user_id == current_user.user_id,
+        )
+    ).scalar_one_or_none()
+
+    if session_exists is None:
+        raise LookupError(
+            "Chat session not found."
+        )
+
+    rows = db.execute(
+        select(
+            ChatHistory,
+            ChatSource.document_id,
+            Document.original_filename,
+        )
+        .outerjoin(
+            ChatSource,
+            ChatSource.chat_id == ChatHistory.chat_id,
+        )
+        .outerjoin(
+            Document,
+            Document.document_id == ChatSource.document_id,
+        )
+        .where(
+            ChatHistory.session_id == session_id,
+        )
+        .order_by(
+            ChatHistory.created_at.asc(),
+            ChatHistory.chat_id.asc(),
+            ChatSource.source_id.asc(),
+        )
+    ).all()
+
+    grouped: dict[
+        int,
+        tuple[ChatHistory, list[tuple[int, str]]]
+    ] = {}
+
+    for (
+        chat_history,
+        document_id,
+        original_filename,
+    ) in rows:
+
+        if chat_history.chat_id not in grouped:
+            grouped[chat_history.chat_id] = (
+                chat_history,
+                [],
+            )
+
+        if (
+            document_id is not None
+            and original_filename is not None
+        ):
+            grouped[
+                chat_history.chat_id
+            ][1].append(
+                (
+                    document_id,
+                    original_filename,
+                )
+            )
+
+    return list(grouped.values())
