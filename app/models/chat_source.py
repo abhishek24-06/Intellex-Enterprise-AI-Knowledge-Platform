@@ -16,8 +16,8 @@ class ChatSource(Base):
             "chat_id",
             "document_id",
             name="uq_chat_source"
-        )
-        )
+        ),
+    )
 
     source_id: Mapped[int] = mapped_column(primary_key=True,index=True)
 

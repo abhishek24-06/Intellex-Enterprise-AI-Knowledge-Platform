@@ -6,6 +6,8 @@ from app.enums.enums import DocumentStatus,DocumentType,DocumentVisibility
 from app.enums.embedding_status import EmbeddingStatus
 from typing import TYPE_CHECKING
 
+from app.models.chat_source import ChatSource
+
 if TYPE_CHECKING:
     from app.models.organization import Organization
     from app.models.chat_history import ChatHistory
@@ -58,7 +60,7 @@ class Document(Base):
 
     organization:Mapped["Organization"]=relationship(back_populates="documents")
 
-    chat_historys:Mapped[list["ChatHistory"]]=relationship(back_populates="document")
+    chat_sources: Mapped[list["ChatSource"]] = relationship(back_populates="document",cascade="all, delete-orphan")
 
     uploader: Mapped["User"] = relationship(back_populates="documents")
 
