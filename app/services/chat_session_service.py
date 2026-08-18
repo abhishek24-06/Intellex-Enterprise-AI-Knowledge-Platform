@@ -28,7 +28,7 @@ def get_chat_session(*,db: Session,session_id: int,current_user: User) -> ChatSe
 
     stmt = select(ChatSession).where(ChatSession.session_id == session_id,ChatSession.user_id == current_user.user_id)
 
-    return list(db.execute(stmt).scalar_one_or_none())
+    return db.execute(stmt).scalar_one_or_none()
 
 def delete_chat_session(*,db: Session,session_id: int,current_user: User) -> bool:
 

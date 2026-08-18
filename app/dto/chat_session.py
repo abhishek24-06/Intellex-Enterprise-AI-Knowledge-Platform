@@ -1,6 +1,6 @@
 from __future__ import annotations
 from datetime import datetime
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator,ConfigDict
 
 class ChatSessionCreateRequest(BaseModel):
 
@@ -21,6 +21,11 @@ class ChatSessionCreateRequest(BaseModel):
         return value
 
 class ChatSessionResponse(BaseModel):
+
+    model_config = ConfigDict(
+        from_attributes=True,
+    )
+
     session_id: int
     title: str | None
     created_at: datetime
@@ -28,4 +33,9 @@ class ChatSessionResponse(BaseModel):
     is_pinned: bool
 
 class ChatSessionListResponse(BaseModel):
+
+    model_config = ConfigDict(
+        from_attributes=True,
+    )
+    
     sessions: list[ChatSessionResponse]
