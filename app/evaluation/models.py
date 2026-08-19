@@ -22,3 +22,13 @@ class RetrievalEvaluationResult:
     precision_at_k: float
     recall_at_k: float
     reciprocal_rank: float
+
+@dataclass
+class AnswerEvaluationResult:
+    query: str
+
+    answer: str
+
+    context_relevance: float
+    faithfulness: float
+    answer_correctness: float
