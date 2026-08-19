@@ -161,10 +161,19 @@ Do not invent facts.
 
         result = CriticResult.model_validate(payload)
 
-        if (
-        result.decision == CriticDecision.RETRY
-        and not result.improved_query
-    ):
-            raise RuntimeError("Critic Agent requested RETRY without an improved query.")
+        should_retry = (
+            result.context_relevance < self.ACCEPT_THRESHOLD
+            or result.faithfulness < self.ACCEPT_THRESHOLD
+            or result.answer_correctness < self.ACCEPT_THRESHOLD
+    )
+        if should_retry:
+            if not result.improved_query:
+                raise RuntimeError("Critic Agent requested RETRY without an improved query.")
+        
+            result.decision = CriticDecision.RETRY
 
+        else:
+            result.decision = CriticDecision.ACCEPT
+            result.improved_query = None
+        
         return result

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from app.critic_agent.critic_agent import CriticAgent,CriticDecision
+from app.agents.critic_agent import CriticAgent,CriticDecision
 from app.dto.rag_response import RAGResult
 
 class SelfCorrectingRAGService:
@@ -11,7 +11,7 @@ class SelfCorrectingRAGService:
             raise ValueError("max_retries cannot be negative.")
 
         self.rag_service = rag_service
-        self.critic_agent = critic_agent
+        self.critique_agent = critic_agent
         self.max_retries = max_retries
 
     def answer(self,*,db,query:str,current_user)->RAGResult:
@@ -50,7 +50,7 @@ class SelfCorrectingRAGService:
                 return result
 
             # No more retries available.
-            if attempt >= self.max_retries:
+            if attempt == self.max_retries:
                 return result
 
             next_query = (
