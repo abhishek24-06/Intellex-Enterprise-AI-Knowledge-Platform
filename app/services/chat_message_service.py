@@ -1,6 +1,7 @@
 from __future__ import annotations
-
+from time import perf_counter
 from datetime import UTC, datetime
+from uuid import uuid4
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -10,6 +11,7 @@ from app.models.chat_session import ChatSession
 from app.models.chat_source import ChatSource
 from app.models.documents import Document
 from app.models.users import User
+from app.services.observability.rag_trace import RAGTrace
 from app.services.rag.rag_service import RAGService
 from app.services.query_contextualizer import QueryContextualizer
 
@@ -65,6 +67,8 @@ def create_chat_message(*,db:Session,session_id:int,
         session_id=session.session_id,
     )
 
+    contextualization_started = perf_counter()
+
     retrieval_query = (
         query_contextualizer.contextualize(
             query=normalised_query,
@@ -74,10 +78,25 @@ def create_chat_message(*,db:Session,session_id:int,
         else normalised_query
     )
 
+    contextualization_latency_ms = (perf_counter() - contextualization_started) * 1000
+
+    trace = RAGTrace(
+        request_id=str(uuid4()),
+        user_id=current_user.user_id,
+        organization_id=current_user.organization_id,
+        session_id=session.session_id,
+        original_query=normalised_query,
+        retrieval_query=retrieval_query,
+        contextualization_latency_ms=(
+            contextualization_latency_ms
+        ),
+    )
+
     #Answer the Query
     rag_result = rag_service.answer(db=db,
                                     query=retrieval_query,
-                                    current_user=current_user)
+                                    current_user=current_user,
+                                    trace=trace)
 
     chat_history = ChatHistory(
         session_id = session.session_id,

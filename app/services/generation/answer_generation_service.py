@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+from time import perf_counter
 from app.dto.retrieved_chunk import RetrievedChunk
 from app.services.generation.llm_client import LLMClient
 from app.services.generation.prompt_builder import RAGPromptBuilder
@@ -15,13 +15,15 @@ class AnswerGenerationService:
             else RAGPromptBuilder()
         )
 
-    def generate(self,*,query:str,chunks:list[RetrievedChunk]) -> str:
+    def generate(self,*,query:str,chunks:list[RetrievedChunk],trace=None) -> str:
 
             if not query or not query.strip():
                 raise ValueError("Query cannot be empty.")
 
             if not chunks:
                 raise ValueError("At least one retrieved chunk is required.")
+
+            generation_started = perf_counter()
 
             system_prompt, user_prompt = (
                 self.prompt_builder.build(
@@ -32,7 +34,11 @@ class AnswerGenerationService:
             answer = self.llm_client.generate(
                     system_prompt=system_prompt,
                     user_prompt=user_prompt,
-        )
+        )        
+            if trace is not None:
+                
+                trace.generation_latency_ms = (perf_counter() - generation_started) * 1000
+
             if not answer or not answer.strip():
                 raise RuntimeError("LLM returned an empty answer.")
 
