@@ -13,6 +13,7 @@ from app.agents.graph.multi_agent_nodes import (
 from app.agents.graph.multi_agent_routing import (
     route_after_multi_agent_critic,
     route_after_orchestrator,
+    route_after_retry_target,
 )
 
 from app.agents.multi_agent_state import (
@@ -126,9 +127,13 @@ def build_multi_agent_graph(
         "finalize": "multi_agent_finalize",
     },
 )
-    builder.add_edge(
+    builder.add_conditional_edges(
     "multi_agent_prepare_retry",
-    "knowledge_agent",
+    route_after_retry_target,
+    {
+        "knowledge": "knowledge_agent",
+        "database": "database_agent",
+    },
 )
 
     builder.add_edge(

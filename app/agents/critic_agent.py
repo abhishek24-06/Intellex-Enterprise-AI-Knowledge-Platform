@@ -12,12 +12,18 @@ class CriticDecision(str, Enum):
     RETRY = "RETRY"
 
 
+class RetryTarget(str, Enum):
+    KNOWLEDGE = "KNOWLEDGE"
+    DATABASE = "DATABASE"
+    BOTH = "BOTH"
+
+
 class CriticResult(BaseModel):
-    decision : CriticDecision
+    decision: CriticDecision
 
     context_relevance: float = Field(
         ge=0.0,
-        le=1.0
+        le=1.0,
     )
 
     faithfulness: float = Field(
@@ -31,27 +37,65 @@ class CriticResult(BaseModel):
     )
 
     reason: str
+
+    retry_target: RetryTarget | None = None
+
     improved_query: str | None = None
 
+
 class CriticAgent:
+    """
+    Agent 2.
+
+    Evaluates the final synthesized answer against the evidence
+    actually supplied by the specialist agents.
+
+    Evidence may come from:
+
+        Knowledge Agent
+            -> retrieved document chunks
+
+        Database Agent
+            -> structured database result
+
+        Hybrid
+            -> both
+    """
+
+    ACCEPT_THRESHOLD = 0.80
 
     SYSTEM_PROMPT = """\
-You are the Critic Agent in an enterprise RAG system.
+You are the Critic Agent in an enterprise multi-agent system.
 
-You evaluate a draft answer produced by another agent.
+Your job is to evaluate the FINAL SYNTHESIZED ANSWER against
+the evidence supplied by the specialist agents.
 
-Evaluate ONLY against the supplied retrieved context.
+Evidence can come from:
 
-Your responsibilities:
+1. KNOWLEDGE AGENT
+   Enterprise documents, policies, SOPs, technical documents,
+   reports, and retrieved document chunks.
 
-1. Determine whether the retrieved context is relevant.
-2. Determine whether the answer is faithful to the context.
-3. Determine whether the answer correctly addresses the user query.
-4. Reject unsupported claims.
-5. If the answer should be retried, provide a better standalone
-   retrieval query.
+2. DATABASE AGENT
+   Structured enterprise information such as users,
+   departments, teams, roles, and organizations.
 
-Return ONLY valid JSON in this exact structure:
+3. BOTH
+   When the answer combines information from both sources.
+
+Evaluate:
+
+1. context_relevance
+   Does the supplied evidence actually address the user's query?
+
+2. faithfulness
+   Is the answer supported by the supplied evidence?
+   Penalize unsupported or invented claims.
+
+3. answer_correctness
+   Does the final answer correctly answer the user's question?
+
+Return ONLY valid JSON:
 
 {
   "decision": "ACCEPT" or "RETRY",
@@ -59,39 +103,51 @@ Return ONLY valid JSON in this exact structure:
   "faithfulness": 0.0,
   "answer_correctness": 0.0,
   "reason": "...",
-  "improved_query": "..." or null
+  "retry_target": "KNOWLEDGE" | "DATABASE" | "BOTH" | null,
+  "improved_query": "..." | null
 }
 
-Scoring:
-0.0 = completely poor
-0.5 = partially acceptable
-1.0 = excellent
+Rules:
 
-Use RETRY when:
-- retrieved context does not sufficiently answer the query
-- answer contains unsupported claims
-- answer does not actually answer the question
-- the query is ambiguous and retrieval can be improved
+- ACCEPT only when the answer is sufficiently supported.
+- RETRY when important evidence is missing, irrelevant,
+  incorrect, or the answer contains unsupported claims.
+- retry_target identifies which specialist should be rerun.
+- Use KNOWLEDGE when document retrieval needs improvement.
+- Use DATABASE when structured enterprise data needs improvement.
+- Use BOTH when both sources need improvement.
+- improved_query must be a standalone query suitable for the
+  specialist identified by retry_target.
+- For ACCEPT, retry_target must be null and improved_query
+  must be null.
+- For RETRY, retry_target and improved_query must be provided.
+- Never invent facts.
 
-Use ACCEPT only when the answer is sufficiently grounded and
-correct.
-
-Do not invent facts.
+Do not return commentary outside the JSON.
 """
-
-    ACCEPT_THRESHOLD = 0.80
 
     def __init__(self, *, llm_client):
         self.llm_client = llm_client
 
+    # ------------------------------------------------------------------
+    # Evidence formatting
+    # ------------------------------------------------------------------
+
     @staticmethod
-    def _build_context(chunks) -> str:
+    def _build_document_evidence(
+        chunks,
+    ) -> str:
+
         sections: list[str] = []
 
-        for index, chunk in enumerate(chunks,start=1):
-            sections.append("\n".join(
+        for index, chunk in enumerate(
+            chunks,
+            start=1,
+        ):
+            sections.append(
+                "\n".join(
                     [
-                        f"[SOURCE {index}]",
+                        f"[DOCUMENT SOURCE {index}]",
                         f"Document ID: {chunk.document_id}",
                         (
                             "Filename: "
@@ -105,75 +161,177 @@ Do not invent facts.
         return "\n\n".join(sections)
 
     @staticmethod
-    def _parse_json(raw_response:str)-> dict[str,Any]:
+    def _build_evidence(
+        *,
+        chunks=None,
+        database_result: str | None = None,
+    ) -> str:
+
+        sections: list[str] = []
+
+        if chunks:
+            document_evidence = (
+                CriticAgent._build_document_evidence(
+                    chunks
+                )
+            )
+
+            if document_evidence:
+                sections.append(
+                    "KNOWLEDGE AGENT EVIDENCE:\n"
+                    + document_evidence
+                )
+
+        if database_result:
+            sections.append(
+                "DATABASE AGENT EVIDENCE:\n"
+                + database_result.strip()
+            )
+
+        return "\n\n".join(sections)
+
+    # ------------------------------------------------------------------
+    # JSON parser
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def _parse_json(
+        raw_response: str,
+    ) -> dict[str, Any]:
 
         cleaned = raw_response.strip()
 
         if cleaned.startswith("```"):
             lines = cleaned.splitlines()
 
-            if lines and lines[0].startswith("```"):
+            if (
+                lines
+                and lines[0].startswith("```")
+            ):
                 lines = lines[1:]
 
-            if lines and lines[-1].strip() == "```":
+            if (
+                lines
+                and lines[-1].strip() == "```"
+            ):
                 lines = lines[:-1]
 
             cleaned = "\n".join(lines).strip()
 
         try:
             return json.loads(cleaned)
-        except json.JSONDecodeError as exc:
-            raise RuntimeError("Critic Agent returned invalid JSON") from exc
 
-    def evaluate(self,*,query:str,answer:str,chunks)->CriticResult:
+        except json.JSONDecodeError as exc:
+            raise RuntimeError(
+                "Critic Agent returned invalid JSON."
+            ) from exc
+
+    # ------------------------------------------------------------------
+    # Evaluation
+    # ------------------------------------------------------------------
+
+    def evaluate(
+        self,
+        *,
+        query: str,
+        answer: str,
+        chunks=None,
+        database_result: str | None = None,
+    ) -> CriticResult:
 
         if not query or not query.strip():
-            raise ValueError("Query cannot be empty.")
+            raise ValueError(
+                "Query cannot be empty."
+            )
 
         if not answer or not answer.strip():
-            raise ValueError("Answer cannot be empty.")
+            raise ValueError(
+                "Answer cannot be empty."
+            )
 
-        if not chunks:
-            raise ValueError("Critic Agent requires retrieved context.")
-
-        context = self._build_context(chunks)
-
-        user_prompt = f"""\
-                USER QUERY:
-                {query.strip()}
-                
-                RETRIEVED CONTEXT:
-                {context}
-                
-                DRAFT ANSWER:
-                {answer.strip()}
-                """
-
-        raw_response = self.llm_client.generate( #INPUT TO CRITIC AGENT
-            system_prompt = self.SYSTEM_PROMPT,  #Send the prompt containnig instruction to follow
-            user_prompt = user_prompt   #also Sends query, retrieved chunk ,ans
+        evidence = self._build_evidence(
+            chunks=chunks,
+            database_result=database_result,
         )
 
-        if not raw_response or not raw_response.strip():
-            raise RuntimeError("Critic Agent returned an empty response.")
+        if not evidence:
+            raise ValueError(
+                "Critic Agent requires at least one "
+                "evidence source."
+            )
 
-        payload = self._parse_json(raw_response)
+        user_prompt = f"""\
+USER QUERY:
+{query.strip()}
 
-        result = CriticResult.model_validate(payload)
+EVIDENCE:
+{evidence}
+
+FINAL SYNTHESIZED ANSWER:
+{answer.strip()}
+"""
+
+        raw_response = self.llm_client.generate(
+            system_prompt=self.SYSTEM_PROMPT,
+            user_prompt=user_prompt,
+        )
+
+        if (
+            not raw_response
+            or not raw_response.strip()
+        ):
+            raise RuntimeError(
+                "Critic Agent returned an empty response."
+            )
+
+        payload = self._parse_json(
+            raw_response
+        )
+
+        result = CriticResult.model_validate(
+            payload
+        )
 
         should_retry = (
-            result.context_relevance < self.ACCEPT_THRESHOLD
-            or result.faithfulness < self.ACCEPT_THRESHOLD
-            or result.answer_correctness < self.ACCEPT_THRESHOLD
-    )
+            result.context_relevance
+            < self.ACCEPT_THRESHOLD
+            or result.faithfulness
+            < self.ACCEPT_THRESHOLD
+            or result.answer_correctness
+            < self.ACCEPT_THRESHOLD
+        )
+
         if should_retry:
-            if not result.improved_query:
-                raise RuntimeError("Critic Agent requested RETRY without an improved query.")
-        
-            result.decision = CriticDecision.RETRY
+
+            if (
+                result.retry_target
+                is None
+            ):
+                raise RuntimeError(
+                    "Critic Agent requested RETRY "
+                    "without specifying retry_target."
+                )
+
+            if (
+                not result.improved_query
+                or not result.improved_query.strip()
+            ):
+                raise RuntimeError(
+                    "Critic Agent requested RETRY "
+                    "without an improved query."
+                )
+
+            result.decision = (
+                CriticDecision.RETRY
+            )
 
         else:
-            result.decision = CriticDecision.ACCEPT
+
+            result.decision = (
+                CriticDecision.ACCEPT
+            )
+
+            result.retry_target = None
             result.improved_query = None
-        
+
         return result

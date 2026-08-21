@@ -421,20 +421,14 @@ Rules:
 # Agent 2 — Multi-Agent Critic
 # ----------------------------------------------------------------------
 
-
 def multi_agent_critic_node(
     state,
     *,
     critic_agent,
 ):
     """
-    Critic for the final synthesized multi-agent answer.
-
-    For the current implementation, the CriticAgent evaluates
-    document-backed answers using the retrieved RAG chunks.
-
-    Database-only queries are currently skipped because the
-    existing CriticAgent expects retrieved document chunks.
+    Evaluate the synthesized answer against all evidence
+    available to the multi-agent system.
     """
 
     final_answer = state.get(
@@ -446,55 +440,77 @@ def multi_agent_critic_node(
             "Multi-agent critic requires a final answer."
         )
 
-    knowledge = state.get(
+    # --------------------------------------------------------------
+    # Knowledge evidence
+    # --------------------------------------------------------------
+
+    rag_result = state.get(
         "rag_result"
     )
 
-    if knowledge is None:
-        return {
-            "critique": None,
-            "history": [
-                {
-                    "node": "multi_agent_critic",
-                    "decision": (
-                        "SKIPPED_NO_DOCUMENT_CONTEXT"
-                    ),
-                }
-            ],
-        }
-
-    chunks = knowledge.sources
-
-    if not chunks:
-        return {
-            "critique": None,
-            "history": [
-                {
-                    "node": "multi_agent_critic",
-                    "decision": (
-                        "SKIPPED_NO_DOCUMENT_CONTEXT"
-                    ),
-                }
-            ],
-        }
-
-    query = state["original_query"]
-
-    critique = critic_agent.evaluate(
-        query=query,
-        answer=final_answer,
-        chunks=chunks,
+    chunks = (
+        rag_result.sources
+        if rag_result is not None
+        else []
     )
 
-    # IMPORTANT:
-    # Do not prepend existing history here.
+    # --------------------------------------------------------------
+    # Database evidence
+    # --------------------------------------------------------------
+
+    database_result = state.get(
+        "database_result"
+    )
+
+    # --------------------------------------------------------------
+    # At least one specialist must have produced evidence.
+    # --------------------------------------------------------------
+
+    if (
+        not chunks
+        and not database_result
+    ):
+        return {
+            "critique": None,
+            "retry_target": None,
+            "history": [
+                {
+                    "node": "multi_agent_critic",
+                    "decision": (
+                        "SKIPPED_NO_EVIDENCE"
+                    ),
+                }
+            ],
+        }
+
+    # --------------------------------------------------------------
+    # Critic evaluation
+    # --------------------------------------------------------------
+
+    critique = critic_agent.evaluate(
+        query=state["original_query"],
+        answer=final_answer,
+        chunks=chunks,
+        database_result=database_result,
+    )
+
     return {
         "critique": critique,
+        "retry_target": (
+            critique.retry_target.value
+            if critique.retry_target
+            else None
+        ),
         "history": [
             {
                 "node": "multi_agent_critic",
                 "decision": (
                     critique.decision.value
+                ),
+                "retry_target": (
+                    critique.retry_target.value
+                    if critique.retry_target
+                    else None
                 ),
                 "context_relevance": (
                     critique.context_relevance
@@ -508,7 +524,6 @@ def multi_agent_critic_node(
             }
         ],
     }
-
 
 # ----------------------------------------------------------------------
 # Multi-Agent Finalize
@@ -560,29 +575,60 @@ def multi_agent_prepare_retry_node(
         critique.improved_query
     )
 
-    if not improved_query:
+    retry_target = (
+        critique.retry_target
+    )
+
+    if retry_target is None:
         raise RuntimeError(
-            "Critic requested RETRY without "
-            "an improved query."
+            "Retry requires a retry target."
         )
 
-    # IMPORTANT:
-    # Do NOT increment attempt here.
-    # multi_agent_knowledge_node owns attempt counting.
-    return {
-        "knowledge_query": (
-            improved_query.strip()
-        ),
-        "retrieval_query": (
-            improved_query.strip()
-        ),
+    if not improved_query:
+        raise RuntimeError(
+            "Retry requires an improved query."
+        )
+
+    update: dict = {
+        "retry_target": retry_target.value,
         "final_answer": None,
         "history": [
             {
                 "node": "prepare_retry",
+                "retry_target": retry_target.value,
                 "improved_query": (
                     improved_query.strip()
                 ),
             }
         ],
     }
+
+    # --------------------------------------------------------------
+    # Knowledge retry
+    # --------------------------------------------------------------
+
+    if retry_target.value in {
+        "KNOWLEDGE",
+        "BOTH",
+    }:
+        update["knowledge_query"] = (
+            improved_query.strip()
+        )
+
+        update["retrieval_query"] = (
+            improved_query.strip()
+        )
+
+    # --------------------------------------------------------------
+    # Database retry
+    # --------------------------------------------------------------
+
+    if retry_target.value in {
+        "DATABASE",
+        "BOTH",
+    }:
+        update["database_query"] = (
+            improved_query.strip()
+        )
+
+    return update

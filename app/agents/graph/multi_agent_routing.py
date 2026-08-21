@@ -154,3 +154,50 @@ def route_after_multi_agent_critic(
         return "finalize"
 
     return "retry"
+
+def route_after_retry_target(
+    state: MultiAgentState,
+) -> str | list[Send]:
+
+    retry_target = state.get(
+        "retry_target"
+    )
+
+    if retry_target == "KNOWLEDGE":
+        return "knowledge"
+
+    if retry_target == "DATABASE":
+        return "database"
+
+    if retry_target == "BOTH":
+
+        return [
+            Send(
+                "knowledge_agent",
+                {
+                    **state,
+                    "knowledge_query": (
+                        state.get(
+                            "knowledge_query"
+                        )
+                        or state["original_query"]
+                    ),
+                },
+            ),
+            Send(
+                "database_agent",
+                {
+                    **state,
+                    "database_query": (
+                        state.get(
+                            "database_query"
+                        )
+                        or state["original_query"]
+                    ),
+                },
+            ),
+        ]
+
+    raise RuntimeError(
+        f"Unknown retry target: {retry_target}"
+    )
