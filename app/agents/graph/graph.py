@@ -1,76 +1,139 @@
-from __future__ import annotations
+from langgraph.graph import END, START, StateGraph
 
-from functools import lru_cache
-
-from langgraph.graph import (
-    END,
-    START,
-    StateGraph,
+from app.agents.graph.multi_agent_nodes import (
+    database_agent_node,
+    multi_agent_critic_node,
+    multi_agent_finalize_node,
+    multi_agent_knowledge_node,
+    multi_agent_prepare_retry_node,
+    orchestrator_node,
+    synthesis_node,
 )
 
-from app.agents.graph.nodes import (
-    critic_agent_node,
-    finalize_node,
-    knowledge_agent_node,
-    prepare_retry_node,
+from app.agents.graph.multi_agent_routing import (
+    route_after_multi_agent_critic,
+    route_after_orchestrator,
 )
-from app.agents.graph.routing import (
-    route_after_critic,
+
+from app.agents.multi_agent_state import (
+    MultiAgentContext,
+    MultiAgentState,
 )
-from app.agents.graph.state import (
-    RAGAgentState,
-    RAGGraphContext,
-)
-from app.agents.critic_agent import CriticAgent
+def build_multi_agent_graph(
+    *,
+    orchestrator,
+    rag_service,
+    data_agent,
+    critic_agent,
+    llm_client,
+):
 
-def build_rag_graph_agent(*,rag_service,critic_agent:CriticAgent,max_retries:int = 2):
-
-    if max_retries < 0:
-        raise ValueError("max_retries cannot be negative.")
-
-    builder = StateGraph(RAGAgentState, context_schema=RAGGraphContext)
-
-    builder.add_node("knowledge_agent",
-                     lambda state, runtime:(  #LangGraph, give me state n runtime, and I'll call knowledge_agent_node() with those plus the rag_service it needs.
-                         knowledge_agent_node(
-                             state,
-                             runtime,
-                             rag_service=rag_service
-                         )
-                     ) )
-
-    builder.add_node("critic_agent",
-                     lambda state:(
-                         critic_agent_node(
-                             state,
-                             critic_agent=critic_agent
-                         )
-                     ))
-
-    builder.add_node("prepare_retry",
-                    prepare_retry_node,
+    builder = StateGraph(
+        MultiAgentState,
+        context_schema=MultiAgentContext,
     )
 
-    builder.add_node("finalize",
-                     finalize_node)
+    builder.add_node(
+        "orchestrator",
+        lambda state: orchestrator_node(
+            state,
+            orchestrator=orchestrator,
+        ),
+    )
 
-    builder.add_edge(START,
-                     "knowledge_agent")
+    builder.add_node(
+        "knowledge_agent",
+        lambda state, runtime: (
+            multi_agent_knowledge_node(
+                state,
+                runtime,
+                rag_service=rag_service,
+            )
+        ),
+    )
 
-    builder.add_edge("knowledge_agent",
-                     "critic_agent")
+    builder.add_node(
+        "database_agent",
+        lambda state, runtime: (
+            database_agent_node(
+                state,
+                runtime,
+                data_agent=data_agent,
+            )
+        ),
+    )
 
-    builder.add_conditional_edges("critic_agent",
-                                  route_after_critic,{
-                                      "retry": "prepare_retry", # RETURNS ONLY A STRING 
-                                      "finalize": "finalize" #RUNS FINALIZE NODE
-                                  }
-                                )
+    builder.add_node(
+    "multi_agent_critic",
+    lambda state: multi_agent_critic_node(
+        state,
+        critic_agent=critic_agent,
+    ),
+)
 
-    builder.add_edge("prepare_retry",
-                     "knowledge_agent")
+    builder.add_node(
+        "synthesis",
+        lambda state: synthesis_node(
+            state,
+            llm_client=llm_client,
+        ),
+    )
 
-    builder.add_edge("finalize",
-                     END)
+    builder.add_node(
+    "multi_agent_finalize",
+    multi_agent_finalize_node,
+)
+
+    builder.add_node(
+        "multi_agent_prepare_retry",
+        multi_agent_prepare_retry_node,
+    )
+
+    builder.add_edge(
+        START,
+        "orchestrator",
+    )
+
+    builder.add_conditional_edges(
+        "orchestrator",
+        route_after_orchestrator,
+        {
+            "knowledge": "knowledge_agent",
+            "database": "database_agent",
+        },
+    )
+
+    builder.add_edge(
+        "knowledge_agent",
+        "synthesis",
+    )
+
+    builder.add_edge(
+        "database_agent",
+        "synthesis",
+    )
+
+    builder.add_edge(
+        "synthesis",
+        "multi_agent_critic",
+    )
+
+    builder.add_conditional_edges(
+    "multi_agent_critic",
+    route_after_multi_agent_critic,
+    {
+        "retry": "multi_agent_prepare_retry",
+        "finalize": "multi_agent_finalize",
+    },
+)
+    builder.add_edge(
+    "multi_agent_prepare_retry",
+    "knowledge_agent",
+)
+
+    builder.add_edge(
+        "multi_agent_finalize",
+        END,
+    )
 
     return builder.compile()

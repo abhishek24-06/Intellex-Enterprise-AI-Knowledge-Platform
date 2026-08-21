@@ -1,396 +1,909 @@
 from __future__ import annotations
 
+from enum import Enum
+from types import SimpleNamespace
+from unittest.mock import Mock
+
 import pytest
 
-from app.database.database import SessionLocal
-from app.models.users import User
-
 from app.agents.tools.user_data_tools import (
+    DATA_AGENT_TOOLS,
+    DataAgentContext,
     get_current_user,
-    search_users,
     get_department,
-    search_departments,
-    list_department_users,
-    get_team,
-    search_teams,
-    list_team_users,
     get_organization,
+    get_team,
+    list_department_users,
+    list_team_users,
+    search_departments,
+    search_teams,
+    search_users,
 )
 
 
-# ============================================================
-# Configuration
-# ============================================================
-
-TEST_USER_ID = 9
+# ======================================================================
+# Helpers
+# ======================================================================
 
 
-# ============================================================
-# Fixtures
-# ============================================================
-
-@pytest.fixture
-def db():
-    session = SessionLocal()
-
-    try:
-        yield session
-    finally:
-        session.close()
+class FakeRole(str, Enum):
+    EMPLOYEE = "EMPLOYEE"
+    ORG_ADMIN = "ORG_ADMIN"
+    SUPER_ADMIN = "SUPER_ADMIN"
 
 
-@pytest.fixture
-def current_user(db):
-    user = (
-        db.query(User)
-        .filter(
-            User.user_id == TEST_USER_ID
-        )
-        .first()
+def make_user(
+    *,
+    user_id: int = 1,
+    organization_id: int = 1,
+    name: str = "Abhishek",
+    email: str = "abhishek@example.com",
+    role=FakeRole.EMPLOYEE,
+    department_id: int | None = None,
+    team_id: int | None = None,
+):
+    return SimpleNamespace(
+        user_id=user_id,
+        organization_id=organization_id,
+        name=name,
+        email=email,
+        role=role,
+        department_id=department_id,
+        team_id=team_id,
     )
 
-    if user is None:
-        pytest.fail(
-            f"Test user {TEST_USER_ID} was not found."
-        )
 
-    return user
-
-
-# ============================================================
-# Helper
-# ============================================================
-
-def call_tool(tool, **kwargs):
-    """
-    LangChain @tool functions are StructuredTool objects.
-
-    .invoke() is the normal way to execute them.
-    """
-    return tool.invoke(kwargs)
-
-
-# ============================================================
-# 1. Current User
-# ============================================================
-
-def test_get_current_user(
-    db,
-    current_user,
+def make_department(
+    *,
+    department_id: int = 1,
+    organization_id: int = 1,
+    name: str = "Engineering",
+    description: str = "Engineering department",
 ):
-    result = call_tool(
-        get_current_user,
+    return SimpleNamespace(
+        department_id=department_id,
+        organization_id=organization_id,
+        name=name,
+        description=description,
+    )
+
+
+def make_team(
+    *,
+    team_id: int = 1,
+    organization_id: int = 1,
+    name: str = "Platform",
+    description: str = "Platform team",
+    department_id: int = 1,
+):
+    return SimpleNamespace(
+        team_id=team_id,
+        organization_id=organization_id,
+        name=name,
+        description=description,
+        department_id=department_id,
+    )
+
+
+def make_organization(
+    *,
+    organization_id: int = 1,
+    name: str = "Intellex",
+    industry: str = "Technology",
+):
+    return SimpleNamespace(
+        organization_id=organization_id,
+        name=name,
+        industry=industry,
+    )
+
+
+def make_runtime(
+    *,
+    db=None,
+    current_user=None,
+):
+    return SimpleNamespace(
+        context=DataAgentContext(
+            db=db or Mock(),
+            current_user=current_user or make_user(),
+        )
+    )
+
+
+def make_scalar_result(value):
+    result = Mock()
+    result.scalar_one_or_none.return_value = value
+    return result
+
+
+def make_scalars_result(values):
+    result = Mock()
+    result.scalars.return_value.all.return_value = values
+    return result
+
+
+# ======================================================================
+# Tool collection
+# ======================================================================
+
+
+def test_all_expected_tools_are_registered():
+
+    tool_names = {
+        tool.name
+        for tool in DATA_AGENT_TOOLS
+    }
+
+    assert tool_names == {
+        "get_current_user",
+        "search_users",
+        "get_department",
+        "search_departments",
+        "list_department_users",
+        "get_team",
+        "search_teams",
+        "list_team_users",
+        "get_organization",
+    }
+
+
+# ======================================================================
+# Runtime injection / schema
+# ======================================================================
+
+
+@pytest.mark.parametrize(
+    "data_tool",
+    DATA_AGENT_TOOLS,
+)
+def test_runtime_dependencies_are_not_model_arguments(
+    data_tool,
+):
+
+    schema = data_tool.args
+
+    assert "runtime" not in schema
+    assert "db" not in schema
+    assert "current_user" not in schema
+
+
+# ======================================================================
+# Current user
+# ======================================================================
+
+
+def test_get_current_user_uses_runtime_context():
+
+    db = Mock()
+
+    current_user = make_user(
+        user_id=10,
+        organization_id=2,
+        name="Abhishek",
+        email="abhishek@example.com",
+        department_id=None,
+        team_id=None,
+    )
+
+    runtime = make_runtime(
         db=db,
         current_user=current_user,
     )
 
-    print("\nCURRENT USER:")
-    print(result)
-
-    assert result is not None
-    assert result["user_id"] == TEST_USER_ID
-    assert result["organization_id"] == current_user.organization_id
-
-    assert "name" in result
-    assert "email" in result
-    assert "role" in result
-    assert "department" in result
-    assert "team" in result
-
-
-# ============================================================
-# 2. Search users by name
-# ============================================================
-
-def test_search_users_by_name(
-    db,
-    current_user,
-):
-    result = call_tool(
-        search_users,
-        db=db,
-        current_user=current_user,
-        name="Akash",
+    result = get_current_user.func(
+        runtime=runtime,
     )
 
-    print("\nSEARCH USERS BY NAME:")
-    print(result)
+    assert result["user_id"] == 10
+    assert result["name"] == "Abhishek"
+    assert result["email"] == "abhishek@example.com"
+    assert result["organization_id"] == 2
 
-    assert result is not None
-    assert "found" in result
-    assert "match_count" in result
-    assert "users" in result
-
-    for user in result["users"]:
-        assert user["organization_id"] == (
-            current_user.organization_id
-        )
+    db.execute.assert_not_called()
 
 
-# ============================================================
-# 3. Search users by ID
-# ============================================================
+# ======================================================================
+# Search users
+# ======================================================================
 
-def test_search_user_by_id(
-    db,
-    current_user,
-):
-    result = call_tool(
-        search_users,
-        db=db,
-        current_user=current_user,
-        user_id=TEST_USER_ID,
+
+def test_search_users_returns_same_organization_users():
+
+    db = Mock()
+
+    current_user = make_user(
+        user_id=1,
+        organization_id=1,
     )
 
-    print("\nSEARCH USER BY ID:")
-    print(result)
+    matched_user = make_user(
+        user_id=7,
+        organization_id=1,
+        name="Rahul Sharma",
+        email="rahul@example.com",
+    )
+
+    db.execute.return_value = make_scalars_result(
+        [matched_user]
+    )
+
+    runtime = make_runtime(
+        db=db,
+        current_user=current_user,
+    )
+
+    result = search_users.func(
+        name="Rahul Sharma",
+        runtime=runtime,
+    )
 
     assert result["found"] is True
     assert result["match_count"] == 1
-    assert result["users"][0]["user_id"] == TEST_USER_ID
+
+    user = result["users"][0]
+
+    assert user["user_id"] == 7
+    assert user["name"] == "Rahul Sharma"
 
 
-# ============================================================
-# 4. Search departments by name
-# ============================================================
+def test_search_users_returns_multiple_same_names():
 
-def test_search_departments_by_name(
-    db,
-    current_user,
-):
-    result = call_tool(
-        search_departments,
+    db = Mock()
+
+    current_user = make_user(
+        user_id=1,
+        organization_id=1,
+    )
+
+    users = [
+        make_user(
+            user_id=7,
+            organization_id=1,
+            name="Rahul Sharma",
+        ),
+        make_user(
+            user_id=8,
+            organization_id=1,
+            name="Rahul Sharma",
+        ),
+    ]
+
+    db.execute.return_value = make_scalars_result(
+        users
+    )
+
+    runtime = make_runtime(
         db=db,
         current_user=current_user,
-        name="IT",
     )
 
-    print("\nSEARCH DEPARTMENTS:")
-    print(result)
-
-    assert result is not None
-    assert "found" in result
-    assert "departments" in result
-
-    for department in result["departments"]:
-        assert department["organization_id"] == (
-            current_user.organization_id
-        )
-
-
-# ============================================================
-# 5. Get department by ID
-# ============================================================
-
-def test_get_department(
-    db,
-    current_user,
-):
-    search_result = call_tool(
-        search_departments,
-        db=db,
-        current_user=current_user,
-        name="IT",
+    result = search_users.func(
+        name="Rahul Sharma",
+        runtime=runtime,
     )
-
-    assert search_result["found"] is True
-    assert search_result["departments"]
-
-    department_id = (
-        search_result["departments"][0]["department_id"]
-    )
-
-    result = call_tool(
-        get_department,
-        db=db,
-        current_user=current_user,
-        department_id=department_id,
-    )
-
-    print("\nGET DEPARTMENT:")
-    print(result)
-
-    assert result is not None
-    assert result["department_id"] == department_id
-    assert result["organization_id"] == (
-        current_user.organization_id
-    )
-
-
-# ============================================================
-# 6. List users in department
-# ============================================================
-
-def test_list_department_users(
-    db,
-    current_user,
-):
-    search_result = call_tool(
-        search_departments,
-        db=db,
-        current_user=current_user,
-        name="IT",
-    )
-
-    assert search_result["found"] is True
-
-    department_id = (
-        search_result["departments"][0]["department_id"]
-    )
-
-    result = call_tool(
-        list_department_users,
-        db=db,
-        current_user=current_user,
-        department_id=department_id,
-    )
-
-    print("\nDEPARTMENT USERS:")
-    print(result)
 
     assert result["found"] is True
-    assert result["department"]["department_id"] == (
-        department_id
+    assert result["match_count"] == 2
+
+    assert {
+        user["user_id"]
+        for user in result["users"]
+    } == {7, 8}
+
+
+def test_search_users_supports_combined_filters():
+
+    db = Mock()
+
+    current_user = make_user(
+        user_id=1,
+        organization_id=2,
     )
 
-    for user in result["users"]:
-        assert user["organization_id"] == (
-            current_user.organization_id
-        )
-        assert user["department"]["department_id"] == (
-            department_id
-        )
+    matched_user = make_user(
+        user_id=15,
+        organization_id=2,
+        name="Rahul Sharma",
+        email="rahul@example.com",
+        department_id=3,
+        team_id=4,
+    )
 
+    db.execute.return_value = make_scalars_result(
+        [matched_user]
+    )
 
-# ============================================================
-# 7. Search teams by name
-# ============================================================
-
-def test_search_teams_by_name(
-    db,
-    current_user,
-):
-    result = call_tool(
-        search_teams,
+    runtime = make_runtime(
         db=db,
         current_user=current_user,
-        name="HR",
     )
 
-    print("\nSEARCH TEAMS:")
-    print(result)
+    result = search_users.func(
+        name="Rahul",
+        department_id=3,
+        team_id=4,
+        runtime=runtime,
+    )
+
+    assert result["match_count"] == 1
+    assert result["users"][0]["user_id"] == 15
+
+
+def test_search_users_rejects_invalid_limit():
+
+    runtime = make_runtime()
+
+    with pytest.raises(
+        ValueError,
+        match="limit must be greater than zero",
+    ):
+        search_users.func(
+            limit=0,
+            runtime=runtime,
+        )
+
+
+def test_search_users_enforces_organization_and_super_admin_filter():
+
+    db = Mock()
+
+    current_user = make_user(
+        organization_id=2,
+    )
+
+    db.execute.return_value = make_scalars_result(
+        []
+    )
+
+    runtime = make_runtime(
+        db=db,
+        current_user=current_user,
+    )
+
+    search_users.func(
+        user_id=7,
+        runtime=runtime,
+    )
+
+    stmt = db.execute.call_args.args[0]
+
+    compiled = str(
+        stmt.compile()
+    )
+
+    assert "organization_id" in compiled
+    assert "user_id" in compiled
+    assert "role" in compiled
+
+
+# ======================================================================
+# Department
+# ======================================================================
+
+
+def test_get_department_returns_same_organization_department():
+
+    db = Mock()
+
+    current_user = make_user(
+        organization_id=2,
+    )
+
+    department = make_department(
+        department_id=3,
+        organization_id=2,
+        name="Engineering",
+    )
+
+    db.execute.return_value = make_scalar_result(
+        department
+    )
+
+    runtime = make_runtime(
+        db=db,
+        current_user=current_user,
+    )
+
+    result = get_department.func(
+        department_id=3,
+        runtime=runtime,
+    )
 
     assert result is not None
-    assert "found" in result
-    assert "teams" in result
-
-    for team in result["teams"]:
-        assert team["organization_id"] == (
-            current_user.organization_id
-        )
+    assert result["department_id"] == 3
+    assert result["name"] == "Engineering"
+    assert result["organization_id"] == 2
 
 
-# ============================================================
-# 8. Get team by ID
-# ============================================================
+def test_get_department_returns_none_for_missing_department():
 
-def test_get_team(
-    db,
-    current_user,
-):
-    search_result = call_tool(
-        search_teams,
+    db = Mock()
+
+    db.execute.return_value = make_scalar_result(
+        None
+    )
+
+    runtime = make_runtime(
         db=db,
-        current_user=current_user,
-        name="HR",
+        current_user=make_user(
+            organization_id=2,
+        ),
     )
 
-    assert search_result["found"] is True
-    assert search_result["teams"]
-
-    team_id = (
-        search_result["teams"][0]["team_id"]
+    result = get_department.func(
+        department_id=999,
+        runtime=runtime,
     )
 
-    result = call_tool(
-        get_team,
+    assert result is None
+
+
+# ======================================================================
+# Search departments
+# ======================================================================
+
+
+def test_search_departments_returns_matches():
+
+    db = Mock()
+
+    departments = [
+        make_department(
+            department_id=1,
+            organization_id=2,
+            name="Engineering",
+        ),
+        make_department(
+            department_id=2,
+            organization_id=2,
+            name="Engineering Operations",
+        ),
+    ]
+
+    db.execute.return_value = make_scalars_result(
+        departments
+    )
+
+    runtime = make_runtime(
         db=db,
-        current_user=current_user,
-        team_id=team_id,
+        current_user=make_user(
+            organization_id=2,
+        ),
     )
 
-    print("\nGET TEAM:")
-    print(result)
-
-    assert result is not None
-    assert result["team_id"] == team_id
-    assert result["organization_id"] == (
-        current_user.organization_id
+    result = search_departments.func(
+        name="Engineering",
+        runtime=runtime,
     )
-
-
-# ============================================================
-# 9. List users in team
-# ============================================================
-
-def test_list_team_users(
-    db,
-    current_user,
-):
-    search_result = call_tool(
-        search_teams,
-        db=db,
-        current_user=current_user,
-        name="HR",
-    )
-
-    assert search_result["found"] is True
-
-    team_id = (
-        search_result["teams"][0]["team_id"]
-    )
-
-    result = call_tool(
-        list_team_users,
-        db=db,
-        current_user=current_user,
-        team_id=team_id,
-    )
-
-    print("\nTEAM USERS:")
-    print(result)
 
     assert result["found"] is True
-    assert result["team"]["team_id"] == team_id
+    assert result["match_count"] == 2
 
-    for user in result["users"]:
-        assert user["organization_id"] == (
-            current_user.organization_id
+    assert {
+        department["department_id"]
+        for department in result["departments"]
+    } == {1, 2}
+
+
+def test_search_departments_rejects_invalid_limit():
+
+    runtime = make_runtime()
+
+    with pytest.raises(
+        ValueError,
+        match="limit must be greater than zero",
+    ):
+        search_departments.func(
+            limit=0,
+            runtime=runtime,
         )
-        assert user["team"]["team_id"] == team_id
 
 
-# ============================================================
-# 10. Get organization
-# ============================================================
+# ======================================================================
+# Department users
+# ======================================================================
 
-def test_get_organization(
-    db,
-    current_user,
-):
-    result = call_tool(
-        get_organization,
+
+def test_list_department_users_returns_users():
+
+    db = Mock()
+
+    current_user = make_user(
+        organization_id=1,
+    )
+
+    department = make_department(
+        department_id=3,
+        organization_id=1,
+        name="Engineering",
+    )
+
+    users = [
+        make_user(
+            user_id=10,
+            organization_id=1,
+            department_id=3,
+        ),
+        make_user(
+            user_id=11,
+            organization_id=1,
+            department_id=3,
+        ),
+    ]
+
+    db.execute.side_effect = [
+        make_scalar_result(department),
+        make_scalars_result(users),
+    ]
+
+    runtime = make_runtime(
         db=db,
         current_user=current_user,
     )
 
-    print("\nORGANIZATION:")
-    print(result)
-
-    assert result is not None
-    assert result["organization_id"] == (
-        current_user.organization_id
+    result = list_department_users.func(
+        department_id=3,
+        runtime=runtime,
     )
 
-    assert "name" in result
-    assert "industry" 
+    assert result["found"] is True
+    assert result["match_count"] == 2
+    assert result["department"]["department_id"] == 3
+
+
+def test_list_department_users_hides_missing_department():
+
+    db = Mock()
+
+    db.execute.return_value = make_scalar_result(
+        None
+    )
+
+    runtime = make_runtime(
+        db=db,
+        current_user=make_user(
+            organization_id=1,
+        ),
+    )
+
+    result = list_department_users.func(
+        department_id=999,
+        runtime=runtime,
+    )
+
+    assert result["found"] is False
+    assert result["users"] == []
+
+
+def test_list_department_users_rejects_invalid_limit():
+
+    runtime = make_runtime()
+
+    with pytest.raises(
+        ValueError,
+        match="limit must be greater than zero",
+    ):
+        list_department_users.func(
+            department_id=3,
+            limit=0,
+            runtime=runtime,
+        )
+
+
+# ======================================================================
+# Team
+# ======================================================================
+
+
+def test_get_team_returns_same_organization_team():
+
+    db = Mock()
+
+    team = make_team(
+        team_id=4,
+        organization_id=2,
+        name="Platform",
+    )
+
+    db.execute.return_value = make_scalar_result(
+        team
+    )
+
+    runtime = make_runtime(
+        db=db,
+        current_user=make_user(
+            organization_id=2,
+        ),
+    )
+
+    result = get_team.func(
+        team_id=4,
+        runtime=runtime,
+    )
+
+    assert result is not None
+    assert result["team_id"] == 4
+    assert result["name"] == "Platform"
+    assert result["organization_id"] == 2
+
+
+def test_get_team_returns_none_for_missing_team():
+
+    db = Mock()
+
+    db.execute.return_value = make_scalar_result(
+        None
+    )
+
+    runtime = make_runtime(
+        db=db,
+        current_user=make_user(
+            organization_id=2,
+        ),
+    )
+
+    result = get_team.func(
+        team_id=999,
+        runtime=runtime,
+    )
+
+    assert result is None
+
+
+# ======================================================================
+# Search teams
+# ======================================================================
+
+
+def test_search_teams_returns_matches():
+
+    db = Mock()
+
+    teams = [
+        make_team(
+            team_id=4,
+            organization_id=2,
+            name="Platform",
+        ),
+        make_team(
+            team_id=5,
+            organization_id=2,
+            name="Platform Operations",
+        ),
+    ]
+
+    db.execute.return_value = make_scalars_result(
+        teams
+    )
+
+    runtime = make_runtime(
+        db=db,
+        current_user=make_user(
+            organization_id=2,
+        ),
+    )
+
+    result = search_teams.func(
+        name="Platform",
+        runtime=runtime,
+    )
+
+    assert result["found"] is True
+    assert result["match_count"] == 2
+
+    assert {
+        team["team_id"]
+        for team in result["teams"]
+    } == {4, 5}
+
+
+def test_search_teams_rejects_invalid_limit():
+
+    runtime = make_runtime()
+
+    with pytest.raises(
+        ValueError,
+        match="limit must be greater than zero",
+    ):
+        search_teams.func(
+            limit=0,
+            runtime=runtime,
+        )
+
+
+# ======================================================================
+# Team users
+# ======================================================================
+
+
+def test_list_team_users_returns_users():
+
+    db = Mock()
+
+    current_user = make_user(
+        organization_id=1,
+    )
+
+    team = make_team(
+        team_id=4,
+        organization_id=1,
+        name="Platform",
+    )
+
+    users = [
+        make_user(
+            user_id=10,
+            organization_id=1,
+            team_id=4,
+        ),
+    ]
+
+    db.execute.side_effect = [
+        make_scalar_result(team),
+        make_scalars_result(users),
+    ]
+
+    runtime = make_runtime(
+        db=db,
+        current_user=current_user,
+    )
+
+    result = list_team_users.func(
+        team_id=4,
+        runtime=runtime,
+    )
+
+    assert result["found"] is True
+    assert result["match_count"] == 1
+    assert result["team"]["team_id"] == 4
+
+
+def test_list_team_users_hides_missing_team():
+
+    db = Mock()
+
+    db.execute.return_value = make_scalar_result(
+        None
+    )
+
+    runtime = make_runtime(
+        db=db,
+        current_user=make_user(
+            organization_id=1,
+        ),
+    )
+
+    result = list_team_users.func(
+        team_id=999,
+        runtime=runtime,
+    )
+
+    assert result["found"] is False
+    assert result["users"] == []
+
+
+def test_list_team_users_rejects_invalid_limit():
+
+    runtime = make_runtime()
+
+    with pytest.raises(
+        ValueError,
+        match="limit must be greater than zero",
+    ):
+        list_team_users.func(
+            team_id=4,
+            limit=0,
+            runtime=runtime,
+        )
+
+
+# ======================================================================
+# Organization
+# ======================================================================
+
+
+def test_get_organization_returns_current_users_organization():
+
+    db = Mock()
+
+    organization = make_organization(
+        organization_id=2,
+        name="Intellex",
+        industry="Technology",
+    )
+
+    db.execute.return_value = make_scalar_result(
+        organization
+    )
+
+    runtime = make_runtime(
+        db=db,
+        current_user=make_user(
+            organization_id=2,
+        ),
+    )
+
+    result = get_organization.func(
+        runtime=runtime,
+    )
+
+    assert result is not None
+    assert result["organization_id"] == 2
+    assert result["name"] == "Intellex"
+    assert result["industry"] == "Technology"
+
+
+def test_get_organization_returns_none_when_missing():
+
+    db = Mock()
+
+    db.execute.return_value = make_scalar_result(
+        None
+    )
+
+    runtime = make_runtime(
+        db=db,
+        current_user=make_user(
+            organization_id=2,
+        ),
+    )
+
+    result = get_organization.func(
+        runtime=runtime,
+    )
+
+    assert result is None
+
+
+# ======================================================================
+# Relationship serialization
+# ======================================================================
+
+
+def test_user_relationships_are_serialized():
+
+    db = Mock()
+
+    user = make_user(
+        user_id=10,
+        organization_id=2,
+        department_id=3,
+        team_id=4,
+    )
+
+    department = make_department(
+        department_id=3,
+        organization_id=2,
+        name="Engineering",
+    )
+
+    team = make_team(
+        team_id=4,
+        organization_id=2,
+        name="Platform",
+    )
+
+    db.execute.side_effect = [
+        make_scalar_result(department),
+        make_scalar_result(team),
+    ]
+
+    runtime = make_runtime(
+        db=db,
+        current_user=user,
+    )
+
+    result = get_current_user.func(
+        runtime=runtime,
+    )
+
+    assert result["department"] == {
+        "department_id": 3,
+        "name": "Engineering",
+    }
+
+    assert result["team"] == {
+        "team_id": 4,
+        "name": "Platform",
+    }
