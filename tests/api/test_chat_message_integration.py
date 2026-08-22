@@ -1,22 +1,36 @@
 from __future__ import annotations
 
-from datetime import datetime, UTC
+from unittest.mock import Mock
 
 import pytest
 from sqlalchemy import select
 
 from app.database.database import SessionLocal
-from app.models.chat_session import ChatSession
-from app.models.chat_history import ChatHistory
-from app.models.chat_source import ChatSource
-from app.models.users import User
-from app.models.documents import Document
-
+from app.dto.multi_agent_response import (
+    MultiAgentResponse,
+)
+from app.dto.retrieved_chunk import (
+    RetrievedChunk,
+)
+from app.models.chat_history import (
+    ChatHistory,
+)
+from app.models.chat_session import (
+    ChatSession,
+)
+from app.models.chat_source import (
+    ChatSource,
+)
+from app.models.documents import (
+    Document,
+)
+from app.models.users import (
+    User,
+)
 from app.services.chat_message_service import (
     create_chat_message,
     get_chat_sources,
 )
-from app.services.rag.rag_service import RAGService
 
 
 # ======================================================================
@@ -27,15 +41,17 @@ from app.services.rag.rag_service import RAGService
 @pytest.fixture
 def db():
     """
-    Real Supabase/PostgreSQL session.
+    Real PostgreSQL/Supabase session.
 
-    Test-created rows are rolled back after the test.
+    Test-created data is rolled back and the session
+    is closed after each test.
     """
 
     session = SessionLocal()
 
     try:
         yield session
+
     finally:
         session.rollback()
         session.close()
@@ -49,7 +65,7 @@ def db():
 @pytest.fixture
 def test_user(db):
     """
-    Use an existing active user from the database.
+    Use an existing active user that belongs to an organization.
     """
 
     user = db.execute(
@@ -58,7 +74,9 @@ def test_user(db):
             User.is_active.is_(True),
             User.organization_id.is_not(None),
         )
-        .order_by(User.user_id.asc())
+        .order_by(
+            User.user_id.asc()
+        )
         .limit(1)
     ).scalar_one_or_none()
 
@@ -76,16 +94,17 @@ def test_user(db):
 
 
 @pytest.fixture
-def chat_session(db, test_user):
+def chat_session(
+    db,
+    test_user,
+):
     """
-    Create a temporary real chat session.
-
-    The outer DB fixture rolls it back after the test.
+    Create a real temporary ChatSession.
     """
 
     session = ChatSession(
         user_id=test_user.user_id,
-        title="Integration Test Session",
+        title="Agentic RAG Integration Test",
         is_pinned=False,
     )
 
@@ -97,63 +116,78 @@ def chat_session(db, test_user):
 
 
 # ======================================================================
-# REAL RAG SERVICE
+# AGENTIC RAG FIXTURES
 # ======================================================================
 
 
-@pytest.fixture
-def rag_service():
-    from unittest.mock import Mock
+def make_retrieved_chunk(
+    *,
+    document_id: int,
+    filename: str,
+    text: str,
+):
+    return RetrievedChunk(
+        document_id=document_id,
+        original_filename=filename,
+        chunk_id=100,
+        chunk_index=0,
+        chunk_text=text,
+        token_count=30,
+        metadata={
+            "document_id": document_id,
+        },
+        vector_score=0.90,
+        rerank_score=0.90,
+    )
 
-    from app.dto.rag_response import RAGResult
-    from app.dto.retrieved_chunk import RetrievedChunk
+
+@pytest.fixture
+def agentic_rag_service():
 
     service = Mock()
 
-    service.answer.return_value = RAGResult(
-        query="Tell me about the deepfake detection system",
-        answer=(
-            "The deepfake detection system uses deep learning "
-            "and computer vision techniques."
-        ),
-        sources=[
-            RetrievedChunk(
-                document_id=24,
-                original_filename="report.docx",
-                chunk_id=425,
-                chunk_index=9,
-                chunk_text="Deepfake detection system content.",
-                token_count=100,
-                metadata={"document_id": 24},
-                vector_score=0.66,
-                rerank_score=4.27,
+    service.answer.return_value = (
+        MultiAgentResponse(
+            query=(
+                "Tell me about the deepfake "
+                "detection system"
             ),
-            RetrievedChunk(
-                document_id=24,
-                original_filename="report.docx",
-                chunk_id=298,
-                chunk_index=277,
-                chunk_text="Deepfake detector conclusion.",
-                token_count=100,
-                metadata={"document_id": 24},
-                vector_score=0.66,
-                rerank_score=2.17,
+            answer=(
+                "The deepfake detection system "
+                "uses deep learning and computer "
+                "vision techniques."
             ),
-            RetrievedChunk(
-                document_id=28,
-                original_filename="report.docx",
-                chunk_id=425,
-                chunk_index=9,
-                chunk_text="Deepfake detection background.",
-                token_count=100,
-                metadata={"document_id": 28},
-                vector_score=0.66,
-                rerank_score=4.27,
-            ),
-        ],
+            sources=[
+                make_retrieved_chunk(
+                    document_id=24,
+                    filename="report.docx",
+                    text=(
+                        "Deepfake detection "
+                        "system content."
+                    ),
+                ),
+                make_retrieved_chunk(
+                    document_id=24,
+                    filename="report.docx",
+                    text=(
+                        "Deepfake detector "
+                        "conclusion."
+                    ),
+                ),
+                make_retrieved_chunk(
+                    document_id=28,
+                    filename="research.docx",
+                    text=(
+                        "Deepfake detection "
+                        "background."
+                    ),
+                ),
+            ],
+        )
     )
 
     return service
+
 
 # ======================================================================
 # HELPERS
@@ -161,6 +195,7 @@ def rag_service():
 
 
 def assert_chat_history_exists(
+    *,
     db,
     chat_id: int,
     session_id: int,
@@ -169,15 +204,22 @@ def assert_chat_history_exists(
     chat = db.execute(
         select(ChatHistory)
         .where(
-            ChatHistory.chat_id == chat_id,
+            ChatHistory.chat_id
+            == chat_id,
         )
     ).scalar_one_or_none()
 
     assert chat is not None
 
-    assert chat.session_id == session_id
+    assert (
+        chat.session_id
+        == session_id
+    )
 
-    assert chat.question == expected_question
+    assert (
+        chat.question
+        == expected_question
+    )
 
     assert chat.answer
 
@@ -185,13 +227,15 @@ def assert_chat_history_exists(
 
 
 def get_source_rows(
+    *,
     db,
     chat_id: int,
 ):
     return db.execute(
         select(ChatSource)
         .where(
-            ChatSource.chat_id == chat_id,
+            ChatSource.chat_id
+            == chat_id,
         )
         .order_by(
             ChatSource.source_id.asc()
@@ -200,24 +244,24 @@ def get_source_rows(
 
 
 # ======================================================================
-# REAL END-TO-END MESSAGE FLOW
+# 1. REAL CHAT MESSAGE PERSISTENCE
 # ======================================================================
 
 
-def test_real_chat_message_persistence(
+def test_real_agentic_chat_message_persistence(
     db,
     test_user,
     chat_session,
-    rag_service: RAGService,
+    agentic_rag_service,
 ):
     """
-    Real flow:
+    Real persistence flow:
 
         Existing User
              ↓
         ChatSession
              ↓
-        RAGService
+        AgenticRAGService
              ↓
         ChatHistory
              ↓
@@ -227,21 +271,20 @@ def test_real_chat_message_persistence(
     """
 
     query = (
-        "Tell me about the deepfake detection system"
+        "Tell me about the deepfake "
+        "detection system"
     )
 
-    old_last_active = chat_session.last_active
-
-    # --------------------------------------------------------------
-    # Execute real RAG + persistence
-    # --------------------------------------------------------------
+    old_last_active = (
+        chat_session.last_active
+    )
 
     chat = create_chat_message(
         db=db,
         session_id=chat_session.session_id,
         query=query,
         current_user=test_user,
-        rag_service=rag_service,
+        agentic_rag_service=agentic_rag_service,
     )
 
     # --------------------------------------------------------------
@@ -250,8 +293,9 @@ def test_real_chat_message_persistence(
 
     assert chat.chat_id is not None
 
-    assert chat.session_id == (
-        chat_session.session_id
+    assert (
+        chat.session_id
+        == chat_session.session_id
     )
 
     assert chat.question == query
@@ -259,14 +303,31 @@ def test_real_chat_message_persistence(
     assert chat.answer
 
     # --------------------------------------------------------------
-    # Persisted DB row
+    # Agentic RAG call
     # --------------------------------------------------------------
 
-    persisted_chat = assert_chat_history_exists(
+    agentic_rag_service.answer.assert_called_once_with(
         db=db,
-        chat_id=chat.chat_id,
-        session_id=chat_session.session_id,
-        expected_question=query,
+        query=query,
+        current_user=test_user,
+    )
+
+    # --------------------------------------------------------------
+    # Persisted row
+    # --------------------------------------------------------------
+
+    persisted_chat = (
+        assert_chat_history_exists(
+            db=db,
+            chat_id=chat.chat_id,
+            session_id=chat_session.session_id,
+            expected_question=query,
+        )
+    )
+
+    assert (
+        persisted_chat.answer
+        == chat.answer
     )
 
     # --------------------------------------------------------------
@@ -278,8 +339,6 @@ def test_real_chat_message_persistence(
         chat_id=chat.chat_id,
     )
 
-    # It is valid for retrieval to find no sources,
-    # but for this known-good query we expect sources.
     assert source_rows
 
     # --------------------------------------------------------------
@@ -292,7 +351,7 @@ def test_real_chat_message_persistence(
             select(Document)
             .where(
                 Document.document_id
-                == source.document_id
+                == source.document_id,
             )
         ).scalar_one_or_none()
 
@@ -311,15 +370,21 @@ def test_real_chat_message_persistence(
         set(document_ids)
     )
 
+    # The mock graph provided documents 24 and 28.
+    assert set(document_ids) == {
+        24,
+        28,
+    }
+
     # --------------------------------------------------------------
-    # Session activity updated
+    # Session last_active
     # --------------------------------------------------------------
 
     refreshed_session = db.execute(
         select(ChatSession)
         .where(
             ChatSession.session_id
-            == chat_session.session_id
+            == chat_session.session_id,
         )
     ).scalar_one()
 
@@ -330,23 +395,19 @@ def test_real_chat_message_persistence(
 
 
 # ======================================================================
-# SOURCE HELPER
+# 2. GET CHAT SOURCES
 # ======================================================================
 
 
-def test_get_chat_sources(
+def test_get_chat_sources_returns_document_metadata(
     db,
     test_user,
     chat_session,
-    rag_service: RAGService,
+    agentic_rag_service,
 ):
-    """
-    Verify that persisted ChatSource rows can be resolved
-    into document_id + original_filename.
-    """
-
     query = (
-        "Tell me about the deepfake detection system"
+        "Tell me about the deepfake "
+        "detection system"
     )
 
     chat = create_chat_message(
@@ -354,7 +415,7 @@ def test_get_chat_sources(
         session_id=chat_session.session_id,
         query=query,
         current_user=test_user,
-        rag_service=rag_service,
+        agentic_rag_service=agentic_rag_service,
     )
 
     sources = get_chat_sources(
@@ -364,7 +425,10 @@ def test_get_chat_sources(
 
     assert sources
 
-    for document_id, original_filename in sources:
+    for (
+        document_id,
+        original_filename,
+    ) in sources:
 
         assert isinstance(
             document_id,
@@ -378,32 +442,146 @@ def test_get_chat_sources(
             str,
         )
 
+    assert {
+        document_id
+        for document_id, _
+        in sources
+    } == {
+        24,
+        28,
+    }
+
 
 # ======================================================================
-# SESSION OWNERSHIP
+# 3. DATABASE-ONLY CHAT
+# ======================================================================
+
+
+def test_database_only_message_creates_no_chat_sources(
+    db,
+    test_user,
+    chat_session,
+):
+    agentic_rag_service = Mock()
+
+    agentic_rag_service.answer.return_value = (
+        MultiAgentResponse(
+            query="What is my email?",
+            answer=(
+                "Your email is "
+                "abhishek@example.com."
+            ),
+            sources=[],
+        )
+    )
+
+    chat = create_chat_message(
+        db=db,
+        session_id=chat_session.session_id,
+        query="What is my email?",
+        current_user=test_user,
+        agentic_rag_service=agentic_rag_service,
+    )
+
+    assert chat.answer == (
+        "Your email is "
+        "abhishek@example.com."
+    )
+
+    source_rows = get_source_rows(
+        db=db,
+        chat_id=chat.chat_id,
+    )
+
+    assert source_rows == []
+
+
+# ======================================================================
+# 4. HYBRID MESSAGE
+# ======================================================================
+
+
+def test_hybrid_message_persists_knowledge_sources(
+    db,
+    test_user,
+    chat_session,
+):
+    agentic_rag_service = Mock()
+
+    agentic_rag_service.answer.return_value = (
+        MultiAgentResponse(
+            query=(
+                "What is my department and "
+                "what does its access policy say?"
+            ),
+            answer=(
+                "You are in Engineering. "
+                "The Engineering access policy "
+                "requires the approved access process."
+            ),
+            sources=[
+                make_retrieved_chunk(
+                    document_id=24,
+                    filename="engineering_policy.pdf",
+                    text=(
+                        "Engineering employees "
+                        "must use the approved "
+                        "access request process."
+                    ),
+                ),
+            ],
+        )
+    )
+
+    chat = create_chat_message(
+        db=db,
+        session_id=chat_session.session_id,
+        query=(
+            "What is my department and "
+            "what does its access policy say?"
+        ),
+        current_user=test_user,
+        agentic_rag_service=agentic_rag_service,
+    )
+
+    assert chat.answer
+
+    source_rows = get_source_rows(
+        db=db,
+        chat_id=chat.chat_id,
+    )
+
+    assert len(source_rows) == 1
+
+    assert source_rows[0].document_id == 24
+
+
+# ======================================================================
+# 5. SESSION OWNERSHIP
 # ======================================================================
 
 
 def test_user_cannot_post_to_another_users_session(
     db,
     test_user,
-    rag_service: RAGService,
+    agentic_rag_service,
 ):
     """
-    Security test:
-
-    A user must not be able to write to another user's
-    chat session even if they know the session_id.
+    A user must not be able to write to another
+    user's session even if they know the session ID.
     """
 
     other_user = db.execute(
         select(User)
         .where(
-            User.user_id != test_user.user_id,
+            User.user_id
+            != test_user.user_id,
             User.is_active.is_(True),
             User.organization_id.is_not(None),
         )
-        .order_by(User.user_id.asc())
+        .order_by(
+            User.user_id.asc()
+        )
         .limit(1)
     ).scalar_one_or_none()
 
@@ -430,12 +608,14 @@ def test_user_cannot_post_to_another_users_session(
             session_id=other_session.session_id,
             query="Unauthorized message",
             current_user=test_user,
-            rag_service=rag_service,
+            agentic_rag_service=agentic_rag_service,
         )
+
+    agentic_rag_service.answer.assert_not_called()
 
 
 # ======================================================================
-# QUERY NORMALIZATION
+# 6. QUERY NORMALIZATION
 # ======================================================================
 
 
@@ -443,10 +623,11 @@ def test_query_is_trimmed_before_persistence(
     db,
     test_user,
     chat_session,
-    rag_service: RAGService,
+    agentic_rag_service,
 ):
     query = (
-        "   Tell me about the deepfake detection system   "
+        "   Tell me about the deepfake "
+        "detection system   "
     )
 
     chat = create_chat_message(
@@ -454,16 +635,26 @@ def test_query_is_trimmed_before_persistence(
         session_id=chat_session.session_id,
         query=query,
         current_user=test_user,
-        rag_service=rag_service,
+        agentic_rag_service=agentic_rag_service,
     )
 
     assert chat.question == (
-        "Tell me about the deepfake detection system"
+        "Tell me about the deepfake "
+        "detection system"
+    )
+
+    agentic_rag_service.answer.assert_called_once_with(
+        db=db,
+        query=(
+            "Tell me about the deepfake "
+            "detection system"
+        ),
+        current_user=test_user,
     )
 
 
 # ======================================================================
-# EMPTY QUERY
+# 7. EMPTY QUERY
 # ======================================================================
 
 
@@ -471,9 +662,8 @@ def test_empty_query_is_rejected(
     db,
     test_user,
     chat_session,
-    rag_service: RAGService,
+    agentic_rag_service,
 ):
-
     with pytest.raises(
         ValueError,
         match="Query cannot be empty",
@@ -483,5 +673,73 @@ def test_empty_query_is_rejected(
             session_id=chat_session.session_id,
             query="   ",
             current_user=test_user,
-            rag_service=rag_service,
+            agentic_rag_service=agentic_rag_service,
         )
+
+    agentic_rag_service.answer.assert_not_called()
+
+
+# ======================================================================
+# 8. FOLLOW-UP CONTEXTUALIZATION
+# ======================================================================
+
+
+def test_follow_up_is_contextualized_before_agentic_rag(
+    db,
+    test_user,
+    chat_session,
+    agentic_rag_service,
+):
+    """
+    This verifies that the existing conversation
+    contextualization layer still sits before AgenticRAGService.
+    """
+
+    # Create a previous message directly.
+    previous_chat = ChatHistory(
+        session_id=chat_session.session_id,
+        question=(
+            "What is the annual leave policy?"
+        ),
+        answer=(
+            "Employees receive annual leave."
+        ),
+    )
+
+    db.add(previous_chat)
+    db.commit()
+
+    contextualizer = Mock()
+
+    contextualizer.contextualize.return_value = (
+        "What is the procedure for applying "
+        "for annual leave?"
+    )
+
+    create_chat_message(
+        db=db,
+        session_id=chat_session.session_id,
+        query="How do I apply for it?",
+        current_user=test_user,
+        agentic_rag_service=agentic_rag_service,
+        query_contextualizer=contextualizer,
+    )
+
+    contextualizer.contextualize.assert_called_once_with(
+        query="How do I apply for it?",
+        history=[
+            (
+                "What is the annual leave policy?",
+                "Employees receive annual leave.",
+            )
+        ],
+    )
+
+    agentic_rag_service.answer.assert_called_once_with(
+        db=db,
+        query=(
+            "What is the procedure for applying "
+            "for annual leave?"
+        ),
+        current_user=test_user,
+    )

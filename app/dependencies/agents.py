@@ -4,6 +4,7 @@ from app.agents.critic_agent import CriticAgent
 from app.agents.database_agent import EnterpriseDataAgent
 from app.agents.orchestrator_agent import OrchestratorAgent
 from app.agents.graph.graph import build_multi_agent_graph
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Use your existing model / service dependencies here.
 from app.dependencies.rag import (
@@ -25,8 +26,14 @@ def get_critic_agent() -> CriticAgent:
 
 @lru_cache(maxsize=1)
 def get_database_agent() -> EnterpriseDataAgent:
+
+    model = ChatGoogleGenerativeAI(
+        model="gemini-2.5-flash",
+        temperature=0,
+    )
+
     return EnterpriseDataAgent(
-        model=get_gemini_client(),
+        model=model,
     )
 
 @lru_cache(maxsize=1)

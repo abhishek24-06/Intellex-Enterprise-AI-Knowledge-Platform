@@ -532,9 +532,28 @@ def test_list_department_users_returns_users():
         ),
     ]
 
+    # --------------------------------------------------------------
+    # DB calls:
+    #
+    # 1. Get department
+    # 2. Get users in department
+    # 3. Resolve department relationship for user 10
+    # 4. Resolve department relationship for user 11
+    # --------------------------------------------------------------
+
+    department_result = make_scalar_result(
+        department
+    )
+
+    users_result = make_scalars_result(
+        users
+    )
+
     db.execute.side_effect = [
+        department_result,
+        users_result,
         make_scalar_result(department),
-        make_scalars_result(users),
+        make_scalar_result(department),
     ]
 
     runtime = make_runtime(
@@ -739,9 +758,26 @@ def test_list_team_users_returns_users():
         ),
     ]
 
+    # --------------------------------------------------------------
+    # DB calls:
+    #
+    # 1. Get team
+    # 2. Get users in team
+    # 3. Resolve team relationship for user 10
+    # --------------------------------------------------------------
+
+    team_result = make_scalar_result(
+        team
+    )
+
+    users_result = make_scalars_result(
+        users
+    )
+
     db.execute.side_effect = [
+        team_result,
+        users_result,
         make_scalar_result(team),
-        make_scalars_result(users),
     ]
 
     runtime = make_runtime(

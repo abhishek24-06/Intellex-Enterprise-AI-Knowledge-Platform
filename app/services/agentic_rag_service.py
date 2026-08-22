@@ -11,8 +11,15 @@ class AgenticRAGService:
         self,
         *,
         graph,
+        max_retries: int = 2,
     ):
+        if max_retries < 0:
+            raise ValueError(
+                "max_retries cannot be negative."
+            )
+
         self.graph = graph
+        self.max_retries = max_retries
 
     def answer(
         self,
@@ -33,7 +40,7 @@ class AgenticRAGService:
             {
                 "original_query": normalized_query,
                 "attempt": 0,
-                "max_retries": 2,
+                "max_retries": self.max_retries,
                 "history": [],
             },
             context={
@@ -51,14 +58,16 @@ class AgenticRAGService:
                 "Agentic RAG graph returned no final answer."
             )
 
-        rag_result = result.get("rag_result")
+        rag_result = result.get(
+            "rag_result"
+        )
 
         sources = (
             rag_result.sources
             if rag_result is not None
             else []
         )
-        
+
         return MultiAgentResponse(
             query=normalized_query,
             answer=answer,

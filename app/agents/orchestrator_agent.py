@@ -70,25 +70,76 @@ Return ONLY valid JSON:
     "reason": "..."
 }"""
 
-def __init__(self,*,llm_client):
-    self.llm_client = llm_client
+    def __init__(self, *, llm_client):
+            self.llm_client = llm_client
 
-def route(self,*,query:str)->OrchestratorDecision:
+    @staticmethod
+    def _parse_json(
+        raw_response: str,
+    ) -> dict:
 
-    if not query or not query.strip():
-            raise ValueError("Query cannot be empty.")
+        cleaned = raw_response.strip()
 
-    raw = self.llm_client.generate(
+        # Handle:
+        #
+        # ```json
+        # {...}
+        # ```
+        #
+
+        if cleaned.startswith("```"):
+
+            lines = cleaned.splitlines()
+
+            if (
+                lines
+                and lines[0].startswith("```")
+            ):
+                lines = lines[1:]
+
+            if (
+                lines
+                and lines[-1].strip() == "```"
+            ):
+                lines = lines[:-1]
+
+            cleaned = "\n".join(
+                lines
+            ).strip()
+
+        try:
+            return json.loads(cleaned)
+
+        except json.JSONDecodeError as exc:
+            raise RuntimeError(
+                "Orchestrator returned invalid JSON: "
+                f"{cleaned!r}"
+            ) from exc
+
+    def route(
+        self,
+        *,
+        query: str,
+    ) -> OrchestratorDecision:
+
+        if not query or not query.strip():
+            raise ValueError(
+                "Query cannot be empty."
+            )
+
+        raw = self.llm_client.generate(
             system_prompt=self.SYSTEM_PROMPT,
-            user_prompt=query.strip()
+            user_prompt=query.strip(),
         )
 
-    if not raw or not raw.strip():
-        raise RuntimeError("Orchestrator returned an empty response.")
+        if not raw or not raw.strip():
+            raise RuntimeError(
+                "Orchestrator returned "
+                "an empty response."
+            )
 
-    try:
-        payload = json.loads(raw.strip())
-    except json.JSONDecodeError as exc:
-        raise RuntimeError("Orchestrator returned invalid JSON.") from exc
+        payload = self._parse_json(raw)
 
-    return OrchestratorDecision.model_validate(payload)
+        return OrchestratorDecision.model_validate(
+            payload
+        )
