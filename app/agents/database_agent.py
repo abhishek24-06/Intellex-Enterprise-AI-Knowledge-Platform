@@ -1,7 +1,7 @@
 from __future__ import annotations
-
+import os
 from langchain.agents import create_agent
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openrouter import ChatOpenRouter
 
 from app.agents.tools.user_data_tools import (
     DATA_AGENT_TOOLS,
@@ -35,7 +35,7 @@ Rules:
 10. Keep the final answer concise and factual.
 """
 
-    def __init__(self,*,model: ChatGoogleGenerativeAI,):
+    def __init__(self,*,model: ChatOpenRouter):
 
         self.model = model
         self.tools = DATA_AGENT_TOOLS

@@ -1,95 +1,92 @@
+from __future__ import annotations
+
 from functools import lru_cache
 
-from app.agents.graph.graph import (
-    build_multi_agent_graph,
-)
+from app.agents.critic_agent import CriticAgent
+from app.agents.database_agent import EnterpriseDataAgent
+from app.agents.graph.graph import build_multi_agent_graph
+from app.agents.orchestrator_agent import OrchestratorAgent
+from app.services.agentic_rag_service import AgenticRAGService
+from app.services.generation.openrouter_client import OpenRouterClient
+from app.services.generation.openrouter_models import get_openrouter_chat_model
+from app.services.rag.rag_service import RAGService
+from app.dependencies.rag import get_rag_service
 
-from app.agents.critic_agent import (
-    CriticAgent
-)
-
-from app.agents.database_agent import (
-    EnterpriseDataAgent
-)
-
-from app.agents.orchestrator_agent import (
-    OrchestratorAgent
-)
-
-from app.dependencies.agents import (
-    get_gemini_client
-)
-
-from langchain_google_genai import ChatGoogleGenerativeAI
-
-from app.dependencies.rag import (
-    get_rag_service
-)
-
-from app.services.agentic_rag_service import (
-    AgenticRAGService,
-)
-
+# GENERATION CLIENT
 
 @lru_cache(maxsize=1)
-def get_agentic_rag_service() -> AgenticRAGService:
+def get_openrouter_generation_client() -> (
+    OpenRouterClient
+):
 
-    # --------------------------------------------------------------
-    # Shared Gemini client
-    # --------------------------------------------------------------
+    return OpenRouterClient()
 
-    gemini_client = get_gemini_client()
+# ORCHESTRATOR
 
-    # --------------------------------------------------------------
-    # Agent 4 — Orchestrator
-    # --------------------------------------------------------------
+@lru_cache(maxsize=1)
+def get_orchestrator_agent() -> (
+    OrchestratorAgent
+):
 
-    orchestrator = OrchestratorAgent(
-        llm_client=gemini_client,
+    return OrchestratorAgent(
+        llm_client=(
+            get_openrouter_generation_client()
+        ),
     )
 
-    # --------------------------------------------------------------
-    # Agent 2 — Critic
-    # --------------------------------------------------------------
+# CRITIC
 
-    critic = CriticAgent(
-        llm_client=gemini_client,
+@lru_cache(maxsize=1)
+def get_critic_agent() -> CriticAgent:
+
+    return CriticAgent(
+        llm_client=(
+            get_openrouter_generation_client()
+        ),
     )
 
-    # --------------------------------------------------------------
-    # Agent 3 — Database Agent
-    # --------------------------------------------------------------
+# DATABASE AGENT
 
-    database_model = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    temperature=0
-)
+@lru_cache(maxsize=1)
+def get_database_agent() -> (
+    EnterpriseDataAgent
+):
 
-    database_agent = EnterpriseDataAgent(
-        model=database_model
+    return EnterpriseDataAgent(
+        model=get_openrouter_chat_model(
+            temperature=0.0,
+        ),
     )
 
-    # --------------------------------------------------------------
-    # Existing Agent 1 RAG Service
-    # --------------------------------------------------------------
+# SYNTHESIS MODEL
 
-    rag_service = get_rag_service()
+@lru_cache(maxsize=1)
+def get_synthesis_client() -> (
+    OpenRouterClient
+):
 
-    # --------------------------------------------------------------
-    # Build LangGraph
-    # --------------------------------------------------------------
+    return get_openrouter_generation_client()
+
+# AGENTIC RAG SERVICE
+
+@lru_cache(maxsize=1)
+def get_agentic_rag_service() -> (
+    AgenticRAGService
+):
+
+    rag_service: RAGService = (
+        get_rag_service()
+    )
 
     graph = build_multi_agent_graph(
-        orchestrator=orchestrator,
+        orchestrator=(
+            get_orchestrator_agent()
+        ),
         rag_service=rag_service,
-        data_agent=database_agent,
-        critic_agent=critic,
-        llm_client=gemini_client,
+        data_agent=get_database_agent(),
+        critic_agent=get_critic_agent(),
+        llm_client=get_synthesis_client(),
     )
-
-    # --------------------------------------------------------------
-    # Wrap graph in application service
-    # --------------------------------------------------------------
 
     return AgenticRAGService(
         graph=graph,

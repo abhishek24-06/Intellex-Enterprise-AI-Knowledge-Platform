@@ -3,7 +3,7 @@ from functools import lru_cache
 from app.services.chunking.code.code_chunker import CodeChunker
 from app.services.chunking.final_chunker_validator.validator import FinalChunkValidator
 from app.services.chunking.hierarchy.hierarchy_chunker import HierarchyChunker
-from app.services.chunking.llm_chunker.gemini_client import GeminiClient
+from app.services.generation.openrouter_client import OpenRouterClient
 from app.services.chunking.llm_chunker.semantic_chunker import SemanticChunker
 from app.services.chunking.recursive_splitter.narrative_safety_splitter import NarrativeSafetySplitter
 from app.services.chunking.routing.element_router import ElementRouter
@@ -28,8 +28,8 @@ def build_document_chunker():
 
     hierarchy_chunker = HierarchyChunker()
 
-    gemini_client = GeminiClient()
-    semantic_chunker = SemanticChunker(llm_client=gemini_client)
+    openrouter_client = OpenRouterClient()
+    semantic_chunker = SemanticChunker(llm_client=openrouter_client)
 
     element_router = ElementRouter()
 

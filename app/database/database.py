@@ -8,7 +8,9 @@ load_dotenv()
 
 DATABASE_URL=os.getenv("DATABASE_URL")##Load URL from .env
 
-engine=create_engine(DATABASE_URL) #Connects PY to DB
+engine=create_engine(DATABASE_URL,
+                     pool_pre_ping=True,
+                     pool_recycle=1800) #Connects PY to DB
 
 SessionLocal=sessionmaker( #Creates DB connection
     bind=engine,
