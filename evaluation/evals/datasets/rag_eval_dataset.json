@@ -1,0 +1,151 @@
+[
+  {
+    "id": "knowledge_001",
+    "category": "KNOWLEDGE",
+    "user_input": "What checks should an operator perform before changing an internal service?",
+    "reference": "Before changing an internal service, an operator should confirm its current health, recent deployments, active incidents, and monitoring state.",
+    "expected_route": "KNOWLEDGE"
+  },
+  {
+    "id": "knowledge_002",
+    "category": "KNOWLEDGE",
+    "user_input": "What should be included in a production service change?",
+    "reference": "A production-like service change should have an identified owner, an intended change window, a rollback approach, and a verification step.",
+    "expected_route": "KNOWLEDGE"
+  },
+  {
+    "id": "knowledge_003",
+    "category": "KNOWLEDGE",
+    "user_input": "What should a deployment record contain?",
+    "reference": "A deployment record should identify the version, target environment, deployment owner, validation checks, and rollback procedure.",
+    "expected_route": "KNOWLEDGE"
+  },
+  {
+    "id": "knowledge_004",
+    "category": "KNOWLEDGE",
+    "user_input": "How should an infrastructure team investigate monitoring alerts?",
+    "reference": "Operators should correlate monitoring alerts with recent changes, service logs, and dependency health before deciding on mitigation.",
+    "expected_route": "KNOWLEDGE"
+  },
+  {
+    "id": "knowledge_005",
+    "category": "KNOWLEDGE",
+    "user_input": "What information should an infrastructure incident record contain?",
+    "reference": "An infrastructure incident record should contain an identifier, affected service, start time, impact, mitigation, owner, and final resolution.",
+    "expected_route": "KNOWLEDGE"
+  },
+  {
+    "id": "knowledge_006",
+    "category": "KNOWLEDGE",
+    "user_input": "What should a budget request contain?",
+    "reference": "A budget request should identify the requesting function, business purpose, expected cost, requested period, supporting rationale, and approval path.",
+    "expected_route": "KNOWLEDGE"
+  },
+  {
+    "id": "knowledge_007",
+    "category": "KNOWLEDGE",
+    "user_input": "What should researchers document before starting an experiment?",
+    "reference": "Researchers should identify the objective, assumptions, inputs, evaluation criteria, and expected outcome before experimentation begins.",
+    "expected_route": "KNOWLEDGE"
+  },
+  {
+    "id": "knowledge_008",
+    "category": "KNOWLEDGE",
+    "user_input": "What should be considered when classifying a security incident?",
+    "reference": "Security incident severity can consider impact, scope, affected assets, confidence, and urgency, and classification should be revisited as evidence changes.",
+    "expected_route": "KNOWLEDGE"
+  },
+
+  {
+    "id": "database_001",
+    "category": "DATABASE",
+    "user_input": "What is my email?",
+    "reference": "The authenticated user's email address.",
+    "expected_route": "DATABASE"
+  },
+  {
+    "id": "database_002",
+    "category": "DATABASE",
+    "user_input": "What department am I in?",
+    "reference": "The authenticated user's department.",
+    "expected_route": "DATABASE"
+  },
+  {
+    "id": "database_003",
+    "category": "DATABASE",
+    "user_input": "What is my department ID?",
+    "reference": "The authenticated user's department ID.",
+    "expected_route": "DATABASE"
+  },
+  {
+    "id": "database_004",
+    "category": "DATABASE",
+    "user_input": "What team am I in?",
+    "reference": "The authenticated user's team.",
+    "expected_route": "DATABASE"
+  },
+  {
+    "id": "database_005",
+    "category": "DATABASE",
+    "user_input": "Who is on my team?",
+    "reference": "The users who belong to the authenticated user's team.",
+    "expected_route": "DATABASE"
+  },
+  {
+    "id": "database_006",
+    "category": "DATABASE",
+    "user_input": "What teams exist in my organization?",
+    "reference": "The teams available within the authenticated user's organization.",
+    "expected_route": "DATABASE"
+  },
+
+  {
+  "id": "hybrid_001",
+  "category": "HYBRID",
+  "user_input": "What is my department and what operational checks does that department perform before a service change?",
+  "reference": "The user's department is IT. Before changing an internal service, the operator should confirm the service's current health, recent deployments, active incidents, and monitoring state."
+ },
+  {
+    "id": "hybrid_002",
+    "category": "HYBRID",
+    "user_input": "What is my team and what does the team's release process require?",
+    "reference": "The answer should identify the authenticated user's team from enterprise data and explain the relevant release requirements from the knowledge base.",
+    "expected_route": "HYBRID"
+  },
+  {
+    "id": "hybrid_003",
+    "category": "HYBRID",
+    "user_input": "Who is on my team and what responsibilities does the team have?",
+    "reference": "The answer should identify the relevant team members from enterprise data and explain the team's responsibilities or documented workflow from the knowledge base.",
+    "expected_route": "HYBRID"
+  },
+  {
+    "id": "hybrid_004",
+    "category": "HYBRID",
+    "user_input": "What department am I in and what incident response procedures apply to my department?",
+    "reference": "The answer should identify the authenticated user's department and explain the incident response procedure applicable to that department.",
+    "expected_route": "HYBRID"
+  },
+
+  {
+    "id": "acl_001",
+    "category": "ACL",
+    "user_input": "What is the Finance budget validation marker?",
+    "reference": "The Finance document is restricted to Finance department members and its validation marker must not be returned to unauthorized users.",
+    "expected_route": "KNOWLEDGE"
+  },
+  {
+    "id": "acl_002",
+    "category": "ACL",
+    "user_input": "What is in Akash's private operations notes?",
+    "reference": "The Akash private operations document is restricted to Akash's user account and should not be returned to other users.",
+    "expected_route": "KNOWLEDGE"
+  },
+  {
+    "id": "acl_003",
+    "category": "ACL",
+    "user_input": "What is the AI team's model evaluation process?",
+    "reference": "The AI team document describes reproducible model evaluation including dataset preparation, baselines, metrics, error analysis, and reranking.",
+    "expected_route": "KNOWLEDGE"
+  }
+]

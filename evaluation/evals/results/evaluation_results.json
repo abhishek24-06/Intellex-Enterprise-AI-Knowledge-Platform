@@ -1,0 +1,28 @@
+{
+  "ragas": [
+    {
+      "user_input": "What checks should an operator perform before changing an internal service?",
+      "retrieved_contexts": [
+        "Before changing an internal service, an operator should confirm its current health, recent deployments, active incidents, and monitoring state. A small amount of structured evidence makes later troubleshooting easier because the team can distinguish a pre-existing condition from a change-induced condition.",
+        "## 6. Monitoring\n\nMonitoring alerts are signals rather than complete diagnoses. Operators correlate alerts with recent changes, service logs, and dependency health before deciding on mitigation.",
+        "## 4. Deployment\n\nA deployment should identify the version, target, owner, validation checks, and rollback method. A successful deployment is not merely the absence of an error; the operator should confirm expected behavior.",
+        "Troubleshooting should proceed from the least invasive checks to more targeted diagnostics. Operators should preserve useful logs and avoid destructive changes until the likely cause is understood.",
+        "The organization IT operations guide describes common operational practices for internal services. It focuses on repeatable procedures, clear ownership, change documentation, incident handling, and verification. It is organization-visible and therefore provides a useful baseline query for ACL testing."
+      ],
+      "response": "Before changing an internal service, an operator should check its current health, recent deployments, active incidents, and monitoring state. This helps in distinguishing pre-existing conditions from conditions induced by the change.",
+      "reference": "Before changing an internal service, an operator should confirm its current health, recent deployments, active incidents, and monitoring state.",
+      "context_recall": 1.0,
+      "faithfulness": 1.0,
+      "factual_correctness(mode=f1)": 0.89
+    }
+  ],
+  "hybrid": [
+    {
+      "id": "hybrid_001",
+      "database_correctness": 1.0,
+      "document_grounding": 1.0,
+      "combined_answer_correctness": 1.0,
+      "reasoning": "The final answer correctly identifies the department as 'IT' based on the database evidence. It also accurately lists the operational checks performed before a service change, such as confirming current health, recent deployments, active incidents, and monitoring state, which are all directly supported by the provided knowledge evidence. The additional details about routine health checks (application availability, database connectivity, queue status, etc.) and the review of current service status, recent configuration changes, alerts, and operational concerns are also explicitly mentioned in the knowledge evidence. The answer effectively combines both sources and addresses the user's query comprehensively."
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "metrics": [
+    {
+      "user_input": "What checks should an operator perform before changing an internal service?",
+      "retrieved_contexts": [
+        "Before changing an internal service, an operator should confirm its current health, recent deployments, active incidents, and monitoring state. A small amount of structured evidence makes later troubleshooting easier because the team can distinguish a pre-existing condition from a change-induced condition.",
+        "Troubleshooting should proceed from the least invasive checks to more targeted diagnostics. Operators should preserve useful logs and avoid destructive changes until the likely cause is understood.",
+        "## 6. Monitoring\n\nMonitoring alerts are signals rather than complete diagnoses. Operators correlate alerts with recent changes, service logs, and dependency health before deciding on mitigation.",
+        "## 4. Deployment\n\nA deployment should identify the version, target, owner, validation checks, and rollback method. A successful deployment is not merely the absence of an error; the operator should confirm expected behavior.",
+        "## 3. Health Checks\n\nRoutine health checks should verify application availability, database connectivity, queue status, monitoring state, and recent deployment activity. Results should be recorded when they are relevant to an operational decision."
+      ],
+      "response": "Before changing an internal service, an operator should check its current health, recent deployments, active incidents, and monitoring state. This helps distinguish pre-existing conditions from conditions induced by the change.",
+      "reference": "Before changing an internal service, an operator should confirm its current health, recent deployments, active incidents, and monitoring state.",
+      "context_recall": 1.0,
+      "faithfulness": 1.0,
+      "factual_correctness(mode=f1)": 0.89
+    },
+    {
+      "user_input": "What is my department and what operational checks does that department perform before a service change?",
+      "retrieved_contexts": [
+        "Before changing an internal service, an operator should confirm its current health, recent deployments, active incidents, and monitoring state. A small amount of structured evidence makes later troubleshooting easier because the team can distinguish a pre-existing condition from a change-induced condition.",
+        "## 3. Health Checks\n\nRoutine health checks should verify application availability, database connectivity, queue status, monitoring state, and recent deployment activity. Results should be recorded when they are relevant to an operational decision.",
+        "## 6. Monitoring\n\nMonitoring alerts are signals rather than complete diagnoses. Operators correlate alerts with recent changes, service logs, and dependency health before deciding on mitigation.",
+        "The review records current service status, recent configuration changes, relevant alerts, and any operational concerns that require additional investigation.",
+        "The organization IT operations guide describes common operational practices for internal services. It focuses on repeatable procedures, clear ownership, change documentation, incident handling, and verification. It is organization-visible and therefore provides a useful baseline query for ACL testing."
+      ],
+      "response": "Your department is IT. Before changing an internal service, your department should perform several operational checks:\n\n*   **Current health:** Confirm the service's current health by verifying application availability, database connectivity, and queue status.\n*   **Recent deployments:** Review recent deployment activity.\n*   **Active incidents:** Check for any active incidents.\n*   **Monitoring state:** Confirm the service's monitoring state and any relevant alerts.\n*   **Recent configuration changes:** Record any recent configuration changes.\n*   **Operational concerns:** Note any operational concerns that require additional investigation.\n\nThese checks help to distinguish pre-existing conditions from change-induced conditions and aid in troubleshooting.",
+      "reference": "The answer should identify the authenticated user's department from enterprise data and explain the relevant operational checks from the knowledge base.",
+      "context_recall": 0.0,
+      "faithfulness": 0.9285714285714286,
+      "factual_correctness(mode=f1)": 0.0
+    }
+  ]
+}

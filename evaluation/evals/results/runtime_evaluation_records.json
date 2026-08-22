@@ -1,0 +1,125 @@
+[
+  {
+    "id": "knowledge_001",
+    "category": "KNOWLEDGE",
+    "user_input": "What checks should an operator perform before changing an internal service?",
+    "retrieved_contexts": [
+      "Before changing an internal service, an operator should confirm its current health, recent deployments, active incidents, and monitoring state. A small amount of structured evidence makes later troubleshooting easier because the team can distinguish a pre-existing condition from a change-induced condition.",
+      "## 6. Monitoring\n\nMonitoring alerts are signals rather than complete diagnoses. Operators correlate alerts with recent changes, service logs, and dependency health before deciding on mitigation.",
+      "## 4. Deployment\n\nA deployment should identify the version, target, owner, validation checks, and rollback method. A successful deployment is not merely the absence of an error; the operator should confirm expected behavior.",
+      "Troubleshooting should proceed from the least invasive checks to more targeted diagnostics. Operators should preserve useful logs and avoid destructive changes until the likely cause is understood.",
+      "The organization IT operations guide describes common operational practices for internal services. It focuses on repeatable procedures, clear ownership, change documentation, incident handling, and verification. It is organization-visible and therefore provides a useful baseline query for ACL testing."
+    ],
+    "database_evidence": null,
+    "response": "Before changing an internal service, an operator should check its current health, recent deployments, active incidents, and monitoring state. This helps in distinguishing pre-existing conditions from conditions induced by the change.",
+    "reference": "Before changing an internal service, an operator should confirm its current health, recent deployments, active incidents, and monitoring state.",
+    "route": "KNOWLEDGE",
+    "attempt": 1,
+    "source_count": 5,
+    "sources": [
+      {
+        "document_id": 35,
+        "original_filename": "02_organization_it_operations.pdf",
+        "chunk_id": 748,
+        "chunk_index": 2,
+        "chunk_text": "Before changing an internal service, an operator should confirm its current health, recent deployments, active incidents, and monitoring state. A small amount of structured evidence makes later troubleshooting easier because the team can distinguish a pre-existing condition from a change-induced condition."
+      },
+      {
+        "document_id": 41,
+        "original_filename": "05_it_department_infrastructure.txt",
+        "chunk_id": 866,
+        "chunk_index": 6,
+        "chunk_text": "## 6. Monitoring\n\nMonitoring alerts are signals rather than complete diagnoses. Operators correlate alerts with recent changes, service logs, and dependency health before deciding on mitigation."
+      },
+      {
+        "document_id": 41,
+        "original_filename": "05_it_department_infrastructure.txt",
+        "chunk_id": 864,
+        "chunk_index": 4,
+        "chunk_text": "## 4. Deployment\n\nA deployment should identify the version, target, owner, validation checks, and rollback method. A successful deployment is not merely the absence of an error; the operator should confirm expected behavior."
+      },
+      {
+        "document_id": 35,
+        "original_filename": "02_organization_it_operations.pdf",
+        "chunk_id": 755,
+        "chunk_index": 9,
+        "chunk_text": "Troubleshooting should proceed from the least invasive checks to more targeted diagnostics. Operators should preserve useful logs and avoid destructive changes until the likely cause is understood."
+      },
+      {
+        "document_id": 35,
+        "original_filename": "02_organization_it_operations.pdf",
+        "chunk_id": 747,
+        "chunk_index": 1,
+        "chunk_text": "The organization IT operations guide describes common operational practices for internal services. It focuses on repeatable procedures, clear ownership, change documentation, incident handling, and verification. It is organization-visible and therefore provides a useful baseline query for ACL testing."
+      }
+    ]
+  },
+  {
+    "id": "database_001",
+    "category": "DATABASE",
+    "user_input": "What is my email?",
+    "retrieved_contexts": [],
+    "database_evidence": "Your email is akashsingh@gmail.com.",
+    "response": "Your email is akashsingh@gmail.com.",
+    "reference": "The authenticated user's email address.",
+    "route": "DATABASE",
+    "attempt": 0,
+    "source_count": 0,
+    "sources": []
+  },
+  {
+    "id": "hybrid_001",
+    "category": "HYBRID",
+    "user_input": "What is my department and what operational checks does that department perform before a service change?",
+    "retrieved_contexts": [
+      "Before changing an internal service, an operator should confirm its current health, recent deployments, active incidents, and monitoring state. A small amount of structured evidence makes later troubleshooting easier because the team can distinguish a pre-existing condition from a change-induced condition.",
+      "## 3. Health Checks\n\nRoutine health checks should verify application availability, database connectivity, queue status, monitoring state, and recent deployment activity. Results should be recorded when they are relevant to an operational decision.",
+      "## 6. Monitoring\n\nMonitoring alerts are signals rather than complete diagnoses. Operators correlate alerts with recent changes, service logs, and dependency health before deciding on mitigation.",
+      "The review records current service status, recent configuration changes, relevant alerts, and any operational concerns that require additional investigation.",
+      "The organization IT operations guide describes common operational practices for internal services. It focuses on repeatable procedures, clear ownership, change documentation, incident handling, and verification. It is organization-visible and therefore provides a useful baseline query for ACL testing."
+    ],
+    "database_evidence": "Your department is IT.",
+    "response": "Your department is IT. Before a service change, the IT department should perform checks to confirm the service's current health, recent deployments, active incidents, and monitoring state. Routine health checks specifically verify application availability, database connectivity, queue status, monitoring state, and recent deployment activity. Additionally, a review of current service status, recent configuration changes, relevant alerts, and any operational concerns needing further investigation is conducted.",
+    "reference": "The user's department is IT. Before changing an internal service, the operator should confirm the service's current health, recent deployments, active incidents, and monitoring state.",
+    "route": "HYBRID",
+    "attempt": 1,
+    "source_count": 5,
+    "sources": [
+      {
+        "document_id": 35,
+        "original_filename": "02_organization_it_operations.pdf",
+        "chunk_id": 748,
+        "chunk_index": 2,
+        "chunk_text": "Before changing an internal service, an operator should confirm its current health, recent deployments, active incidents, and monitoring state. A small amount of structured evidence makes later troubleshooting easier because the team can distinguish a pre-existing condition from a change-induced condition."
+      },
+      {
+        "document_id": 41,
+        "original_filename": "05_it_department_infrastructure.txt",
+        "chunk_id": 863,
+        "chunk_index": 3,
+        "chunk_text": "## 3. Health Checks\n\nRoutine health checks should verify application availability, database connectivity, queue status, monitoring state, and recent deployment activity. Results should be recorded when they are relevant to an operational decision."
+      },
+      {
+        "document_id": 41,
+        "original_filename": "05_it_department_infrastructure.txt",
+        "chunk_id": 866,
+        "chunk_index": 6,
+        "chunk_text": "## 6. Monitoring\n\nMonitoring alerts are signals rather than complete diagnoses. Operators correlate alerts with recent changes, service logs, and dependency health before deciding on mitigation."
+      },
+      {
+        "document_id": 40,
+        "original_filename": "10_akashsingh_private_operations_notes.md",
+        "chunk_id": 845,
+        "chunk_index": 4,
+        "chunk_text": "The review records current service status, recent configuration changes, relevant alerts, and any operational concerns that require additional investigation."
+      },
+      {
+        "document_id": 35,
+        "original_filename": "02_organization_it_operations.pdf",
+        "chunk_id": 747,
+        "chunk_index": 1,
+        "chunk_text": "The organization IT operations guide describes common operational practices for internal services. It focuses on repeatable procedures, clear ownership, change documentation, incident handling, and verification. It is organization-visible and therefore provides a useful baseline query for ACL testing."
+      }
+    ]
+  }
+]

@@ -73,3 +73,62 @@ class AgenticRAGService:
             answer=answer,
             sources=sources,
         )
+
+    def evaluate(self,*,db,query: str,current_user) -> dict:
+
+        if not query or not query.strip():
+            raise ValueError(
+                "Query cannot be empty."
+            )
+    
+        normalized_query = query.strip()
+    
+        result = self.graph.invoke(
+            {
+                "original_query": normalized_query,
+                "attempt": 0,
+                "max_retries": self.max_retries,
+                "history": [],
+            },
+            context={
+                "db": db,
+                "current_user": current_user,
+            },
+        )
+    
+        answer = result.get(
+            "final_answer"
+        )
+    
+        if not answer:
+            raise RuntimeError(
+                "Agentic RAG graph returned no final answer."
+            )
+    
+        rag_result = result.get(
+            "rag_result"
+        )
+    
+        sources = (
+            rag_result.sources
+            if rag_result is not None
+            else []
+        )
+    
+        database_result = result.get(
+            "database_result"
+        )
+    
+        return {
+            "answer": answer,
+            "route": result.get("route"),
+            "rag_result": rag_result,
+            "sources": sources,
+            "database_result": database_result,
+            "critique": result.get("critique"),
+            "attempt": result.get("attempt", 0),
+            "history": result.get(
+                "history",
+                [],
+            ),
+        }
