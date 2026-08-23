@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from unittest.mock import Mock
-
+from app.dto.agent_execution import AgentExecutionEvent
 import pytest
 from sqlalchemy import select
 
@@ -31,6 +31,8 @@ from app.services.chat_message_service import (
     create_chat_message,
     get_chat_sources,
 )
+
+from app.models.agent_execution import AgentExecution
 
 
 # ======================================================================
@@ -183,11 +185,61 @@ def agentic_rag_service():
                     ),
                 ),
             ],
+
+            # ADD THIS
+            execution_trace=[
+                AgentExecutionEvent(
+                    request_id="test-request-001",
+                    agent_name="orchestrator",
+                    route="knowledge",
+                    attempt=0,
+                    status="SUCCESS",
+                    latency_ms=10.0,
+                    details={},
+                ),
+                AgentExecutionEvent(
+                    request_id="test-request-001",
+                    agent_name="knowledge_agent",
+                    route="knowledge",
+                    attempt=0,
+                    status="SUCCESS",
+                    latency_ms=20.0,
+                    details={
+                        "retrieved_chunks": 3,
+                    },
+                ),
+                AgentExecutionEvent(
+                    request_id="test-request-001",
+                    agent_name="synthesis",
+                    route="knowledge",
+                    attempt=0,
+                    status="SUCCESS",
+                    latency_ms=15.0,
+                    details={},
+                ),
+                AgentExecutionEvent(
+                    request_id="test-request-001",
+                    agent_name="multi_agent_critic",
+                    route="knowledge",
+                    attempt=0,
+                    status="SUCCESS",
+                    latency_ms=12.0,
+                    details={},
+                ),
+                AgentExecutionEvent(
+                    request_id="test-request-001",
+                    agent_name="finalize",
+                    route="knowledge",
+                    attempt=0,
+                    status="SUCCESS",
+                    latency_ms=5.0,
+                    details={},
+                ),
+            ],
         )
     )
 
     return service
-
 
 # ======================================================================
 # HELPERS
@@ -743,3 +795,119 @@ def test_follow_up_is_contextualized_before_agentic_rag(
         ),
         current_user=test_user,
     )
+
+def test_real_agentic_chat_message_persists_execution_trace(
+    db,
+    test_user,
+    chat_session,
+    agentic_rag_service,
+):
+    query = (
+        "Tell me about the deepfake "
+        "detection system"
+    )
+
+    chat = create_chat_message(
+        db=db,
+        session_id=chat_session.session_id,
+        query=query,
+        current_user=test_user,
+        query_contextualizer=Mock(),
+        agentic_rag_service=(
+            agentic_rag_service
+        ),
+    )
+
+    rows = db.execute(
+        select(AgentExecution)
+        .where(
+            AgentExecution.chat_id
+            == chat.chat_id
+        )
+        .order_by(
+            AgentExecution.execution_id.asc()
+        )
+    ).scalars().all()
+
+    assert rows
+
+    request_ids = {
+        row.request_id
+        for row in rows
+    }
+
+    assert len(request_ids) == 1
+
+    agent_names = {
+        row.agent_name
+        for row in rows
+    }
+
+    assert "orchestrator" in agent_names
+
+    assert "synthesis" in agent_names
+
+    assert "multi_agent_critic" in agent_names
+
+    for row in rows:
+
+        assert row.chat_id == chat.chat_id
+
+        assert (
+            row.session_id
+            == chat_session.session_id
+        )
+
+        assert (
+            row.user_id
+            == test_user.user_id
+        )
+
+        assert (
+            row.organization_id
+            == test_user.organization_id
+        )
+
+        assert row.latency_ms >= 0
+
+        assert row.details is not None
+
+def test_execution_trace_rolls_back_with_chat(
+    db,
+    test_user,
+    chat_session,
+    agentic_rag_service,
+    monkeypatch,
+):
+
+    from app.services import (
+        chat_message_service,
+    )
+
+    original_commit = db.commit
+
+    def failing_commit():
+
+        original_commit()
+
+        raise RuntimeError(
+            "forced commit failure"
+        )
+
+    db.commit = failing_commit
+
+    with pytest.raises(
+        RuntimeError,
+        match="forced commit failure",
+    ):
+
+        create_chat_message(
+            db=db,
+            session_id=chat_session.session_id,
+            query="Test query",
+            current_user=test_user,
+            query_contextualizer=Mock(),
+            agentic_rag_service=(
+                agentic_rag_service
+            ),
+        )

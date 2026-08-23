@@ -17,10 +17,9 @@ from app.services.agentic_rag_service import AgenticRAGService
 from app.services.observability.rag_trace import RAGTrace
 from app.services.query_contextualizer import QueryContextualizer
 from app.services.rag.rag_service import RAGService
-
+from evaluation.observability.agent_execution_service import AgentExecutionService
 
 MAX_CONTEXT_MESSAGES = 10
-
 
 def get_recent_chat_history(
     *,
@@ -60,11 +59,7 @@ def create_chat_message(
     agentic_rag_service: AgenticRAGService | None = None,
     rag_service: RAGService | None = None,
 ) -> ChatHistory:
-
-    # --------------------------------------------------------------
     # 1. Verify session belongs to current user
-    # --------------------------------------------------------------
-
     session = db.execute(
         select(ChatSession)
         .where(
@@ -77,31 +72,19 @@ def create_chat_message(
         raise LookupError(
             "Chat session not found."
         )
-
-    # --------------------------------------------------------------
     # 2. Normalize query
-    # --------------------------------------------------------------
-
     normalised_query = query.strip()
 
     if not normalised_query:
         raise ValueError(
             "Query cannot be empty."
         )
-
-    # --------------------------------------------------------------
     # 3. Retrieve recent conversation history
-    # --------------------------------------------------------------
-
     history = get_recent_chat_history(
         db=db,
         session_id=session.session_id,
     )
-
-    # --------------------------------------------------------------
     # 4. Contextualize follow-up query
-    # --------------------------------------------------------------
-
     contextualization_started = perf_counter()
 
     retrieval_query = (
@@ -117,11 +100,7 @@ def create_chat_message(
         perf_counter()
         - contextualization_started
     ) * 1000
-
-    # --------------------------------------------------------------
     # 5. Observability trace
-    # --------------------------------------------------------------
-
     trace = RAGTrace(
         request_id=str(uuid4()),
         user_id=current_user.user_id,
@@ -133,8 +112,6 @@ def create_chat_message(
             contextualization_latency_ms
         ),
     )
-
-    # --------------------------------------------------------------
     # 6. Agentic RAG
     #
     # New production path:
@@ -148,8 +125,6 @@ def create_chat_message(
     # Agent 2
     #   ↓
     # Final answer
-    # --------------------------------------------------------------
-
     if agentic_rag_service is not None:
 
         agentic_result = agentic_rag_service.answer(
@@ -160,14 +135,10 @@ def create_chat_message(
 
         answer = agentic_result.answer
         sources = agentic_result.sources
-
-    # --------------------------------------------------------------
     # 7. Legacy fallback
     #
     # This allows the existing service tests and callers to continue
     # working during the migration.
-    # --------------------------------------------------------------
-
     elif rag_service is not None:
 
         rag_result = rag_service.answer(
@@ -186,28 +157,19 @@ def create_chat_message(
             "Either agentic_rag_service or rag_service "
             "must be provided."
         )
-
-    # --------------------------------------------------------------
     # 8. Persist ChatHistory
-    # --------------------------------------------------------------
-
     chat_history = ChatHistory(
         session_id=session.session_id,
         question=normalised_query,
-        answer=answer,
+        answer=answer
     )
 
     db.add(chat_history)
     db.flush()
-
-    # --------------------------------------------------------------
     # 9. Persist document sources
     #
     # Database-only requests produce sources=[].
-    #
     # Knowledge and Hybrid requests contain RAG sources.
-    # --------------------------------------------------------------
-
     seen_document_ids: set[int] = set()
 
     for chunk in sources:
@@ -226,16 +188,23 @@ def create_chat_message(
             )
         )
 
-    # --------------------------------------------------------------
+    AgentExecutionService.persist(
+        db=db,
+        chat_id=chat_history.chat_id,
+        session_id=session.session_id,
+        user_id=current_user.user_id,
+        organization_id=current_user.organization_id,
+        events=(
+            agentic_result.execution_trace
+            if agentic_rag_service is not None
+            else []
+        ),
+    )
+
     # 10. Update session activity
-    # --------------------------------------------------------------
-
     session.last_active = datetime.now(UTC)
-
-    # --------------------------------------------------------------
+    
     # 11. Commit transaction
-    # --------------------------------------------------------------
-
     try:
         db.commit()
 

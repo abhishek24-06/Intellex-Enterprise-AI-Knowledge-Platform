@@ -15,6 +15,7 @@ from app.models.documents import Document
 from app.models.chat_session import ChatSession
 from app.models.chat_history import ChatHistory
 from app.models.document_acl import DocumentACL
+from app.models.agent_execution import AgentExecution
 
 import os
 from dotenv import load_dotenv

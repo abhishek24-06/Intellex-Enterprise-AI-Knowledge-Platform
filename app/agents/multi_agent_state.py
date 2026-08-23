@@ -18,6 +18,8 @@ class MultiAgentState(TypedDict, total=False):
 
     original_query: str
 
+    request_id: str
+
     # Agent 4 — Orchestrator
 
     route: str

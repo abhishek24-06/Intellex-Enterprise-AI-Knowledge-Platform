@@ -22,7 +22,11 @@ from app.agents.orchestrator_agent import (
 )
 from app.dto.rag_response import RAGResult
 
+
+# ---------------------------------------------------------------------------
 # Helpers
+# ---------------------------------------------------------------------------
+
 
 def make_user(
     *,
@@ -71,7 +75,6 @@ def make_rag_result(
 
 
 def make_context():
-
     return MultiAgentContext(
         db=Mock(name="db"),
         current_user=make_user(
@@ -88,7 +91,6 @@ def make_orchestrator(
     database_query: str | None = None,
     reason: str = "Test route.",
 ):
-
     orchestrator = Mock()
 
     orchestrator.route.return_value = (
@@ -113,7 +115,6 @@ def make_critic(
     answer_correctness: float = 0.95,
     reason: str = "Answer is sufficiently grounded.",
 ):
-
     critic = Mock()
 
     critic.evaluate.return_value = (
@@ -149,7 +150,6 @@ def build_graph(
 
 
 def history_nodes(result):
-
     return {
         item["node"]
         for item in result.get(
@@ -160,7 +160,11 @@ def history_nodes(result):
         and "node" in item
     }
 
+
+# ===========================================================================
 # 1. KNOWLEDGE ROUTE
+# ===========================================================================
+
 
 def test_knowledge_route_runs_knowledge_synthesis_and_critic():
 
@@ -268,6 +272,10 @@ def test_knowledge_route_runs_knowledge_synthesis_and_critic():
         is None
     )
 
+    # ------------------------------------------------------------------
+    # Existing graph-node assertions
+    # ------------------------------------------------------------------
+
     nodes = history_nodes(result)
 
     assert "orchestrator" in nodes
@@ -276,7 +284,38 @@ def test_knowledge_route_runs_knowledge_synthesis_and_critic():
     assert "multi_agent_critic" in nodes
     assert "finalize" in nodes
 
+    # ------------------------------------------------------------------
+    # NEW: Agent execution observability assertions
+    # ------------------------------------------------------------------
+
+    execution_events = [
+        event
+        for event in result["history"]
+        if event.get("node") == "agent_execution"
+    ]
+
+    assert execution_events
+
+    knowledge_execution = next(
+        event
+        for event in execution_events
+        if event["agent_name"] == "knowledge_agent"
+    )
+
+    assert knowledge_execution["status"] == "SUCCESS"
+
+    assert knowledge_execution["latency_ms"] >= 0
+
+    assert (
+        knowledge_execution["details"]["retrieved_chunks"]
+        == 1
+    )
+
+
+# ===========================================================================
 # 2. DATABASE ROUTE
+# ===========================================================================
+
 
 def test_database_route_is_critic_evaluated():
 
@@ -395,7 +434,11 @@ def test_database_route_is_critic_evaluated():
 
     assert "knowledge_agent" not in nodes
 
+
+# ===========================================================================
 # 3. HYBRID ROUTE
+# ===========================================================================
+
 
 def test_hybrid_route_evaluates_both_evidence_sources():
 
@@ -522,6 +565,10 @@ def test_hybrid_route_evaluates_both_evidence_sources():
 
     assert result["critique"].retry_target is None
 
+    # ------------------------------------------------------------------
+    # Existing graph-node assertions
+    # ------------------------------------------------------------------
+
     nodes = history_nodes(result)
 
     assert "orchestrator" in nodes
@@ -531,7 +578,28 @@ def test_hybrid_route_evaluates_both_evidence_sources():
     assert "multi_agent_critic" in nodes
     assert "finalize" in nodes
 
+    # ------------------------------------------------------------------
+    # NEW: Verify every Hybrid execution was traced
+    # ------------------------------------------------------------------
+
+    execution_agents = [
+        event["agent_name"]
+        for event in result["history"]
+        if event.get("node") == "agent_execution"
+    ]
+
+    assert "orchestrator" in execution_agents
+    assert "knowledge_agent" in execution_agents
+    assert "database_agent" in execution_agents
+    assert "synthesis" in execution_agents
+    assert "multi_agent_critic" in execution_agents
+    assert "finalize" in execution_agents
+
+
+# ===========================================================================
 # 4. KNOWLEDGE RETRY
+# ===========================================================================
+
 
 def test_knowledge_route_retries_with_improved_query():
 
@@ -661,13 +729,17 @@ def test_knowledge_route_retries_with_improved_query():
         for event in result["history"]
         if event.get("node") == "prepare_retry"
     ]
-    
+
     assert len(retry_events) == 1
-    
+
     assert retry_events[0]["retry_target"] == (
         "KNOWLEDGE"
     )
-    
+
+    # ------------------------------------------------------------------
+    # Existing retry execution assertion
+    # ------------------------------------------------------------------
+
     knowledge_events = [
         event
         for event in result["history"]
@@ -677,7 +749,27 @@ def test_knowledge_route_retries_with_improved_query():
 
     assert len(knowledge_events) == 2
 
+    # ------------------------------------------------------------------
+    # NEW: Observability must record both executions
+    # ------------------------------------------------------------------
+
+    knowledge_execution_events = [
+        event
+        for event in result["history"]
+        if (
+            event.get("node") == "agent_execution"
+            and event.get("agent_name")
+            == "knowledge_agent"
+        )
+    ]
+
+    assert len(knowledge_execution_events) == 2
+
+
+# ===========================================================================
 # 5. DATABASE RETRY
+# ===========================================================================
+
 
 def test_database_route_retries_database_agent():
 
@@ -782,7 +874,11 @@ def test_database_route_retries_database_agent():
         CriticDecision.ACCEPT
     )
 
+
+# ===========================================================================
 # 6. HYBRID RETRY — BOTH
+# ===========================================================================
+
 
 def test_hybrid_route_can_retry_both_agents():
 
@@ -797,12 +893,12 @@ def test_hybrid_route_can_retry_both_agents():
     )
 
     chunk = make_chunk(
-    original_filename="engineering_policy.pdf",
-    chunk_text=(
-        "Engineering employees must use the "
-        "approved access request process."
-    ),
-)
+        original_filename="engineering_policy.pdf",
+        chunk_text=(
+            "Engineering employees must use the "
+            "approved access request process."
+        ),
+    )
 
     orchestrator = make_orchestrator(
         route=AgentRoute.HYBRID,
@@ -887,12 +983,11 @@ def test_hybrid_route_can_retry_both_agents():
         context=make_context(),
     )
 
-    # Both specialists ran initially.
+    # Both specialists ran initially and again.
     assert rag_service.answer.call_count == 2
 
     assert data_agent.invoke.call_count == 2
 
-    # Both specialists should have been retried.
     assert critic.evaluate.call_count == 2
 
     assert result["final_answer"] == (
@@ -924,7 +1019,11 @@ def test_hybrid_route_can_retry_both_agents():
 
     assert len(database_events) == 2
 
+
+# ===========================================================================
 # 7. RETRY LIMIT
+# ===========================================================================
+
 
 def test_retry_limit_is_enforced():
 
@@ -994,7 +1093,11 @@ def test_retry_limit_is_enforced():
         "Still weak."
     )
 
+
+# ===========================================================================
 # 8. NO EVIDENCE
+# ===========================================================================
+
 
 def test_knowledge_route_with_no_context_skips_critic():
 
@@ -1056,7 +1159,11 @@ def test_knowledge_route_with_no_context_skips_critic():
 
     assert critic.evaluate.call_count == 0
 
+
+# ===========================================================================
 # 9. ORCHESTRATOR ROUTING
+# ===========================================================================
+
 
 @pytest.mark.parametrize(
     "route",
@@ -1121,7 +1228,11 @@ def test_orchestrator_route_is_preserved(
         route.value
     )
 
+
+# ===========================================================================
 # 10. RUNTIME CONTEXT
+# ===========================================================================
+
 
 def test_graph_passes_runtime_context_to_database_agent():
 

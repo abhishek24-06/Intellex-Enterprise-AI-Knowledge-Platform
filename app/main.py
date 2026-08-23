@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.api.auth import router as auth_router
-from app.api import departments, organizations, team, users, documents,document_access, retrieval, chat, chat_sessions, chat_messages, chat_history
+from app.api import departments, organizations, team, users, documents,document_access, retrieval, chat, chat_sessions, chat_messages, chat_history, observability
 from app.core.exceptions import value_error_handler
 
 app=FastAPI()
@@ -30,3 +30,5 @@ app.include_router(chat_sessions.router)
 app.include_router(chat_messages.router)
 
 app.include_router(chat_history.router)
+
+app.include_router(observability.router)
