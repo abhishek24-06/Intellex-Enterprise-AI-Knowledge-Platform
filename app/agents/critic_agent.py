@@ -293,45 +293,40 @@ FINAL SYNTHESIZED ANSWER:
         )
 
         should_retry = (
-            result.context_relevance
-            < self.ACCEPT_THRESHOLD
-            or result.faithfulness
-            < self.ACCEPT_THRESHOLD
-            or result.answer_correctness
-            < self.ACCEPT_THRESHOLD
+            result.context_relevance < self.ACCEPT_THRESHOLD
+            or result.faithfulness < self.ACCEPT_THRESHOLD
+            or result.answer_correctness < self.ACCEPT_THRESHOLD
         )
+
 
         if should_retry:
 
-            if (
-                result.retry_target
-                is None
-            ):
+            # The critic identified a quality problem.
+            # A retry must specify where the graph should retry.
+            if result.retry_target is None:
                 raise RuntimeError(
-                    "Critic Agent requested RETRY "
-                    "without specifying retry_target."
+                    "Critic Agent identified a low-quality answer "
+                    "but did not specify retry_target. "
+                    f"reason={result.reason!r}"
                 )
-
+        
             if (
                 not result.improved_query
                 or not result.improved_query.strip()
             ):
                 raise RuntimeError(
-                    "Critic Agent requested RETRY "
-                    "without an improved query."
+                    "Critic Agent identified a low-quality answer "
+                    "but did not provide improved_query. "
+                    f"retry_target={result.retry_target.value}"
                 )
-
-            result.decision = (
-                CriticDecision.RETRY
-            )
-
+        
+            result.decision = CriticDecision.RETRY
+        
         else:
-
-            result.decision = (
-                CriticDecision.ACCEPT
-            )
-
+        
+            result.decision = CriticDecision.ACCEPT
+        
             result.retry_target = None
             result.improved_query = None
-
+        
         return result

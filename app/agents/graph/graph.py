@@ -11,6 +11,7 @@ from app.agents.graph.execution_timing import (
 )
 
 from app.agents.graph.multi_agent_nodes import (
+    conversational_node,
     database_agent_node,
     multi_agent_critic_node,
     multi_agent_finalize_node,
@@ -100,6 +101,23 @@ def build_multi_agent_graph(
             with_runtime=True,
         ),
     )
+
+    def timed_conversational_node(state):
+        return conversational_node(
+            state,
+            llm_client=llm_client,
+        )
+
+
+    builder.add_node(
+        "conversational_agent",
+        timed_node(
+            agent_name="conversational_agent",
+            node=timed_conversational_node,
+            with_runtime=False,
+        ),
+    )
+
     # SYNTHESIS
     def timed_synthesis_node(
         state,
@@ -164,6 +182,7 @@ def build_multi_agent_graph(
         {
             "knowledge": "knowledge_agent",
             "database": "database_agent",
+            "conversational": "conversational_agent",
         },
     )
 
@@ -176,6 +195,11 @@ def build_multi_agent_graph(
         "database_agent",
         "synthesis",
     )
+
+    builder.add_edge(
+    "conversational_agent",
+    END,
+)
 
     builder.add_edge(
         "synthesis",

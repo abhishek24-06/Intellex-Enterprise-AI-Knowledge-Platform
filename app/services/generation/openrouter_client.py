@@ -1,9 +1,10 @@
 from __future__ import annotations
+from dotenv import load_dotenv
 
 import os
-
 from openai import OpenAI
 
+load_dotenv()
 
 class OpenRouterClient:
     """
@@ -18,8 +19,8 @@ class OpenRouterClient:
     )
 
     DEFAULT_MODEL = (
-        "google/gemini-2.5-flash"
-    )
+    "z-ai/glm-5.2:free"
+)
 
     def __init__(
         self,
@@ -62,41 +63,49 @@ class OpenRouterClient:
         self.max_tokens = max_tokens
 
     def generate(
-        self,
-        *,
-        system_prompt: str,
-        user_prompt: str,
-    ) -> str:
+    self,
+    *,
+    system_prompt: str,
+    user_prompt: str,
+    response_format: dict | None = None,
+) -> str:
 
-        response = self.client.chat.completions.create(
-                     model=self.model,
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": system_prompt,
-                        },
-                        {
-                            "role": "user",
-                            "content": user_prompt,
-                        },
-                    ],
-                    max_tokens=self.max_tokens,
-                )
-
+        request_kwargs = {
+            "model": self.model,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": system_prompt,
+                },
+                {
+                    "role": "user",
+                    "content": user_prompt,
+                },
+            ],
+            "max_tokens": self.max_tokens,
+        }
+    
+        if response_format is not None:
+            request_kwargs["response_format"] = response_format
+    
+        response = (
+            self.client.chat.completions.create(
+                **request_kwargs,
+            )
+        )
+    
         if not response.choices:
             raise RuntimeError(
                 "OpenRouter returned no choices."
             )
-
-        content = (
-            response.choices[0]
-            .message
-            .content
-        )
-
+    
+        message = response.choices[0].message
+    
+        content = message.content
+        
         if not content:
             raise RuntimeError(
                 "OpenRouter returned an empty response."
             )
-
+        
         return content

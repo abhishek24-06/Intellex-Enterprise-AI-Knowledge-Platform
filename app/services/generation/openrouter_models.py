@@ -13,23 +13,26 @@ def get_openrouter_client() -> OpenRouterClient:
     return OpenRouterClient(
         model=os.getenv(
             "OPENROUTER_MODEL",
-            "google/gemini-2.5-flash",
+            "z-ai/glm-5.2:free",
         )
     )
 
-
-def get_openrouter_chat_model(*,model: str | None = None,temperature: float = 0.0) -> ChatOpenRouter:
+def get_openrouter_chat_model(
+    *,
+    model: str | None = None,
+    temperature: float = 0.0,
+) -> ChatOpenRouter:
 
     return ChatOpenRouter(
         model=(
             model
             or os.getenv(
-                "OPENROUTER_MODEL",
-                "google/gemini-2.5-flash",
+                "OPENROUTER_DATABASE_MODEL",
+                "z-ai/glm-5.2:free",
             )
         ),
         temperature=temperature,
-        max_tokens=2048,
+        max_tokens=1024,
         api_key=os.environ[
             "OPENROUTER_API_KEY"
         ],

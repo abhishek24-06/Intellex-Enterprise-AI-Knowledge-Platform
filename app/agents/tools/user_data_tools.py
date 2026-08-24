@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any
+from typing import Annotated, Any
 
-from langchain.tools import ToolRuntime, tool
+from langchain.tools import ToolRuntime, tool, InjectedToolArg
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -128,10 +128,19 @@ def get_current_user(*,runtime: ToolRuntime[DataAgentContext]) -> dict[str, Any]
 # 2. SEARCH USERS
 @tool
 def search_users(
+    # db: Annotated[
+    #     Session,
+    #     "Authenticated Database session",
+    # ],
+    # current_user: Annotated[
+    #     User,
+    #     "Authenticated user",
+    # ],
     user_id: int | None = None,
     email: str | None = None,
     name: str | None = None,
     department_id: int | None = None,
+    role: UserRole  | None = None,
     team_id: int | None = None,
     limit: int = 10,
     *,
@@ -187,6 +196,18 @@ def search_users(
 
     if team_id is not None:
         conditions.append(User.team_id == team_id)
+
+    if role is not None:
+        if role == UserRole.SUPER_ADMIN:
+            return {
+                "found": False,
+                "match_count": 0,
+                "users": [],
+            }
+    
+        conditions.append(
+            User.role == role
+        )
 
     stmt = (
         select(User)
@@ -542,15 +563,202 @@ def get_organization( *, runtime: ToolRuntime[DataAgentContext]) -> dict[str, An
         "industry": organization.industry,
     }
 
+@tool
+def list_all_users(
+    limit: int = 100,
+    *,
+    runtime: ToolRuntime[DataAgentContext],
+) -> dict[str, Any]:
+    """
+    List users in the authenticated user's organization.
+
+    This tool is used for requests such as:
+    - List all users in my organization.
+    - Show me all employees.
+    - Who are all the users in my organization?
+
+    SUPER_ADMIN users are excluded.
+    Cross-organization users are never returned.
+    """
+
+    if limit <= 0:
+        raise ValueError(
+            "limit must be greater than zero."
+        )
+
+    limit = min(limit, 100)
+
+    db = runtime.context.db
+    current_user = runtime.context.current_user
+
+    conditions = _base_user_conditions(
+        current_user=current_user,
+    )
+
+    stmt = (
+        select(User)
+        .where(*conditions)
+        .order_by(
+            User.name.asc(),
+            User.user_id.asc(),
+        )
+        .limit(limit)
+    )
+
+    users = (
+        db.execute(stmt)
+        .scalars()
+        .all()
+    )
+
+    return {
+        "found": bool(users),
+        "match_count": len(users),
+        "users": [
+            _get_user_with_relationships(
+                db=db,
+                user=user,
+            )
+            for user in users
+        ],
+    }
+
+@tool
+def list_all_departments(
+    limit: int = 100,
+    *,
+    runtime: ToolRuntime[DataAgentContext],
+) -> dict[str, Any]:
+    """
+    List all departments in the authenticated user's organization.
+
+    Use this for requests such as:
+    - List all departments.
+    - Show me all departments in my organization.
+    - What departments exist in my organization?
+    """
+
+    if limit <= 0:
+        raise ValueError(
+            "limit must be greater than zero."
+        )
+
+    limit = min(limit, 100)
+
+    db = runtime.context.db
+    current_user = runtime.context.current_user
+
+    stmt = (
+        select(Department)
+        .where(
+            Department.organization_id
+            == current_user.organization_id
+        )
+        .order_by(
+            Department.name.asc(),
+            Department.department_id.asc(),
+        )
+        .limit(limit)
+    )
+
+    departments = (
+        db.execute(stmt)
+        .scalars()
+        .all()
+    )
+
+    return {
+        "found": bool(departments),
+        "match_count": len(departments),
+        "departments": [
+            {
+                "department_id": department.department_id,
+                "name": department.name,
+                "organization_id": department.organization_id,
+            }
+            for department in departments
+        ],
+    }
+
+@tool
+def list_all_teams(
+    limit: int = 100,
+    *,
+    runtime: ToolRuntime[DataAgentContext],
+) -> dict[str, Any]:
+    """
+    List all teams in the authenticated user's organization.
+
+    Use this for requests such as:
+    - List all teams.
+    - Show me all teams in my organization.
+    - What teams exist in my organization?
+    """
+
+    if limit <= 0:
+        raise ValueError(
+            "limit must be greater than zero."
+        )
+
+    limit = min(limit, 100)
+
+    db = runtime.context.db
+    current_user = runtime.context.current_user
+
+    stmt = (
+        select(Team)
+        .where(
+            Team.organization_id
+            == current_user.organization_id
+        )
+        .order_by(
+            Team.name.asc(),
+            Team.team_id.asc(),
+        )
+        .limit(limit)
+    )
+
+    teams = (
+        db.execute(stmt)
+        .scalars()
+        .all()
+    )
+
+    return {
+        "found": bool(teams),
+        "match_count": len(teams),
+        "teams": [
+            {
+                "team_id": team.team_id,
+                "name": team.name,
+                "organization_id": team.organization_id,
+                "department_id": team.department_id,
+            }
+            for team in teams
+        ],
+    }
+
 # Tool Collection
 DATA_AGENT_TOOLS = [
+    # Current user
     get_current_user,
+
+    # Users
     search_users,
+    list_all_users,
+
+    # Departments
     get_department,
     search_departments,
+    list_all_departments,
     list_department_users,
+
+    # Teams
     get_team,
     search_teams,
+    list_all_teams,
     list_team_users,
+
+    # Organization
     get_organization,
 ]

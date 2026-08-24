@@ -25,8 +25,13 @@ class QueryContextualizer:
         if not query or not query.strip():
             raise ValueError("Query cannot be empty.")
 
+        query = query.strip()
+
         if not history:
-            return query.strip()
+            return query
+
+        if len(history) > 0 and self._is_standalone_query(query):
+            return query
 
         history_text = "\n\n".join(
             f"USER:{question}\nASSISTANT: {answer}"
@@ -44,15 +49,41 @@ CURRENT USER QUERY:
 Rewrite the current user query as a standalone query.
 Return only the rewritten query.
 """
+        try:
+            rewritten = self.llm_client.generate(
+                system_prompt=self.SYSTEM_PROMPT,
+                user_prompt=user_prompt,
+            )
+        except Exception:
 
-        rewritten = self.llm_client.generate(
-            system_prompt=self.SYSTEM_PROMPT,
-            user_prompt=user_prompt,
-        )
-
+            return query 
         if not rewritten or not rewritten.strip():
             raise RuntimeError(
                 "Query contextualizer returned an empty query."
             )
 
         return rewritten.strip()
+
+    @staticmethod
+    def _is_standalone_query(query: str) -> bool:
+    
+        lowered = query.lower().strip()
+    
+        conversational_queries = {
+            "hi",
+            "hello",
+            "hey",
+            "hello!",
+            "hi!",
+            "hey!",
+            "thanks",
+            "thank you",
+            "ok",
+            "okay",
+            "bye",
+            "good morning",
+            "good afternoon",
+            "good evening",
+        }
+    
+        return lowered in conversational_queries

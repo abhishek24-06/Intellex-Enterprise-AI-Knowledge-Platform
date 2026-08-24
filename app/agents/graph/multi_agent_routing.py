@@ -34,6 +34,10 @@ def route_after_orchestrator(
     if route == "DATABASE":
         return "database"
 
+    #Conversation only
+    if route == "CONVERSATIONAL":
+        return "conversational"
+
     # --------------------------------------------------------------
     # Hybrid
     #

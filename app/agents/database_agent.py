@@ -33,6 +33,24 @@ Rules:
 9. For questions about the authenticated user, prefer
    get_current_user.
 10. Keep the final answer concise and factual.
+
+11. For requests to list ALL users in the organization,
+    use list_all_users.
+
+12. For requests to list ALL departments in the organization,
+    use list_all_departments.
+
+13. For requests to list ALL teams in the organization,
+    use list_all_teams.
+
+14. Do not claim that Intellex cannot list all users, teams,
+    or departments when the corresponding list tool is available.
+
+15. Use search tools when the user provides a specific
+    name or search criterion.
+
+16. Use list tools when the user explicitly asks for all
+    users, teams, or departments.
 """
 
     def __init__(self,*,model: ChatOpenRouter):

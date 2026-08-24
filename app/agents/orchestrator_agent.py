@@ -10,6 +10,7 @@ class AgentRoute(str, Enum):
     KNOWLEDGE = "KNOWLEDGE"
     DATABASE = "DATABASE"
     HYBRID = "HYBRID"
+    CONVERSATIONAL = "CONVERSATIONAL"
 
 class OrchestratorDecision(BaseModel):
     route: AgentRoute
@@ -41,6 +42,25 @@ Available routes:
    - enterprise database information
    - enterprise document knowledge
 
+4. CONVERSATIONAL
+   Use for greetings, thanks, farewells, and simple
+   conversational messages that do not require enterprise
+   knowledge or database information.
+
+Examples:
+
+"Hi"
+→ CONVERSATIONAL
+
+"Hello"
+→ CONVERSATIONAL
+
+"Thanks"
+→ CONVERSATIONAL
+
+"Good morning"
+→ CONVERSATIONAL
+
 Examples:
 
 "What is my email?"
@@ -64,7 +84,7 @@ Examples:
 Return ONLY valid JSON:
 
 {
-    "route": "KNOWLEDGE | DATABASE | HYBRID",
+    "route": "KNOWLEDGE | DATABASE | HYBRID | CONVERSATIONAL",
     "knowledge_query": "... or null",
     "database_query": "... or null",
     "reason": "..."
@@ -130,6 +150,9 @@ Return ONLY valid JSON:
         raw = self.llm_client.generate(
             system_prompt=self.SYSTEM_PROMPT,
             user_prompt=query.strip(),
+            response_format={
+                "type": "json_object",
+           },
         )
 
         if not raw or not raw.strip():
