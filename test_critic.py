@@ -19,8 +19,7 @@ def main():
     result = critic.evaluate(
         query="What is our password policy?",
         answer=(
-            "The password policy requires passwords to be at least "
-    "8 characters and they must be changed every 30 days."
+            "What is my department, and what operational checks should my department perform before making a service change?"
         ),
         chunks=[FakeChunk()],
         database_result=None,

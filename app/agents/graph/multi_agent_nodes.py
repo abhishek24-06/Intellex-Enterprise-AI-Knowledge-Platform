@@ -611,26 +611,46 @@ def multi_agent_prepare_retry_node(
         "KNOWLEDGE",
         "BOTH",
     }:
+    
+        knowledge_query = (
+            getattr(
+                critique,
+                "knowledge_query",
+                None,
+            )
+            or improved_query
+        )
+    
         update["knowledge_query"] = (
-            improved_query.strip()
+            knowledge_query.strip()
         )
-
+    
         update["retrieval_query"] = (
-            improved_query.strip()
+            knowledge_query.strip()
         )
-
+    
     # --------------------------------------------------------------
     # Database retry
     # --------------------------------------------------------------
-
+    
     if retry_target.value in {
         "DATABASE",
         "BOTH",
     }:
-        update["database_query"] = (
-            improved_query.strip()
+    
+        database_query = (
+            getattr(
+                critique,
+                "database_query",
+                None,
+            )
+            or improved_query
         )
-
+    
+        update["database_query"] = (
+            database_query.strip()
+        )
+    
     return update
 
 def conversational_node(

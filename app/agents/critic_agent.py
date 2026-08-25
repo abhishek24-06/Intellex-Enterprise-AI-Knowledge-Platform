@@ -42,6 +42,10 @@ class CriticResult(BaseModel):
 
     improved_query: str | None = None
 
+    knowledge_query: str | None = None
+
+    database_query: str | None = None
+
 
 class CriticAgent:
     """
@@ -103,24 +107,45 @@ Return ONLY valid JSON:
   "faithfulness": 0.0,
   "answer_correctness": 0.0,
   "reason": "...",
+
   "retry_target": "KNOWLEDGE" | "DATABASE" | "BOTH" | null,
-  "improved_query": "..." | null
+
+  "improved_query": "..." | null,
+
+  "knowledge_query": "..." | null,
+
+  "database_query": "..." | null
 }
 
 Rules:
 
 - ACCEPT only when the answer is sufficiently supported.
+
+- For ACCEPT:
+  retry_target = null
+  improved_query = null
+  knowledge_query = null
+  database_query = null
+
 - RETRY when important evidence is missing, irrelevant,
   incorrect, or the answer contains unsupported claims.
+
 - retry_target identifies which specialist should be rerun.
-- Use KNOWLEDGE when document retrieval needs improvement.
-- Use DATABASE when structured enterprise data needs improvement.
-- Use BOTH when both sources need improvement.
-- improved_query must be a standalone query suitable for the
-  specialist identified by retry_target.
-- For ACCEPT, retry_target must be null and improved_query
-  must be null.
-- For RETRY, retry_target and improved_query must be provided.
+
+- KNOWLEDGE:
+  provide knowledge_query.
+
+- DATABASE:
+  provide database_query.
+
+- BOTH:
+  provide BOTH knowledge_query and database_query.
+
+- improved_query may be provided as a general retry description,
+  but specialist-specific queries are preferred.
+
+- Never leave the required specialist query empty.
+
 - Never invent facts.
 
 Do not return commentary outside the JSON.
@@ -301,26 +326,115 @@ FINAL SYNTHESIZED ANSWER:
 
         if should_retry:
 
-            # The critic identified a quality problem.
-            # A retry must specify where the graph should retry.
-            if result.retry_target is None:
-                raise RuntimeError(
-                    "Critic Agent identified a low-quality answer "
-                    "but did not specify retry_target. "
-                    f"reason={result.reason!r}"
-                )
-        
-            if (
-                not result.improved_query
-                or not result.improved_query.strip()
-            ):
-                raise RuntimeError(
-                    "Critic Agent identified a low-quality answer "
-                    "but did not provide improved_query. "
-                    f"retry_target={result.retry_target.value}"
-                )
-        
             result.decision = CriticDecision.RETRY
+        
+            # ----------------------------------------------------------
+            # Determine retry target
+            # ----------------------------------------------------------
+        
+            if result.retry_target is None:
+        
+                # Infer the target from available evidence.
+                #
+                # Knowledge evidence exists if chunks were supplied.
+                # Database evidence exists if database_result was supplied.
+        
+                has_knowledge = bool(chunks)
+                has_database = bool(database_result)
+        
+                if has_knowledge and has_database:
+                    result.retry_target = RetryTarget.BOTH
+        
+                elif has_knowledge:
+                    result.retry_target = RetryTarget.KNOWLEDGE
+        
+                elif has_database:
+                    result.retry_target = RetryTarget.DATABASE
+        
+                else:
+                    raise RuntimeError(
+                        "Critic Agent requested RETRY but no "
+                        "retry target could be inferred."
+                    )
+        
+            # ----------------------------------------------------------
+            # Build specialist-specific retry queries
+            # ----------------------------------------------------------
+        
+            if result.retry_target == RetryTarget.KNOWLEDGE:
+        
+                if not result.knowledge_query:
+                    result.knowledge_query = (
+                        result.improved_query
+                        or query
+                    )
+        
+                result.improved_query = (
+                    result.knowledge_query
+                )
+        
+                result.database_query = None
+        
+            elif result.retry_target == RetryTarget.DATABASE:
+        
+                if not result.database_query:
+                    result.database_query = (
+                        result.improved_query
+                        or query
+                    )
+        
+                result.improved_query = (
+                    result.database_query
+                )
+        
+                result.knowledge_query = None
+        
+            elif result.retry_target == RetryTarget.BOTH:
+        
+                if not result.knowledge_query:
+                    result.knowledge_query = (
+                        result.improved_query
+                        or query
+                    )
+        
+                if not result.database_query:
+                    result.database_query = (
+                        result.improved_query
+                        or query
+                    )
+        
+                result.improved_query = (
+                    result.knowledge_query
+                )
+        
+            # ----------------------------------------------------------
+            # Final safety validation
+            # ----------------------------------------------------------
+        
+            if result.retry_target == RetryTarget.KNOWLEDGE:
+        
+                if not result.knowledge_query:
+                    raise RuntimeError(
+                        "Knowledge retry requires knowledge_query."
+                    )
+        
+            elif result.retry_target == RetryTarget.DATABASE:
+        
+                if not result.database_query:
+                    raise RuntimeError(
+                        "Database retry requires database_query."
+                    )
+        
+            elif result.retry_target == RetryTarget.BOTH:
+        
+                if (
+                    not result.knowledge_query
+                    or not result.database_query
+                ):
+                    raise RuntimeError(
+                        "Hybrid retry requires both "
+                        "knowledge_query and database_query."
+                    )
         
         else:
         
@@ -328,5 +442,7 @@ FINAL SYNTHESIZED ANSWER:
         
             result.retry_target = None
             result.improved_query = None
-        
+            result.knowledge_query = None
+            result.database_query = None
+
         return result
