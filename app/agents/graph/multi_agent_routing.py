@@ -106,17 +106,17 @@ def route_after_critic(
     ):
         return "finalize"
 
-    attempt = state.get(
-        "attempt",
-        0,
-    )
+    retry_count = state.get(
+    "retry_count",
+    0,
+)
 
     max_retries = state.get(
         "max_retries",
         2,
     )
-
-    if attempt > max_retries + 1:
+    
+    if retry_count >= max_retries:
         return "finalize"
 
     return "retry"
@@ -144,8 +144,8 @@ def route_after_multi_agent_critic(
     ):
         return "finalize"
 
-    attempt = state.get(
-        "attempt",
+    retry_count = state.get(
+        "retry_count",
         0,
     )
 
@@ -154,7 +154,7 @@ def route_after_multi_agent_critic(
         2,
     )
 
-    if attempt > max_retries:
+    if retry_count >= max_retries:
         return "finalize"
 
     return "retry"

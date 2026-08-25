@@ -19,6 +19,35 @@ from app.agents.orchestrator_agent import OrchestratorAgent
 # RAG graph. Keep them separate from the new multi-agent graph nodes.
 # ======================================================================
 
+def _is_useful_retry_query(
+    improved_query: str,
+    previous_query: str | None,
+) -> bool:
+
+    if not improved_query or not improved_query.strip():
+        return False
+
+    improved = improved_query.strip().lower()
+
+    generic_queries = {
+        "retrieve the relevant enterprise information again.",
+        "retrieve the relevant information again.",
+        "try again.",
+        "retry the query.",
+        "search again.",
+        "retrieve the information again.",
+    }
+
+    if improved in generic_queries:
+        return False
+
+    if (
+        previous_query
+        and improved == previous_query.strip().lower()
+    ):
+        return False
+
+    return True
 
 # ----------------------------------------------------------------------
 # Agent 1 — Original Knowledge Agent
@@ -557,7 +586,6 @@ def multi_agent_finalize_node(
 # Multi-Agent Retry
 # ----------------------------------------------------------------------
 
-
 def multi_agent_prepare_retry_node(
     state,
 ) -> dict:
@@ -589,18 +617,38 @@ def multi_agent_prepare_retry_node(
             "Retry requires an improved query."
         )
 
+    # --------------------------------------------------------------
+    # Retry counter
+    # --------------------------------------------------------------
+
+    current_retry_count = state.get(
+        "retry_count",
+        0,
+    )
+
+    max_retries = state.get(
+        "max_retries",
+        2,
+    )
+
+    next_retry_count = (
+        current_retry_count + 1
+    )
+
+    # --------------------------------------------------------------
+    # Prepare retry
+    # --------------------------------------------------------------
+
     update: dict = {
+        "max_retries": max_retries,
+
         "retry_target": retry_target.value,
+
+        "retry_count": next_retry_count,
+
         "final_answer": None,
-        "history": [
-            {
-                "node": "prepare_retry",
-                "retry_target": retry_target.value,
-                "improved_query": (
-                    improved_query.strip()
-                ),
-            }
-        ],
+
+        "history": [],
     }
 
     # --------------------------------------------------------------
@@ -611,46 +659,109 @@ def multi_agent_prepare_retry_node(
         "KNOWLEDGE",
         "BOTH",
     }:
-    
-        knowledge_query = (
-            getattr(
-                critique,
-                "knowledge_query",
-                None,
+
+        previous_query = (
+            state.get("knowledge_query")
+            or state.get("retrieval_query")
+            or state.get("original_query")
+        )
+
+        if _is_useful_retry_query(
+            improved_query,
+            previous_query,
+        ):
+            knowledge_query = (
+                improved_query.strip()
             )
-            or improved_query
-        )
-    
+        else:
+            knowledge_query = (
+                previous_query.strip()
+                if previous_query
+                else improved_query.strip()
+            )
+
         update["knowledge_query"] = (
-            knowledge_query.strip()
+            knowledge_query
         )
-    
+
         update["retrieval_query"] = (
-            knowledge_query.strip()
+            knowledge_query
         )
-    
+
+        update["history"].append(
+            {
+                "node": "prepare_retry",
+                "retry_target": (
+                    retry_target.value
+                ),
+                "retry_count": (
+                    next_retry_count
+                ),
+                "query": knowledge_query,
+                "query_source": (
+                    "critic_improved"
+                    if _is_useful_retry_query(
+                        improved_query,
+                        previous_query,
+                    )
+                    else "previous_query"
+                ),
+            }
+        )
+
     # --------------------------------------------------------------
     # Database retry
     # --------------------------------------------------------------
-    
+
     if retry_target.value in {
         "DATABASE",
         "BOTH",
     }:
-    
-        database_query = (
-            getattr(
-                critique,
-                "database_query",
-                None,
+
+        previous_query = (
+            state.get("database_query")
+            or state.get("original_query")
+        )
+
+        if _is_useful_retry_query(
+            improved_query,
+            previous_query,
+        ):
+            database_query = (
+                improved_query.strip()
             )
-            or improved_query
-        )
-    
+        else:
+            database_query = (
+                previous_query.strip()
+                if previous_query
+                else improved_query.strip()
+            )
+
         update["database_query"] = (
-            database_query.strip()
+            database_query
         )
-    
+
+        update["history"].append(
+            {
+                "node": "prepare_retry",
+                "retry_target": (
+                    retry_target.value
+                ),
+                "retry_count": (
+                    next_retry_count
+                ),
+                "query": database_query,
+                "query_source": (
+                    "critic_improved"
+                    if _is_useful_retry_query(
+                        improved_query,
+                        previous_query,
+                    )
+                    else "previous_query"
+                ),
+            }
+        )
+
     return update
 
 def conversational_node(

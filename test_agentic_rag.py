@@ -33,7 +33,7 @@ def main():
 
         result = service.answer(
             db=db,
-            query="What is my department, and what operational checks should my department perform before making a service change?",
+            query="What operational checks should be performed before changing a service?",
             current_user=current_user,
         )
 

@@ -46,6 +46,7 @@ class MultiAgentState(TypedDict, total=False):
 
     # Loop control
     attempt: int
+    retry_count: int
     max_retries: int
 
     # Observability
