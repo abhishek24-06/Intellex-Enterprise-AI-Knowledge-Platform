@@ -29,7 +29,7 @@ class OpenRouterClient:
         model: str | None = None,
         base_url: str | None = None,
         timeout: float = 60.0,
-        max_tokens: int = 1024
+        max_tokens: int = 2048
     ):
         resolved_api_key = (
             api_key

@@ -25,7 +25,7 @@ class ProviderLLMClient:
         *,
         system_prompt: str,
         user_prompt: str,
-        max_tokens: int = 1024,
+        max_tokens: int = 4096,
         response_format: dict | None = None,
     ) -> str:
     
@@ -51,6 +51,21 @@ class ProviderLLMClient:
             messages,
             **kwargs,
         )
+
+        print("\n========== LLM RESPONSE DEBUG ==========")
+        print("Response type:", type(response))
+        print("Content:", repr(getattr(response, "content", None)))
+        print(
+            "Additional kwargs:",
+            getattr(response, "additional_kwargs", None),
+        )
+        print(
+            "Response metadata:",
+            getattr(response, "response_metadata", None),
+        )
+        print("Usage metadata:", getattr(response, "usage_metadata", None))
+        print("========================================\n")
+        
     
         content = getattr(
             response,

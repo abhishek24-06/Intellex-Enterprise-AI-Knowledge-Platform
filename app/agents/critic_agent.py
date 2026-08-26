@@ -299,6 +299,7 @@ FINAL SYNTHESIZED ANSWER:
         raw_response = self.llm_client.generate(
             system_prompt=self.SYSTEM_PROMPT,
             user_prompt=user_prompt,
+            response_format={"type": "json_object"}
         )
 
         if (

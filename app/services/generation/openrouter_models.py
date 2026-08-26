@@ -32,7 +32,7 @@ def get_openrouter_chat_model(
             )
         ),
         temperature=temperature,
-        max_tokens=1024,
+        max_tokens=2048,
         api_key=os.environ[
             "OPENROUTER_API_KEY"
         ],
