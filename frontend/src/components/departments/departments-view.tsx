@@ -1,148 +1,307 @@
 "use client";
 
 import * as React from "react";
-import { useMutation } from "@tanstack/react-query";
-import { FolderKanban, Info, Plus } from "lucide-react";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+import {
+  FolderKanban,
+  Info,
+  Plus,
+} from "lucide-react";
 import { toast } from "sonner";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { EmptyState } from "@/components/shared/states";
-import { PageHeader } from "@/components/layout/page-header";
-import { createDepartment } from "@/lib/api/departments";
-import { formatDateTime } from "@/lib/utils";
-import type { Department } from "@/types/api";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-/**
- * The backend currently exposes only department creation (POST /departments).
- * There is no listing endpoint yet, so this page shows departments created
- * during the current browser session only — clearly labeled as such.
- */
+import {
+  EmptyState,
+  ErrorState,
+} from "@/components/shared/states";
+
+import { PageHeader } from "@/components/layout/page-header";
+
+import {
+  createDepartment,
+  listDepartments,
+} from "@/lib/api/departments";
+
 export function DepartmentsView() {
   const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [error, setError] = React.useState<string | null>(null);
-  const [created, setCreated] = React.useState<Department[]>([]);
+  const [description, setDescription] =
+    React.useState("");
+  const [error, setError] =
+    React.useState<string | null>(null);
 
-  const mutation = useMutation({
-    mutationFn: () =>
-      createDepartment({
-        name: name.trim(),
-        description: description.trim() || null,
-      }),
-    onSuccess: (department) => {
-      setCreated((prev) => [department, ...prev]);
-      setName("");
-      setDescription("");
-      setError(null);
-      toast.success(`Department “${department.name}” created (#${department.department_id})`);
-    },
-    onError: (err) => setError(err.message),
-  });
+  const queryClient =
+    useQueryClient();
 
-  function onSubmit(event: React.FormEvent) {
+  // ----------------------------------------------------------
+  // Load departments
+  // ----------------------------------------------------------
+
+  const departmentsQuery =
+    useQuery({
+      queryKey: ["departments"],
+      queryFn: listDepartments,
+    });
+
+  const departments =
+    departmentsQuery.data ?? [];
+
+  // ----------------------------------------------------------
+  // Create department
+  // ----------------------------------------------------------
+
+  const mutation =
+    useMutation({
+      mutationFn: () =>
+        createDepartment({
+          name: name.trim(),
+          description: description.trim(),
+        }),
+
+      onSuccess: (department) => {
+        setName("");
+        setDescription("");
+        setError(null);
+
+        void queryClient.invalidateQueries({
+          queryKey: ["departments"],
+        });
+
+        toast.success(
+          `Department “${department.name}” created`,
+        );
+      },
+
+      onError: (err) => {
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Unable to create department.",
+        );
+      },
+    });
+
+  // ----------------------------------------------------------
+  // Submit
+  // ----------------------------------------------------------
+
+  function onSubmit(
+    event: React.FormEvent,
+  ) {
     event.preventDefault();
-    if (!name.trim()) {
-      setError("Department name is required.");
+
+    const trimmedName =
+      name.trim();
+
+    const trimmedDescription =
+      description.trim();
+
+    if (!trimmedName) {
+      setError(
+        "Department name is required.",
+      );
       return;
     }
+
+    if (!trimmedDescription) {
+      setError(
+        "Department description is required.",
+      );
+      return;
+    }
+
+    setError(null);
+
     mutation.mutate();
   }
 
   return (
-    <div className="mx-auto max-w-6xl space-y-6 p-4 sm:p-6 lg:p-8">
+    <div className="mx-auto flex h-[calc(100vh-64px)] w-full min-w-0 max-w-6xl flex-col overflow-hidden p-4 sm:p-6 lg:p-8">
       <PageHeader
         title="Departments"
         description="Create organizational departments for structuring employees and document access."
       />
 
-      <div className="grid gap-6 lg:grid-cols-[420px_1fr]">
-        <Card>
+      <div className="grid min-h-0 min-w-0 flex-1 gap-6 lg:grid-cols-[420px_minmax(0,1fr)]">
+        {/* =====================================================
+            CREATE DEPARTMENT
+           ===================================================== */}
+
+        <Card className="lg:shrink-0">
           <CardHeader>
-            <CardTitle className="text-base">New department</CardTitle>
-            <CardDescription>Names should be unique and descriptive.</CardDescription>
+            <CardTitle className="text-base">
+              New department
+            </CardTitle>
+
+            <CardDescription>
+              Names should be unique and descriptive.
+            </CardDescription>
           </CardHeader>
+
           <CardContent>
-            <form onSubmit={onSubmit} className="space-y-4" noValidate>
+            <form
+              onSubmit={onSubmit}
+              className="space-y-4"
+              noValidate
+            >
               {error ? (
-                <p role="alert" className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
+                <p
+                  role="alert"
+                  className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
+                >
                   {error}
                 </p>
               ) : null}
 
+              {/* Name */}
               <label className="block space-y-1.5">
-                <Label>Name</Label>
+                <Label>
+                  Name
+                </Label>
+
                 <Input
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(event) => {
+                    setName(
+                      event.target.value,
+                    );
+
+                    if (error) {
+                      setError(null);
+                    }
+                  }}
                   placeholder="e.g. Engineering"
                   maxLength={100}
                 />
               </label>
 
+              {/* Description */}
               <label className="block space-y-1.5">
-                <Label>Description</Label>
+                <Label>
+                  Description
+                </Label>
+
                 <Textarea
                   value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  onChange={(event) => {
+                    setDescription(
+                      event.target.value,
+                    );
+
+                    if (error) {
+                      setError(null);
+                    }
+                  }}
                   placeholder="What does this department do?"
                   rows={3}
+                  required
                 />
               </label>
 
-              <Button type="submit" disabled={mutation.isPending} className="w-full">
+              <Button
+                type="submit"
+                disabled={mutation.isPending}
+                className="w-full"
+              >
                 <Plus />
-                Create department
+
+                {mutation.isPending
+                  ? "Creating..."
+                  : "Create department"}
               </Button>
             </form>
           </CardContent>
         </Card>
 
-        <div className="space-y-4">
-          <div className="flex items-start gap-2 rounded-lg border border-indigo-200 bg-indigo-50/70 px-3.5 py-3 text-xs leading-relaxed text-indigo-900">
+        {/* =====================================================
+            DEPARTMENT DIRECTORY
+           ===================================================== */}
+
+        <div className="flex min-h-0 min-w-0 flex-col">
+          {/* Information banner */}
+          <div className="mb-4 flex shrink-0 items-start gap-2 rounded-lg border border-indigo-200 bg-indigo-50/70 px-3.5 py-3 text-xs leading-relaxed text-indigo-900">
             <Info className="mt-0.5 size-4 shrink-0 text-indigo-500" />
+
             <span>
-              The platform API currently supports creating departments only.
-              A directory of all departments will appear here once a listing
-              endpoint becomes available. Departments created in this session are
-              shown below with their assigned IDs for reference.
+              Departments in your organization are
+              shown here. Create a department using
+              the form, then use it when creating
+              teams or assigning employees.
             </span>
           </div>
 
-          {created.length === 0 ? (
-            <EmptyState
-              icon={FolderKanban}
-              title="No departments created in this session"
-              description="Use the form to create your first department."
-            />
-          ) : (
-            <ul className="space-y-2.5">
-              {created.map((dept) => (
-                <li key={dept.department_id}>
-                  <Card>
-                    <CardContent className="flex items-center justify-between gap-4 p-4">
-                      <div className="min-w-0">
-                        <p className="flex items-center gap-2 text-sm font-medium">
-                          {dept.name}
-                          <Badge variant="secondary">#{dept.department_id}</Badge>
-                        </p>
-                        <p className="mt-0.5 truncate text-xs text-muted-foreground">
-                          {dept.description || "No description"}
-                        </p>
-                      </div>
-                      <span className="shrink-0 font-mono text-xs text-muted-foreground">
-                        {formatDateTime(dept.created_at)}
-                      </span>
-                    </CardContent>
-                  </Card>
-                </li>
-              ))}
-            </ul>
-          )}
+          {/* Scrollable department directory */}
+          <div className="min-h-0 flex-1 overflow-y-auto pr-2 [scrollbar-width:thin]">
+            {departmentsQuery.isLoading ? (
+              <div className="space-y-2.5">
+                {[0, 1, 2].map(
+                  (item) => (
+                    <Card key={item}>
+                      <CardContent className="p-4">
+                        <div className="h-5 w-40 animate-pulse rounded bg-muted" />
+
+                        <div className="mt-2 h-4 w-64 animate-pulse rounded bg-muted" />
+                      </CardContent>
+                    </Card>
+                  ),
+                )}
+              </div>
+            ) : departmentsQuery.isError ? (
+              <ErrorState
+                title="Unable to load departments"
+                message="The department directory could not be loaded."
+                onRetry={() =>
+                  void departmentsQuery.refetch()
+                }
+              />
+            ) : departments.length === 0 ? (
+              <EmptyState
+                icon={FolderKanban}
+                title="No departments found"
+                description="Create your first organizational department."
+              />
+            ) : (
+              <ul className="min-w-0 space-y-2.5">
+                {departments.map(
+                  (department) => (
+                    <li
+                      key={
+                        department.department_id
+                      }
+                    >
+                      <Card className="min-w-0">
+                        <CardContent className="min-w-0 p-4">
+                          <div className="min-w-0">
+                            <p className="text-sm font-medium">
+                              {department.name}
+                            </p>
+
+                            <p className="mt-1 line-clamp-2 text-xs leading-5 text-muted-foreground">
+                              {department.description}
+                            </p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </li>
+                  ),
+                )}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
     </div>

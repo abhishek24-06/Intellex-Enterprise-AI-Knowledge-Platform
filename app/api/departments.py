@@ -5,7 +5,7 @@ from app.schemas.departments import CreateDepartmentRequest,DepartmentResponse
 from app.database.database import get_db
 from app.models.users import User
 from app.dependencies.roles import require_org_admin
-from app.services.department_service import create_department
+from app.services.department_service import create_department, get_departments_by_organization
 
 router=APIRouter(
     prefix="/departments",
@@ -25,4 +25,17 @@ def create_department_api(department_data:CreateDepartmentRequest,
     )
 
     return department
+
+@router.get(
+    "",
+    response_model=list[DepartmentResponse],
+)
+def list_departments_api(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_org_admin),
+):
+    return get_departments_by_organization(
+        db=db,
+        organization_id=current_user.organization_id,
+    )
 

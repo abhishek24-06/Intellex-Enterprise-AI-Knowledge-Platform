@@ -3,7 +3,7 @@ from datetime import datetime
 
 class CreateDepartmentRequest(BaseModel):
     name:str
-    description:str | None = None
+    description:str 
 
 class DepartmentResponse(BaseModel):
     department_id:int

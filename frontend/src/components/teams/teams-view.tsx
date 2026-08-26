@@ -1,8 +1,16 @@
 "use client";
 
 import * as React from "react";
-import { useMutation } from "@tanstack/react-query";
-import { Info, Network, Plus } from "lucide-react";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+import {
+  Info,
+  Network,
+  Plus,
+} from "lucide-react";
 import { toast } from "sonner";
 
 import { Badge } from "@/components/ui/badge";
@@ -10,154 +18,412 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { EmptyState } from "@/components/shared/states";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import {
+  EmptyState,
+  ErrorState,
+} from "@/components/shared/states";
+
 import { PageHeader } from "@/components/layout/page-header";
-import { createTeam } from "@/lib/api/teams";
-import { formatDateTime } from "@/lib/utils";
-import type { Team } from "@/types/api";
 
-/**
- * The backend currently exposes only team creation (POST /teams).
- * No listing endpoint exists yet; session-created teams are shown for reference.
- */
+import {
+  createTeam,
+  listTeams,
+} from "@/lib/api/teams";
+
+import { listDepartments } from "@/lib/api/departments";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 export function TeamsView() {
-  const [departmentId, setDepartmentId] = React.useState("");
-  const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [error, setError] = React.useState<string | null>(null);
-  const [created, setCreated] = React.useState<Team[]>([]);
+  const [departmentId, setDepartmentId] =
+    React.useState("");
 
-  const mutation = useMutation({
-    mutationFn: () =>
-      createTeam({
-        department_id: Number(departmentId),
-        name: name.trim(),
-        description: description.trim() || null,
-      }),
-    onSuccess: (team) => {
-      setCreated((prev) => [team, ...prev]);
-      setName("");
-      setDescription("");
-      setError(null);
-      toast.success(`Team “${team.name}” created (#${team.team_id})`);
-    },
-    onError: (err) => setError(err.message),
-  });
+  const [name, setName] =
+    React.useState("");
 
-  function onSubmit(event: React.FormEvent) {
+  const [description, setDescription] =
+    React.useState("");
+
+  const [error, setError] =
+    React.useState<string | null>(null);
+
+  const queryClient =
+    useQueryClient();
+
+  // ----------------------------------------------------------
+  // Departments
+  // ----------------------------------------------------------
+
+  const departmentsQuery =
+    useQuery({
+      queryKey: ["departments"],
+      queryFn: listDepartments,
+    });
+
+  const departments =
+    departmentsQuery.data ?? [];
+
+  // ----------------------------------------------------------
+  // Department lookup
+  // ----------------------------------------------------------
+
+  const departmentNameById =
+    new Map(
+      departments.map(
+        (department) => [
+          department.department_id,
+          department.name,
+        ],
+      ),
+    );
+
+  // ----------------------------------------------------------
+  // Teams
+  // ----------------------------------------------------------
+
+  const teamsQuery =
+    useQuery({
+      queryKey: ["teams"],
+      queryFn: listTeams,
+    });
+
+  const teams =
+    teamsQuery.data ?? [];
+
+  // ----------------------------------------------------------
+  // Create team
+  // ----------------------------------------------------------
+
+  const mutation =
+    useMutation({
+      mutationFn: () =>
+        createTeam({
+          department_id:
+            Number(departmentId),
+
+          name:
+            name.trim(),
+
+          description:
+            description.trim(),
+        }),
+
+      onSuccess: (team) => {
+        setDepartmentId("");
+        setName("");
+        setDescription("");
+        setError(null);
+
+        void queryClient.invalidateQueries({
+          queryKey: ["teams"],
+        });
+
+        toast.success(
+          `Team “${team.name}” created`,
+        );
+      },
+
+      onError: (err) => {
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Unable to create team.",
+        );
+      },
+    });
+
+  // ----------------------------------------------------------
+  // Submit
+  // ----------------------------------------------------------
+
+  function onSubmit(
+    event: React.FormEvent,
+  ) {
     event.preventDefault();
+
     if (!departmentId) {
-      setError("A department ID is required.");
+      setError(
+        "Please select a department.",
+      );
       return;
     }
+
     if (!name.trim()) {
-      setError("Team name is required.");
+      setError(
+        "Team name is required.",
+      );
       return;
     }
+
+    if (!description.trim()) {
+      setError(
+        "Team description is required.",
+      );
+      return;
+    }
+
+    setError(null);
+
     mutation.mutate();
   }
 
   return (
-    <div className="mx-auto max-w-6xl space-y-6 p-4 sm:p-6 lg:p-8">
+    <div className="mx-auto flex h-[calc(100vh-64px)] w-full min-w-0 max-w-6xl flex-col overflow-hidden p-4 sm:p-6 lg:p-8">
       <PageHeader
         title="Teams"
         description="Teams belong to departments and group employees for access and context."
       />
 
-      <div className="grid gap-6 lg:grid-cols-[420px_1fr]">
-        <Card>
+      <div className="grid min-h-0 min-w-0 flex-1 gap-6 lg:grid-cols-[420px_minmax(0,1fr)]">
+        {/* =====================================================
+            CREATE TEAM
+           ===================================================== */}
+
+        <Card className="lg:shrink-0">
           <CardHeader>
-            <CardTitle className="text-base">New team</CardTitle>
-            <CardDescription>Reference an existing department ID.</CardDescription>
+            <CardTitle className="text-base">
+              New team
+            </CardTitle>
+
+            <CardDescription>
+              Select an existing department for the
+              new team.
+            </CardDescription>
           </CardHeader>
+
           <CardContent>
-            <form onSubmit={onSubmit} className="space-y-4" noValidate>
+            <form
+              onSubmit={onSubmit}
+              className="space-y-4"
+              noValidate
+            >
               {error ? (
-                <p role="alert" className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
+                <p
+                  role="alert"
+                  className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
+                >
                   {error}
                 </p>
               ) : null}
 
-              <label className="block space-y-1.5">
-                <Label>Department ID</Label>
-                <Input
-                  inputMode="numeric"
-                  value={departmentId}
-                  onChange={(e) => setDepartmentId(e.target.value.replace(/\D/g, ""))}
-                  placeholder="e.g. 1"
-                />
-              </label>
+              {/* Department */}
+              <div className="space-y-1.5">
+                <Label>
+                  Department
+                </Label>
 
+                <Select
+                  value={departmentId}
+                  onValueChange={(value) => {
+                    setDepartmentId(value);
+                    setError(null);
+                  }}
+                  disabled={
+                    departmentsQuery.isLoading ||
+                    departmentsQuery.isError
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue
+                      placeholder={
+                        departmentsQuery.isLoading
+                          ? "Loading departments..."
+                          : "Select a department"
+                      }
+                    />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    {departments.map(
+                      (department) => (
+                        <SelectItem
+                          key={
+                            department.department_id
+                          }
+                          value={String(
+                            department.department_id,
+                          )}
+                        >
+                          {department.name}
+                        </SelectItem>
+                      ),
+                    )}
+                  </SelectContent>
+                </Select>
+
+                {departmentsQuery.isError ? (
+                  <p className="text-xs text-red-600">
+                    Unable to load departments.
+                  </p>
+                ) : null}
+              </div>
+
+              {/* Team name */}
               <label className="block space-y-1.5">
-                <Label>Team name</Label>
+                <Label>
+                  Team name
+                </Label>
+
                 <Input
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(event) => {
+                    setName(
+                      event.target.value,
+                    );
+
+                    if (error) {
+                      setError(null);
+                    }
+                  }}
                   placeholder="e.g. Platform Engineering"
                   maxLength={100}
                 />
               </label>
 
+              {/* Description */}
               <label className="block space-y-1.5">
-                <Label>Description</Label>
+                <Label>
+                  Description
+                </Label>
+
                 <Textarea
                   value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  onChange={(event) => {
+                    setDescription(
+                      event.target.value,
+                    );
+
+                    if (error) {
+                      setError(null);
+                    }
+                  }}
                   placeholder="What does this team own?"
                   rows={3}
+                  required
                 />
               </label>
 
-              <Button type="submit" disabled={mutation.isPending} className="w-full">
+              <Button
+                type="submit"
+                disabled={
+                  mutation.isPending ||
+                  departmentsQuery.isLoading ||
+                  departmentsQuery.isError
+                }
+                className="w-full"
+              >
                 <Plus />
-                Create team
+
+                {mutation.isPending
+                  ? "Creating..."
+                  : "Create team"}
               </Button>
             </form>
           </CardContent>
         </Card>
 
-        <div className="space-y-4">
-          <div className="flex items-start gap-2 rounded-lg border border-indigo-200 bg-indigo-50/70 px-3.5 py-3 text-xs leading-relaxed text-indigo-900">
+        {/* =====================================================
+            TEAM DIRECTORY
+           ===================================================== */}
+
+        <div className="flex min-h-0 min-w-0 flex-col">
+          {/* Information banner */}
+          <div className="mb-4 flex shrink-0 items-start gap-2 rounded-lg border border-indigo-200 bg-indigo-50/70 px-3.5 py-3 text-xs leading-relaxed text-indigo-900">
             <Info className="mt-0.5 size-4 shrink-0 text-indigo-500" />
+
             <span>
-              The platform API currently supports creating teams only. Department IDs are
-              shown on the Departments page after you create them. Teams created in this
-              session appear below.
+              Teams in your organization are shown
+              here. Select a department when creating
+              a new team.
             </span>
           </div>
 
-          {created.length === 0 ? (
-            <EmptyState
-              icon={Network}
-              title="No teams created in this session"
-              description="Use the form to create your first team."
-            />
-          ) : (
-            <ul className="space-y-2.5">
-              {created.map((team) => (
-                <li key={team.team_id}>
-                  <Card>
-                    <CardContent className="flex items-center justify-between gap-4 p-4">
-                      <div className="min-w-0">
-                        <p className="flex flex-wrap items-center gap-2 text-sm font-medium">
-                          {team.name}
-                          <Badge variant="secondary">#{team.team_id}</Badge>
-                          <Badge variant="outline">Dept #{team.department_id}</Badge>
-                        </p>
-                        <p className="mt-0.5 truncate text-xs text-muted-foreground">
-                          {team.description || "No description"}
-                        </p>
-                      </div>
-                      <span className="shrink-0 font-mono text-xs text-muted-foreground">
-                        {formatDateTime(team.created_at)}
-                      </span>
-                    </CardContent>
-                  </Card>
-                </li>
-              ))}
-            </ul>
-          )}
+          {/* Scrollable team directory */}
+          <div className="min-h-0 flex-1 overflow-y-auto pr-2 [scrollbar-width:thin]">
+            {teamsQuery.isLoading ? (
+              <div className="space-y-2.5">
+                {[0, 1, 2].map(
+                  (item) => (
+                    <Card key={item}>
+                      <CardContent className="p-4">
+                        <div className="h-5 w-40 animate-pulse rounded bg-muted" />
+
+                        <div className="mt-2 h-4 w-64 animate-pulse rounded bg-muted" />
+                      </CardContent>
+                    </Card>
+                  ),
+                )}
+              </div>
+            ) : teamsQuery.isError ? (
+              <ErrorState
+                title="Unable to load teams"
+                message="The team directory could not be loaded."
+                onRetry={() =>
+                  void teamsQuery.refetch()
+                }
+              />
+            ) : teams.length === 0 ? (
+              <EmptyState
+                icon={Network}
+                title="No teams found"
+                description="Create your first organizational team."
+              />
+            ) : (
+              <ul className="min-w-0 space-y-2.5">
+                {teams.map((team) => {
+                  const departmentName =
+                    departmentNameById.get(
+                      team.department_id,
+                    );
+
+                  return (
+                    <li
+                      key={team.team_id}
+                    >
+                      <Card className="min-w-0">
+                        <CardContent className="min-w-0 p-4">
+                          <div className="min-w-0">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <p className="text-sm font-medium">
+                                {team.name}
+                              </p>
+
+                              {departmentName ? (
+                                <Badge
+                                  variant="secondary"
+                                  className="font-normal"
+                                >
+                                  {departmentName}
+                                </Badge>
+                              ) : null}
+                            </div>
+
+                            <p className="mt-1 line-clamp-2 text-xs leading-5 text-muted-foreground">
+                              {team.description}
+                            </p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
     </div>

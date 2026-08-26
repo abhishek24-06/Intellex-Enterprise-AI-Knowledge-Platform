@@ -176,7 +176,7 @@ export function AdminDashboard() {
             </Button>
           </CardContent>
         </Card>
-        <Card>
+        {/* <Card>
           <CardHeader>
             <CardTitle className="text-base">Retrieval diagnostics</CardTitle>
             <CardDescription>
@@ -192,7 +192,7 @@ export function AdminDashboard() {
               </Link>
             </Button>
           </CardContent>
-        </Card>
+        </Card> */}
       </section>
     </div>
   );

@@ -46,3 +46,24 @@ def create_team(db:Session,
     db.refresh(team)
 
     return team
+
+def get_teams_by_organization(
+    db: Session,
+    organization_id: int,
+) -> list[Team]:
+
+    stmt = (
+        select(Team)
+        .where(
+            Team.organization_id == organization_id,
+        )
+        .order_by(
+            Team.name.asc(),
+        )
+    )
+
+    return (
+        db.execute(stmt)
+        .scalars()
+        .all()
+    )       
