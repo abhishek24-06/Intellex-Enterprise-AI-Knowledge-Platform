@@ -127,8 +127,8 @@ export function AdminDashboard() {
               icon={FileText}
             />
           )}
-          <StatTile label="Teams & structure" value="Manage" icon={Network} />
-          <StatTile label="AI operations" value="Monitor" icon={Gauge} />
+          {/* <StatTile label="Teams & structure" value="Manage" icon={Network} />
+          <StatTile label="AI operations" value="Monitor" icon={Gauge} /> */}
         </div>
       )}
 

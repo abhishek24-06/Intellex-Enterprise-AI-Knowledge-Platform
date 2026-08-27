@@ -1,0 +1,11 @@
+Supply Chain Status Note – Sagar Rajput
+
+Department: Operations
+Team: Supply Chain
+Subject: Supplier Performance Review
+
+Sagar Rajput is responsible for reviewing supplier performance exceptions within the Supply Chain team. The review covers delayed deliveries, recurring quality issues, unresolved purchase-order exceptions, and supplier follow-up actions.
+
+During a supplier review, the reviewer records the affected supplier, issue category, operational impact, current status, and required follow-up. Escalations are coordinated with the appropriate Operations stakeholders when an issue remains unresolved.
+
+This document is intended as a separate test document for validating retrieval of information specifically associated with Sagar Rajput.

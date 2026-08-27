@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from enum import Enum
 import json
+import re
 
 from pydantic import BaseModel, Field
 
@@ -90,8 +91,22 @@ Return ONLY valid JSON:
     "reason": "..."
 }"""
 
+    CONVERSATIONAL_PATTERNS = [
+        r"^\s*(hi|hello|hey|hiya|howdy)[\s!.]*$",
+        r"^\s*(good\s+(morning|afternoon|evening))[\s!.]*$",
+        r"^\s*(thanks|thank\s+you|thx|ty)[\s!.]*$",
+        r"^\s*(bye|goodbye|see\s+you(\s+later)?|catch\s+you\s+later|take\s+care)[\s!.]*$",
+        r"^\s*(hi|hello|hey)[\s,]+(thanks|thank\s+you)[\s!.]*$",
+        r"^\s*(bye|goodbye)[\s,]+(thanks|thank\s+you)[\s!.]*$",
+        r"^\s*(thanks|thank\s+you)[\s,]+(bye|goodbye|see\s+you)[\s!.]*$",
+        r"^\s*(how\s+are\s+you|what'?s\s+up|how'?s\s+(it\s+going|your\s+day))\??\s*$",
+        r"^\s*(ok|okay|sure|alright)[\s!.]*$",
+        r"^\s*(welcome)[\s!.]*$",
+    ]
+
     def __init__(self, *, llm_client):
             self.llm_client = llm_client
+            self._compiled_patterns = [re.compile(p, re.IGNORECASE) for p in self.CONVERSATIONAL_PATTERNS]
 
     @staticmethod
     def _parse_json(
@@ -99,13 +114,6 @@ Return ONLY valid JSON:
     ) -> dict:
 
         cleaned = raw_response.strip()
-
-        # Handle:
-        #
-        # ```json
-        # {...}
-        # ```
-        #
 
         if cleaned.startswith("```"):
 
@@ -136,6 +144,13 @@ Return ONLY valid JSON:
                 f"{cleaned!r}"
             ) from exc
 
+    def _is_conversational(self, query: str) -> bool:
+        normalized = query.strip()
+        for pattern in self._compiled_patterns:
+            if pattern.match(normalized):
+                return True
+        return False
+
     def route(
         self,
         *,
@@ -147,9 +162,19 @@ Return ONLY valid JSON:
                 "Query cannot be empty."
             )
 
+        normalized_query = query.strip()
+
+        if self._is_conversational(normalized_query):
+            return OrchestratorDecision(
+                route=AgentRoute.CONVERSATIONAL,
+                knowledge_query=None,
+                database_query=None,
+                reason="Fast-path: detected conversational greeting/thanks/farewell/small-talk pattern",
+            )
+
         raw = self.llm_client.generate(
             system_prompt=self.SYSTEM_PROMPT,
-            user_prompt=query.strip(),
+            user_prompt=normalized_query,
             response_format={
                 "type": "json_object",
            },

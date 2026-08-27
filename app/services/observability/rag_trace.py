@@ -28,6 +28,10 @@ class RAGTrace:
     contextualization_latency_ms: float = 0.0
     total_latency_ms: float = 0.0
 
+    embedding_cache_hits: int = 0
+    embedding_cache_misses: int = 0
+    retrieval_cache_hit: bool = False
+
     status: str = "RUNNING"
 
     _started_at: float = field(

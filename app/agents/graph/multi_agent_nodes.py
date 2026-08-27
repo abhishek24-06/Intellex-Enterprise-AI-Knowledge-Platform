@@ -389,6 +389,8 @@ def synthesis_node(
     llm_client,
 ):
 
+    route = state.get("route")
+
     knowledge = state.get(
         "rag_result"
     )
@@ -408,6 +410,34 @@ def synthesis_node(
         or ""
     )
 
+    # Single-agent routes: bypass LLM synthesis, pass through the answer directly
+    if route == "KNOWLEDGE":
+        if knowledge is None or not knowledge_answer:
+            raise RuntimeError("KNOWLEDGE route requires a RAG result with answer.")
+        return {
+            "final_answer": knowledge_answer,
+            "history": [
+                {
+                    "node": "synthesis",
+                    "mode": "passthrough_knowledge",
+                }
+            ],
+        }
+
+    if route == "DATABASE":
+        if not database_answer:
+            raise RuntimeError("DATABASE route requires a database result.")
+        return {
+            "final_answer": database_answer,
+            "history": [
+                {
+                    "node": "synthesis",
+                    "mode": "passthrough_database",
+                }
+            ],
+        }
+
+    # HYBRID route: use LLM to synthesize both sources
     prompt = f"""\
 USER QUERY:
 {state["original_query"]}
@@ -441,6 +471,7 @@ Rules:
         "history": [
             {
                 "node": "synthesis",
+                "mode": "llm_synthesis",
             }
         ],
     }
@@ -639,17 +670,25 @@ def multi_agent_prepare_retry_node(
     # Prepare retry
     # --------------------------------------------------------------
 
+    # Preserve existing results for non-targeted agents
+    # Only clear final_answer and the targeted agent's result
     update: dict = {
         "max_retries": max_retries,
-
         "retry_target": retry_target.value,
-
         "retry_count": next_retry_count,
-
         "final_answer": None,
-
-        "history": [],
+        # Don't clear history - let reducer append
     }
+
+    # Clear the targeted agent's result so it gets recomputed
+    if retry_target.value in {"KNOWLEDGE", "BOTH"}:
+        update["rag_result"] = None
+        update["knowledge_query"] = None
+        update["retrieval_query"] = None
+
+    if retry_target.value in {"DATABASE", "BOTH"}:
+        update["database_result"] = None
+        update["database_query"] = None
 
     # --------------------------------------------------------------
     # Knowledge retry
@@ -688,27 +727,6 @@ def multi_agent_prepare_retry_node(
             knowledge_query
         )
 
-        update["history"].append(
-            {
-                "node": "prepare_retry",
-                "retry_target": (
-                    retry_target.value
-                ),
-                "retry_count": (
-                    next_retry_count
-                ),
-                "query": knowledge_query,
-                "query_source": (
-                    "critic_improved"
-                    if _is_useful_retry_query(
-                        improved_query,
-                        previous_query,
-                    )
-                    else "previous_query"
-                ),
-            }
-        )
-
     # --------------------------------------------------------------
     # Database retry
     # --------------------------------------------------------------
@@ -739,27 +757,6 @@ def multi_agent_prepare_retry_node(
 
         update["database_query"] = (
             database_query
-        )
-
-        update["history"].append(
-            {
-                "node": "prepare_retry",
-                "retry_target": (
-                    retry_target.value
-                ),
-                "retry_count": (
-                    next_retry_count
-                ),
-                "query": database_query,
-                "query_source": (
-                    "critic_improved"
-                    if _is_useful_retry_query(
-                        improved_query,
-                        previous_query,
-                    )
-                    else "previous_query"
-                ),
-            }
         )
 
     return update

@@ -25,6 +25,8 @@ from app.agents.graph.multi_agent_routing import (
     route_after_multi_agent_critic,
     route_after_orchestrator,
     route_after_retry_target,
+    route_after_synthesis,
+    route_after_agent,
 )
 
 from app.agents.multi_agent_state import (
@@ -186,14 +188,22 @@ def build_multi_agent_graph(
         },
     )
 
-    builder.add_edge(
+    builder.add_conditional_edges(
         "knowledge_agent",
-        "synthesis",
+        route_after_agent,
+        {
+            "synthesis": "synthesis",
+            "finalize": "multi_agent_finalize",
+        },
     )
 
-    builder.add_edge(
+    builder.add_conditional_edges(
         "database_agent",
-        "synthesis",
+        route_after_agent,
+        {
+            "synthesis": "synthesis",
+            "finalize": "multi_agent_finalize",
+        },
     )
 
     builder.add_edge(
@@ -201,9 +211,13 @@ def build_multi_agent_graph(
     END,
 )
 
-    builder.add_edge(
+    builder.add_conditional_edges(
         "synthesis",
-        "multi_agent_critic",
+        route_after_synthesis,
+        {
+            "finalize": "multi_agent_finalize",
+            "critic": "multi_agent_critic",
+        },
     )
 
     builder.add_conditional_edges(

@@ -77,11 +77,11 @@ export function ProfileView() {
         </CardContent>
       </Card>
 
-      <p className="text-xs leading-relaxed text-muted-foreground" aria-live="polite">
+      {/* <p className="text-xs leading-relaxed text-muted-foreground" aria-live="polite">
         {status === "authenticated"
           ? "Details are fetched live from GET /auth/me using your session token."
           : ""}
-      </p>
+      </p> */}
     </div>
   );
 }

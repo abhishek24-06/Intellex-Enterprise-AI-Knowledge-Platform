@@ -384,7 +384,7 @@ export function UsersView() {
               <Input
                 value={employeeForm.name}
                 onChange={(e) => setEmployeeForm((f) => ({ ...f, name: e.target.value }))}
-                placeholder="Priya Sharma"
+                placeholder="Enter Name"
               />
             </Field>
             <Field label="Email">
@@ -392,7 +392,7 @@ export function UsersView() {
                 type="email"
                 value={employeeForm.email}
                 onChange={(e) => setEmployeeForm((f) => ({ ...f, email: e.target.value }))}
-                placeholder="priya@company.com"
+                placeholder="Enter Company Email"
               />
             </Field>
             <Field label="Temporary password">
