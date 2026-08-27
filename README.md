@@ -10,10 +10,11 @@ Instead of sending every question through a single RAG pipeline, Intellex uses a
 
 ## Demo
 
-**Demo Video:** [Coming Soon](#)
+Watch the complete demonstration of Intellex:
 
-> Replace the link above with your YouTube, Loom, or other demo video link.
+[![Watch the Intellex Demo](https://img.youtube.com/vi/dE154FFfTfI/maxresdefault.jpg)](https://youtu.be/dE154FFfTfI)
 
+**Click the image above to watch the full system demonstration.**
 ---
 
 ## Project Preview

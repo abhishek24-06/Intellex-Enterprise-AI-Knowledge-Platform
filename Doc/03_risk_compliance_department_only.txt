@@ -1,0 +1,19 @@
+Risk & Compliance - Department Procedures
+
+ACL TEST TYPE: DEPARTMENT ONLY
+AUTHORIZED DEPARTMENT: Risk & Compliance
+
+Purpose
+This document describes department-level procedures for managing enterprise risk and
+compliance activities.
+
+Department Procedures
+Risk & Compliance maintains the enterprise risk register, coordinates regulatory
+obligations, reviews internal control exceptions, and tracks policy-related remediation.
+
+Test Facts
+The department's quarterly risk review uses the marker RISK-COMP-Q4-118.
+The quarterly review covers risk ownership, mitigation status, control effectiveness,
+and outstanding remediation actions.
+
+This document is intended for department-level ACL testing.
