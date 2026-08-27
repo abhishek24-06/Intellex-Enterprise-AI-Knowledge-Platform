@@ -8,15 +8,15 @@ Instead of sending every question through a single RAG pipeline, Intellex uses a
 
 ---
 
-## 🎬 Demo
+## Demo
 
-🎥 **Demo Video:** [Coming Soon](#)
+**Demo Video:** [Coming Soon](#)
 
 > Replace the link above with your YouTube, Loom, or other demo video link.
 
 ---
 
-## 🖼️ Project Preview
+## Project Preview
 
 > Add your project screenshots inside a folder such as `docs/images/`.
 
@@ -38,7 +38,7 @@ Instead of sending every question through a single RAG pipeline, Intellex uses a
 
 ---
 
-# 🚀 Overview
+# Overview
 
 Enterprise knowledge is often scattered across:
 
@@ -53,39 +53,39 @@ Traditional search systems struggle to understand natural-language questions and
 
 **Intellex solves this by combining:**
 
-* 🧠 Multi-agent AI orchestration
-* 📚 Retrieval-Augmented Generation (RAG)
-* 🔐 ACL-aware vector retrieval
-* 🏢 Organizational database intelligence
-* 🔀 Hybrid document + database queries
-* 🔄 Self-correcting answer generation
+* Multi-agent AI orchestration
+* Retrieval-Augmented Generation (RAG)
+* ACL-aware vector retrieval
+* Organizational database intelligence
+* Hybrid document and database queries
+* Self-correcting answer generation
 
 ---
 
-# ✨ Key Features
+# Key Features
 
-## 🧠 Multi-Agent Query Routing
+## Multi-Agent Query Routing
 
 Intellex automatically classifies each query and routes it to the appropriate execution path.
 
-| Query Type            | Description                                          |
-| --------------------- | ---------------------------------------------------- |
-| 📚 **Knowledge**      | Answers questions using internal documents           |
-| 🏢 **Database**       | Retrieves structured organizational data             |
-| 🔀 **Hybrid**         | Combines document knowledge and database information |
-| 💬 **Conversational** | Handles simple conversational queries                |
+| Query Type         | Description                                          |
+| ------------------ | ---------------------------------------------------- |
+| **Knowledge**      | Answers questions using internal documents           |
+| **Database**       | Retrieves structured organizational data             |
+| **Hybrid**         | Combines document knowledge and database information |
+| **Conversational** | Handles simple conversational queries                |
 
 ---
 
-## 📚 Enterprise RAG System
+## Enterprise RAG System
 
 The knowledge pipeline retrieves relevant information from internal documents using:
 
-* **BGE-M3 Embeddings**
-* **PostgreSQL + pgvector**
-* **ACL-aware retrieval**
-* **BGE Reranking**
-* **LLM-based answer generation**
+* BGE-M3 Embeddings
+* PostgreSQL + pgvector
+* ACL-aware retrieval
+* BGE Reranking
+* LLM-based answer generation
 
 ### Retrieval Flow
 
@@ -111,7 +111,7 @@ Answer + Sources
 
 ---
 
-## 🔐 ACL-Aware Retrieval
+## ACL-Aware Retrieval
 
 Security is enforced directly during retrieval.
 
@@ -140,7 +140,7 @@ This ensures unauthorized document chunks are filtered **before they become AI c
 
 ---
 
-## 🔀 Hybrid Intelligence
+## Hybrid Intelligence
 
 Some enterprise questions require information from multiple sources.
 
@@ -164,7 +164,7 @@ Intellex can execute both the **Knowledge Agent** and **Database Agent**, then c
 
 ---
 
-## 🔄 Self-Correcting AI Workflow
+## Self-Correcting AI Workflow
 
 Hybrid answers pass through a **Critic Agent** before being finalized.
 
@@ -198,7 +198,7 @@ If the answer does not meet the required quality threshold, the system can retry
 
 ---
 
-# 🏗️ System Architecture
+# System Architecture
 
 ```mermaid
 graph TB
@@ -251,7 +251,7 @@ graph TB
 
 ---
 
-# 🔄 End-to-End Query Flow
+# End-to-End Query Flow
 
 ```text
 1. User submits a question
@@ -301,7 +301,7 @@ Knowledge + Database
 
 ---
 
-# 📄 Document Ingestion Pipeline
+# Document Ingestion Pipeline
 
 Intellex processes uploaded documents through a structured pipeline.
 
@@ -346,7 +346,7 @@ The system uses structure-aware processing to handle different types of content.
 
 ---
 
-# 🤖 Multi-Agent System
+# Multi-Agent System
 
 ## 1. Orchestrator Agent
 
@@ -423,7 +423,7 @@ Weak answers can trigger a controlled retry process.
 
 ---
 
-# 🗄️ Database Architecture
+# Database Architecture
 
 Intellex uses **PostgreSQL with pgvector** for both relational and vector data.
 
@@ -444,7 +444,7 @@ Intellex uses **PostgreSQL with pgvector** for both relational and vector data.
 
 ---
 
-# 🔐 Multi-Tenant Architecture
+# Multi-Tenant Architecture
 
 Intellex follows an organization-centered hierarchy.
 
@@ -468,7 +468,7 @@ Every relevant operation is scoped to the user's organization.
 
 ---
 
-# 👥 Role-Based Access Control
+# Role-Based Access Control
 
 The system supports multiple access levels.
 
@@ -488,7 +488,7 @@ Authorized enterprise knowledge access
 
 ---
 
-# 📊 Observability
+# Observability
 
 Intellex captures information about agent execution.
 
@@ -507,7 +507,7 @@ This helps make multi-agent behavior observable and easier to debug.
 
 ---
 
-# ⚡ Performance Optimizations
+# Performance Optimizations
 
 The system includes mechanisms to reduce unnecessary computation.
 
@@ -523,7 +523,7 @@ The reranker operates on a smaller candidate set instead of processing the entir
 
 ---
 
-# 🧰 Technology Stack
+# Technology Stack
 
 ## Backend
 
@@ -532,7 +532,7 @@ The reranker operates on a smaller candidate set instead of processing the entir
 * SQLAlchemy
 * Alembic
 
-## AI & Agent Framework
+## AI and Agent Framework
 
 * LangGraph
 * LangChain
@@ -569,7 +569,7 @@ The project supports configurable LLM integrations, including:
 
 ---
 
-# 📁 Project Structure
+# Project Structure
 
 ```text
 Intellex/
@@ -629,7 +629,7 @@ Intellex/
 
 ---
 
-# 📊 Retrieval Evaluation
+# Retrieval Evaluation
 
 The project includes retrieval evaluation tooling for measuring retrieval quality.
 
@@ -644,9 +644,9 @@ These metrics help evaluate retrieval performance independently from the final L
 
 ---
 
-# 💬 Example Queries
+# Example Queries
 
-## 📚 Knowledge Query
+## Knowledge Query
 
 > **What is the company's expense reimbursement policy?**
 
@@ -654,7 +654,7 @@ The system retrieves relevant internal document content.
 
 ---
 
-## 🏢 Database Query
+## Database Query
 
 > **Who is in the Engineering department?**
 
@@ -662,7 +662,7 @@ The system routes the request to the Database Agent.
 
 ---
 
-## 🔀 Hybrid Query
+## Hybrid Query
 
 > **What is the Engineering deployment SOP and who is responsible for it?**
 
@@ -682,7 +682,7 @@ Database Agent
 
 ---
 
-## 💬 Conversational Query
+## Conversational Query
 
 > **Hi, thanks!**
 
@@ -690,7 +690,7 @@ The request can be handled without unnecessary retrieval.
 
 ---
 
-# 🛠️ Local Setup
+# Local Setup
 
 ## Prerequisites
 
@@ -764,7 +764,7 @@ uvicorn app.main:app --reload
 
 ---
 
-# 💻 Frontend Setup
+# Frontend Setup
 
 Navigate to the frontend:
 
@@ -786,7 +786,7 @@ npm run dev
 
 ---
 
-# 📖 API Documentation
+# API Documentation
 
 FastAPI automatically provides interactive API documentation.
 
@@ -798,7 +798,7 @@ http://localhost:8000/docs
 
 ---
 
-# 🧠 Key Engineering Decisions
+# Key Engineering Decisions
 
 ## Why LangGraph?
 
@@ -855,7 +855,7 @@ This allows the system to retry weak answers instead of accepting every generate
 
 ---
 
-# 🚧 Future Improvements
+# Future Improvements
 
 Potential improvements include:
 
@@ -873,7 +873,7 @@ Potential improvements include:
 
 ---
 
-# 🎥 Demo Checklist
+# Demo Checklist
 
 When recording the project demo, consider showing:
 
@@ -892,7 +892,7 @@ When recording the project demo, consider showing:
 
 ---
 
-# 📸 Recommended Screenshots
+# Recommended Screenshots
 
 Store screenshots in:
 
@@ -919,7 +919,7 @@ docs/images/
 
 ---
 
-# 🔒 Security Checklist
+# Security Checklist
 
 Before sharing the repository publicly:
 
@@ -936,7 +936,7 @@ Before sharing the repository publicly:
 
 ---
 
-# 👨‍💻 Author
+# Author
 
 **Abhishek**
 
@@ -944,7 +944,7 @@ GitHub: [@abhishek24-06](https://github.com/abhishek24-06)
 
 ---
 
-# 📌 Project Status
+# Project Status
 
 **Completed**
 
@@ -961,4 +961,4 @@ into a unified enterprise knowledge platform.
 
 ---
 
-⭐ **If you found this project interesting, consider giving the repository a star!**
+If you found this project interesting, consider giving the repository a star.
