@@ -12,9 +12,7 @@ Instead of sending every question through a single RAG pipeline, Intellex uses a
 
 Watch the complete demonstration of Intellex:
 
-[![Watch the Intellex Demo](https://img.youtube.com/vi/dE154FFfTfI/maxresdefault.jpg)](https://youtu.be/dE154FFfTfI)
 
-**Click the image above to watch the full system demonstration.**
 ---
 
 ## Project Preview
