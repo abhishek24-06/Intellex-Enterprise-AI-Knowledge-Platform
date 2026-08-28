@@ -32,10 +32,6 @@ https://github.com/user-attachments/assets/efcccb73-652e-4bb1-a8f2-7122554e6ab4
 
 ![Intellex Chat Workspace](docs/images/chat-workspace.png)
 
-### Hybrid AI Response
-
-![Hybrid Answer](docs/images/hybrid-answer.png)
-
 ### Document Processing
 
 ![Document Upload](docs/images/document-upload.png)
