@@ -10,8 +10,17 @@ Instead of sending every question through a single RAG pipeline, Intellex uses a
 
 ## Demo
 
-Watch the complete demonstration of Intellex:
+### Core System Demo
 
+This demonstration showcases the main Intellex workflow, including Multi Agent RAG Chat, document intelligence, ACL-aware access control, document upload, and multi-agent observability.
+
+https://github.com/user-attachments/assets/7508d6bc-77a2-4a4d-826b-7f84227ee9d7
+
+### Organization Management Demo
+
+This demonstration showcases organizational data management, including users, departments, and teams.
+
+https://github.com/user-attachments/assets/efcccb73-652e-4bb1-a8f2-7122554e6ab4
 
 ---
 
